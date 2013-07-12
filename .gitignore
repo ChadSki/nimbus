@@ -1,4 +1,7 @@
-
+*.pyd
+c_file_cache/
+bin/
+build/
 
 ############
 ## Halo
