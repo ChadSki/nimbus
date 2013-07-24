@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+    <struct name="map_header" file_offset="0" memory_offset="0x6A4400">
+        <ascii name="integrity" length="4" offset="0" />
+        <uint32 name="game_version" offset="4" />
+        <uint32 name="map_size" offset="8" />
+        <!-- offset="12" -->
+        <uint32 name="index_offset" offset="16" />
+        <uint32 name="metadata_length" offset="20" />
+        <!-- offset="24" -->
+        <!-- offset="28" -->
+        <ascii name="map_name" length="32" offset="32" />
+        <ascii name="map_build" length="64" offset="64" />
+        <uint32 name="map_type" offset="128" />
+    </struct>
+
+    <!-- ??? -->
+
+    <struct name="tag_index" file_offset="/map_header/index_offset" memory_offset="0x40440000">
+        <uint32 name="memory_offset" offset="0" />
+        <uint32 name="base_tag_ident" offset="4" />
+        <uint32 name="map_id" offset="8" />
+        <uint32 name="tag_count" offset="12" />
+        <uint32 name="verticie_count" offset="16" />
+        <uint32 name="verticie_offset" offset="20" />
+        <uint32 name="indicie_count" offset="24" />
+        <uint32 name="indicie_offset" offset="28" />
+        <uint32 name="model_data_length" offset="32" />
+        <!-- offset="36" -->
+        <array offset="40" count="/tag_index/index_header/tag_count">
+            <struct size="32">
+                <ascii name="first_type" length="4" offset="0" />
+                <ascii name="second_type" length="4" offset="4" />
+                <ascii name="third_type" length="4" offset="8" />
+                <uint32 name="ident" offset="12" />
+                <uint32 name="name_offset_raw" offset="16" />
+                <uint32 name="meta_offset_raw" offset="20" />
+                <uint32 name="indexed" offset="24" />
+                <!-- offset="28" -->
+            </struct>
+        </array>
+    </struct>
+</root>
