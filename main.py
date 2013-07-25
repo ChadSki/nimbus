@@ -1,18 +1,21 @@
-from halolib import make_class
+from xmlplugins import load_plugin
 
 def load_map_from_file(map_path):
-    MapHeader = make_class('map_header.xml')
-    IndexHeader = make_class('index_header.xml')
-    IndexEntry = make_class('index_entry.xml')
+    MapHeader = load_plugin('map_header.xml')
+    IndexHeader = load_plugin('index_header.xml')
+    IndexEntry = load_plugin('index_entry.xml')
 
-    mh = MapHeader("stuff")
+    mapfile = open(map_path, 'r+b')
+    map_bytes = bytes(mapfile.read())
 
-    print('\n', type(mh))
-    for key in MapHeader.__dict__:
-        if key[0] != '_':
-            x = getattr(mh, key)
-            print(key, x)
-            setattr(mh, key, x + '1')
+    mh = MapHeader(map_bytes)
+    print(mh, '\n')
 
+    ih = IndexHeader(map_bytes, mh.index_offset)
+    print (ih, '\n')
 
-load_map_from_file('bloodgulch.map')
+    for i in range(ih.tag_count):
+        ie = IndexEntry(map_bytes, mh.index_offset + IndexHeader.struct_size + (i * IndexEntry.struct_size))
+        print(ie.first_type[::-1])
+    
+load_map_from_file('beavercreek.map')

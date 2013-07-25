@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <struct name="map_header" size="132">
-  <ascii name="integrity" length="4"  offset="0" />
+  <ascii name="integrity" offset="0" maxlength="4" />
   <uint32 name="game_version" offset="4" />
   <uint32 name="map_size" offset="8" />
   <!-- offset="12" -->
@@ -8,7 +8,7 @@
   <uint32 name="metadata_length" offset="20" />
   <!-- offset="24" -->
   <!-- offset="28" -->
-  <ascii name="map_name" length="32" offset="32" />
-  <ascii name="map_build" length="64" offset="64" />
+  <ascii name="map_name" offset="32" maxlength="32" />
+  <ascii name="map_build" offset="64" maxlength="64" />
   <uint32 name="map_type" offset="128" />
 </struct>
