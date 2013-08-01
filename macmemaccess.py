@@ -23,11 +23,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from distutils.core import setup
-from distutils.extension import Extension
-from Cython.Distutils import build_ext
+from byteaccess import ByteAccess
 
-setup(
-    cmdclass = {'build_ext':build_ext},
-    ext_modules = [Extension("xmlplugins", ["xmlplugins.pyx"])]
-)
+class MacMemAccess(ByteAccess):
+    """Encapsulates reading and writing to the map loaded in HaloMD's memory."""
+
+    def __init__(self, offset, size):
+        super(MacMemAccess, self).__init__(offset, size)
