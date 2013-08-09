@@ -10,9 +10,6 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of the organization nor the
-#       names of its contributors may be used to endorse or promote products
-#       derived from this software without specific prior written permission.
 # 
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -30,112 +27,177 @@ from libc.stdint cimport int8_t, int16_t, int32_t, int64_t
 from libc.stdint cimport uint8_t, uint16_t, uint32_t, uint64_t
 
 cdef extern from "stdlib.h" nogil:
-    char *memcpy(char *dst, char *src, long len)
+    char* memcpy(char* dst, char* src, long len)
 cdef extern from "string.h" nogil:
-    long strlen(char *s)
+    long strlen(char* s)
 
+def py_strlen(s): return strlen(<char*>s)
 
 def make_property(field):
     """Defines a property which reads/writes to a field in a plugin-defined struct"""
+
+    # to make a property we need three things:
+    #  1) a getter function
+    #  2) a setter function
+    #  3) a docstring (optional)
+
+    def make_fget():
+        """Defines a custom fget depending on what type of reader is needed"""
+
+        # We need different ways to read the data depending on what type of field
+        # this is. Define all possible readers here, then pick one later.
+
+        # Cython is a little different than C. We can't expect pointers,
+        # so we need to cast before dereferencing.
+        # Note that 'int' is just a hint, not a specific size
+        def read_float(self, int address):  return (<float*>address)[0]
+        def read_double(self, int address): return (<double*>address)[0]
+        def read_int8(self, int address):   return (<int8_t*>address)[0]
+        def read_int16(self, int address):  return (<int16_t*>address)[0]
+        def read_int32(self, int address):  return (<int32_t*>address)[0]
+        def read_int64(self, int address):  return (<int64_t*>address)[0]
+        def read_uint8(self, int address):  return (<uint8_t*>address)[0]
+        def read_uint16(self, int address): return (<uint16_t*>address)[0]
+        def read_uint32(self, int address): return (<uint32_t*>address)[0]
+        def read_uint64(self, int address): return (<uint64_t*>address)[0]
+        def read_ascii(self, int address):
+            # only copy up to null-termination, but limit to a maximum
+            length = min(strlen(<char*>address), int(field.attrib['maxlength']))
+
+            # create a new Python string, then copy the data over
+            answer = b'\x00' * length
+            memcpy(<char*>answer, <char*>address, length)
+
+            # 'ihev' <-> 'vehi' and so forth
+            if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
+                answer = answer[::-1]
+
+            return answer
+
+        # select the appropriate reader for this property's type
+        read_field = {
+            'float' : read_float,
+            'double' : read_double,
+            'int8' : read_int8,
+            'int16' : read_int16,
+            'int32' : read_int32,
+            'int64' : read_int64,
+            'uint8' : read_uint8,
+            'uint16' : read_uint16,
+            'uint32' : read_uint32,
+            'uint64' : read_uint64,
+            'ascii' : read_ascii,
+        }[field.tag]
+
+        cdef int offset = int(field.attrib['offset']) # get the field's offset from xml
+                                                      # (this can be done once, ahead of time)
+        def fget(self):
+            pybuffer = self.access.read_all_bytes()   # retrieve the struct as bytes
+            cdef int buf = <int>(<char*>(pybuffer))   # Cython cast for pointer arithmetic
+            return read_field(self, buf + offset)     # reinterpret the raw data with the selected reader
+
+        return fget
+
+    def make_fset():
+        """Defines a custom fset depending on what type of writer is needed"""
+
+        # We need different ways to write the data depending on what type of field
+        # this is. Define all possible writers here, then pick one later.
+
+        # Cython is a little different than C. We can't expect pointers,
+        # so we need to cast before dereferencing then setting the value.
+        # Note that 'int' is just a hint, not a specific size
+        def write_float(self, int address, value):  (<float*>address)[0] = value
+        def write_double(self, int address, value): (<double*>address)[0] = value
+        def write_int8(self, int address, value):   (<int8_t*>address)[0] = value
+        def write_int16(self, int address, value):  (<int16_t*>address)[0] = value
+        def write_int32(self, int address, value):  (<int32_t*>address)[0] = value
+        def write_int64(self, int address, value):  (<int64_t*>address)[0] = value
+        def write_uint8(self, int address, value):  (<uint8_t*>address)[0] = value
+        def write_uint16(self, int address, value): (<uint16_t*>address)[0] = value
+        def write_uint32(self, int address, value): (<uint32_t*>address)[0] = value
+        def write_uint64(self, int address, value): (<uint64_t*>address)[0] = value
+        def write_ascii(self, int address, value):
+            raise Exception("need to discriminate between null-terminated and not")
+
+            # 'ihev' <-> 'vehi' and so forth
+            if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
+                value = value[::-1]
+
+            # only copy up to null-termination, but limit to a maximum
+            length = min(strlen(<char*>value), int(field.attrib['maxlength']))
+
+            # copy and null-terminate the string
+            memcpy(address, <char*>value, length)
+            null_loc = address + length
+            memcpy(<char*>null_loc, <char*>b'\x00', 1)
+
+        # select the appropriate writer for this property's type
+        write_field = {
+            'float' : write_float,
+            'double' : write_double,
+            'int8' : write_int8,
+            'int16' : write_int16,
+            'int32' : write_int32,
+            'int64' : write_int64,
+            'uint8' : write_uint8,
+            'uint16' : write_uint16,
+            'uint32' : write_uint32,
+            'uint64' : write_uint64,
+            'ascii' : write_ascii,
+        }[field.tag]
+
+        cdef int offset = int(field.attrib['offset']) # get the field's offset from xml
+                                                      # (this can be done once, ahead of time)
+        def fset(self, value):
+            pybuffer = self.access.read_all_bytes()   # retrieve the struct as bytes
+            cdef char* buf = <char*>(pybuffer)        # Cython cast for pointer arithmetic
+            write_field(self, buf + offset, value)    # write the new value by using the selected writer
+            self.access.write_bytes(pybuffer, 0)      # don't forget to write the bytes back!
+
+        return fset
 
     if 'description' in field.attrib:
         doc = field.attrib['description']
     else:
         doc = field.attrib['name'].replace('_', ' ')
 
-    def read_field(self):
-        # retrieve the struct as bytes
-        pybuffer = self.access.read_all_bytes()
-        cdef:
-            char *buf = <char *>(pybuffer)
-            int offset = int(field.attrib['offset']) + self.offset
-
-        # then cast the data into the correct format and return it
-        answer = None
-        if field.tag == 'float': answer = (<float *>(buf + offset))[0]
-        elif field.tag == 'double': answer = (<double *>(buf + offset))[0]
-        elif field.tag == 'int8': answer = (<int8_t *>(buf + offset))[0]
-        elif field.tag == 'int16': answer = (<int16_t *>(buf + offset))[0]
-        elif field.tag == 'int32': answer = (<int32_t *>(buf + offset))[0]
-        elif field.tag == 'int64': answer = (<int64_t *>(buf + offset))[0]
-        elif field.tag == 'uint8': answer = (<uint8_t *>(buf + offset))[0]
-        elif field.tag == 'uint16': answer = (<uint16_t *>(buf + offset))[0]
-        elif field.tag == 'uint32': answer = (<uint32_t *>(buf + offset))[0]
-        elif field.tag == 'uint64': answer = (<uint64_t *>(buf + offset))[0]
-        elif field.tag == 'ascii':
-            # only copy up to null-termination, but limit to a maximum
-            length = min(strlen(buf + offset), int(field.attrib['maxlength']))
-            answer = b'\x00' * length
-            memcpy(<char *>answer, buf + offset, length)
-            if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
-                answer = answer[::-1]
-        return answer
-
-    def write_field(self, value):
-        # retrieve the struct as bytes
-        pybuffer = self.access.read_all_bytes()
-        cdef:
-            int offset = int(field.attrib['offset']) + self.offset
-            char *buf = <char *>(pybuffer)
-
-        # cast the data into the correct format and write back
-        if field.tag == 'float': (<float *>(buf + offset))[0] = value
-        elif field.tag == 'double': (<double *>(buf + offset))[0] = value
-        elif field.tag == 'int8': (<int8_t *>(buf + offset))[0] = value
-        elif field.tag == 'int16': (<int16_t *>(buf + offset))[0] = value
-        elif field.tag == 'int32': (<int32_t *>(buf + offset))[0] = value
-        elif field.tag == 'int64': (<int64_t *>(buf + offset))[0] = value
-        elif field.tag == 'uint8': (<uint8_t *>(buf + offset))[0] = value
-        elif field.tag == 'uint16': (<uint16_t *>(buf + offset))[0] = value
-        elif field.tag == 'uint32': (<uint32_t *>(buf + offset))[0] = value
-        elif field.tag == 'uint64': (<uint64_t *>(buf + offset))[0] = value
-        elif field.tag == 'ascii':
-            if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
-                value = value[::-1]
-            memcpy(buf + offset, <char *>value, len(value))
-            memcpy(buf + offset + len(value), <char *>b'\x00', 1)
-        self.access.write_bytes(pybuffer, 0)
-
-    return property(fget=read_field, fset=write_field, doc=doc)
+    return property(fget=make_fget(), fset=make_fset(), doc=doc)
 
 def load_plugin(xml_filepath):
     """Using an xml definition, define a new Python class which wraps a c-struct"""
 
-    base_struct = et.parse(xml_filepath).getroot()
+    # load the xml definition
+    root_struct = et.parse(xml_filepath).getroot()
 
-    def __init__(self, access, offset=0):
+    def __init__(self, access):
         self.access = access
-        self.offset = offset
+
+        # remember fields for later printing
+        self.field_names = []
+        for field in root_struct:
+            if 'name' in field.attrib:
+                self.field_names.append(field.attrib['name'])
 
     def __str__(self):
-        # Example string representation:
-        # struct type: map_header
-        #   struct_size: 132
-        #   integrity: b'daeh'
-        #   game_version: 7
-        #   map_size: 13523732
-        #   index_offset: 8042316
-        #   metadata_length: 5481416
-        #   map_name: b'beavercreek'
-        #   map_build: b'01.00.00.0564'
-        #   map_type: 0
+        answer = "struct type: " + root_struct.attrib['name']
 
-        answer = "struct type: " + base_struct.attrib['name']
+        # fields sorted by xml declaration
+        # should be sorted by offset but that's just convention
+        for key in self.field_names:
+            answer += '\n  ' + key + ': ' + str(getattr(self, key))
 
-        # attributes sorted by offset (confusing sort, I know...)
-        for key in sorted(new_class.__dict__, key=lambda x: str(new_class.__dict__.get(x))):
-            if key[0] != '_' and key != 'access':
-                answer += '\n  ' + key + ': ' + str(getattr(self, key))
         return answer
 
-    new_class = type(base_struct.attrib['name'], (object,), {})
+    # define a new class (aka type) without knowing the name ahead of time
+    new_class = type(root_struct.attrib['name'], (object,), {})
     new_class.__init__ = __init__
     new_class.__str__ = __str__
 
-    if 'size' in base_struct.attrib:
-        new_class.struct_size = int(base_struct.attrib['size'])
+    if 'size' in root_struct.attrib:
+        new_class.struct_size = int(root_struct.attrib['size'])
 
-    for field in base_struct:
+    for field in root_struct:
         if 'name' in field.attrib:
             setattr(new_class, field.attrib['name'], make_property(field))
 
