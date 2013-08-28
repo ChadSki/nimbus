@@ -47,13 +47,16 @@ def process_list():
     hTH32Snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
     pe32 = PROCESSENTRY32()
     pe32.dwSize = ctypes.sizeof(PROCESSENTRY32)
+
     if Process32First(hTH32Snapshot, ctypes.byref(pe32)) == False:
-        print >> sys.stderr, "Failed getting first process."
+        print("Failed getting first process.", file=sys.stderr)
         return
+
     while True:
         yield pe32
         if Process32Next(hTH32Snapshot, ctypes.byref(pe32)) == False:
             break
+
     CloseHandle(hTH32Snapshot) # does this get reached if the get_process_by_name loop exits early?
 
 def get_process_by_name(name):
@@ -76,7 +79,9 @@ class WinMemAccess(ByteAccess):
         # share the same process between all WinMemAccesses
         if 'process' not in WinMemAccess.__dict__:
             halo = get_process_by_name("halo.exe")
-            if halo == None: raise Exception("Halo is not running")
+            if halo == None:
+                raise Exception("Halo is not running")
+
             WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
 
         super(WinMemAccess, self).__init__(offset, size)
