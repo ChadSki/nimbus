@@ -22,6 +22,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import glob
+import os
 import xml.etree.ElementTree as et
 from libc.stdint cimport int8_t, int16_t, int32_t, int64_t
 from libc.stdint cimport uint8_t, uint16_t, uint32_t, uint64_t
@@ -185,6 +187,9 @@ def make_property(field):
 
     return property(fget=make_fget(), fset=make_fset(), doc=doc)
 
+
+plugin_dict = {}
+
 def load_plugin(xml_filepath):
     """Using an xml definition, define a new Python class which wraps a c-struct"""
 
@@ -222,4 +227,10 @@ def load_plugin(xml_filepath):
         if 'name' in field.attrib:
             setattr(new_class, field.attrib['name'], make_property(field))
 
+    plugin_dict[root_struct.attrib['name']] = new_class
     return new_class
+
+def load_plugins(plugin_dir):
+    plugins = glob.glob(os.path.join(plugin_dir,'*.xml'))
+    for each in plugins:
+        load_plugin(each)

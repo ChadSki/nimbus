@@ -20,7 +20,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from xmlplugins import load_plugin
+from xmlplugins import load_plugins
+from xmlplugins import plugin_dict
 from xmlplugins import py_strlen
 from byteaccess import FileAccess
 import mmap
@@ -33,13 +34,17 @@ class HaloMap(object):
         self.file = file
 
     def __str__(self):
-        answer = str(self.map_header) + '\n\n'
-        answer += str(self.index_header) + '\n\n'
-        answer += 'Tag classes in order:\n'
-        curr_column = 0
+        answer = '%s\n\n' % str(self.map_header)
+        answer += '%s\n\n' % str(self.index_header)
 
+        answer += 'Tag classes in order:\n'
+        column = 0
         for each in self.tags_in_order:
-            answer += str(each.name) + '\n'
+            answer += '%s ' % each.first_class
+            column += 1
+            if column > 50:
+                answer += '\n'
+                column = 0
 
         return answer
 
@@ -67,7 +72,8 @@ class HaloTag(object):
 
     @property
     def meta(self):
-        pass
+        # every time the meta is accessed, reinterpret it as the current class
+        return plugin_dict[self.first_class](self.meta_access)
 
     @meta.setter
     def meta(self, value):
@@ -78,43 +84,48 @@ class HaloTag(object):
 
 
 def load_map_from_file(map_path):
-    MapHeader = load_plugin('map_header.xml')
-    IndexHeader = load_plugin('index_header.xml')
-    IndexEntry = load_plugin('index_entry.xml')
+    load_plugins('.')
+
+    MapHeader = plugin_dict['map_header']
+    IndexHeader = plugin_dict['index_header']
+    IndexEntry = plugin_dict['index_entry']
 
     f = open(map_path, 'r+b')
-    mapfile = mmap.mmap(f.fileno(), 0)
+    mmap_file = mmap.mmap(f.fileno(), 0)
 
-    mh = MapHeader(FileAccess(mapfile, 0, MapHeader.struct_size))
-    ih = IndexHeader(FileAccess(mapfile, mh.index_offset, IndexHeader.struct_size))
+    map_header = MapHeader(FileAccess(mmap_file, 0, MapHeader.struct_size))
+    index_header = IndexHeader(FileAccess(mmap_file, map_header.index_offset, IndexHeader.struct_size))
 
-    # In a standard map, ih.primary_magic and standard_magic are the same. However, Halo also
-    # accepts non-standard tag index locations, which the following can handle: (thanks Zero2!)
-    standard_magic = 0x40440028
-    index_location = mh.index_offset + IndexHeader.struct_size + (ih.primary_magic - standard_magic)
-    map_magic = ih.primary_magic - index_location
+    # Usually a map's primary magic is exactly equal to the 'standard primary magic'
+    # defined here. However, some forms of map protection move the tag index to other
+    # locations, which results in a different primary magic. (Thanks for explaining, Zero2!)
+    standard_primary_magic = 0x40440028
+    standard_index_location = map_header.index_offset + IndexHeader.struct_size
+    primary_magic_difference = index_header.primary_magic - standard_primary_magic
+    index_location = standard_index_location + primary_magic_difference
+
+    # map magic is based on primary magic and the index location
+    map_magic = index_header.primary_magic - index_location
 
     index_entries = []
     curr_offset = index_location
-    for i in range(ih.tag_count):
-        ie = IndexEntry(FileAccess(mapfile, curr_offset, IndexEntry.struct_size))
-        name_access = FileAccess(mapfile, ie.name_offset_raw - map_magic, 256)
-        meta_access = FileAccess(mapfile, ie.meta_offset_raw - map_magic, 16)
 
-        ht = HaloTag(ie, name_access, meta_access)
+    for i in range(index_header.tag_count):
+        index_entry = IndexEntry(FileAccess(mmap_file, curr_offset, IndexEntry.struct_size))
+        name_access = FileAccess(mmap_file, index_entry.name_offset_raw - map_magic, 256)
+        meta_access = FileAccess(mmap_file, index_entry.meta_offset_raw - map_magic, 16)
 
-        print(ht.first_class)
-
+        ht = HaloTag(index_entry, name_access, meta_access)
         index_entries.append(ht)
 
         curr_offset += IndexEntry.struct_size
 
 
-    #tn = TagName(FileAccess(mapfile, ie.name_offset_raw + map_magic, name_length))
-    #md = Metadata(FileAccess(mapfile, ie.meta_offset_raw + map_magic, meta_size))
-    #tags_in_order.append(HaloTag(ie, tn, md))
+    #tn = TagName(FileAccess(mmap_file, index_entry.name_offset_raw + map_magic, name_length))
+    #md = Metadata(FileAccess(mmap_file, index_entry.meta_offset_raw + map_magic, meta_size))
+    #tags_in_order.append(HaloTag(index_entry, tn, md))
 
-    hm = HaloMap(mh, ih, index_entries, f)
+    hm = HaloMap(map_header, index_header, index_entries, f)
     print(hm)
     hm.close()
     
