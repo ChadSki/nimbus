@@ -49,7 +49,7 @@ def make_property(field):
 
         # Cython is a little different than C. We can't expect pointers,
         # so we need to cast before dereferencing.
-        # Note that 'int' is just a hint, not a specific size
+        # Note that 'int' is just a Cython hint, it doesn't have a specific size
         def read_float(self, int address):  return (<float*>address)[0]
         def read_double(self, int address): return (<double*>address)[0]
         def read_int8(self, int address):   return (<int8_t*>address)[0]
@@ -60,19 +60,30 @@ def make_property(field):
         def read_uint16(self, int address): return (<uint16_t*>address)[0]
         def read_uint32(self, int address): return (<uint32_t*>address)[0]
         def read_uint64(self, int address): return (<uint64_t*>address)[0]
-        def read_ascii(self, int address):
-            # only copy up to null-termination, but limit to a maximum
-            length = min(strlen(<char*>address), int(field.attrib['maxlength']))
 
-            # create a new Python string, then copy the data over
-            answer = b'\x00' * length
-            memcpy(<char*>answer, <char*>address, length)
+        def read_ascii(self, int address):
+            """Reads a fixed-length ascii string"""
+
+            length = int(field.attrib['length'])            # the fixed length to copy
+            answer = b'\x00' * length                       # create a new Python string
+            memcpy(<char*>answer, <char*>address, length)   # copy the data over
 
             # 'ihev' <-> 'vehi' and so forth
             if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
                 answer = answer[::-1]
 
-            return answer
+            return answer.decode('ascii')
+
+        def read_asciiz(self, int address):
+            """Reads a null-terminated ascii string"""
+
+            # only copy up to null-termination, but limit to a maximum
+            length = min(strlen(<char*>address), int(field.attrib['maxlength']))
+
+            answer = b'\x00' * length                       # create a new Python string
+            memcpy(<char*>answer, <char*>address, length)   # copy the data over
+
+            return answer.decode('ascii')
 
         # select the appropriate reader for this property's type
         read_field = {
@@ -87,14 +98,15 @@ def make_property(field):
             'uint32' : read_uint32,
             'uint64' : read_uint64,
             'ascii' : read_ascii,
+            'asciiz' : read_asciiz,
         }[field.tag]
 
-        cdef int offset = int(field.attrib['offset']) # get the field's offset from xml
-                                                      # (this can be done once, ahead of time)
+        cdef int offset = int(field.attrib['offset'])   # get the field's offset from xml
+
         def fget(self):
-            pybuffer = self.access.read_all_bytes()   # retrieve the struct as bytes
-            cdef int buf = <int>(<char*>(pybuffer))   # Cython cast for pointer arithmetic
-            return read_field(self, buf + offset)     # reinterpret the raw data with the selected reader
+            pybuffer = self.access.read_all_bytes()     # retrieve the struct as bytes
+            cdef int buf = <int>(<char*>(pybuffer))     # Cython cast for pointer arithmetic
+            return read_field(self, buf + offset)       # reinterpret the raw data with the selected reader
 
         return fget
 
@@ -106,7 +118,7 @@ def make_property(field):
 
         # Cython is a little different than C. We can't expect pointers,
         # so we need to cast before dereferencing then setting the value.
-        # Note that 'int' is just a hint, not a specific size
+        # Note that 'int' is just a Cython hint, it doesn't have a specific size
         def write_float(self, int address, value):  (<float*>address)[0] = value
         def write_double(self, int address, value): (<double*>address)[0] = value
         def write_int8(self, int address, value):   (<int8_t*>address)[0] = value
@@ -117,20 +129,28 @@ def make_property(field):
         def write_uint16(self, int address, value): (<uint16_t*>address)[0] = value
         def write_uint32(self, int address, value): (<uint32_t*>address)[0] = value
         def write_uint64(self, int address, value): (<uint64_t*>address)[0] = value
+
         def write_ascii(self, int address, value):
-            raise Exception("need to discriminate between null-terminated and not")
+            """Writes a fixed-length ascii string"""
+            value = value.encode('ascii')                   # convert from string to bytes
 
             # 'ihev' <-> 'vehi' and so forth
             if 'reverse' in field.attrib and field.attrib['reverse'] == 'true':
                 value = value[::-1]
 
-            # only copy up to null-termination, but limit to a maximum
-            length = min(strlen(<char*>value), int(field.attrib['maxlength']))
+            length = int(field.attrib['length'])            # the fixed length to copy
+            memcpy(<char*>address, <char*>value, length)    # copy the data over
 
-            # copy and null-terminate the string
-            memcpy(address, <char*>value, length)
-            null_loc = address + length
-            memcpy(<char*>null_loc, <char*>b'\x00', 1)
+        def write_asciiz(self, int address, value):
+            """Writes a null-terminated ascii string"""
+            value = value.encode('ascii')                   # convert from string to bytes
+
+            # only copy up to null-termination, but limit to a maximum (account for null terminator)
+            length = min(strlen(<char*>value), int(field.attrib['maxlength']) - 1)
+
+            memcpy(<char*>address, <char*>value, length)    # copy the data over
+            null_loc = address + length                     # calculate address of the null-terminator
+            memcpy(<char*>null_loc, <char*>b'\x00', 1)      # null-terminate
 
         # select the appropriate writer for this property's type
         write_field = {
@@ -145,15 +165,16 @@ def make_property(field):
             'uint32' : write_uint32,
             'uint64' : write_uint64,
             'ascii' : write_ascii,
+            'asciiz' : write_asciiz,
         }[field.tag]
 
-        cdef int offset = int(field.attrib['offset']) # get the field's offset from xml
-                                                      # (this can be done once, ahead of time)
+        cdef int offset = int(field.attrib['offset'])   # get the field's offset from xml
+
         def fset(self, value):
-            pybuffer = self.access.read_all_bytes()   # retrieve the struct as bytes
-            cdef char* buf = <char*>(pybuffer)        # Cython cast for pointer arithmetic
-            write_field(self, buf + offset, value)    # write the new value by using the selected writer
-            self.access.write_bytes(pybuffer, 0)      # don't forget to write the bytes back!
+            pybuffer = self.access.read_all_bytes()     # retrieve the struct as bytes
+            cdef char* buf = <char*>(pybuffer)          # Cython cast for pointer arithmetic
+            write_field(self, buf + offset, value)      # write the new value by using the selected writer
+            self.access.write_bytes(pybuffer, 0)        # don't forget to write the bytes back!
 
         return fset
 

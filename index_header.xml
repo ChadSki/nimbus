@@ -9,5 +9,5 @@
     <uint32 name="indicie_count" offset="24" />
     <uint32 name="indicie_offset" offset="28" />
     <uint32 name="model_data_length" offset="32" />
-    <ascii name="integrity" offset="36" maxlength="4" reverse="true" />
+    <ascii name="integrity" offset="36" length="4" reverse="true" />
 </struct>
