@@ -174,7 +174,7 @@ def make_property(field):
 
         def fset(self, value):
             pybuffer = self.access.read_all_bytes()     # retrieve the struct as bytes
-            cdef char* buf = <char*>(pybuffer)          # Cython cast for pointer arithmetic
+            cdef int buf = <int>(<char*>(pybuffer))     # Cython cast for pointer arithmetic
             write_field(self, buf + offset, value)      # write the new value by using the selected writer
             self.access.write_bytes(pybuffer, 0)        # don't forget to write the bytes back!
 
@@ -188,25 +188,22 @@ def make_property(field):
     return property(fget=make_fget(), fset=make_fset(), doc=doc)
 
 
-plugin_dict = {}
+struct_reader = {}
 
-def load_plugin(xml_filepath):
-    """Using an xml definition, define a new Python class which wraps a c-struct"""
-
-    # load the xml definition
-    root_struct = et.parse(xml_filepath).getroot()
+def load_plugin(layout):
+    """Using an xml-defined layout, define a new Python class which wraps a c-struct"""
 
     def __init__(self, access):
         self.access = access
 
         # remember fields for later printing
         self.field_names = []
-        for field in root_struct:
+        for field in layout:
             if 'name' in field.attrib:
                 self.field_names.append(field.attrib['name'])
 
     def __str__(self):
-        answer = "struct type: " + root_struct.attrib['name']
+        answer = "struct type: " + layout.attrib['name']
 
         # fields sorted by xml declaration
         # should be sorted by offset but that's just convention
@@ -216,21 +213,23 @@ def load_plugin(xml_filepath):
         return answer
 
     # define a new class (aka type) without knowing the name ahead of time
-    new_class = type(root_struct.attrib['name'], (object,), {})
+    new_class = type(layout.attrib['name'], (object,), {})
     new_class.__init__ = __init__
     new_class.__str__ = __str__
 
-    if 'size' in root_struct.attrib:
-        new_class.struct_size = int(root_struct.attrib['size'])
+    if 'size' in layout.attrib:
+        new_class.struct_size = int(layout.attrib['size'])
 
-    for field in root_struct:
+    for field in layout:
         if 'name' in field.attrib:
             setattr(new_class, field.attrib['name'], make_property(field))
 
-    plugin_dict[root_struct.attrib['name']] = new_class
-    return new_class
+    struct_reader[layout.attrib['name']] = new_class
 
 def load_plugins(plugin_dir):
-    plugins = glob.glob(os.path.join(plugin_dir,'*.xml'))
-    for each in plugins:
-        load_plugin(each)
+    """Load all xml plugins from the plugin directory"""
+
+    plugin_list = glob.glob(os.path.join(plugin_dir, '*.xml'))
+    for filepath in plugin_list:
+        root_struct = et.parse(filepath).getroot()  # load the xml definition
+        load_plugin(root_struct)                    # create a class to read the struct as defined
