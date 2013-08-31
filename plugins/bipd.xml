@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <struct name="bipd" size="800">
     <float name="turn_speed" offset="752" />
-    <reflexive name="something" offset="0x140">
-        <ascii name="stuff" offset="0x0" length='16' reverse='false' />
+    <reflexive name="something" offset="0x140" size='16'>
+        <rawdata name="stuff" offset="0x0" length='16' reverse='false' />
     </reflexive>
 </struct>

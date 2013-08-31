@@ -103,8 +103,8 @@ cdef class UInt64Field(Field):
     def _set_value(self, int address, value): (<uint64_t*>(address))[0] = value
 
 
-cdef class AsciiField(Field):
-    """Read/write fixed length ascii strings"""
+cdef class RawDataField(Field):
+    """Read/write fixed length bytestrings"""
 
     cdef:
         int length
@@ -113,12 +113,11 @@ cdef class AsciiField(Field):
     def __init__(self, **kwargs):
         self.length = int(kwargs.pop('length'), base=0)
         self.reverse = kwargs.pop('reverse', 'false')
-        super(AsciiField, self).__init__(**kwargs)
+        super(RawDataField, self).__init__(**kwargs)
 
     def _get_value(self, int address):
         answer = b'\x00' * self.length                      # create a new Python bytestring
         memcpy(<char*>answer, <char*>address, self.length)  # copy the data over
-        answer = answer.decode('ascii')                     # convert from bytestring to string
 
         if self.reverse == 'true':
             answer = answer[::-1]
@@ -131,6 +130,18 @@ cdef class AsciiField(Field):
 
         value = value.encode('ascii')                       # convert from string to bytes
         memcpy(<char*>address, <char*>value, self.length)   # copy the data over
+
+cdef class AsciiField(RawDataField):
+    """Read/write fixed length ascii strings"""
+
+    def __init__(self, **kwargs):
+        super(AsciiField, self).__init__(**kwargs)
+
+    def _get_value(self, int address):
+        return super(AsciiField, self)._get_value(address).decode('ascii')
+
+    def _set_value(self, int address, value):
+        super(AsciiField, self)._set_value(address, value.encode('ascii'))
 
 cdef class AsciizField(Field):
     """Read/write null-terminated ascii strings"""
@@ -171,11 +182,7 @@ cdef class ReflexiveField(Field):
         self.count_reader = UInt32Field(offset=self.offset)
         self.pointer_reader = UInt32Field(offset=(self.offset + 4))
 
-    def _get_value(self, int address):
+    def get_value(self, address):
         count = self.count_reader.get_value(address)
-        p_curr = self.pointer_reader.get_value(address)
-
-        for i in range(count):
-            reflexive = object()
-            for child in self.children:
-                pass
+        raw_pointer = self.pointer_reader.get_value(address)
+        return (count, raw_pointer)
