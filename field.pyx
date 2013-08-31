@@ -34,14 +34,11 @@ cdef extern from "string.h" nogil:
 def py_strlen(s):
     return strlen(<char*>s)
 
-        # We need different ways to read the data depending on what type of field
-        # this is. Define all possible readers here, then pick one later.
-
-        # Cython is a little different than C. We can't expect pointers,
-        # so we need to cast before dereferencing.
-        # Note that 'int' is just a Cython hint, it doesn't have a specific size
 
 cdef class Field(object):
+    """Fields read and write to C structs in a way that Python can understand.
+    Use a subclass of Field to read/write a specific datatype."""
+
     cdef int offset
 
     def __init__(self, **kwargs):
@@ -60,6 +57,18 @@ cdef class Field(object):
             int address = <int>(buf) + self.offset
 
         self._set_value(address, value)
+
+    def _get_value(self, int address):
+        raise Exception("Cannot read from an abstract Field")
+
+    def _set_value(self, int address):
+        raise Exception("Cannot write to an abstract Field")
+
+
+# Primitives are straightforward to read and write, even though Cython is a little
+# different than C. We can't expect pointers, so we need to cast before dereferencing.
+
+# Note that using 'int' for pointers is just a Cython hint; it doesn't require a specific size
 
 cdef class FloatField(Field):
     def _get_value(self, int address): return (<float*>(address))[0]
@@ -101,7 +110,10 @@ cdef class UInt64Field(Field):
     def _get_value(self, int address): return (<uint64_t*>(address))[0]
     def _set_value(self, int address, value): (<uint64_t*>(address))[0] = value
 
+
 cdef class AsciiField(Field):
+    """Read/write fixed length ascii strings"""
+
     cdef:
         int length
         object reverse
@@ -129,6 +141,8 @@ cdef class AsciiField(Field):
         memcpy(<char*>address, <char*>value, self.length)   # copy the data over
 
 cdef class AsciizField(Field):
+    """Read/write null-terminated ascii strings"""
+
     cdef int maxlength
 
     def __init__(self, **kwargs):
@@ -139,8 +153,8 @@ cdef class AsciizField(Field):
         # only copy up to null-termination, but limit to a maximum
         length = min(strlen(<char*>address), self.maxlength)
 
-        answer = b'\x00' * length                       # create a new Python bytestring
-        memcpy(<char*>answer, <char*>address, length)   # copy the data over
+        answer = b'\x00' * length                           # create a new Python bytestring
+        memcpy(<char*>answer, <char*>address, length)       # copy the data over
 
         return answer.decode('ascii')
 
