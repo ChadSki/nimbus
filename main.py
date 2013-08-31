@@ -1,10 +1,13 @@
-from halolib import load_map_from_file
+import halolib
 
-halomap = load_map_from_file('bloodgulch.map')
+halolib.load_plugins('.\plugins')
+
+halomap = halolib.load_map_from_file('bloodgulch.map')
 
 print(halomap)
-
 for tag in halomap.tags:
-    print(tag)
+    if tag.first_class == 'bipd':
+        print(tag)
+        print('    turn speed: %f\n' %tag.turn_speed)
 
 halomap.close()

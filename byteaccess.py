@@ -30,7 +30,7 @@ class ByteAccess(object):
         self.size = size
 
     def read_bytes(self, offset, size):
-        if offset + size > self.size:\
+        if offset + size > self.size:
             raise Exception("Cannot read past end of Access")
 
         return self._read_bytes(offset, size)

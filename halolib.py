@@ -106,8 +106,6 @@ class HaloTag(object):
 
 
 def load_map_from_file(map_path):
-    load_plugins('.\plugins')
-
     MapHeader = struct_reader['map_header']
     IndexHeader = struct_reader['index_header']
     IndexEntry = struct_reader['index_entry']

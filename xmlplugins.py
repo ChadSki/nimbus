@@ -25,6 +25,10 @@ import os
 import xml.etree.ElementTree as et
 from field import *
 
+def remove_key(d, key):
+    r = dict(d)
+    del r[key]
+    return r
 
 def make_property(field):
     """Defines a property which reads/writes to a field in a plugin-defined struct"""
@@ -34,29 +38,36 @@ def make_property(field):
     #  2) a setter function
     #  3) a docstring (optional)
 
-    converter = {
-        'float' : FloatField,
-        'double' : DoubleField,
-        'int8' : Int8Field,
-        'int16' : Int16Field,
-        'int32' : Int32Field,
-        'int64' : Int64Field,
-        'uint8' : UInt8Field,
-        'uint16' : UInt16Field,
-        'uint32' : UInt32Field,
-        'uint64' : UInt64Field,
-        'ascii' : AsciiField,
-        'asciiz' : AsciizField,
-    }[field.tag](**field.attrib)
+
+    offset = int(field.attrib['offset'], base=0)    # we use the offset here, not in the converter
+    ctor_args = remove_key(field.attrib, 'offset')  # pass the remaining args to the converter
+
+    converter_ctor, size_of = {
+        'float' : (FloatField, 4),
+        'double' : (DoubleField, 8),
+        'int8' : (Int8Field, 1),
+        'int16' : (Int16Field, 2),
+        'int32' : (Int32Field, 4),
+        'int64' : (Int64Field, 8),
+        'uint8' : (UInt8Field, 1),
+        'uint16' : (UInt16Field, 2),
+        'uint32' : (UInt32Field, 4),
+        'uint64' : (UInt64Field, 8),
+        'ascii' : (AsciiField, int(field.attrib.get('length', '0'), base=0)),
+        'asciiz' : (AsciizField, int(field.attrib.get('maxlength', '0'), base=0)),
+        'reflexive' : (ReflexiveField, 8),
+    }[field.tag]
+
+    converter = converter_ctor(**ctor_args)
 
     def fget(self):
-        buf = self.access.read_all_bytes()  # retrieve the struct as bytes
-        return converter.get_value(buf)     # reinterpret the raw data with the selected reader
+        buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
+        return converter.get_value(buf)                 # reinterpret the raw data with the selected reader
 
     def fset(self, value):
-        buf = self.access.read_all_bytes()  # retrieve the struct as bytes
-        converter.set_value(buf)            # write the new value by using the selected writer
-        self.access.write_bytes(buf, 0)     # don't forget to write the bytes back!
+        buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
+        converter.set_value(buf)                        # write the new value by using the selected writer
+        self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
 
         return fset
 

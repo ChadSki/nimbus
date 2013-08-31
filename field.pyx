@@ -42,21 +42,13 @@ cdef class Field(object):
     cdef int offset
 
     def __init__(self, **kwargs):
-        self.offset = int(kwargs.pop('offset'), base=0) # convert from base 10 or, if prefixed with '0x', from hex
+        pass
 
     def get_value(self, pybuffer):
-        cdef:
-            char* buf = <char*>pybuffer
-            int address = <int>(buf) + self.offset
-
-        return self._get_value(address)
+        return self._get_value(<int><char*>pybuffer)
 
     def set_value(self, pybuffer, value):
-        cdef:
-            char* buf = <char*>pybuffer
-            int address = <int>(buf) + self.offset
-
-        self._set_value(address, value)
+        self._set_value(<int><char*>pybuffer, value)
 
     def _get_value(self, int address):
         raise Exception("Cannot read from an abstract Field")
@@ -169,3 +161,21 @@ cdef class AsciizField(Field):
         null_loc = address + self.length                    # calculate address of the null-terminator
         memcpy(<char*>null_loc, <char*>b'\x00', 1)          # null-terminate
 
+cdef class ReflexiveField(Field):
+    cdef:
+        object count_reader
+        object pointer_reader
+
+    def __init__(self, **kwargs):
+        super(ReflexiveField, self).__init__(**kwargs)
+        self.count_reader = UInt32Field(offset=self.offset)
+        self.pointer_reader = UInt32Field(offset=(self.offset + 4))
+
+    def _get_value(self, int address):
+        count = self.count_reader.get_value(address)
+        p_curr = self.pointer_reader.get_value(address)
+
+        for i in range(count):
+            reflexive = object()
+            for child in self.children:
+                pass
