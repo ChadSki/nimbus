@@ -21,7 +21,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from xmlplugins import load_plugins
-from xmlplugins import struct_reader
+from xmlplugins import halo_struct_classes
 from xmlplugins import py_strlen
 from byteaccess import FileAccess
 import mmap
@@ -35,7 +35,7 @@ class HaloMap(object):
         self.file = file
 
     def __str__(self):
-        return '%s\n\n%s\n' % (self.map_header, self.index_header)
+        return '%s\n\n%s\n' % (str(self.map_header) % '', str(self.index_header) % '')
 
     def close(self):
         if self.file != None:
@@ -44,13 +44,18 @@ class HaloMap(object):
 
 
 class HaloTag(object):
-    def __init__(self, index_entry, name_access, meta_access):
+    def __init__(self, index_entry, name_access, meta_access, map_magic):
         object.__setattr__(self, 'index_entry', index_entry)
         object.__setattr__(self, 'name_access', name_access)
         object.__setattr__(self, 'meta_access', meta_access)
+        object.__setattr__(self, 'map_magic', map_magic)
 
     def __str__(self):
         return '[%s]%s' % (self.first_class, self.name)
+
+    @property
+    def layout_str(self):
+        return str(self.meta) % self.name
 
     @property
     def name(self):
@@ -65,7 +70,7 @@ class HaloTag(object):
     @property
     def meta(self):
         # every time the meta is accessed, reinterpret it as the current first_class
-        return struct_reader[self.first_class](self.meta_access)
+        return halo_struct_classes[self.first_class](self.meta_access, self.map_magic)
 
     # HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own
     #
@@ -106,15 +111,15 @@ class HaloTag(object):
 
 
 def load_map_from_file(map_path):
-    MapHeader = struct_reader['map_header']
-    IndexHeader = struct_reader['index_header']
-    IndexEntry = struct_reader['index_entry']
+    MapHeader = halo_struct_classes['map_header']
+    IndexHeader = halo_struct_classes['index_header']
+    IndexEntry = halo_struct_classes['index_entry']
 
     f = open(map_path, 'r+b')
     mmap_file = mmap.mmap(f.fileno(), 0)
 
-    map_header = MapHeader(FileAccess(mmap_file, 0, MapHeader.struct_size))
-    index_header = IndexHeader(FileAccess(mmap_file, map_header.index_offset, IndexHeader.struct_size))
+    map_header = MapHeader(FileAccess(mmap_file, 0, MapHeader.struct_size), 0)
+    index_header = IndexHeader(FileAccess(mmap_file, map_header.index_offset, IndexHeader.struct_size), 0)
 
     # Usually a map's primary magic is exactly equal to the 'standard primary magic'
     # defined here. However, some forms of map protection move the tag index to other
@@ -131,11 +136,11 @@ def load_map_from_file(map_path):
     curr_offset = index_location
 
     for i in range(index_header.tag_count):
-        index_entry = IndexEntry(FileAccess(mmap_file, curr_offset, IndexEntry.struct_size))
+        index_entry = IndexEntry(FileAccess(mmap_file, curr_offset, IndexEntry.struct_size), map_magic)
         name_access = FileAccess(mmap_file, index_entry.name_offset_raw - map_magic, 256)
-        meta_access = FileAccess(mmap_file, index_entry.meta_offset_raw - map_magic, 800)
+        meta_access = FileAccess(mmap_file, index_entry.meta_offset_raw - map_magic, 0x4000)
 
-        ht = HaloTag(index_entry, name_access, meta_access)
+        ht = HaloTag(index_entry, name_access, meta_access, map_magic)
         tags.append(ht)
 
         curr_offset += IndexEntry.struct_size

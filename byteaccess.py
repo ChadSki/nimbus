@@ -30,9 +30,9 @@ class ByteAccess(object):
         self.size = size
 
     def create_subaccess(self, offset, size):
-        relative_offset = offset - self.offset
-        if relative_offset + size > self.size:
-            raise Exception("Cannot subaccess past end of Access. offset:%d size:%d self.size:%d" % (offset, size, self.size))
+        #relative_offset = offset - self.offset
+        #if relative_offset + size > self.size:
+        #    raise Exception("Cannot subaccess past end of Access. offset:%d size:%d self.size:%d" % (relative_offset, size, self.size))
 
         return self._create_subaccess(offset, size)
 

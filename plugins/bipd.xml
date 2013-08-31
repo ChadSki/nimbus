@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<struct name="bipd" size="800">
-    <float name="turn_speed" offset="752" />
-    <reflexive name="something" offset="0x140" size='16'>
-        <rawdata name="stuff" offset="0x0" length='16' reverse='false' />
+<plugin name="bipd" struct_size="800">
+    <float name="turn_speed" offset="0x2F0" />
+    <float name="jump_velocity" offset="0x3B4" />
+    <reflexive name="functions" offset="0x158" struct_size='0x20'>
+        <float name="period" offset="0x4" />
+        <float name="wobble_period" offset="0x10" />
+        <float name="wobble_magnitude" offset="0x14" />
     </reflexive>
-</struct>
+</plugin>

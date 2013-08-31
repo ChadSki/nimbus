@@ -38,38 +38,60 @@ def make_property(field):
     #  2) a setter function
     #  3) a docstring (optional)
 
+    offset = int(field.attrib['offset'], base=0)
 
-    offset = int(field.attrib['offset'], base=0)    # we use the offset here, not in the converter
-    ctor_args = remove_key(field.attrib, 'offset')  # pass the remaining args to the converter
+    if field.tag == 'reflexive':
+        converter = ReflexiveField(**field.attrib)
+        offset = int(field.attrib['offset'], base=0)
 
-    converter_ctor, size_of = {
-        'float' : (FloatField, 4),
-        'double' : (DoubleField, 8),
-        'int8' : (Int8Field, 1),
-        'int16' : (Int16Field, 2),
-        'int32' : (Int32Field, 4),
-        'int64' : (Int64Field, 8),
-        'uint8' : (UInt8Field, 1),
-        'uint16' : (UInt16Field, 2),
-        'uint32' : (UInt32Field, 4),
-        'uint64' : (UInt64Field, 8),
-        'ascii' : (AsciiField, int(field.attrib.get('length', '0'), base=0)),
-        'asciiz' : (AsciizField, int(field.attrib.get('maxlength', '0'), base=0)),
-        'reflexive' : (ReflexiveField, 8),
-    }[field.tag]
+        Reflexive = load_plugin(field)
 
-    converter = converter_ctor(**ctor_args)
+        def fget(self):
+            buf = self.access.read_bytes(offset, 8)         # retrieve the struct as bytes
+            count, raw_offset = converter.get_value(buf)    # reinterpret the raw data
 
-    def fget(self):
-        buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
-        return converter.get_value(buf)                 # reinterpret the raw data with the selected reader
+            structs = []
+            curr_p = raw_offset - self.map_magic
+            for i in range(count):
+                structs.append(Reflexive(self.access.create_subaccess(curr_p, Reflexive.struct_size), self.map_magic))
+                curr_p += Reflexive.struct_size
 
-    def fset(self, value):
-        buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
-        converter.set_value(buf)                        # write the new value by using the selected writer
-        self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
+            return structs
 
-        return fset
+        def fset(self, value):
+            raise Exception("Writing an entire reflexive at once is not implemented")
+
+
+    else:
+        converter_ctor, size_of = {
+            'float' : (FloatField, 4),
+            'double' : (DoubleField, 8),
+            'int8' : (Int8Field, 1),
+            'int16' : (Int16Field, 2),
+            'int32' : (Int32Field, 4),
+            'int64' : (Int64Field, 8),
+            'uint8' : (UInt8Field, 1),
+            'uint16' : (UInt16Field, 2),
+            'uint32' : (UInt32Field, 4),
+            'uint64' : (UInt64Field, 8),
+            'rawdata' : (RawDataField, int(field.attrib.get('length', '0'), base=0)),
+            'ascii' : (AsciiField, int(field.attrib.get('length', '0'), base=0)),
+            'asciiz' : (AsciizField, int(field.attrib.get('maxlength', '0'), base=0)),
+        }[field.tag]
+
+        converter = converter_ctor(**field.attrib)
+        offset = int(field.attrib['offset'], base=0)
+
+        def fget(self):
+            buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
+            return converter.get_value(buf)                 # reinterpret the raw data with the selected reader
+
+        def fset(self, value):
+            buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
+            converter.set_value(buf)                        # write the new value by using the selected writer
+            self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
+
+            return fset
 
     if 'description' in field.attrib:
         doc = field.attrib['description']
@@ -79,13 +101,14 @@ def make_property(field):
     return property(fget=fget, fset=fset, doc=doc)
 
 
-struct_reader = {}
+halo_struct_classes = {}
 
 def load_plugin(layout):
     """Using an xml-defined layout, define a new Python class which wraps a c-struct"""
 
-    def __init__(self, access):
+    def __init__(self, access, map_magic):
         self.access = access
+        self.map_magic = map_magic
 
         # remember fields for later printing
         self.field_names = []
@@ -94,27 +117,42 @@ def load_plugin(layout):
                 self.field_names.append(field.attrib['name'])
 
     def __str__(self):
-        answer = "struct type: " + layout.attrib['name']
+        answer = '[%s]%%s' % layout.attrib['name']
 
-        # fields sorted by xml declaration
-        # should be sorted by offset but that's just convention
-        for key in self.field_names:
-            answer += '\n  ' + key + ': ' + str(getattr(self, key))
+        def stringify_struct(struct, answer, indent='\n  '):
+            """Recursively stringifies the base struct as well as reflexives"""
 
-        return answer
+            # fields sorted by xml declaration
+            # should be sorted by offset but that's just convention
+            for field in struct.field_names:
+                value = getattr(struct, field)
+                if type(value) == list:
+                    for i, each in enumerate(value):
+                        answer += indent + field + '[%d]:' % i
+                        answer = stringify_struct(each, answer, indent + '  ')
+                else:
+                    answer += indent + field + ': ' + str(value)
+
+            return answer
+
+        return stringify_struct(self, answer) + '\n'
 
     # define a new class (aka type) without knowing the name ahead of time
     new_class = type(layout.attrib['name'], (object,), {})
     new_class.__init__ = __init__
     new_class.__str__ = __str__
-
-    if 'size' in layout.attrib:
-        new_class.struct_size = int(layout.attrib['size'])
+    new_class.struct_size = int(layout.attrib['struct_size'], base=0)
 
     for field in layout:
         setattr(new_class, field.attrib['name'], make_property(field))
 
-    struct_reader[layout.attrib['name']] = new_class
+    # save entire plugins for later
+    if layout.tag == 'plugin':
+        halo_struct_classes[layout.attrib['name']] = new_class
+
+    # reflexives are used immediately to help construct plugins
+    else:
+        return new_class
 
 def load_plugins(plugin_dir):
     """Load all xml plugins from the plugin directory"""

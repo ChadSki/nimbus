@@ -39,16 +39,16 @@ cdef class Field(object):
     """Fields read and write to C structs in a way that Python can understand.
     Use a subclass of Field to read/write a specific datatype."""
 
-    cdef int offset
+    cdef public int offset
 
     def __init__(self, **kwargs):
-        pass
+        self.offset = 0
 
     def get_value(self, pybuffer):
-        return self._get_value(<int><char*>pybuffer)
+        return self._get_value(<int><char*>pybuffer + self.offset)
 
     def set_value(self, pybuffer, value):
-        self._set_value(<int><char*>pybuffer, value)
+        self._set_value(<int><char*>pybuffer + self.offset, value)
 
     def _get_value(self, int address):
         raise Exception("Cannot read from an abstract Field")
@@ -57,8 +57,8 @@ cdef class Field(object):
         raise Exception("Cannot write to an abstract Field")
 
 
-# Primitives are straightforward to read and write, even though Cython is a little
-# different than C. We can't expect pointers, so we need to cast before dereferencing.
+# Primitives are straightforward to read and write, even though Cython is a little different
+# than C. We can't expect pointers, so we need to cast from int before dereferencing.
 
 # Note that using 'int' for pointers is just a Cython hint; it doesn't require a specific size
 
@@ -104,7 +104,7 @@ cdef class UInt64Field(Field):
 
 
 cdef class RawDataField(Field):
-    """Read/write fixed length bytestrings"""
+    """Read/write fixed-length bytestrings"""
 
     cdef:
         int length
@@ -132,7 +132,7 @@ cdef class RawDataField(Field):
         memcpy(<char*>address, <char*>value, self.length)   # copy the data over
 
 cdef class AsciiField(RawDataField):
-    """Read/write fixed length ascii strings"""
+    """Read/write fixed-length ascii strings"""
 
     def __init__(self, **kwargs):
         super(AsciiField, self).__init__(**kwargs)
@@ -153,7 +153,7 @@ cdef class AsciizField(Field):
         super(AsciizField, self).__init__(**kwargs)
 
     def _get_value(self, int address):
-        # only copy up to null-termination, but limit to a maximum
+        # stop at null-termination, but limit to a maximum
         length = min(strlen(<char*>address), self.maxlength)
 
         answer = b'\x00' * length                           # create a new Python bytestring
@@ -164,8 +164,8 @@ cdef class AsciizField(Field):
     def _set_value(self, int address, value):
         value = value.encode('ascii')                       # convert from string to bytes
 
-        # only copy up to null-termination, but limit to a maximum
-        # also leave the last byte for a null character
+        # stop at null-termination, but limit to a maximum
+        # (leaving the last byte for a null character)
         self.length = min(strlen(<char*>value), self.maxlength - 1)
 
         memcpy(<char*>address, <char*>value, self.length)   # copy the data over
@@ -173,16 +173,27 @@ cdef class AsciizField(Field):
         memcpy(<char*>null_loc, <char*>b'\x00', 1)          # null-terminate
 
 cdef class ReflexiveField(Field):
+    """Read a reflexive's count and pointer,
+    then return both in a tuple."""
+
     cdef:
         object count_reader
         object pointer_reader
 
     def __init__(self, **kwargs):
         super(ReflexiveField, self).__init__(**kwargs)
-        self.count_reader = UInt32Field(offset=self.offset)
-        self.pointer_reader = UInt32Field(offset=(self.offset + 4))
+        self.count_reader = UInt32Field()
+        self.pointer_reader = UInt32Field()
+        self.pointer_reader.offset = 4
 
     def get_value(self, address):
         count = self.count_reader.get_value(address)
         raw_pointer = self.pointer_reader.get_value(address)
         return (count, raw_pointer)
+
+cdef class ReferenceField(UInt32Field):
+    """TODO"""
+
+    def __init__(self, **kwargs):
+        super(ReferenceField, self).__init__(**kwargs)
+        self.offset = 12
