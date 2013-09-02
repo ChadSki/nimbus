@@ -115,6 +115,13 @@ class HaloTag(object):
         else:
             pass
 
+def get_tag(halomap, first_class, name_fragment):
+    for tag in halomap.tags:
+        if tag.first_class == first_class and name_fragment in tag.name:
+            return tag
+
+    return None
+
 
 def load_map_from_file(map_path):
     MapHeader = halo_struct_classes['map_header']
