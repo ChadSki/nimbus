@@ -86,6 +86,9 @@ class WinMemAccess(ByteAccess):
 
         super(WinMemAccess, self).__init__(offset, size)
 
+    def _create_subaccess(self, offset, size):
+        return WinMemAccess(offset, size)
+
     def _read_bytes(self, offset, size):
         address = self.offset + offset
         buf = create_string_buffer(size)
