@@ -20,11 +20,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from halolib.xmlplugins import load_plugins
-from halolib.xmlplugins import halo_struct_classes
-from halolib.xmlplugins import py_strlen
-from halolib.byteaccess import FileAccess
-from halolib.winmemaccess import WinMemAccess
+from halolib.xmlplugins import load_plugins, py_strlen, halo_struct_classes
+from halolib.byteaccess import FileAccess, WinMemAccess
 import mmap
 
 class HaloMap(object):
