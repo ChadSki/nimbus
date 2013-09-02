@@ -72,39 +72,44 @@ OpenProcess = windll.kernel32.OpenProcess
 ReadProcessMemory = windll.kernel32.ReadProcessMemory
 WriteProcessMemory = windll.kernel32.WriteProcessMemory
 
-class WinMemAccess(ByteAccess):
-    """Encapsulates reading and writing to the map currently loaded in Halo.exe's memory."""
+def access_process(process_name):
+    """Defines a class for accessing bytes of memory from a specific process."""
 
-    def __init__(self, offset, size):
-        # share the same process between all WinMemAccesses
-        if 'process' not in WinMemAccess.__dict__:
-            halo = get_process_by_name(b'halo.exe')
-            if halo == None:
-                raise Exception("Halo is not running")
+    class WinMemAccess(ByteAccess):
+        """Encapsulates reading and writing to the specified process's memory."""
 
-            WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
+        def __init__(self, offset, size):
 
-        super(WinMemAccess, self).__init__(offset, size)
+            # share the same process handle between all WinMemAccesses for this process
+            if 'process' not in WinMemAccess.__dict__:
+                halo = get_process_by_name(process_name.encode('ascii'))
+                if halo == None:
+                    raise Exception("'%s' is not running" % process_name)
 
-    def _create_subaccess(self, offset, size):
-        return WinMemAccess(offset, size)
+                WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
 
-    def _read_bytes(self, offset, size):
-        address = self.offset + offset
-        buf = create_string_buffer(size)
-        bytesRead = c_ulong(0)
-        if ReadProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesRead)):
-            return bytes(buf)
-        else:
-            raise Exception("Failed to read memory")
+            super(WinMemAccess, self).__init__(offset, size)
 
-    def _write_bytes(self, to_write, offset):
-        address = self.offset + offset
-        buf = c_char_p(to_write)
-        size = len(to_write)
-        bytesWritten = c_ulong(0)
-        if WriteProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesWritten)):
-            return
-        else:
-            raise Exception("Failed to write memory")
-            
+        def _create_subaccess(self, offset, size):
+            return WinMemAccess(offset, size)
+
+        def _read_bytes(self, offset, size):
+            address = self.offset + offset
+            buf = create_string_buffer(size)
+            bytesRead = c_ulong(0)
+            if ReadProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesRead)):
+                return bytes(buf)
+            else:
+                raise Exception("Failed to read memory")
+
+        def _write_bytes(self, to_write, offset):
+            address = self.offset + offset
+            buf = c_char_p(to_write)
+            size = len(to_write)
+            bytesWritten = c_ulong(0)
+            if WriteProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesWritten)):
+                return
+            else:
+                raise Exception("Failed to write memory")
+
+    return WinMemAccess

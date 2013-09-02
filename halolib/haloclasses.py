@@ -21,7 +21,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from halolib.xmlplugins import load_plugins, py_strlen, halo_struct_classes
-from halolib.byteaccess import FileAccess, WinMemAccess
+from halolib.byteaccess import FileAccess, access_process
 import mmap
 
 class HaloMap(object):
@@ -38,6 +38,19 @@ class HaloMap(object):
 
     def __str__(self):
         return '%s\n%s' % (str(self.map_header) % '', str(self.index_header) % '')
+
+    def get_tag(self, first_class, name_fragment=''):
+        for tag in self.tags:
+            if tag.first_class == first_class and name_fragment in tag.name:
+                return tag
+
+        return None
+    
+    def get_tags(self, first_class, name_fragment=''):
+        for tag in self.tags:
+            if tag.first_class == first_class and name_fragment in tag.name:
+                yield tag
+    
 
     def close(self):
         if self.file != None:
@@ -112,13 +125,6 @@ class HaloTag(object):
         else:
             pass
 
-def get_tag(halomap, first_class, name_fragment):
-    for tag in halomap.tags:
-        if tag.first_class == first_class and name_fragment in tag.name:
-            return tag
-
-    return None
-
 
 def load_map_from_file(map_path):
     MapHeader = halo_struct_classes['map_header']
@@ -161,6 +167,8 @@ def load_map_from_file(map_path):
 
 
 def load_map_from_memory(*, fix_video_render=False):
+    WinMemAccess = access_process('halo.exe')
+
     # Force Halo to render video even when window is deselected
     if fix_video_render:
         video_rendering = WinMemAccess(0x400000 + 0x142538, 16)

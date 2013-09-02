@@ -6,7 +6,7 @@ halolib.py aims to be compatible with Halo 1 PC on Windows, and HaloMD on Mac OS
 
 ## Example usage
 
-Here we selectively display the (partial) layout of a Halo tag. Layouts are defined in xml plugins, and will become more complete in the future!
+As an example of modding at runtime, here we swap the projectile of the player's starting weapon with a more powerful projectile
 
 ### mem_example.py
 ```python
@@ -16,16 +16,15 @@ load_plugins('.\plugins')
 halomap = load_map_from_memory(fix_video_render=True)
 
 print(halomap)
-for tag in halomap.tags:
-    if tag.first_class == 'bipd':
-        first_weapon = tag.weapons[0].weapon
+for tag in halomap.get_tags('bipd'):
+    first_weapon = tag.weapons[0].weapon
 
-        print(tag)
-        print('before swap:%s' % first_weapon.projectile)
+    print(tag)
+    print('before swap:%s' % first_weapon.projectile)
 
-        first_weapon.projectile = get_tag(halomap, 'proj', 'charged')
+    first_weapon.projectile = halomap.get_tag('proj', 'charged')
 
-        print('after swap: %s\n' % first_weapon.projectile)
+    print('after swap: %s\n' % first_weapon.projectile)
 
 halomap.close()
 ```

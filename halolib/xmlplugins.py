@@ -25,7 +25,7 @@ import os
 import xml.etree.ElementTree as et
 from halolib.field import *
 
-def make_property(field):
+def make_property(node):
     """Defines a property which reads/writes to a field in a plugin-defined struct"""
 
     # to make a property we need three things:
@@ -33,18 +33,18 @@ def make_property(field):
     #  2) a setter function
     #  3) a docstring (optional)
 
-    offset = int(field.attrib['offset'], base=0)
+    offset = int(node.attrib['offset'], base=0)
 
-    if field.tag == 'reflexive':
+    if node.tag == 'reflexive':
         # handles the reflexive's count and pointer
-        converter = ReflexiveField(**field.attrib)
+        field = ReflexiveField(**node.attrib)
 
         # handles interpreting that which is pointed to
-        Reflexive = load_plugin(field)
+        Reflexive = load_plugin(node)
 
         def fget(self):
-            buf = self.access.read_bytes(offset, 8)         # retrieve the struct as bytes
-            count, raw_offset = converter.get_value(buf)    # reinterpret the raw data
+            buf = self.access.read_bytes(offset, 8)     # retrieve the struct as bytes
+            count, raw_offset = field.get_value(buf)    # reinterpret the raw data
 
             structs = []
             curr_p = raw_offset - self.map_magic
@@ -57,13 +57,13 @@ def make_property(field):
         def fset(self, value):
             raise Exception("Writing an entire reflexive at once is not implemented")
 
-    elif field.tag == 'reference':
-        converter = UInt32Field(**field.attrib)
-        offset = int(field.attrib['offset'], base=0) + 12
+    elif node.tag == 'reference':
+        field = UInt32Field(**node.attrib)
+        offset = int(node.attrib['offset'], base=0) + 12
 
         def fget(self):
             buf = self.access.read_bytes(offset, 4)     # retrieve the struct as bytes
-            ident = converter.get_value(buf)            # reinterpret the raw data with the selected reader
+            ident = field.get_value(buf)                # reinterpret the raw data with the selected reader
 
             if ident == 0 or ident == 0xFFFFFFFF:
                 return None
@@ -77,11 +77,11 @@ def make_property(field):
                 ident = 0xFFFFFFFF                      # Halo's version of null
 
             buf = self.access.read_bytes(offset, 4)     # retrieve the struct as bytes
-            converter.set_value(buf, ident)             # write the new value by using the selected writer
+            field.set_value(buf, ident)                 # write the new value by using the selected writer
             self.access.write_bytes(buf, offset)        # don't forget to write the bytes back!
 
-    else:
-        converter_ctor, size_of = {
+    else: # primitives
+        field_ctor, size_of = {
             'float' : (FloatField, 4),
             'double' : (DoubleField, 8),
             'int8' : (Int8Field, 1),
@@ -92,26 +92,26 @@ def make_property(field):
             'uint16' : (UInt16Field, 2),
             'uint32' : (UInt32Field, 4),
             'uint64' : (UInt64Field, 8),
-            'rawdata' : (RawDataField, int(field.attrib.get('length', '0'), base=0)),
-            'ascii' : (AsciiField, int(field.attrib.get('length', '0'), base=0)),
-            'asciiz' : (AsciizField, int(field.attrib.get('maxlength', '0'), base=0)),
-        }[field.tag]
+            'rawdata' : (RawDataField, int(node.attrib.get('length', '0'), base=0)),
+            'ascii' : (AsciiField, int(node.attrib.get('length', '0'), base=0)),
+            'asciiz' : (AsciizField, int(node.attrib.get('maxlength', '0'), base=0)),
+        }[node.tag]
 
-        converter = converter_ctor(**field.attrib)
+        field = field_ctor(**node.attrib)
 
         def fget(self):
             buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
-            return converter.get_value(buf)                 # reinterpret the raw data with the selected reader
+            return field.get_value(buf)                     # reinterpret the raw data with the selected reader
 
         def fset(self, value):
             buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
-            converter.set_value(buf, value)                 # write the new value by using the selected writer
+            field.set_value(buf, value)                     # write the new value by using the selected writer
             self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
 
-    if 'description' in field.attrib:
-        doc = field.attrib['description']
+    if 'description' in node.attrib:
+        doc = node.attrib['description']
     else:
-        doc = field.attrib['name'].replace('_', ' ')
+        doc = node.attrib['name'].replace('_', ' ')
 
     return property(fget=fget, fset=fset, doc=doc)
 
@@ -128,9 +128,9 @@ def load_plugin(layout):
 
         # remember fields for later printing
         self.field_names = []
-        for field in layout:
-            if 'name' in field.attrib:
-                self.field_names.append(field.attrib['name'])
+        for node in layout:
+            if 'name' in node.attrib:
+                self.field_names.append(node.attrib['name'])
 
     def __str__(self):
         answer = '[%s]%%s' % layout.attrib['name']
@@ -159,8 +159,8 @@ def load_plugin(layout):
     new_class.__str__ = __str__
     new_class.struct_size = int(layout.attrib['struct_size'], base=0)
 
-    for field in layout:
-        setattr(new_class, field.attrib['name'], make_property(field))
+    for node in layout:
+        setattr(new_class, node.attrib['name'], make_property(node))
 
     # save entire plugins for later
     if layout.tag == 'plugin':
