@@ -187,10 +187,3 @@ cdef class ReflexiveField(Field):
         count = self.count_reader.get_value(address)
         raw_pointer = self.pointer_reader.get_value(address)
         return (count, raw_pointer)
-
-cdef class ReferenceField(UInt32Field):
-    """TODO"""
-
-    def __init__(self, **kwargs):
-        super(ReferenceField, self).__init__(**kwargs)
-        self.offset = 12

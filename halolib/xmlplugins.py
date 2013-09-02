@@ -36,9 +36,10 @@ def make_property(field):
     offset = int(field.attrib['offset'], base=0)
 
     if field.tag == 'reflexive':
+        # handles the reflexive's count and pointer
         converter = ReflexiveField(**field.attrib)
-        offset = int(field.attrib['offset'], base=0)
 
+        # handles interpreting that which is pointed to
         Reflexive = load_plugin(field)
 
         def fget(self):
@@ -48,7 +49,7 @@ def make_property(field):
             structs = []
             curr_p = raw_offset - self.map_magic
             for i in range(count):
-                structs.append(Reflexive(self.access.create_subaccess(curr_p, Reflexive.struct_size), self.map_magic))
+                structs.append(Reflexive(self.access.create_subaccess(curr_p, Reflexive.struct_size), self.map_magic, self.halomap))
                 curr_p += Reflexive.struct_size
 
             return structs
@@ -56,6 +57,28 @@ def make_property(field):
         def fset(self, value):
             raise Exception("Writing an entire reflexive at once is not implemented")
 
+    elif field.tag == 'reference':
+        converter = UInt32Field(**field.attrib)
+        offset = int(field.attrib['offset'], base=0) + 12
+
+        def fget(self):
+            buf = self.access.read_bytes(offset, 4)     # retrieve the struct as bytes
+            ident = converter.get_value(buf)            # reinterpret the raw data with the selected reader
+
+            if ident == 0 or ident == 0xFFFFFFFF:
+                return None
+            else:
+                return self.halomap.tags_by_id[ident]   # return the referenced tag
+
+        def fset(self, value):
+            if value:
+                ident = value.ident                     # write back the tag's ident, not the tag itself
+            else:
+                ident = 0xFFFFFFFF                      # Halo's version of null
+
+            buf = self.access.read_bytes(offset, 4)     # retrieve the struct as bytes
+            converter.set_value(buf, ident)             # write the new value by using the selected writer
+            self.access.write_bytes(buf, offset)        # don't forget to write the bytes back!
 
     else:
         converter_ctor, size_of = {
@@ -75,7 +98,6 @@ def make_property(field):
         }[field.tag]
 
         converter = converter_ctor(**field.attrib)
-        offset = int(field.attrib['offset'], base=0)
 
         def fget(self):
             buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
@@ -85,8 +107,6 @@ def make_property(field):
             buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
             converter.set_value(buf, value)                 # write the new value by using the selected writer
             self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
-
-            return fset
 
     if 'description' in field.attrib:
         doc = field.attrib['description']
@@ -101,9 +121,10 @@ halo_struct_classes = {}
 def load_plugin(layout):
     """Using an xml-defined layout, define a new Python class which wraps a c-struct"""
 
-    def __init__(self, access, map_magic):
+    def __init__(self, access, map_magic, halomap):
         self.access = access
         self.map_magic = map_magic
+        self.halomap = halomap
 
         # remember fields for later printing
         self.field_names = []
@@ -114,7 +135,7 @@ def load_plugin(layout):
     def __str__(self):
         answer = '[%s]%%s' % layout.attrib['name']
 
-        def stringify_struct(struct, answer, indent='\n  '):
+        def stringify_struct(struct, answer, indent='\n    '):
             """Recursively stringifies the base struct as well as reflexives"""
 
             # fields sorted by xml declaration
@@ -124,7 +145,7 @@ def load_plugin(layout):
                 if type(value) == list:
                     for i, each in enumerate(value):
                         answer += indent + field + '[%d]:' % i
-                        answer = stringify_struct(each, answer, indent + '  ')
+                        answer = stringify_struct(each, answer, indent + '    ')
                 else:
                     answer += indent + field + ': ' + str(value)
 
