@@ -7,4 +7,5 @@
         <uint16 name="rounds_total_maximum" offset="0x8" />
         <uint16 name="rounds_loaded_maximum" offset="0xA" />
     </reflexive>
+    <reference name="projectile" offset="0xCE8" />
 </plugin>

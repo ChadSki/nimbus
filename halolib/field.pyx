@@ -35,6 +35,9 @@ def py_strlen(s):
     return strlen(<char*>s)
 
 
+# Cython is a little different than C. We can't expect pointers, so we need to cast from int before dereferencing.
+# Note that using 'int' for pointers is just a Cython hint; it doesn't require a specific size
+
 cdef class Field(object):
     """Fields read and write to C structs in a way that Python can understand.
     Use a subclass of Field to read/write a specific datatype."""
@@ -56,11 +59,6 @@ cdef class Field(object):
     def _set_value(self, int address):
         raise Exception("Cannot write to an abstract Field")
 
-
-# Primitives are straightforward to read and write, even though Cython is a little different
-# than C. We can't expect pointers, so we need to cast from int before dereferencing.
-
-# Note that using 'int' for pointers is just a Cython hint; it doesn't require a specific size
 
 cdef class FloatField(Field):
     def _get_value(self, int address): return (<float*>(address))[0]
@@ -104,7 +102,7 @@ cdef class UInt64Field(Field):
 
 
 cdef class RawDataField(Field):
-    """Read/write fixed-length bytestrings"""
+    """Read/write fixed-length bytestrings."""
 
     cdef:
         int length
@@ -132,7 +130,7 @@ cdef class RawDataField(Field):
         memcpy(<char*>address, <char*>value, self.length)   # copy the data over
 
 cdef class AsciiField(RawDataField):
-    """Read/write fixed-length ascii strings"""
+    """Read/write fixed-length ascii strings."""
 
     def __init__(self, **kwargs):
         super(AsciiField, self).__init__(**kwargs)
@@ -144,7 +142,7 @@ cdef class AsciiField(RawDataField):
         super(AsciiField, self)._set_value(address, value.encode('ascii'))
 
 cdef class AsciizField(Field):
-    """Read/write null-terminated ascii strings"""
+    """Read/write null-terminated ascii strings."""
 
     cdef int maxlength
 
@@ -173,8 +171,7 @@ cdef class AsciizField(Field):
         memcpy(<char*>null_loc, <char*>b'\x00', 1)          # null-terminate
 
 cdef class ReflexiveField(Field):
-    """Read a reflexive's count and pointer,
-    then return both in a tuple."""
+    """Read a reflexive's count and pointer, then return both in a tuple."""
 
     cdef:
         object count_reader

@@ -24,6 +24,7 @@ from halolib.xmlplugins import load_plugins
 from halolib.xmlplugins import halo_struct_classes
 from halolib.xmlplugins import py_strlen
 from halolib.byteaccess import FileAccess
+from halolib.winmemaccess import WinMemAccess
 import mmap
 
 class HaloMap(object):
@@ -134,7 +135,6 @@ def load_map_from_file(map_path):
 
     tags = []
     curr_offset = index_location
-
     for i in range(index_header.tag_count):
         index_entry = IndexEntry(FileAccess(mmap_file, curr_offset, IndexEntry.struct_size), map_magic)
         name_access = FileAccess(mmap_file, index_entry.name_offset_raw - map_magic, 256)
@@ -146,3 +146,32 @@ def load_map_from_file(map_path):
         curr_offset += IndexEntry.struct_size
 
     return HaloMap(map_header, index_header, tags, map_magic, f)
+
+def load_map_from_memory(video_render=False):
+    # Force Halo to render video even when window is deselected
+    if video_render:
+        video_rendering = WinMemAccess(0x400000 + 0x142538, 16)
+        video_rendering.write_bytes(b'\xe9\x91\x00\x00', 0)
+
+    MapHeader = halo_struct_classes['map_header']
+    IndexHeader = halo_struct_classes['index_header']
+    IndexEntry = halo_struct_classes['index_entry']
+
+    # Not sure where the map header lives in Halo 1.09's memory space...
+    map_header = 'No MapHeader\n%s' #MapHeader(WinMemAccess(0xDEADBEEF, MapHeader.struct_size), 0)
+    index_header = IndexHeader(WinMemAccess(0x40440000, IndexHeader.struct_size), 0)
+
+    tags = []
+    curr_offset = index_header.primary_magic
+
+    for i in range(index_header.tag_count):
+        index_entry = IndexEntry(WinMemAccess(curr_offset, IndexEntry.struct_size), 0)
+        name_access = WinMemAccess(index_entry.name_offset_raw, 256)
+        meta_access = WinMemAccess(index_entry.meta_offset_raw, 0x4000)
+
+        ht = HaloTag(index_entry, name_access, meta_access, 0)
+        tags.append(ht)
+
+        curr_offset += IndexEntry.struct_size
+
+    return HaloMap(map_header, index_header, tags, 0)

@@ -2,9 +2,8 @@
 <plugin name="bipd" struct_size="800">
     <float name="turn_speed" offset="0x2F0" />
     <float name="jump_velocity" offset="0x3B4" />
-    <reflexive name="functions" offset="0x158" struct_size='0x20'>
-        <float name="period" offset="0x4" />
-        <float name="wobble_period" offset="0x10" />
-        <float name="wobble_magnitude" offset="0x14" />
+    <reference name="melee_damage" offset="0x288" />
+    <reflexive name="weapons" offset="0x2D8" struct_size="36">
+        <reference name="weapon" offset="0x00" />
     </reflexive>
 </plugin>

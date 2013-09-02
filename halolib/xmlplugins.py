@@ -83,7 +83,7 @@ def make_property(field):
 
         def fset(self, value):
             buf = self.access.read_bytes(offset, size_of)   # retrieve the struct as bytes
-            converter.set_value(buf)                        # write the new value by using the selected writer
+            converter.set_value(buf, value)                 # write the new value by using the selected writer
             self.access.write_bytes(buf, offset)            # don't forget to write the bytes back!
 
             return fset

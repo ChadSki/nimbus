@@ -20,7 +20,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from byteaccess import ByteAccess
+from halolib.byteaccess import ByteAccess
 from ctypes import *
 from ctypes.wintypes import *
 
@@ -78,7 +78,7 @@ class WinMemAccess(ByteAccess):
     def __init__(self, offset, size):
         # share the same process between all WinMemAccesses
         if 'process' not in WinMemAccess.__dict__:
-            halo = get_process_by_name("halo.exe")
+            halo = get_process_by_name(b'halo.exe')
             if halo == None:
                 raise Exception("Halo is not running")
 
@@ -98,6 +98,7 @@ class WinMemAccess(ByteAccess):
     def _write_bytes(self, to_write, offset):
         address = self.offset + offset
         buf = c_char_p(to_write)
+        size = len(to_write)
         bytesWritten = c_ulong(0)
         if WriteProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesWritten)):
             return
