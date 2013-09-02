@@ -20,10 +20,10 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from xmlplugins import load_plugins
-from xmlplugins import halo_struct_classes
-from xmlplugins import py_strlen
-from byteaccess import FileAccess
+from halolib.xmlplugins import load_plugins
+from halolib.xmlplugins import halo_struct_classes
+from halolib.xmlplugins import py_strlen
+from halolib.byteaccess import FileAccess
 import mmap
 
 class HaloMap(object):
@@ -35,7 +35,7 @@ class HaloMap(object):
         self.file = file
 
     def __str__(self):
-        return '%s\n\n%s\n' % (str(self.map_header) % '', str(self.index_header) % '')
+        return '%s\n%s' % (str(self.map_header) % '', str(self.index_header) % '')
 
     def close(self):
         if self.file != None:
@@ -54,7 +54,7 @@ class HaloTag(object):
         return '[%s]%s' % (self.first_class, self.name)
 
     @property
-    def layout_str(self):
+    def layout(self):
         return str(self.meta) % self.name
 
     @property

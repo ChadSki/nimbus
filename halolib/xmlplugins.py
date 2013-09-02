@@ -23,12 +23,7 @@
 import glob
 import os
 import xml.etree.ElementTree as et
-from field import *
-
-def remove_key(d, key):
-    r = dict(d)
-    del r[key]
-    return r
+from halolib.field import *
 
 def make_property(field):
     """Defines a property which reads/writes to a field in a plugin-defined struct"""
