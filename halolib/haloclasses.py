@@ -21,7 +21,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from halolib.xmlplugins import load_plugins, py_strlen, halo_struct_classes
-from halolib.byteaccess import FileAccess, access_process
+from byteaccess import FileAccess, access_process
 import mmap
 
 class HaloMap(object):

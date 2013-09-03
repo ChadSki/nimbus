@@ -20,7 +20,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from halolib.byteaccess import ByteAccess
+from byteaccess import ByteAccess
 from ctypes import *
 from ctypes.wintypes import *
 
