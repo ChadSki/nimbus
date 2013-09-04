@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="proj" struct_size="0x4000">
+    <float name="initial_velocity" offset="0x1E4" />
+    <float name="final_velocity" offset="0x1E8" />
+</plugin>
