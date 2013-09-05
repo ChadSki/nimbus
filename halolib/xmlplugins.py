@@ -49,7 +49,7 @@ def make_property(node):
             structs = []
             curr_p = raw_offset - self.map_magic
             for i in range(count):
-                structs.append(Reflexive(self.access.create_subaccess(curr_p, Reflexive.struct_size), self.map_magic, self.halomap))
+                structs.append(Reflexive(self.access.__class__(curr_p, Reflexive.struct_size), self.map_magic, self.halomap))
                 curr_p += Reflexive.struct_size
 
             return structs

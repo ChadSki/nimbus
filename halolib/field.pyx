@@ -187,3 +187,8 @@ cdef class ReflexiveField(Field):
         count = self.count_reader.get_value(address)
         raw_pointer = self.pointer_reader.get_value(address)
         return (count, raw_pointer)
+
+    def set_value(self, address, value):
+        count, raw_pointer = value
+        self.count_reader.set_value(count)
+        self.pointer_reader.set_value(raw_pointer)

@@ -30,10 +30,6 @@ class ByteAccess(object):
         self.size = size
 
     def create_subaccess(self, offset, size):
-        #relative_offset = offset - self.offset
-        #if relative_offset + size > self.size:
-        #    raise Exception("Cannot subaccess past end of Access. offset:%d size:%d self.size:%d" % (relative_offset, size, self.size))
-
         return self._create_subaccess(offset, size)
 
     def read_bytes(self, offset, size):
@@ -61,22 +57,24 @@ class ByteAccess(object):
         raise Exception("Writing not implemented in abstract class")
 
 
-class FileAccess(ByteAccess):
-    """Encapsulates reading and writing to a memory-mapped file on disk."""
+def access_over_file(mmap_f):
+    """Defines a class for accessing bytes of data from a specific file."""
 
-    def __init__(self, mmap_f, offset, size):
-        self.mmap_f = mmap_f
-        super(FileAccess, self).__init__(offset, size)
+    class FileAccess(ByteAccess):
+        """Encapsulates reading and writing to a memory-mapped file on disk."""
 
-    def _create_subaccess(self, offset, size):
-        return FileAccess(self.mmap_f, offset, size)
+        def __init__(self, offset, size):
+            self.mmap_f = mmap_f
+            super(FileAccess, self).__init__(offset, size)
 
-    def _read_bytes(self, offset, size):
-        begin = self.offset + offset
-        end = begin + size
-        return self.mmap_f[begin:end]
+        def _read_bytes(self, offset, size):
+            begin = self.offset + offset
+            end = begin + size
+            return self.mmap_f[begin:end]
 
-    def _write_bytes(self, to_write, offset):
-        begin = self.offset + offset
-        end = begin + len(to_write)
-        self.mmap_f[begin:end] = to_write
+        def _write_bytes(self, to_write, offset):
+            begin = self.offset + offset
+            end = begin + len(to_write)
+            self.mmap_f[begin:end] = to_write
+
+    return FileAccess

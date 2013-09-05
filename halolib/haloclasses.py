@@ -21,7 +21,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from halolib.xmlplugins import load_plugins, py_strlen, halo_struct_classes
-from byteaccess import FileAccess, access_process
+from byteaccess import access_over_file, access_over_process
 import mmap
 
 class HaloMap(object):
@@ -127,17 +127,18 @@ class HaloTag(object):
 
 
 def load_map_from_file(map_path):
+    f = open(map_path, 'r+b')
+    mmap_file = mmap.mmap(f.fileno(), 0)
+    FileAccess = access_over_file(mmap_file)
+
     MapHeader = halo_struct_classes['map_header']
     IndexHeader = halo_struct_classes['index_header']
     IndexEntry = halo_struct_classes['index_entry']
 
-    f = open(map_path, 'r+b')
-    mmap_file = mmap.mmap(f.fileno(), 0)
-
     halomap = HaloMap()
 
-    map_header = MapHeader(FileAccess(mmap_file, 0, MapHeader.struct_size), 0, halomap)
-    index_header = IndexHeader(FileAccess(mmap_file, map_header.index_offset, IndexHeader.struct_size), 0, halomap)
+    map_header = MapHeader(FileAccess(0, MapHeader.struct_size), 0, halomap)
+    index_header = IndexHeader(FileAccess(map_header.index_offset, IndexHeader.struct_size), 0, halomap)
 
     # Usually a map's primary magic is exactly equal to the 'standard primary magic'
     # defined here. However, some forms of map protection move the tag index to other
@@ -153,9 +154,17 @@ def load_map_from_file(map_path):
     tags = []
     curr_offset = index_location
     for i in range(index_header.tag_count):
-        index_entry = IndexEntry(FileAccess(mmap_file, curr_offset, IndexEntry.struct_size), map_magic, halomap)
-        name_access = FileAccess(mmap_file, index_entry.name_offset_raw - map_magic, 256)
-        meta_access = FileAccess(mmap_file, index_entry.meta_offset_raw - map_magic, 0x4000)
+        index_entry = IndexEntry(FileAccess(curr_offset, IndexEntry.struct_size), map_magic, halomap)
+
+        name_access = FileAccess(index_entry.name_offset_raw - map_magic, 256)
+
+        # determine the base struct size, depending on the tag class
+        try:
+            base_struct_size = halo_struct_classes[index_entry.first_class].struct_size
+        except KeyError:
+            base_struct_size = 0x100
+
+        meta_access = FileAccess(index_entry.meta_offset_raw - map_magic, base_struct_size)
 
         ht = HaloTag(index_entry, name_access, meta_access, map_magic, halomap)
         tags.append(ht)
@@ -167,7 +176,7 @@ def load_map_from_file(map_path):
 
 
 def load_map_from_memory(*, fix_video_render=False):
-    WinMemAccess = access_process('halo.exe')
+    WinMemAccess = access_over_process('halo.exe')
 
     # Force Halo to render video even when window is deselected
     if fix_video_render:
