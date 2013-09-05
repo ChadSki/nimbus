@@ -1,2 +1,2 @@
-from byteaccess.byteaccess import *
-from byteaccess.winmemaccess import *
+from byteaccess.byteaccess import ByteAccess, access_over_file
+from byteaccess.winmemaccess import access_over_process
