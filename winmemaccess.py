@@ -72,11 +72,11 @@ OpenProcess = windll.kernel32.OpenProcess
 ReadProcessMemory = windll.kernel32.ReadProcessMemory
 WriteProcessMemory = windll.kernel32.WriteProcessMemory
 
-def access_process(process_name):
+def access_over_process(process_name):
     """Defines a class for accessing bytes of memory from a specific process."""
 
     class WinMemAccess(ByteAccess):
-        """Encapsulates reading and writing to the specified process's memory."""
+        """Encapsulates reading and writing to a specified process's memory."""
 
         def __init__(self, offset, size):
 
@@ -89,9 +89,6 @@ def access_process(process_name):
                 WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
 
             super(WinMemAccess, self).__init__(offset, size)
-
-        def _create_subaccess(self, offset, size):
-            return WinMemAccess(offset, size)
 
         def _read_bytes(self, offset, size):
             address = self.offset + offset
