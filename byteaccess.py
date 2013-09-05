@@ -29,9 +29,6 @@ class ByteAccess(object):
         self.offset = offset
         self.size = size
 
-    def create_subaccess(self, offset, size):
-        return self._create_subaccess(offset, size)
-
     def read_bytes(self, offset, size):
         if offset + size > self.size:
             raise Exception("Cannot read past end of Access. offset:%d size:%d self.size:%d" % (offset, size, self.size))
