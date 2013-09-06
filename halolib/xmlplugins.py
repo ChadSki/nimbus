@@ -82,8 +82,8 @@ def make_property(node):
 
     else: # primitives
         field_ctor, size_of = {
-            'float' : (FloatField, 4),
-            'double' : (DoubleField, 8),
+            'float32' : (Float32Field, 4),
+            'float64' : (Float64Field, 8),
             'int8' : (Int8Field, 1),
             'int16' : (Int16Field, 2),
             'int32' : (Int32Field, 4),

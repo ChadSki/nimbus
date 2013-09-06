@@ -60,11 +60,11 @@ cdef class Field(object):
         raise Exception("Cannot write to an abstract Field")
 
 
-cdef class FloatField(Field):
+cdef class Float32Field(Field):
     def _get_value(self, int address): return (<float*>(address))[0]
     def _set_value(self, int address, value): (<float*>(address))[0] = value
 
-cdef class DoubleField(Field):
+cdef class Float64Field(Field):
     def _get_value(self, int address): return (<double*>(address))[0]
     def _set_value(self, int address, value): (<double*>(address))[0] = value
 

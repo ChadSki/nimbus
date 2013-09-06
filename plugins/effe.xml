@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="effe" struct_size="0x4000">
+    <reflexive name="events" offset="0x34" struct_size='68'>
+        <float32 name="skip_fraction" offset="0x4" />
+        <reflexive name="parts" offset="0x2C" struct_size="104">
+            <float32 name="velocity_bounds_from" offset="0x60" />
+        </reflexive>
+    </reflexive>
+</plugin>
