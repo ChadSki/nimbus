@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<plugin name="bipd" struct_size="800">
+<plugin name="bipd" struct_size="0x450">
     <float32 name="turn_speed" offset="0x2F0" />
     <float32 name="jump_velocity" offset="0x3B4" />
     <reference name="melee_damage" offset="0x288" />
