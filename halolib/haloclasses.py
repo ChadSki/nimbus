@@ -71,7 +71,8 @@ class HaloTag(object):
 
     @property
     def layout(self):
-        return str(self.meta) % self.name
+        # this nested string interpolation is kinda gross
+        return str(self.meta) % ('%s(%d)' % (self.name, self.index_entry.ident))
 
     @property
     def name(self):
