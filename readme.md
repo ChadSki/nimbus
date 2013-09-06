@@ -4,7 +4,7 @@ halolib.py is a library  for Python 3 which provides scriptable editing of Halo 
 
 halolib.py aims to be compatible with Halo 1 PC on Windows, and HaloMD on Mac OS X.
 
-## Example usage
+## Usage
 
 As an example of modding at runtime, here we swap the projectile of the player's starting weapon with a more powerful projectile
 
