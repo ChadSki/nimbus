@@ -58,3 +58,13 @@ after swap: [proj]weapons\plasma rifle\charged bolt(3883664904)
 - www.macgamingmods.com/forums
 - www.modhalo.net
 - www.halomods.com
+
+## Development
+
+### Merging changes from byteaccess.py
+
+Since the content of byteaccess/ seems useful even outside the context of Halo hacking, it has been split into a [separate git repo](https://github.com/ChadSki/byteaccess.py). Synchronizing changes between the two repos is managed with git subtree. To merge changes from byteaccess-origin, run the following commands:
+```
+git fetch byteaccess-origin
+git pull -X subtree=byteaccess byteaccess-origin master
+```
