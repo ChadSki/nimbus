@@ -16,8 +16,10 @@ plasma = m.get_tag('proj', 'plasma grenade')
 plasma.initial_velocity = 0.2
 plasma.final_velocity = 0.2
 
-rifle.triggers[0].projectile = plasma
-pistol.triggers[0].projectile = plasma
+# do swaps
+rifle.triggers[0].projectile = rocket           # assault rifle shoots rockets
+banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger spawns warthogs
+banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger shoots plasma grenades
 
 #banshee_gun.triggers[0].projectile = rocket
 #banshee_gun.triggers[1].projectile = m.get_tag('vehi', 'scorpion')

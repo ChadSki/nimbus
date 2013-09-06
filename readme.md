@@ -1,65 +1,51 @@
 # halolib.py
 
-halolib.py is a library  for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory.
+Halolib is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory.
 
-halolib.py aims to be compatible with Halo 1 PC on Windows, and HaloMD on Mac OS X.
+Halolib aims to be compatible with Halo 1 PC on Windows, and HaloMD on Mac OS X.
+
+## Installation
+
+Halolib requires an installation of Python 3. Either invoke the examples directly, or import from halolib.
+
+If you do not already have an installation of Python 3, you can download my stripped-down portable Python 3.2 installation from [here](http://www.mediafire.com/download/55o5dzct6hyw8bd/halolib-portable-python-2013-09-06.7z) (15 MB zipped, 60 MB unzipped) and place the bin/ folder in the root of this repo.
+
+If you are not executing halolib from a 32-bit installation of Python, you may need to recompile halolib/field.pyx. See Development below for compilation instructions.
 
 ## Usage
 
-As an example of modding at runtime, here we swap the projectile of the player's starting weapon with a more powerful projectile
+As an example of modding at runtime, here we swap the projectile of the player's starting weapon with a more powerful projectile.
 
 ### mem_example.py
 ```python
 from halolib import *
 load_plugins('.\plugins')
+m = load_map_from_memory(fix_video_render=True)
 
-halomap = load_map_from_memory(fix_video_render=True)
+# weaps
+rifle = m.get_tag('weap', 'assault rifle')
+banshee_gun = m.get_tag('weap', 'banshee')
 
-print(halomap)
-for tag in halomap.get_tags('bipd'):
-    first_weapon = tag.weapons[0].weapon
+# vehis
+warthog = m.get_tag('vehi', 'warthog')
 
-    print(tag)
-    print('before swap:%s' % first_weapon.projectile)
+# projs
+rocket = m.get_tag('proj', 'rocket')
+plasma = m.get_tag('proj', 'plasma grenade')
 
-    first_weapon.projectile = halomap.get_tag('proj', 'charged')
-
-    print('after swap: %s\n' % first_weapon.projectile)
-
-halomap.close()
+# do swaps
+rifle.triggers[0].projectile = rocket           # assault rifle shoots rockets
+banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger spawns warthogs
+banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger shoots plasma grenades
 ```
 
-### Output
-```
-[index_header]
-    primary_magic: 1078198312
-    base_tag_ident: 3782475776
-    map_id: 1579874334
-    tag_count: 2408
-    verticie_count: 447
-    verticie_offset: 1519616
-    indicie_count: 447
-    indicie_offset: 6864260
-    model_data_length: 7203188
-    integrity: tags
-
-[bipd]characters\cyborg_mp\cyborg_mp(3792109715)
-before swap:[proj]weapons\assault rifle\bullet(3802071339)
-after swap: [proj]weapons\plasma rifle\charged bolt(3883664904)
-
-[bipd]characters\cyborg\cyborg(3904440133)
-before swap:[proj]weapons\plasma rifle\charged bolt(3883664904)
-after swap: [proj]weapons\plasma rifle\charged bolt(3883664904)
-```
-
-## Community
-
-- www.opencarnage.net
-- www.macgamingmods.com/forums
-- www.modhalo.net
-- www.halomods.com
+![Effects of mem_example.py](http://i.imgur.com/tdnHwf0.png)
 
 ## Development
+
+Halolib is developed on Windows with the 32-bit build of Python 3.2.
+
+Building halolib/field.pyx requires Cython and a C compiler. I use a portable Python 3.2, Cython 0.19.1, and MinGW bundle that can be downloaded [here](http://www.mediafire.com/download/u1p4449zk4d2gy1/halolib-portable-devenv-2013-09-06.7z) (26 MB zipped, 82 MB unzipped). Place the bin/ folder in the root of this repository, and run halolib/build.bat to compile field.pyx.
 
 ### Merging changes from byteaccess.py
 
@@ -68,3 +54,28 @@ Since the content of byteaccess/ seems useful even outside the context of Halo h
 git fetch byteaccess-origin
 git pull -X subtree=byteaccess byteaccess-origin master
 ```
+
+## Community
+
+"If I have seen further it is by standing on the shoulders of giants." --Issac Newton
+
+### People
+
+- conure: Proved that runtime edits are possible
+- Modzy: Provided source code to Open Halo Parser and Pearl 2
+- Oxide: Provided a simple C++ map parsing example and source code to [Phasor](https://github.com/urbanyoung/Phasor)
+- Ryx: Provided x86 assembly which prevents Halo's graphics from pausing when alt-tabbed
+- dirk: Provided source code to [SDMHaloMapLoader](https://github.com/samdmarshall/SDMHaloMapLoader)
+- nil: Reminded me that I don't need C++ to bridge Python and C#
+- Zero2: Explained reflexives, map magic, and map deprotection theory
+- Btcc22: Provided code to hook into the Halo console and add custom commands
+
+If you helped me at one point in time and I forgot to list you, let me know so I can bestow proper credit!
+
+### Forums
+
+- www.opencarnage.net
+- www.macgamingmods.com/forums
+- www.halomods.com
+- www.xboxchaos.com/forum/
+- www.modhalo.net

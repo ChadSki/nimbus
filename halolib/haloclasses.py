@@ -60,6 +60,7 @@ class HaloMap(object):
 
 class HaloTag(object):
     def __init__(self, index_entry, name_access, meta_access, map_magic, halomap):
+        # these attributes are all protected from erroneous assignment
         object.__setattr__(self, 'index_entry', index_entry)
         object.__setattr__(self, 'name_access', name_access)
         object.__setattr__(self, 'meta_access', meta_access)
@@ -104,7 +105,7 @@ class HaloTag(object):
             return getattr(self.meta, name)
 
     # Setting an attribute resolves in the following order:
-    #   1. index_entry, name_access, and meta_access are exempt from being replaced
+    #   1. [list of attributes] are exempt from being replaced
     #   2. Other attributes of self can be assigned to
     #   3. If no such attribute is found in self, check self,index_entry
     #   3. If no such attribute is found in self.index_entry, check self.meta
