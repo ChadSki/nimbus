@@ -47,13 +47,17 @@ Halolib is developed on Windows with the 32-bit build of Python 3.2.
 
 Building halolib/field.pyx requires Cython and a C compiler. I use a portable Python 3.2, Cython 0.19.1, and MinGW bundle that can be downloaded [here](http://www.mediafire.com/download/u1p4449zk4d2gy1/halolib-portable-devenv-2013-09-06.7z) (26 MB zipped, 82 MB unzipped). Place the bin/ folder in the root of this repository, and run halolib/build.bat to compile field.pyx.
 
-### Merging changes from byteaccess.py
+#### Merging changes from byteaccess.py
 
 Since the content of byteaccess/ seems useful even outside the context of Halo hacking, it has been split into a [separate git repo](https://github.com/ChadSki/byteaccess.py). Synchronizing changes between the two repos is managed with git subtree. To merge changes from byteaccess-origin, run the following commands:
 ```
 git fetch byteaccess-origin
 git pull -X subtree=byteaccess byteaccess-origin master
 ```
+
+### License
+
+The entirety of my work on this project is released under the 2-clause BSD license. While contributors retain copyright on their own work, I ask that pull requests also be released under the 2-clause BSD license.
 
 ## Community
 
