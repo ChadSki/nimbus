@@ -28,26 +28,25 @@ class HaloMap(object):
     def init(self, map_header, index_header, tags, map_magic, file=None):
         self.map_header = map_header
         self.index_header = index_header
-        self.tags = tags
         self.map_magic = map_magic
         self.file = file
 
-        self.tags_by_id = {}
+        self.tags = {}
         for each in tags:
-            self.tags_by_id[each.ident] = each
+            self.tags[each.ident] = each
 
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
 
     def get_tag(self, first_class, name_fragment=''):
-        for tag in self.tags:
+        for tag in self.tags.values():
             if tag.first_class == first_class and name_fragment in tag.name:
                 return tag
 
         return None
     
     def get_tags(self, first_class, name_fragment=''):
-        for tag in self.tags:
+        for tag in self.tags.values():
             if tag.first_class == first_class and name_fragment in tag.name:
                 yield tag
     

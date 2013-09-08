@@ -68,7 +68,7 @@ def make_property(node):
             if ident == 0 or ident == 0xFFFFFFFF:
                 return None
             else:
-                return self.halomap.tags_by_id[ident]   # return the referenced tag
+                return self.halomap.tags[ident]         # return the referenced tag
 
         def fset(self, value):
             if value:
