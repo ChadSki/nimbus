@@ -37,7 +37,7 @@ class HaloMap(object):
             self.tags_by_id[each.ident] = each
 
     def __str__(self):
-        return '%s\n%s' % (str(self.map_header) % '', str(self.index_header) % '')
+        return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
 
     def get_tag(self, first_class, name_fragment=''):
         for tag in self.tags:
@@ -57,7 +57,6 @@ class HaloMap(object):
             self.file.close()
             self.file = None
 
-
 class HaloTag(object):
     def __init__(self, index_entry, name_access, meta_access, map_magic, halomap):
         # these attributes are all protected from erroneous assignment
@@ -73,7 +72,7 @@ class HaloTag(object):
     @property
     def layout(self):
         # this nested string interpolation is kinda gross
-        return str(self.meta) % ('%s(%d)' % (self.name, self.index_entry.ident))
+        return '%s%s' % (str(self), str(self.meta))
 
     @property
     def name(self):

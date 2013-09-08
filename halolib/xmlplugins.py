@@ -133,7 +133,7 @@ def load_plugin(layout):
                 self.field_names.append(node.attrib['name'])
 
     def __str__(self):
-        answer = '[%s]%%s' % layout.attrib['name']
+        answer = ''
 
         def stringify_struct(struct, answer, indent='\n    '):
             """Recursively stringifies the base struct as well as reflexives"""
