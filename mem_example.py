@@ -1,6 +1,6 @@
-from halolib import *
-load_plugins('.\plugins')
-m = load_map_from_memory(fix_video_render=True)
+import halolib
+halolib.load_plugins('.\plugins')
+m = halolib.load_map_from_memory(fix_video_render=True)
 
 # weaps
 rifle = m.get_tag('weap', 'assault rifle')

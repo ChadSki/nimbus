@@ -1,10 +1,9 @@
-from halolib import *
-load_plugins('.\plugins')
+import halolib
+halolib.load_plugins('.\plugins')
+m = halolib.load_map_from_file('beavercreek.map')
 
-halomap = load_map_from_file('beavercreek.map')
-
-print(halomap)
-for tag in halomap.get_tags('weap'):
+print(m)
+for tag in m.get_tags('weap'):
     print(tag.layout)
 
-halomap.close()
+m.close()
