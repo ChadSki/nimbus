@@ -24,7 +24,7 @@ from byteaccess import ByteAccess
 from ctypes import *
 from ctypes.wintypes import *
 
-class PROCESSENTRY32(ctypes.Structure):
+class ProcessEntry32(ctypes.Structure):
      _fields_ = [("dwSize", ctypes.c_ulong),
                  ("cntUsage", ctypes.c_ulong),
                  ("th32ProcessID", ctypes.c_ulong),
@@ -42,11 +42,10 @@ Process32First = windll.kernel32.Process32First
 Process32Next = windll.kernel32.Process32Next
 CloseHandle = windll.kernel32.CloseHandle
 
-def process_list():
+def process_list(hTH32Snapshot):
     """Iterates through currently open processes."""
-    hTH32Snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
-    pe32 = PROCESSENTRY32()
-    pe32.dwSize = ctypes.sizeof(PROCESSENTRY32)
+    pe32 = ProcessEntry32()
+    pe32.dwSize = ctypes.sizeof(ProcessEntry32)
 
     if Process32First(hTH32Snapshot, ctypes.byref(pe32)) == False:
         print("Failed getting first process.", file=sys.stderr)
@@ -57,13 +56,15 @@ def process_list():
         if Process32Next(hTH32Snapshot, ctypes.byref(pe32)) == False:
             break
 
-    CloseHandle(hTH32Snapshot) # does this get reached if the get_process_by_name loop exits early?
-
 def get_process_by_name(name):
     """Returns the first running process found with the specified name, or None."""
-    for each in process_list():
+    hTH32Snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
+    for each in process_list(hTH32Snapshot):
         if each.szExeFile == name:
+            CloseHandle(hTH32Snapshot)
             return each
+
+    CloseHandle(hTH32Snapshot)
     return None
 
 
