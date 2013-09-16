@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="weap" struct_size="0x504">
+    <uint16 name="step_count" offset="0x1C" />
+    <reflexive name="magazines" offset="0x4F0" struct_size='112'>
+        <uint16 name="rounds_recharged" offset="0x4" />
+        <uint16 name="rounds_total_initial" offset="0x6" />
+        <uint16 name="rounds_total_maximum" offset="0x8" />
+        <uint16 name="rounds_loaded_maximum" offset="0xA" />
+    </reflexive>
+    <reflexive name="triggers" offset="0x4FC" struct_size="276">
+        <reference name="projectile" offset="0x94"/>
+    </reflexive>
+</plugin>
