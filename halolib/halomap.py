@@ -20,8 +20,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from halolib.xmlplugins import load_plugins, py_strlen, halo_struct_classes
 from byteaccess import access_over_file, access_over_process
+from halolib.field import py_strlen
+from halolib.chunk import chunk_classes
 import mmap
 
 class HaloMap(object):
@@ -86,7 +87,7 @@ class HaloTag(object):
     @property
     def meta(self):
         # every time the meta is accessed, reinterpret it as the current first_class
-        return halo_struct_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
+        return chunk_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
 
     # HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own
     #
@@ -131,9 +132,9 @@ def load_map_from_file(map_path):
     mmap_file = mmap.mmap(f.fileno(), 0)
     FileAccess = access_over_file(mmap_file)
 
-    MapHeader = halo_struct_classes['map_header']
-    IndexHeader = halo_struct_classes['index_header']
-    IndexEntry = halo_struct_classes['index_entry']
+    MapHeader = chunk_classes['map_header']
+    IndexHeader = chunk_classes['index_header']
+    IndexEntry = chunk_classes['index_entry']
 
     halomap = HaloMap()
 
@@ -160,7 +161,7 @@ def load_map_from_file(map_path):
 
         # determine the base struct size, depending on the tag class
         try:
-            base_struct_size = halo_struct_classes[index_entry.first_class].struct_size
+            base_struct_size = chunk_classes[index_entry.first_class].struct_size
         except KeyError:
             base_struct_size = 0x100
 
@@ -183,9 +184,9 @@ def load_map_from_memory(*, fix_video_render=False):
         video_rendering = WinMemAccess(0x400000 + 0x142538, 16)
         video_rendering.write_bytes(b'\xe9\x91\x00\x00', 0)
 
-    MapHeader = halo_struct_classes['map_header']
-    IndexHeader = halo_struct_classes['index_header']
-    IndexEntry = halo_struct_classes['index_entry']
+    MapHeader = chunk_classes['map_header']
+    IndexHeader = chunk_classes['index_header']
+    IndexEntry = chunk_classes['index_entry']
 
     halomap = HaloMap()
 
