@@ -20,10 +20,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import mmap
+import re
 from byteaccess import access_over_file, access_over_process
 from halolib.field import py_strlen
 from halolib.chunk import chunk_classes
-import mmap
 
 class HaloMap(object):
     def init(self, map_header, index_header, tags, map_magic, file=None):
@@ -39,17 +40,14 @@ class HaloMap(object):
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
 
-    def get_tag(self, first_class, name_fragment=''):
-        for tag in self.tags.values():
-            if tag.first_class == first_class and name_fragment in tag.name:
-                return tag
-
-        return None
+    def get_tag(self, first_class, *name_fragments):
+        return self.get_tags(first_class, *name_fragments).next()
     
-    def get_tags(self, first_class, name_fragment=''):
+    def get_tags(self, first_class, *name_fragments):
         for tag in self.tags.values():
-            if tag.first_class == first_class and name_fragment in tag.name:
-                yield tag
+            if re.search(first_class, tag.first_class):
+                if all(re.search(regex, tag.name) for regex in name_fragments):
+                    yield tag
     
 
     def close(self):
@@ -87,7 +85,10 @@ class HaloTag(object):
     @property
     def meta(self):
         # every time the meta is accessed, reinterpret it as the current first_class
-        return chunk_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
+        try:
+            return chunk_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
+        except KeyError:
+            return chunk_classes['unknown'](self.meta_access, self.map_magic, self.halomap)
 
     # HaloTag (using magic) sort of merges the attributes of self.index_entry and self.meta alongside its own
     #

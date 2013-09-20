@@ -3,7 +3,7 @@ halolib.load_plugins('.\plugins')
 m = halolib.load_map_from_file('beavercreek.map')
 
 print(m)
-for tag in m.get_tags('weap'):
+for tag in m.get_tags('', 'bolt$'):
     print(tag.layout)
 
 m.close()
