@@ -40,13 +40,19 @@ class HaloMap(object):
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
 
-    def get_tag(self, first_class, *name_fragments):
-        return self.get_tags(first_class, *name_fragments).next()
+    def layout(self):
+        answer = str(self)
+        for each in self.get_tags():
+            answer += str(each) + '\n'
+        return answer
+
+    def get_tag(self, first_class='', *name_fragments):
+        return next(self.get_tags(first_class, *name_fragments))
     
-    def get_tags(self, first_class, *name_fragments):
+    def get_tags(self, first_class='', *name_fragments):
         for tag in self.tags.values():
-            if re.search(first_class, tag.first_class):
-                if all(re.search(regex, tag.name) for regex in name_fragments):
+            if first_class == '' or re.search(first_class, tag.first_class):
+                if all((regex == '' or re.search(regex, tag.name)) for regex in name_fragments):
                     yield tag
     
 
@@ -129,6 +135,9 @@ class HaloTag(object):
 
 
 def load_map_from_file(map_path):
+    if len(chunk_classes) == 0:
+        load_plugins()
+
     f = open(map_path, 'r+b')
     mmap_file = mmap.mmap(f.fileno(), 0)
     FileAccess = access_over_file(mmap_file)
@@ -178,6 +187,9 @@ def load_map_from_file(map_path):
 
 
 def load_map_from_memory(fix_video_render=True):
+    if len(chunk_classes) == 0:
+        load_plugins()
+
     WinMemAccess = access_over_process('halo.exe')
 
     # Force Halo to render video even when window is deselected
@@ -192,7 +204,7 @@ def load_map_from_memory(fix_video_render=True):
     halomap = HaloMap()
 
     # Not sure where the map header lives in Halo 1.09's memory space...
-    map_header = 'No MapHeader\n%s' #MapHeader(WinMemAccess(0xDEADBEEF, MapHeader.struct_size), 0, halomap)
+    map_header = '\nNot Implemented Yet\n' #MapHeader(WinMemAccess(0xDEADBEEF, MapHeader.struct_size), 0, halomap)
     index_header = IndexHeader(WinMemAccess(0x40440000, IndexHeader.struct_size), 0, halomap)
 
     tags = []
@@ -210,3 +222,9 @@ def load_map_from_memory(fix_video_render=True):
 
     halomap.init(map_header, index_header, tags, 0)
     return halomap
+
+def load_map(*args):
+    if len(args):
+        return load_map_from_file(*args)
+    else:
+        return load_map_from_memory(True)

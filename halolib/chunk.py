@@ -88,10 +88,10 @@ def load_plugin(layout):
     else:
         return new_class
 
-def load_plugins(plugin_dir):
+def load_plugins():
     """Load all xml plugins from the plugin directory"""
 
-    plugin_list = glob.glob(os.path.join(plugin_dir, '*.xml'))
+    plugin_list = glob.glob(os.path.join('.\plugins', '*.xml'))
     for filepath in plugin_list:
         root_struct = et.parse(filepath).getroot()  # load the xml definition
         load_plugin(root_struct)
