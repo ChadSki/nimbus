@@ -177,7 +177,7 @@ def load_map_from_file(map_path):
     return halomap
 
 
-def load_map_from_memory(*, fix_video_render=False):
+def load_map_from_memory(fix_video_render=True):
     WinMemAccess = access_over_process('halo.exe')
 
     # Force Halo to render video even when window is deselected
