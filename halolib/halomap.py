@@ -40,8 +40,9 @@ class HaloMap(object):
     def __str__(self):
         return '[map_header]%s\n[index_header]%s' % (str(self.map_header), str(self.index_header))
 
-    def layout(self):
+    def __repr__(self):
         answer = str(self)
+        answer += '\nTag Index:\n'
         for each in self.get_tags():
             answer += str(each) + '\n'
         return answer
@@ -154,8 +155,8 @@ def load_map_from_file(map_path):
     # Usually a map's primary magic is exactly equal to the 'standard primary magic'
     # defined here. However, some forms of map protection move the tag index to other
     # locations, which results in a different primary magic. (Thanks for explaining, Zero2!)
-    standard_primary_magic = 0x40440028
-    standard_index_location = map_header.index_offset + IndexHeader.struct_size
+    standard_primary_magic = 0x40440000
+    standard_index_location = map_header.index_offset
     primary_magic_difference = index_header.primary_magic - standard_primary_magic
     index_location = standard_index_location + primary_magic_difference
 
@@ -166,7 +167,6 @@ def load_map_from_file(map_path):
     curr_offset = index_location
     for i in range(index_header.tag_count):
         index_entry = IndexEntry(FileAccess(curr_offset, IndexEntry.struct_size), map_magic, halomap)
-
         name_access = FileAccess(index_entry.name_offset_raw - map_magic, 256)
 
         # determine the base struct size, depending on the tag class
@@ -200,11 +200,19 @@ def load_map_from_memory(fix_video_render=True):
     MapHeader = chunk_classes['map_header']
     IndexHeader = chunk_classes['index_header']
     IndexEntry = chunk_classes['index_entry']
+    ObjectTable = chunk_classes['object_table']
+    #PlayerTable = chunk_classes['player_table']
 
     halomap = HaloMap()
 
+    object_table = ObjectTable(WinMemAccess(0x400506B4, 64), 0, halomap)
+    print(object_table)
+
+    player_table = WinMemAccess(0x402AAF94, 64)
+    print(player_table.read_all_bytes())
+
     # Not sure where the map header lives in Halo 1.09's memory space...
-    map_header = '\nNot Implemented Yet\n' #MapHeader(WinMemAccess(0xDEADBEEF, MapHeader.struct_size), 0, halomap)
+    map_header = MapHeader(WinMemAccess(0x6A8154, MapHeader.struct_size), 0, halomap)
     index_header = IndexHeader(WinMemAccess(0x40440000, IndexHeader.struct_size), 0, halomap)
 
     tags = []
@@ -213,6 +221,13 @@ def load_map_from_memory(fix_video_render=True):
     for i in range(index_header.tag_count):
         index_entry = IndexEntry(WinMemAccess(curr_offset, IndexEntry.struct_size), 0, halomap)
         name_access = WinMemAccess(index_entry.name_offset_raw, 256)
+
+        # determine the base struct size, depending on the tag class
+        try:
+            base_struct_size = chunk_classes[index_entry.first_class].struct_size
+        except KeyError:
+            base_struct_size = 0x100
+
         meta_access = WinMemAccess(index_entry.meta_offset_raw, 0x4000)
 
         ht = HaloTag(index_entry, name_access, meta_access, 0, halomap)
