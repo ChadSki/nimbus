@@ -24,6 +24,8 @@ from byteaccess import ByteAccess
 from ctypes import *
 from ctypes.wintypes import *
 
+__all__ = ['WinMemAccess']
+
 class ProcessEntry32(ctypes.Structure):
      _fields_ = [("dwSize", ctypes.c_ulong),
                  ("cntUsage", ctypes.c_ulong),
@@ -67,47 +69,41 @@ def get_process_by_name(name):
     CloseHandle(hTH32Snapshot)
     return None
 
-
 PROCESS_ALL_ACCESS = 0x1F0FFF
 OpenProcess = windll.kernel32.OpenProcess
 ReadProcessMemory = windll.kernel32.ReadProcessMemory
 WriteProcessMemory = windll.kernel32.WriteProcessMemory
 
-def access_over_process(process_name):
-    """Defines a class for accessing bytes of memory from a specific process."""
+class WinMemAccess(ByteAccess):
+    """Encapsulates reading and writing to a specified process's memory."""
 
-    class WinMemAccess(ByteAccess):
-        """Encapsulates reading and writing to a specified process's memory."""
+    def __init__(self, offset, size, process_name):
 
-        def __init__(self, offset, size):
+        # share the same process handle between all WinMemAccesses for this process
+        if 'process' not in WinMemAccess.__dict__:
+            halo = get_process_by_name(process_name.encode('ascii'))
+            if halo == None:
+                raise Exception("'%s' is not running" % process_name)
 
-            # share the same process handle between all WinMemAccesses for this process
-            if 'process' not in WinMemAccess.__dict__:
-                halo = get_process_by_name(process_name.encode('ascii'))
-                if halo == None:
-                    raise Exception("'%s' is not running" % process_name)
+            WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
 
-                WinMemAccess.process = OpenProcess(PROCESS_ALL_ACCESS, False, halo.th32ProcessID)
+        super(WinMemAccess, self).__init__(offset, size)
 
-            super(WinMemAccess, self).__init__(offset, size)
+    def _read_bytes(self, offset, size):
+        address = self.offset + offset
+        buf = create_string_buffer(size)
+        bytesRead = c_ulong(0)
+        if ReadProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesRead)):
+            return bytes(buf)
+        else:
+            raise Exception("Failed to read memory")
 
-        def _read_bytes(self, offset, size):
-            address = self.offset + offset
-            buf = create_string_buffer(size)
-            bytesRead = c_ulong(0)
-            if ReadProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesRead)):
-                return bytes(buf)
-            else:
-                raise Exception("Failed to read memory")
-
-        def _write_bytes(self, to_write, offset):
-            address = self.offset + offset
-            buf = c_char_p(to_write)
-            size = len(to_write)
-            bytesWritten = c_ulong(0)
-            if WriteProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesWritten)):
-                return
-            else:
-                raise Exception("Failed to write memory")
-
-    return WinMemAccess
+    def _write_bytes(self, to_write, offset):
+        address = self.offset + offset
+        buf = c_char_p(to_write)
+        size = len(to_write)
+        bytesWritten = c_ulong(0)
+        if WriteProcessMemory(WinMemAccess.process, address, buf, size, byref(bytesWritten)):
+            return
+        else:
+            raise Exception("Failed to write memory")

@@ -1,20 +1,17 @@
 import halolib
-m = halolib.load_map("D:\\Program Files (x86)\\Microsoft Games\\Halo\\MAPS\\bloodgulch.map")
+m = halolib.load_map("beavercreek.map")
 
 print(repr(m))
+for tag in m.get_tags('weap'):
+    pass #print(tag.layout)
 
-#def print_data(x):
-#    print(x.struct_data)
-#    for key in x.reflexives:
-#        for each in x.reflexives[key]:
-#            print_data(each)
-#
-#print_data(t.meta.export())
+t = m.get_tag('bipd', '')
+print(repr(t))
 
-banshee = m.get_tag('vehi', 'banshee_mp')
-warthog = m.get_tag('vehi', '\\warthog')
-
-print(repr(banshee))
-print(repr(warthog))
+def print_data(x):
+    print(x.struct_data)
+    for key in x.reflexives:
+        for each in x.reflexives[key]:
+            print_data(each)
 
 m.close()

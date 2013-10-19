@@ -20,8 +20,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from halolib.field import py_strlen
-from halolib.chunk import chunk_classes
+from halolib.cythonutil import py_strlen
+from halolib.halostruct import plugin_classes
 
 class CachedHaloTag(object):
     """An object for storing tags in limbo between exportation from one map
@@ -61,9 +61,9 @@ class HaloTag(object):
     def meta(self):
         # every time the meta is accessed, reinterpret it as the current first_class
         try:
-            return chunk_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
+            return plugin_classes[self.first_class](self.meta_access, self.map_magic, self.halomap)
         except KeyError:
-            return chunk_classes['unknown'](self.meta_access, self.map_magic, self.halomap)
+            return plugin_classes['unknown'](self.meta_access, self.map_magic, self.halomap)
 
     def export(self):
         ached_self = CachedHaloTag()

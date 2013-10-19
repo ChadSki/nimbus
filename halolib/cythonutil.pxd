@@ -1,3 +1,5 @@
+# cython: language_level=3
+
 # Copyright (c) 2013, Chad Zawistowski
 # All rights reserved.
 #
@@ -20,11 +22,17 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from distutils.core import setup
-from distutils.extension import Extension
-from Cython.Distutils import build_ext
+"""cythonutil.pxd
 
-setup(
-    cmdclass = {'build_ext':build_ext},
-    ext_modules = [Extension("cythonutil", ["cythonutil.pxd", "cythonutil.pyx"]), Extension("halostruct", ["halostruct.pyx"])]
-)
+This file contains Cython declarations at the C level, and is combined with
+cythonutil.pyx at compile-time.
+"""
+
+from libc.stdint cimport int8_t, int16_t, int32_t, int64_t
+from libc.stdint cimport uint8_t, uint16_t, uint32_t, uint64_t
+
+cdef extern from "stdlib.h" nogil:
+    char* memcpy(char* dst, char* src, long len)
+
+cdef extern from "string.h" nogil:
+    long strlen(char* s)
