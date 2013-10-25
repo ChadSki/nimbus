@@ -192,8 +192,8 @@ def make_field_property(field_type, reflexive_class=None, **kwargs):
 
 def class_from_xml(layout):
     """Return a new class which wraps a c-struct. Extends HaloStruct by adding
-    properties to read/write to fields. Field layouts are specified by xml plugins."""
-
+    properties to read/write to fields. Field layouts are specified by xml plugins.
+    """
     # define a subclass of HaloStruct using the name from xml
     new_class = type(layout.attrib['name'], (HaloStruct,), {})
 

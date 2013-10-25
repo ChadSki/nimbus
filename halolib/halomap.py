@@ -51,7 +51,10 @@ class HaloMap(object):
         return answer
 
     def get_tag(self, first_class='', *name_fragments):
-        return next(self.get_tags(first_class, *name_fragments))
+        try:
+            return next(self.get_tags(first_class, *name_fragments))
+        except StopIteration:
+            return None
     
     def get_tags(self, first_class='', *name_fragments):
         for tag in self.tags.values():
@@ -110,21 +113,21 @@ def load_map_common(*, location, map_path=None):
     if len(plugin_classes) == 0:
         load_plugins()
 
+    # mapfile structures
     MapHeader = plugin_classes['map_header']
     IndexHeader = plugin_classes['index_header']
     IndexEntry = plugin_classes['index_entry']
 
-    if location == 'mem':
-        # these are some runtime-only structures that may be interesting to edit in the future
-        pass
-        #ObjectTable = plugin_classes['object_table']
-        #PlayerTable = plugin_classes['player_table']
+    # runtime-only structures
+    ObjectTable = plugin_classes['object_table']
+    #PlayerTable = plugin_classes['player_table']
 
-        #object_table = ObjectTable(HaloMemAccess(0x400506B4, 64), 0, halomap)
-        #print(object_table)
+    if location == 'mem':
+        object_table = ObjectTable(HaloMemAccess(0x400506B4, 64), 0, halomap)
+        print(object_table)
         
-        #player_table = HaloMemAccess(0x402AAF94, 64)
-        #print(player_table.read_all_bytes())
+        player_table = HaloMemAccess(0x402AAF94, 64)
+        print(player_table.read_all_bytes())
 
     map_header = MapHeader(
                     ByteAccess(
@@ -153,7 +156,7 @@ def load_map_common(*, location, map_path=None):
         map_magic = index_header.primary_magic - map_offsets.Index
 
     elif location == 'mem':
-        # Almost always 0x40440000, unless the map has been 
+        # Almost always 0x40440028, unless the map has been protected in a specific way
         map_offsets.Index = index_header.primary_magic
 
         # In memory, offsets are just raw pointers and require no adjustment.
@@ -180,8 +183,8 @@ def load_map_common(*, location, map_path=None):
     # to calculate sizes, we need the offset to the end
     meta_offsets.append(meta_offsets[0] + map_header.metadata_size)
 
-    # [00, 10, 40, 55, 80] location offsets,
-    #   [10, 30, 15, 25]   calculate sizes...
+    # [00, 10, 40, 55, 80] from location offsets...
+    #   [10, 30, 15, 25]   we can calculate sizes...
     #                      but instead of an ordered list, key based on the start offset
     meta_sizes = {start: (end - start) for start, end in zip(meta_offsets[:-1], meta_offsets[1:])}
 

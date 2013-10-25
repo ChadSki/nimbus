@@ -20,13 +20,17 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+"""halotag.py
+
+Defines the HaloTag class, which encapsulates an index entry, tag name, and metadata.
+"""
 from halolib.cythonutil import py_strlen
 from halolib.halostruct import plugin_classes
 
 class CachedHaloTag(object):
     """An object for storing tags in limbo between exportation from one map
-    and importation into another."""
-
+    and importation into another.
+    """
     pass #__slots__ = ['index_entry_data', 'name_data', 'meta_data']
 
 class HaloTag(object):
@@ -44,8 +48,7 @@ class HaloTag(object):
 
     def __repr__(self):
         """Returns a full string representation of this tag and its metadata"""
-        # this nested string interpolation is kinda gross
-        return '%s%s' % (str(self), str(self.meta))
+        return str(self) + str(self.meta)
 
     @property
     def name(self):
@@ -55,7 +58,7 @@ class HaloTag(object):
 
     @name.setter
     def name(self, value):
-        pass
+        raise Exception('Changing tag names not yet implemented.')
 
     @property
     def meta(self):
@@ -84,7 +87,8 @@ class HaloTag(object):
             1. First self's attributes are checked
             2. If nothing was found, Python will run __getattr__ and check self.index_entry's attributes
             3. If nothing was found in self.index_entry, check self.meta
-            4. If checking self.meta fails just let the AttributeError propagate upwards"""
+            4. If checking self.meta fails just let the AttributeError propagate upwards
+        """
         try:
             return getattr(self.index_entry, name)
         except AttributeError:
@@ -98,8 +102,8 @@ class HaloTag(object):
             2. Other attributes of self can be assigned to
             3. If the attribute is not found in self, check self.index_entry
             4. If the attribute is not found in self.index_entry, check self.meta
-            5. If checking self.meta fails, return without setting anything"""
-
+            5. If checking self.meta fails, return without setting anything
+        """
         if name in ['meta', 'index_entry', 'name_access', 'meta_access', 'map_magic', 'halomap']:
             pass
 
