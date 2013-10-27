@@ -20,39 +20,22 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-class ByteAccess(object):
-    """Cordons off an area of bytes. Within a ByteAccess, offsets are
-    relative, and attempting to read or write outside the encapsulated
-    area will raise an Exception.
+import mmap
+from byteaccess import ByteAccess
 
-    ByteAccess is an abstract class, written so that only _read_bytes and
-    _write_bytes need to be implemented, usually along with a custom
-    constructor.
-    """
-    def __init__(self, offset, size):
-        self.offset = offset
-        self.size = size
+class FileAccess(ByteAccess):
+    """Encapsulates reading and writing to a memory-mapped file on disk."""
 
-    def create_subaccess(self, offset, size):
-        if offset + size > self.size: raise Exception("Cannot allocate past end of Access. %s" % str(self))
-        return self.__class__(self.offset + offset, size)
-
-    def __str__(self):
-        return 'offset:%d size:%d self.size:%d' % (offset, size, self.size)
-
-    def read_all_bytes(self):
-        return self.read_bytes(0, self.size)
-
-    def read_bytes(self, offset, size):
-        if offset + size > self.size: raise Exception("Cannot read past end of Access. %s" % str(self))
-        return self._read_bytes(offset, size)
+    def __init__(self, offset, size, mmap_f):
+        self.mmap_f = mmap_f
+        super(FileAccess, self).__init__(offset, size)
 
     def _read_bytes(self, offset, size):
-        raise Exception("Reading not implemented in abstract class")
-
-    def write_bytes(self, to_write, offset):
-        if offset + len(to_write) > self.size: raise Exception("Cannot write past end of Access. %s" % str(self))
-        self._write_bytes(to_write, offset)
+        begin = self.offset + offset
+        end = begin + size
+        return self.mmap_f[begin:end]
 
     def _write_bytes(self, to_write, offset):
-        raise Exception("Writing not implemented in abstract class")
+        begin = self.offset + offset
+        end = begin + len(to_write)
+        self.mmap_f[begin:end] = to_write

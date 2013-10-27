@@ -52,7 +52,8 @@ Building halolib/field.pyx requires Cython and a C compiler. I use a portable Py
 Since the content of byteaccess/ seems useful even outside the context of Halo hacking, it has been split into a [separate git repo](https://github.com/ChadSki/byteaccess.py). Synchronizing changes between the two repos is managed with git subtree. To merge changes from byteaccess-origin, run the following commands:
 ```
 git fetch byteaccess-origin
-git pull -X subtree=byteaccess byteaccess-origin master
+# http://stackoverflow.com/a/12048161/1628916
+git merge -s ours --no-commit byteaccess-origin/master
 ```
 
 ### License

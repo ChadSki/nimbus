@@ -20,11 +20,27 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from distutils.core import setup
-from distutils.extension import Extension
-from Cython.Distutils import build_ext
+"""haloaccess.py
 
-setup(
-    cmdclass = {'build_ext':build_ext},
-    ext_modules = [Extension("cythonutil", ["cythonutil.pxd", "cythonutil.pyx"]), Extension("halostruct", ["halostruct.pyx"])]
-)
+A separate class is newly generated for each map that is opened.
+"""
+import mmap
+from byteaccess import FileAccess, WinMemAccess
+
+def access_over_file(the_file):
+    mmap_f = mmap.mmap(the_file.fileno(), 0)
+
+    class HaloFileAccess(FileAccess):
+        def __init__(self, *args, **kwargs):
+            super().__init__(mmap_f=mmap_f, *args, **kwargs)
+
+    return HaloFileAccess
+
+
+def access_over_memory():
+    class HaloMemAccess(WinMemAccess):
+        def __init__(self, *args, **kwargs):
+            # we always want to read Halo, so let's assume that parameter
+            super().__init__(process_name='halo.exe', *args, **kwargs)
+
+    return HaloMemAccess
