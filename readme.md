@@ -1,8 +1,8 @@
 # halolib.py
 
-Halolib is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory.
+Halolib is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory. Halolib is compatible with Halo 1 PC on Windows.
 
-Halolib aims to be compatible with Halo 1 PC on Windows, and HaloMD on Mac OS X.
+Because of the difficulty of maintaining a build chain for cross-platform Cython extensions, development is moving to an IronPython/Mono stack. Watch [Quickbeam](https://github.com/ChadSki/Quickbeam) for updates.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Halolib requires an installation of Python 3. Either invoke the examples directl
 
 If you do not already have an installation of Python 3, you can download my stripped-down portable Python 3.2 installation from [here](http://www.mediafire.com/download/55o5dzct6hyw8bd/halolib-portable-python-2013-09-06.7z) (15 MB zipped, 60 MB unzipped) and place the bin/ folder in the root of this repo.
 
-If you are not executing halolib from a 32-bit installation of Python, you may need to recompile halolib/field.pyx. See Development below for compilation instructions.
+If you are not executing halolib from a 32-bit installation of Python, you may need to recompile halolib/field.pyx usinhg Cyton. See Development below for compilation instructions.
 
 ## Usage
 
@@ -43,18 +43,9 @@ banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger shoo
 
 ## Development
 
-Halolib is developed on Windows with the 32-bit build of Python 3.2.
+Halolib is developed on Windows with the 32-bit build of Python 3.2 and the accompanying Cython package.
 
 Building halolib/field.pyx requires Cython and a C compiler. I use a portable Python 3.2, Cython 0.19.1, and MinGW bundle that can be downloaded [here](http://www.mediafire.com/download/u1p4449zk4d2gy1/halolib-portable-devenv-2013-09-06.7z) (26 MB zipped, 82 MB unzipped). Place the bin/ folder in the root of this repository, and run halolib/build.bat to compile field.pyx.
-
-#### Merging changes from byteaccess.py
-
-Since the content of byteaccess/ seems useful even outside the context of Halo hacking, it has been split into a [separate git repo](https://github.com/ChadSki/byteaccess.py). Synchronizing changes between the two repos is managed with git subtree. To merge changes from byteaccess-origin, run the following commands:
-```
-git fetch byteaccess-origin
-# http://stackoverflow.com/a/12048161/1628916
-git merge -s ours --no-commit byteaccess-origin/master
-```
 
 ### License
 
