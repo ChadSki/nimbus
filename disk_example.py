@@ -1,12 +1,14 @@
 import halolib
-m = halolib.load_map("beavercreek.map")
+m = halolib.load_map("./beavercreek.map")
 
 print(repr(m))
 for tag in m.get_tags('weap'):
     pass #print(tag.layout)
 
-t = m.get_tag('bipd', '')
+t = m.get_tag('bipd')
 print(repr(t))
+
+t.turn_speed *= 1.05
 
 def print_data(x):
     print(x.struct_data)
