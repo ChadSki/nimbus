@@ -1,0 +1,40 @@
+bitflag: bool
+	bitmask8 -- 1-8 individual bitflags, bits offset from 8
+	bitmask16 -- 1-16 individual bitflags, bits offset from 16
+	bitmask32 -- 1-32 individual bitflags, bits offset from 32
+
+float32: float
+	single, float
+float64: float
+	double
+
+int8: int
+	int8, char
+int16: int
+	int16, short
+int32: int
+	int32, long
+
+ascii, asciiz: str
+	string4 -- in-place char[4]
+	string32 -- in-place char[32]
+	string128 -- in-place char[128]
+	
+reference: complex type
+	loneID -- int32
+	dependency -- Class name[4], name offset[4], padding[4], ID[4]. Total: 0x10
+
+enum: complex type
+	enum8 -- options in range(1, max(int8))
+	enum16 -- options in range(1, max(int16))
+	enum32 -- options in range(1, max(int32))
+
+struct_array: complex type
+	struct -- Count[4], offset[4], padding[4]. Total: 0xC
+
+index: complex type
+	int16 refers to which struct in a struct_array
+
+colorbyte -- array of four Int8 floats. Total size: 4 bytes
+colorRGB -- array of three single-precision floats. Total size: 12 bytes
+colorARGB -- array of four single-precision floats. Total size: 16 bytes

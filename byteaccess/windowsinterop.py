@@ -55,7 +55,7 @@ def find_process(name):
             if 0 == k32.Process32Next(hTH32Snapshot, byref(process_entry)):
                 break
 
-        raise RuntimeError("'{0}' is not running".format(name))
+        raise RuntimeError("{0} is not running".format(name.decode('ascii')))
 
     finally:  # ensure we close the snapshot
         k32.CloseHandle(hTH32Snapshot)

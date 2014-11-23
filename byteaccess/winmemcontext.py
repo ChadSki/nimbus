@@ -12,14 +12,19 @@ k32 = windll.kernel32
 
 class WinMemContext(object):
 
-    """Context for creating ByteAccesses which read and write to a Windows process."""
+    """Context for creating ByteAccesses which read and write to a Windows process.
+
+    Usage:
+        context = WinMemContext('notepad')
+        context.ByteAccess(offset, size)
+    """
 
     def __init__(self, process_name):
         """Instantiate a WinMemContext for a specific process.
 
         process_name -- The name of the target process. e.g. 'notepad' or 'notepad.exe'
         """
-        if process_name[-4:] != '.exe':
+        if not '.' in process_name:
             process_name += '.exe'
 
         PROCESS_ALL_ACCESS = 0x1F0FFF
@@ -48,7 +53,7 @@ class WinMemContext(object):
                 bytesWritten = c_ulong(0)
                 if k32.WriteProcessMemory(self.process, address,
                                           buf, size, byref(bytesWritten)):
-                    return
+                    return  # Success!
                 else:
                     raise RuntimeError("Failed to write memory")
 

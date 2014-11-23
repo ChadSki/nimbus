@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <plugin name="bipd" struct_size="0x450">
+    <bitmask16 name="flags" offset="0x02">
+        <bitflag name="Does Not Cast Shadow" offset="0x02" bit="15"/>
+        <bitflag name="Transparent Self-Occlusion" offset="0x02" bit="14"/>
+        <bitflag name="Brighter Than It Should Be" offset="0x02" bit="13"/>
+        <bitflag name="Not a Pathfinding Obstacle" offset="0x02" bit="12"/>
+    </bitmask>
+
     <reference name="model" offset="0x28" />
     <reference name="animation" offset="0x38" />
     <reference name="collision" offset="0x70" />

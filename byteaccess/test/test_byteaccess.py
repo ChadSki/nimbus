@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.abspath('..\..'))
 
 import byteaccess
 
+
 def string_tests(foo, bar, offset):
     assert foo.read_bytes(0, 4) == b'asdf'
     assert foo.read_bytes(4, 10) == b'0123456789'
@@ -18,6 +19,7 @@ def string_tests(foo, bar, offset):
     assert bar.read_all_bytes() == foo.read_bytes(0, 4)
     bar.write_bytes(0, b'asdf')
     assert foo.read_bytes(0, 4) == b'asdf'
+
 
 def number_tests(foo, offset):
     foo.write_float32(offset + 0, 2.0)
@@ -34,6 +36,7 @@ def number_tests(foo, offset):
     assert foo.read_int32(offset + 3) == 14
     assert foo.read_int64(offset + 7) == 14
 
+
 def test_filebyteaccess():
     context = byteaccess.FileContext('./testfile.bin')
 
@@ -43,6 +46,7 @@ def test_filebyteaccess():
 
     baz = context.ByteAccess(15, 16)
     number_tests(baz, 0)
+
 
 def test_membyteaccess():
     context = byteaccess.MemContext('halo')

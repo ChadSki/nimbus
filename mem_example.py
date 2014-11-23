@@ -3,7 +3,6 @@ m = halolib.load_map()
 
 print(repr(m))
 
-
 # weaps
 rifle = m.get_tag('weap', 'assault rifle')
 pistol = m.get_tag('weap', '\\pistol')
