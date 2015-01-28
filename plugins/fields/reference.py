@@ -7,7 +7,7 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, loneid='False', info, **kwargs):
+def field(*, name, offset, loneid='False', info='', **kwargs):
 
     if loneid not in ('True', 'False'):
         raise ValueError(
@@ -19,7 +19,7 @@ def field(*, name, offset, loneid='False', info, **kwargs):
         offset += 12  # (which is located 12 bytes inside)
 
     def fget(self):
-        ident = self.byteaccess.ReadUInt32(offset)
+        ident = self.byteaccess.read_uint32(offset)
         if ident == 0 or ident == 0xFFFFFFFF:
             return None
         else:
@@ -28,8 +28,8 @@ def field(*, name, offset, loneid='False', info, **kwargs):
     def fset(self, value):
         # when value is None, write Halo's version of null (-1)
         # otherwise, write the tag's ident, not the tag itself
-        self.byteaccess.WriteUInt32(offset,
-                                    0xFFFFFFFF if value is None
-                                    else value.ident)
+        self.byteaccess.write_uint32(offset,
+                                     0xFFFFFFFF if value is None
+                                     else value.ident)
 
     return NotifyProperty(name=name, fget=fget, fset=fset, doc=info)

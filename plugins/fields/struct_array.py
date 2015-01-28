@@ -7,16 +7,17 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, struct_class, info, **kwargs):
+def field(*, name, offset, struct_class, info='', **kwargs):
     """A pointer to an array of structs."""
 
     def fget(self):
-        count = self.byteaccess.ReadUInt32(offset)
-        raw_offset = self.byteaccess.ReadUInt32(offset + 4)
+        count = self.byteaccess.read_uint32(offset)
+        raw_offset = self.byteaccess.read_uint32(offset + 4)
 
         start_offset = raw_offset - self.halomap.magic
         size = struct_class.struct_size
-        return [struct_class(self.halomap.ByteArray(start_offset + i * size, size),
+        return [struct_class(self.halomap.context.ByteAccess(
+                                start_offset + i * size, size),
                              self.halomap)
                 for i in range(count)]
 

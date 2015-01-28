@@ -7,18 +7,15 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, length, reverse, info, **kwargs):
+def field(*, name, offset, length, reverse, info='', **kwargs):
     """Fixed-length ascii string."""
 
     def fget(self):
-        answer = self.byteaccess.read_ascii(offset, length)
-        if reverse:
-            answer = answer[::-1]
-        return answer
+        buf = self.byteaccess.read_ascii(offset, length)
+        return buf[::-1] if reverse else buf
 
     def fset(self, value):
-        if reverse:
-            value = value[::-1]
-        self.byteaccess.write_ascii(offset, value)
+        self.write_ascii(offset, length,
+                         value[::-1] if reverse else value)
 
     return NotifyProperty(fget=fget, fset=fset, name=name, doc=info)

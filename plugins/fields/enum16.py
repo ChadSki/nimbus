@@ -7,7 +7,7 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, options, info, **kwargs):
+def field(*, name, offset, options, info='', **kwargs):
     """8-bit enumeration of options."""
 
     forward_options = {

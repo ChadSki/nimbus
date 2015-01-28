@@ -7,13 +7,13 @@
 from plugins import NotifyProperty
 
 
-def field(*args, name, offset, maxlength, info, **kwargs):
+def field(*, name, offset, maxlength, info='', **kwargs):
     """Null-terminated ascii string."""
 
     def fget(self):
-        return self.byteaccess.ReadAsciiz(offset, maxlength)
+        return self.byteaccess.read_asciiz(offset, maxlength)
 
     def fset(self, value):
-        self.byteaccess.WriteAsciiz(offset, value, maxlength)
+        self.byteaccess.write_asciiz(offset, maxlength, value)
 
     return NotifyProperty(fget=fget, fset=fset, name=name, doc=info)

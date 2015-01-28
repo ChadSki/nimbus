@@ -7,7 +7,7 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, info, **kwargs):
+def field(*, name, offset, info='', **kwargs):
     """16-bit (2-byte) unsigned integer."""
 
     def fget(self):

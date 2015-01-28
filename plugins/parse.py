@@ -72,15 +72,16 @@ def struct_helper(layout):
 
         def _repr_(self):
             """Generate a string representation of this struct in JSON format."""
-            r = '{'                                     # open JSON object
-            for name in self.__dir__():                 # for each field:
-                r += '\n    "{0}": '.format(name)       # single-indented field name
-                lines = str(getattr(name)).split('\n')  # stringify (1+ lines)
-                r += lines.pop(0)                       # attach the first part directly
-                for line in lines:                      # indent the remaining lines
+            r = '{'                                   # open JSON object
+            for name in self.__dir__():               # for each field:
+                r += '\n    "{0}": '.format(name)     # single-indented field name
+                lines = str(
+                    getattr(self, name)).split('\n')  # stringify (1+ lines)
+                r += lines.pop(0)                     # attach the first part directly
+                for line in lines:                    # indent the remaining lines
                     r += '\n    ' + line
-                r += ','                                # comma to close this field
-            r += '\n}'                                  # close JSON object
+                r += ','                              # comma to close this field
+            r += '\n}'                                # close JSON object
             return r
 
         fields = {}  # {name => property}

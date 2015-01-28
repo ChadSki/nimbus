@@ -86,27 +86,37 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
 
     # read/write strings
 
-    def read_ascii(self, offset, length, reverse=False):
-        buf = self.read_bytes(offset, length).decode('ascii')
-        return buf[::-1] if reverse else buf
+    def read_ascii(self, offset, length):
+        return self.read_bytes(offset, length).decode('ascii')
 
-    def write_ascii(self, offset, data, reverse=False,):
+    def write_ascii(self, offset, length, data):
         buf = data.encode('ascii')
-        self.write_bytes(offset, buf[::-1] if reverse else buf)
-
-    def read_asciiz(self, offset, length):
-        buf = self.read_bytes(offset, length).decode('ascii')
-        return buf[:buf.find('\0')]  # null-terminated
-
-    def write_asciiz(self, offset, data):
-        buf = (data + '\0').encode('ascii')
+        if len(buf) > length:
+            raise ValueError("ascii string {} is {} characters too long"
+                             .format(buf, len(buf) - length))
+        elif len(buf) < length:
+            buf += b'\x00' * (length - len(buf))
         self.write_bytes(offset, buf)
 
-    def read_utf16(self, offset, length):
-        buf = self.read_bytes(offset, length).decode('utf-16')
-        return buf[:buf.find('\0')]  # null-terminated
+    def read_asciiz(self, offset, maxlength):
+        buf = self.read_bytes(offset, maxlength)
+        return buf[:buf.find(b'\x00')].decode('ascii')
 
-    def write_utf16(self, offset, data):
+    def write_asciiz(self, offset, maxlength, data):
+        buf = (data + '\x00').encode('ascii')
+        if len(buf) > maxlength:
+            raise ValueError("ascii string {} is {} characters too long"
+                             .format(buf, len(buf) - maxlength))
+        self.write_bytes(offset, buf)
+
+    def read_utf16(self, offset, maxlength):
+        buf = self.read_bytes(offset, maxlength).decode('utf-16')
+        if len(buf) > maxlength:
+            raise ValueError("unicode string {} is {} characters too long"
+                             .format(buf, len(buf) - maxlength))
+        return buf[:buf.find('\x00')]  # null-terminated
+
+    def write_utf16(self, offset, maxlength, data):
         buf = (data + '\0').encode('utf-16')
         self.write_bytes(offset, buf)
 

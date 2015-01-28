@@ -7,7 +7,7 @@
 from plugins import NotifyProperty
 
 
-def field(*, name, offset, bit, info, **kwargs):
+def field(*, name, offset, bit, info='', **kwargs):
     """A boolean flag."""
 
     def fget(self):
