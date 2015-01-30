@@ -22,8 +22,11 @@ def field(*, name, offset, loneid='False', info='', **kwargs):
         ident = self.byteaccess.read_uint32(offset)
         if ident == 0 or ident == 0xFFFFFFFF:
             return None
-        else:
+        try:
             return self.halomap.tags_by_ident[ident]  # the referenced tag
+        except KeyError:
+            # we wanted a tag that wasn't there =(
+            return None
 
     def fset(self, value):
         # when value is None, write Halo's version of null (-1)

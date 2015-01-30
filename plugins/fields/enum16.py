@@ -18,14 +18,18 @@ def field(*, name, offset, options, info='', **kwargs):
         name: int(number) for name, number in options.items()
     }  # type: Dict[str, int]
 
+    doc = format('\n'.join('    {} => {}'.format(number, name)
+                           for name, number in options.items()))
+
     def fget(self):
-        return forward_options[self.byteaccess.read_uint16(offset)]
+        try:
+            value = self.byteaccess.read_uint16(offset)
+            return forward_options[value]
+        except KeyError:
+            print("Enum16: Cannot find {} in options for {}".format(value, name))
+            print(doc)  # TODO does this look right?
 
     def fset(self, value):
         self.byteaccess.write_uint16(offset, reversed_options[value])
 
-    doc = info + ('\n'.join('{} => {}'.format(number, name)
-                            for name, number in options.items()))
-    print(doc)  # TODO does this look right?
-
-    return NotifyProperty(fget=fget, fset=fset, name=name, doc=doc)
+    return NotifyProperty(fget=fget, fset=fset, name=name, doc=info+doc)

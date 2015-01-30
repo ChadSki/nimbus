@@ -24,7 +24,7 @@ class WinMemContext(object):
 
         process_name -- The name of the target process. e.g. 'notepad' or 'notepad.exe'
         """
-        if not '.' in process_name:
+        if not '.' not in process_name:
             process_name += '.exe'
 
         PROCESS_ALL_ACCESS = 0x1F0FFF

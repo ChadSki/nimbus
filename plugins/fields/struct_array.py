@@ -16,6 +16,10 @@ def field(*, name, offset, struct_class, info='', **kwargs):
 
         start_offset = raw_offset - self.halomap.magic
         size = struct_class.struct_size
+
+        if count > 1024:  # something's fucky
+            raise RuntimeError('{} structs in struct_array?!'.format(count))
+
         return [struct_class(self.halomap.context.ByteAccess(
                                 start_offset + i * size, size),
                              self.halomap)

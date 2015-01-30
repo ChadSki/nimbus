@@ -4,11 +4,12 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-import functools
-import sys
+from .notify import Event
 from importlib import import_module
 from os import path
-from .notify import Event
+import functools
+import sys
+import traceback
 import xml.etree.ElementTree as et
 
 fields_dir = '.'
@@ -49,49 +50,71 @@ def field_type(typename):
     return import_module(typename).field
 
 
+class ObservableStruct(object):
+
+    def __init__(self, byteaccess, halomap):
+            self.byteaccess = byteaccess
+            self.halomap = halomap
+            self.property_changed = Event()
+
+    def __dir__(self):
+            """A sorted list of methods and properties available to this class."""
+            return sorted(self.field_names)
+            # + ['byteaccess', 'field_names', 'halomap', 'property_changed'])
+
+    def __repr__(self):
+            """Generate a string representation of this struct in JSON format."""
+            r = '{'                                      # open JSON object
+            for name in self.__dir__():                  # for each field:
+                r += '\n    "{0}": '.format(name)        # single-indented field name
+                try:
+                    value = getattr(self, name)
+
+                    lines = str(value).split('\n')
+                    if len(lines) > 1:
+                        r += lines.pop(0)  # attach the first part directly
+                        for line in lines:
+                            r += '\n    ' + line  # indent the remaining lines
+                    else:
+                        if isinstance(value, bool):
+                            r += str(value).lower()
+                        elif isinstance(value, str):
+                            r += repr(str(value)).replace(
+                                '"', '@').replace(
+                                "'", '"').replace(
+                                '@', "'")
+                        elif value is None:
+                            r += 'null'
+                        else:
+                            r += str(value)
+                    r += ','  # comma to close this field
+
+                except (AttributeError, RuntimeError):
+                    print('Error getting "{}" from "{}"'.format(name, self.class_name))
+                    print(traceback.format_exc())
+
+                except (ValueError):
+                    raise
+
+            r += '\n}'  # close JSON object
+            return r
+
+
 def struct_helper(layout):
     """Recursively define a new struct type based on the given xml definition."""
     try:
         # typename, e.g. "MagazineStruct" or "BipdStruct". Doesn't need to be unique.
         class_name = camel_case(layout.attrib['name']) + 'Struct'
 
-        # let's load this once now instead of every time in the constructor
-        field_names = sorted(node.attrib['name'] for node in layout)
-
-        def _init_(self, byteaccess, halomap):
-            """{} constructor""".format(class_name)
-            self.byteaccess = byteaccess
-            self.field_names = field_names
-            self.halomap = halomap
-            self.property_changed = Event()
-
-        def _dir_(self):
-            """A sorted list of methods and properties available to this class."""
-            return sorted(self.field_names +
-                          ['byteaccess', 'field_names', 'halomap', 'property_changed'])
-
-        def _repr_(self):
-            """Generate a string representation of this struct in JSON format."""
-            r = '{'                                   # open JSON object
-            for name in self.__dir__():               # for each field:
-                r += '\n    "{0}": '.format(name)     # single-indented field name
-                lines = str(
-                    getattr(self, name)).split('\n')  # stringify (1+ lines)
-                r += lines.pop(0)                     # attach the first part directly
-                for line in lines:                    # indent the remaining lines
-                    r += '\n    ' + line
-                r += ','                              # comma to close this field
-            r += '\n}'                                # close JSON object
-            return r
-
         fields = {}  # {name => property}
         for node in layout:
             try:
-                fields[node.attrib['name']] = field_type(typename=node.tag)(
+                answer = field_type(typename=node.tag)(
 
                     # if a field involves another struct, load that too (recurse)
-                    struct_class=struct_helper(node)
-                    if node.tag == 'struct_array' else None,
+                    struct_class=(struct_helper(node)
+                                  if node.tag == 'struct_array' else
+                                  None),
 
                     # if present, load enum options from child nodes
                     options={
@@ -102,6 +125,7 @@ def struct_helper(layout):
                     # everything else (via xml attributes)
                     **{name: try_parse_int(value)
                        for name, value in node.attrib.items()})
+                fields[node.attrib['name']] = answer
 
             except TypeError:
                 print('Error while parsing <{}> node "{}"'.format(node.tag,
@@ -110,21 +134,16 @@ def struct_helper(layout):
                     print('    {} => {}'.format(key, node.attrib[key]))
                 raise
 
-            except ImportError:
+            except (ImportError, NotImplementedError):
                 print('Skipping import of "{}" type'.format(node.tag))
                 if 'int' in node.tag:
                     raise
 
         # build struct type
-        return type(class_name, (object,), dict(
-                    __init__=_init_,
-                    __dir__=_dir_,
-                    __repr__=_repr_,
-
-                    # how large ByteAccesses for this ought to be
+        return type(class_name, (ObservableStruct,), dict(
                     struct_size=int(layout.attrib['size'], 0),
-
-                    # create a field of the correct type and assign by name
+                    class_name=class_name,
+                    field_names=sorted(name for name in fields),
                     **fields))
 
     except:
@@ -146,7 +165,7 @@ def struct_type(name):
         root_node = et.parse(filepath).getroot()
 
         if name != root_node.attrib['name']:
-            raise ValueError(
+            print(
                 'Plugin "{}" file name does not match struct name {}'.format(
                     filepath, root_node.attrib['name']))
 

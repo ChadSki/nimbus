@@ -11,7 +11,6 @@ __all__ = ['Event', 'NotifyProperty', 'ObservableField',
            'set_fields_dir', 'set_plugins_dir',
            'field_type', 'struct_type', 'try_parse_int']
 
-
 class ObservableField(object):
 
     def __init__(self):

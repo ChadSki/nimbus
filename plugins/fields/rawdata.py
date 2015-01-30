@@ -7,7 +7,7 @@
 from plugins import NotifyProperty
 
 
-def field(*args, name, offset, length, info='', **kwargs):
+def field(*, name, offset, length, info='', **kwargs):
     """Just bytes."""
 
     def fget(self):

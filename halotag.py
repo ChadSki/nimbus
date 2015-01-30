@@ -30,8 +30,8 @@ class HaloTag(object):
     @property
     def meta(self):
         if self._meta is None:
-            self._meta = struct_type(self.tag_header.first_class)(
-                self.meta_access, self.halomap)
+            tag_type = struct_type(self.tag_header.first_class)
+            self._meta = tag_type(self.meta_access, self.halomap)
         return self._meta
 
     @meta.setter
@@ -40,10 +40,11 @@ class HaloTag(object):
 
     def __str__(self):
         """Returns a 1-line string representation of this tag."""
-        return '[{}]{}({})'.format(self.tag_header.first_class,
-                                   self.name,
-                                   self.tag_header.ident)
+        answer = '[{}]{}({})'.format(self.tag_header.first_class,
+                                     self.name,
+                                     self.tag_header.ident)
+        return repr(answer).replace("'", '"')
 
     def __repr__(self):
         """Returns a full string representation of this tag and its metadata."""
-        return str(self) + str(self.meta)
+        return '{}{}'.format(str(self), str(self.meta))

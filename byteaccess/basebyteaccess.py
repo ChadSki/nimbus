@@ -5,7 +5,7 @@
 # license as detailed in the LICENSE file.
 
 import abc
-from struct import pack, unpack
+from struct import pack, unpack, error
 
 
 class BaseByteAccess(metaclass=abc.ABCMeta):
@@ -20,6 +20,8 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         """
         self.offset = offset
         self.size = size
+        if size <= 0:
+            raise ValueError("Cannot create a ByteAccess with no size")
 
     # This abstract class is defined such that subclasses only need to
     # implement the following two methods:
@@ -45,7 +47,11 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
                              "offset:{0} size:{1} self.size:{2}"
                              .format(offset, size, self.size))
 
-        return self._read_bytes(offset, size)
+        buf = self._read_bytes(offset, size)
+        if len(buf) != size:
+            raise RuntimeError('requested {} bytes but got {}'
+                               .format(size, buf))
+        return buf
 
     def read_all_bytes(self):
         """Read all data this ByteAccess encapsulates."""
@@ -87,7 +93,11 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
     # read/write strings
 
     def read_ascii(self, offset, length):
-        return self.read_bytes(offset, length).decode('ascii')
+        buf = self.read_bytes(offset, length)
+        try:
+            return buf.decode('ascii')
+        except UnicodeDecodeError:
+            return repr(buf)
 
     def write_ascii(self, offset, length, data):
         buf = data.encode('ascii')
@@ -100,7 +110,11 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
 
     def read_asciiz(self, offset, maxlength):
         buf = self.read_bytes(offset, maxlength)
-        return buf[:buf.find(b'\x00')].decode('ascii')
+        buf = buf[:buf.find(b'\x00')]  # truncate at null
+        try:
+            return buf.decode('ascii')
+        except UnicodeDecodeError:
+            return repr(buf)
 
     def write_asciiz(self, offset, maxlength, data):
         buf = (data + '\x00').encode('ascii')
@@ -147,7 +161,14 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         return unpack('<H', self.read_bytes(offset, 2))[0]
 
     def read_uint32(self, offset):
-        return unpack('<I', self.read_bytes(offset, 4))[0]
+        try:
+            return unpack('<I', self.read_bytes(offset, 4))[0]
+        except error:
+            buf = self.read_bytes(offset, 4)
+            print(repr(buf))
+            print("offset:{0} size:{1} self.size:{2}"
+                  .format(offset, len(buf), self.size))
+            raise
 
     def read_uint64(self, offset):
         return unpack('<Q', self.read_bytes(offset, 8))[0]
