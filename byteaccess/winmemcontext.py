@@ -24,7 +24,7 @@ class WinMemContext(object):
 
         process_name -- The name of the target process. e.g. 'notepad' or 'notepad.exe'
         """
-        if not '.' not in process_name:
+        if '.' not in process_name:
             process_name += '.exe'
 
         PROCESS_ALL_ACCESS = 0x1F0FFF
@@ -44,7 +44,9 @@ class WinMemContext(object):
                                          buf, size, byref(bytesRead)):
                     return bytes(buf)
                 else:
-                    raise RuntimeError("Failed to read memory")
+                    raise OSError("Failed to read memory. " +
+                                  "offset:{0} size:{1}"
+                                  .format(offset, size))
 
             def _write_bytes(slf, offset, to_write):
                 address = slf.offset + offset
@@ -55,7 +57,9 @@ class WinMemContext(object):
                                           buf, size, byref(bytesWritten)):
                     return  # Success!
                 else:
-                    raise RuntimeError("Failed to write memory")
+                    raise OSError("Failed to write memory. " +
+                                  "offset:{0} size:{1}"
+                                  .format(offset, size))
 
         self.ByteAccess = WinMemByteAccess
 

@@ -28,7 +28,15 @@ class FileContext(object):
             def _read_bytes(slf, offset, size):
                 begin = slf.offset + offset
                 end = begin + size
-                return self.mmap_f[begin:end]
+                buf = self.mmap_f[begin:end]
+
+                if len(buf) != size:
+                    raise RuntimeError(('requested {} bytes but got {}\n' +
+                                        '    begin:{} end:{}' +
+                                        '    offset:{} self.offset:{}')
+                                       .format(size, buf, begin, end,
+                                               offset, slf.offset))
+                return buf
 
             def _write_bytes(slf, offset, to_write):
                 begin = slf.offset + offset

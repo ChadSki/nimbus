@@ -5,7 +5,7 @@
 # license as detailed in the LICENSE file.
 
 import abc
-from struct import pack, unpack, error
+from struct import pack, unpack
 
 
 class BaseByteAccess(metaclass=abc.ABCMeta):
@@ -18,10 +18,13 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         offset -- Absolute offset within the source medium.
         size -- Number of bytes to grant access to.
         """
-        self.offset = offset
-        self.size = size
+        if offset < 0:
+            raise ValueError("Offset must be 0 or larger. offset:{}"
+                             .format(offset))
         if size <= 0:
             raise ValueError("Cannot create a ByteAccess with no size")
+        self.offset = offset
+        self.size = size
 
     # This abstract class is defined such that subclasses only need to
     # implement the following two methods:
@@ -42,16 +45,16 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         offset -- Relative offset within the ByteAccess.
         size -- Number of bytes to read.
         """
+        if offset < 0:
+            raise ValueError("Offset must be positive. " +
+                             "{} is invalid.".format(offset))
+
         if offset + size > self.size:
             raise ValueError("Cannot read past end of ByteAccess. " +
                              "offset:{0} size:{1} self.size:{2}"
                              .format(offset, size, self.size))
 
-        buf = self._read_bytes(offset, size)
-        if len(buf) != size:
-            raise RuntimeError('requested {} bytes but got {}'
-                               .format(size, buf))
-        return buf
+        return self._read_bytes(offset, size)
 
     def read_all_bytes(self):
         """Read all data this ByteAccess encapsulates."""
@@ -64,6 +67,10 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         to_write -- The bytestring to write. If the bytestring is too long to
                     write at the specified offset, raises ValueError.
         """
+        if offset < 0:
+            raise ValueError("Offset must be positive. " +
+                             "{} is invalid.".format(offset))
+
         if offset + len(to_write) > self.size:
             raise ValueError("Cannot write past end of ByteAccess. " +
                              "offset:{0} size:{1} self.size:{2}"
@@ -161,14 +168,7 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
         return unpack('<H', self.read_bytes(offset, 2))[0]
 
     def read_uint32(self, offset):
-        try:
-            return unpack('<I', self.read_bytes(offset, 4))[0]
-        except error:
-            buf = self.read_bytes(offset, 4)
-            print(repr(buf))
-            print("offset:{0} size:{1} self.size:{2}"
-                  .format(offset, len(buf), self.size))
-            raise
+        return unpack('<I', self.read_bytes(offset, 4))[0]
 
     def read_uint64(self, offset):
         return unpack('<Q', self.read_bytes(offset, 8))[0]
