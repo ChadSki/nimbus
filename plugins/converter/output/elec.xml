@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<struct name="elec" size="176">
+  <int16 info="0 defaults to 1; number of overlapping lightning effects to render" name="lightning_count" offset="0x2"/>
+  <float32 info="world units; distance at which lightning is at full brightness" name="lightning_near_fade_distance" offset="0x14"/>
+  <float32 info="world units; distance at which lightning is at zero brightness" name="lightning_far_fade_distance" offset="0x18"/>
+  <enum16 name="lightning_jitter_scale_source" offset="0x2c">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="lightning_thickness_scale_source" offset="0x2e">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="lightning_tint_modulation_source" offset="0x30">
+    <option name="none" value="0"/>
+    <option name="_a" value="1"/>
+    <option name="_b" value="2"/>
+    <option name="_c" value="3"/>
+    <option name="_d" value="4"/>
+  </enum16>
+  <enum16 name="lightning_brightness_scale_source" offset="0x32">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <reference name="lightning_bitmap" offset="0x34"/>
+  <struct_array name="markers" offset="0x98" size="228">
+    <asciiz maxlength="32" name="attachment_marker" offset="0x0"/>
+    <flag bit="7" name="not_connected_to_next_marker" offset="0x20"/>
+    <int16 name="octaves_to_next_marker" offset="0x24"/>
+    <float32 info="world units" name="random_position_bounds_i_1" offset="0x74"/>
+    <float32 info="world units" name="random_position_bounds_i_2" offset="0x78"/>
+    <float32 info="world units" name="random_position_bounds_k" offset="0x7c"/>
+    <float32 info="world units" name="random_jitter" offset="0x80"/>
+    <float32 info="world units" name="thickness" offset="0x84"/>
+    <colorARGB info="alpha is brightness" name="tint" offset="0x88"/>
+  </struct_array>
+  <struct_array info="maximum of one" name="shader" offset="0xa4" size="32">
+    <flag bit="7" name="sort_bias" offset="0x28"/>
+    <flag bit="6" name="nonlinear_tint" offset="0x28"/>
+    <flag bit="5" name="dont_overdraw_first_person_weapon" offset="0x28"/>
+    <enum16 name="framebuffer_blend_function" offset="0x2a">
+      <option name="alpha_blend" value="0"/>
+      <option name="multiply" value="1"/>
+      <option name="double_multiply" value="2"/>
+      <option name="add" value="3"/>
+      <option name="subtract" value="4"/>
+      <option name="component_minimum" value="5"/>
+      <option name="component_maximum" value="6"/>
+      <option name="alpha_multiply_add" value="7"/>
+    </enum16>
+    <enum16 name="framebuffer_fade_mode" offset="0x2c">
+      <option name="none" value="0"/>
+      <option name="fade_when_perpendicular" value="1"/>
+      <option name="fade_when_parallel" value="2"/>
+    </enum16>
+    <flag bit="7" name="unfiltered" offset="0x2e"/>
+  </struct_array>
+</struct>

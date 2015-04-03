@@ -1,0 +1,14 @@
+<plugin class="ngpr" author="sparky" version="4.0" headersize="Main">
+
+<string32 name="Name" offset="0x00"/>
+
+<colorRGB name="Primary Color" offset="0x20"/>
+<colorRGB name="Secondary Color" offset="0x2C"/>
+
+<dependency name="Pattern" offset="0x38"/>
+<short name="Pattern Bitmap Index" offset="0x48"/>
+
+<dependency name="Decal" offset="0x4C"/>
+<short name="Decal Bitmap Index" offset="0x5C"/>
+
+</plugin>

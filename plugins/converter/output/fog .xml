@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<struct name="fog" size="276">
+  <flag bit="7" name="is_water" offset="0x0"/>
+  <flag bit="6" name="atmosphere_dominant" offset="0x0"/>
+  <flag bit="5" name="fog_screen_only" offset="0x0"/>
+  <float32 info="0 - 1 only; planar fog density is clamped to this value" name="density_maximum_density" offset="0x58"/>
+  <float32 info="world units; the fog becomes opaque at this distance from the viewer" name="density_opaque_distance" offset="0x60"/>
+  <float32 info="world units; the fog becomes opaque at this distance from its surface" name="density_opaque_depth" offset="0x68"/>
+  <float32 info="world units; the fog becomes water at this distance from its surface" name="density_distance_to_water_plane" offset="0x74"/>
+  <colorRGB name="color_color" offset="0x78"/>
+  <flag bit="7" name="no_environment_multipass" offset="0x84"/>
+  <flag bit="6" name="no_model_multipass" offset="0x84"/>
+  <flag bit="5" name="no_texture_based_falloff" offset="0x84"/>
+  <int16 info="0 - 4 only; 0 layers disables the effect" name="screen_layers_layer_count" offset="0x86"/>
+  <float32 info="world units" name="screen_layers_distance_to_gradient_from" offset="0x88"/>
+  <float32 info="world units" name="screen_layers_distance_to_gradient_to" offset="0x8c"/>
+  <float32 info="0 - 1 only" name="screen_layers_density_gradient_from" offset="0x90"/>
+  <float32 info="0 - 1 only" name="screen_layers_density_gradient_to" offset="0x94"/>
+  <float32 info="do NOT set this to the same value as 'maximum depth' {Sparky says, 'do they mean maximum density???'}" name="screen_layers_start_distance_from_fog_plane" offset="0x98"/>
+  <colorbyte info="0 defaults to planar fog color" name="screen_layers_color" offset="0xa0"/>
+  <float32 info="0 - 1 only" name="screen_layers_rotation_multiplier" offset="0xa4"/>
+  <float32 info="0 - 1 only" name="screen_layers_strafing_multiplier" offset="0xa8"/>
+  <float32 info="0 - 1 only" name="screen_layers_zoom_multiplier" offset="0xac"/>
+  <float32 info="0 defaults to 1" name="screen_layers_map_scale" offset="0xb8"/>
+  <reference name="screen_layers_map" offset="0xbc"/>
+  <float32 info="seconds" name="screen_layer_animation_animation_period" offset="0xcc"/>
+  <float32 info="world units per second" name="screen_layer_animation_wind_velocity_from" offset="0xd4"/>
+  <float32 info="world units per second" name="screen_layer_animation_wind_velocity_to" offset="0xd8"/>
+  <float32 info="seconds; 0 defaults to 1" name="screen_layer_animation_wind_period_from" offset="0xdc"/>
+  <float32 info="seconds; 0 defaults to 1" name="screen_layer_animation_wind_period_to" offset="0xe0"/>
+  <float32 info="0 - 1 only" name="screen_layer_animation_wind_acceleration_weight" offset="0xe4"/>
+  <float32 info="0 - 1 only" name="screen_layer_animation_wind_perpendicular_weight" offset="0xe8"/>
+  <reference name="sound_background_sound" offset="0xf4"/>
+  <reference name="sound_sound_environment" offset="0x104"/>
+</struct>

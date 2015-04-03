@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<struct name="font" size="136">
+  <int16 name="flags" offset="0x0"/>
+  <int16 name="ascending_height" offset="0x4"/>
+  <int16 name="descending_height" offset="0x6"/>
+  <int16 name="leading_height" offset="0x8"/>
+  <int16 name="leading_width" offset="0xa"/>
+  <struct_array name="character_tables" offset="0x30" size="12">
+    <struct_array name="character_table" offset="0x0" size="2">
+      <index name="character_index" offset="0x0" struct_array="characters"/>
+    </struct_array>
+  </struct_array>
+  <reference name="bold" offset="0x3c"/>
+  <reference name="italic" offset="0x4c"/>
+  <reference name="condense" offset="0x5c"/>
+  <reference name="underline" offset="0x6c"/>
+  <struct_array name="characters" offset="0x7c" size="20">
+    <int16 name="character" offset="0x0"/>
+    <int16 name="character_width" offset="0x2"/>
+    <int16 name="bitmap_width" offset="0x4"/>
+    <int16 name="bitmap_height" offset="0x6"/>
+    <int16 name="bitmap_origin_x" offset="0x8"/>
+    <int16 name="bitmap_origin_y" offset="0xa"/>
+    <int16 name="hardware_character_index" offset="0xc"/>
+    <int16 info="Sparky says, 'Don't touch this, data type unsupported by Eschaton'" name="pixels_offset" offset="0xe"/>
+  </struct_array>
+</struct>

@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<struct name="snd" size="164">
+  <flag bit="7" name="fit_to_adpcm_block_size" offset="0x0"/>
+  <flag bit="6" info="used when recompressing in Tool" name="split_long_sound_into_permutations" offset="0x0"/>
+  <enum16 info="how the game engine handles this sound" name="sound_type" offset="0x4">
+    <option name="projectile_impact" value="0"/>
+    <option name="projectile_detonation" value="1"/>
+    <option name="unknown_02" value="2"/>
+    <option name="unknown_03" value="3"/>
+    <option name="weapon_fire" value="4"/>
+    <option name="weapon_ready" value="5"/>
+    <option name="weapon_reload" value="6"/>
+    <option name="weapon_empty" value="7"/>
+    <option name="weapon_charge" value="8"/>
+    <option name="weapon_overheat" value="9"/>
+    <option name="weapon_idle" value="10"/>
+    <option name="unknown_11" value="11"/>
+    <option name="unknown_12" value="12"/>
+    <option name="object_impacts" value="13"/>
+    <option name="particle_impacts" value="14"/>
+    <option name="slow_particle_impacts" value="15"/>
+    <option name="unknown_16" value="16"/>
+    <option name="unknown_17" value="17"/>
+    <option name="unit_footsteps" value="18"/>
+    <option name="unit_dialog" value="19"/>
+    <option name="unknown_20" value="20"/>
+    <option name="unknown_21" value="21"/>
+    <option name="vehicle_collision" value="22"/>
+    <option name="vehicle_engine" value="23"/>
+    <option name="unknown_24" value="24"/>
+    <option name="unknown_25" value="25"/>
+    <option name="device_door" value="26"/>
+    <option name="device_force_field" value="27"/>
+    <option name="device_machinery" value="28"/>
+    <option name="device_nature" value="29"/>
+    <option name="device_computers" value="30"/>
+    <option name="unknown_31" value="31"/>
+    <option name="music" value="32"/>
+    <option name="ambient_nature" value="33"/>
+    <option name="ambient_machinery" value="34"/>
+    <option name="ambient_computers" value="35"/>
+    <option name="unknown_36" value="36"/>
+    <option name="unknown_37" value="37"/>
+    <option name="unknown_38" value="38"/>
+    <option name="first_person_damage" value="39"/>
+    <option name="unknown_40" value="40"/>
+    <option name="unknown_41" value="41"/>
+    <option name="unknown_42" value="42"/>
+    <option name="unknown_43" value="43"/>
+    <option name="scripted_dialog_player" value="44"/>
+    <option name="scripted_effect" value="45"/>
+    <option name="scripted_dialog_other" value="46"/>
+    <option name="scripted_dialog_force_unspatialized" value="47"/>
+    <option name="unknown_48" value="48"/>
+    <option name="unknown_49" value="49"/>
+    <option name="game_event" value="50"/>
+  </enum16>
+  <enum16 name="sample_rate" offset="0x6">
+    <option name="khz_22" value="0"/>
+    <option name="khz_44" value="1"/>
+  </enum16>
+  <float32 info="world units; the distance below which this sound no longer gets louder" name="minimum_distance" offset="0x8"/>
+  <float32 info="world units; the distance beyond which this sound is no longer audible" name="maximum_distance" offset="0xc"/>
+  <float32 info="0 - 1 only; 0 = always play; fraction of requests to play this sound that will be ignored" name="skip_fraction" offset="0x10"/>
+  <float32 info="1.0 = recorded pitch; the sound's pitch will be randomly selected from within this range" name="randomization_random_pitch_bounds_from" offset="0x14"/>
+  <float32 info="1.0 = recorded pitch; the sound's pitch will be randomly selected from within this range" name="randomization_random_pitch_bounds_to" offset="0x18"/>
+  <float32 info="radians; play with a gain of 1.0 within the cone defined by this angle using the sound's direction" name="randomization_inner_cone_angle" offset="0x1c"/>
+  <float32 info="radians; outside the cone defined by this angle and the sound's direction, the sound plays with a gain of OUTER CONE GAIN. (0 means the sound does not attenuate with direction.)" name="randomization_outer_cone_angle" offset="0x20"/>
+  <float32 info="0 - 1 only; gain / volume to use when the sound is directed away from the listener" name="randomization_outer_cone_gain" offset="0x24"/>
+  <float32 name="randomization_gain_modifier" offset="0x28"/>
+  <int32 name="randomization_maximum_bend_per_second" offset="0x2c"/>
+  <float32 name="while_scale_is_zero_skip_fraction_modifier" offset="0x3c"/>
+  <float32 name="while_scale_is_zero_gain_modifier" offset="0x40"/>
+  <float32 name="while_scale_is_zero_pitch_modifier" offset="0x44"/>
+  <float32 name="while_scale_is_one_skip_fraction_modifier" offset="0x54"/>
+  <float32 name="while_scale_is_one_gain_modifier" offset="0x58"/>
+  <float32 name="while_scale_is_one_pitch_modifier" offset="0x5c"/>
+  <enum16 name="import_properties_encoding" offset="0x6c">
+    <option name="mono" value="0"/>
+    <option name="stereo" value="1"/>
+  </enum16>
+  <enum16 name="import_properties_compression" offset="0x6e">
+    <option name="none" value="0"/>
+    <option name="xbox_adpcm" value="1"/>
+    <option name="ima_adpcm" value="2"/>
+    <option name="ogg" value="3"/>
+  </enum16>
+  <reference name="import_properties_promotion_sound" offset="0x70"/>
+  <int16 info="when there are this many instances of the sound, promote to the new sound" name="import_properties_promotion_count" offset="0x80"/>
+  <struct_array info="Allow multiple samples to represent the same sound at different pitches. If only 1 chunk, 'always played'; if more than one, 'default: (bend bounds: from) to (bend bounds: to)'" name="pitch_ranges" offset="0x98" size="72">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <float32 info="the apparent pitch when these samples are played at their recorded pitch" name="pitch_control_natural_pitch" offset="0x20"/>
+    <float32 info="this is weird, just avoid it; the range of pitches that will be represented using this sample; this should always contain the natural pitch" name="pitch_control_bend_bounds_from" offset="0x24"/>
+    <float32 info="this is weird, just avoid it; the range of pitches that will be represented using this sample; this should always contain the natural pitch" name="pitch_control_bend_bounds_to" offset="0x28"/>
+    <int16 name="pitch_control_actual_permutation_count" offset="0x2c"/>
+    <float32 info="tested by 002. Speed and Pitch adjustment multiplier; 2 = twice as fast and at twice the frequency" name="playback_rate_multiplier" offset="0x30"/>
+    <struct_array info="represent equivalent variations of this sound" name="permutations" offset="0x3c" size="124">
+      <asciiz info="name of the file from which this sample was imported" maxlength="32" name="name" offset="0x0"/>
+      <float32 info="0 - 1 only; fraction of requests to play this permutation that are ignored (a different permutation is selected)" name="skip_fraction" offset="0x20"/>
+      <float32 info="0 - 1 only; play at this fraction of recorded volume" name="gain" offset="0x24"/>
+      <enum16 name="import_properties_compression" offset="0x28">
+        <option name="none" value="0"/>
+        <option name="xbox_adpcm" value="1"/>
+        <option name="ima_adpcm" value="2"/>
+        <option name="ogg" value="3"/>
+      </enum16>
+      <int16 info="like an array, index count starts at 0; -1 means nothing follows this permutation" name="next_permutation_index" offset="0x2a"/>
+      <int32 info="bytes; sampled sound data" name="samples" offset="0x40"/>
+      <int32 info="bytes" name="mouth_data" offset="0x54"/>
+      <int32 info="bytes; may be correct, but not sure" name="subtitle_data" offset="0x68"/>
+    </struct_array>
+  </struct_array>
+</struct>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<struct name="ant" size="208">
+  <asciiz maxlength="32" name="attachment_marker_name" offset="0x0"/>
+  <reference name="bitmaps" offset="0x20"/>
+  <reference name="physics" offset="0x30"/>
+  <float32 info="larger values make the spring stronger" name="spring_strength_coefficient" offset="0x90"/>
+  <float32 name="falloff_pixels" offset="0x94"/>
+  <float32 name="cutoff_pixels" offset="0x98"/>
+  <struct_array name="vertices" offset="0xc4" size="128">
+    <float32 info="larger values make the spring stronger" name="spring_strength_coefficient" offset="0x0"/>
+    <float32 info="radians; direction toward next vertex" name="angles_y" offset="0x1c"/>
+    <float32 info="radians; direction toward next vertex" name="angles_p" offset="0x20"/>
+    <float32 info="world units; distance between this vertex and the next" name="length" offset="0x24"/>
+    <int16 info="bitmap group sequence index for this vertex's texture" name="sequence_index" offset="0x28"/>
+    <colorARGB info="color at this vertex" name="color" offset="0x2c"/>
+    <colorARGB info="color at this vertex for the low level of detail line primitives" name="lod_color" offset="0x3c"/>
+    <float32 info="tested by 002" name="origin_offset_x" offset="0x74"/>
+    <float32 info="tested by 002" name="origin_offset_y" offset="0x78"/>
+    <float32 info="tested by 002" name="origin_offset_z" offset="0x7c"/>
+  </struct_array>
+</struct>

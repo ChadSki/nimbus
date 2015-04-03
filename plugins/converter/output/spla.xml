@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<struct name="spla" size="300">
+  <flag bit="7" name="simple_parameterization" offset="0x0"/>
+  <flag bit="6" name="ignore_normals" offset="0x0"/>
+  <flag bit="5" name="transparent_lit" offset="0x0"/>
+  <enum16 info="affects the density of tessellation (high means slow)" name="radiosity_properties_detail_level" offset="0x2">
+    <option name="high" value="0"/>
+    <option name="medium" value="1"/>
+    <option name="low" value="2"/>
+    <option name="turd" value="3"/>
+  </enum16>
+  <float32 info="0 - infinity; power of emitted light" name="radiosity_properties_power" offset="0x4"/>
+  <colorRGB name="radiosity_properties_color_of_emitted_light" offset="0x8"/>
+  <colorRGB info="light passing through this surface, if it's transparent, will be tinted this color" name="radiosity_properties_tint_color" offset="0x14"/>
+  <enum16 name="physics_properties_material_type" offset="0x22">
+    <option name="dirt" value="0"/>
+    <option name="sand" value="1"/>
+    <option name="stone" value="2"/>
+    <option name="snow" value="3"/>
+    <option name="wood" value="4"/>
+    <option name="metal_hollow" value="5"/>
+    <option name="metal_thin" value="6"/>
+    <option name="metal_thick" value="7"/>
+    <option name="rubber" value="8"/>
+    <option name="glass" value="9"/>
+    <option name="force_field" value="10"/>
+    <option name="grunt" value="11"/>
+    <option name="hunter_armor" value="12"/>
+    <option name="hunter_skin" value="13"/>
+    <option name="elite" value="14"/>
+    <option name="jackal" value="15"/>
+    <option name="jackal_energy_shield" value="16"/>
+    <option name="engineer_skin" value="17"/>
+    <option name="engineer_force_field" value="18"/>
+    <option name="flood_combat_form" value="19"/>
+    <option name="flood_carrier_form" value="20"/>
+    <option name="cyborg_armor" value="21"/>
+    <option name="cyborg_energy_shield" value="22"/>
+    <option name="human_armor" value="23"/>
+    <option name="human_skin" value="24"/>
+    <option name="sentinel" value="25"/>
+    <option name="monitor" value="26"/>
+    <option name="plastic" value="27"/>
+    <option name="water" value="28"/>
+    <option name="leaves" value="29"/>
+    <option name="elite_energy_shield" value="30"/>
+    <option name="ice" value="31"/>
+    <option name="hunter_shield" value="32"/>
+  </enum16>
+  <enum16 name="intensity_intensity_source" offset="0x2c">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <float32 info="0 defaults to 1" name="intensity_intensity_exponent" offset="0x30"/>
+  <enum16 name="offset_offset_source" offset="0x34">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <float32 info="world units" name="offset_amount" offset="0x38"/>
+  <float32 info="0 defaults to 1" name="offset_offset_exponent" offset="0x3c"/>
+  <float32 info="0 - 1 only" name="color_perpendicular_brightness" offset="0x60"/>
+  <colorRGB name="color_perpendicular_tint_color" offset="0x64"/>
+  <float32 info="0 - 1 only" name="color_parallel_brightness" offset="0x70"/>
+  <colorRGB name="color_parallel_tint_color" offset="0x74"/>
+  <enum16 info="modulates perpendicular and parallel colors" name="color_tint_color_source" offset="0x80">
+    <option name="none" value="0"/>
+    <option name="_a" value="1"/>
+    <option name="_b" value="2"/>
+    <option name="_c" value="3"/>
+    <option name="_d" value="4"/>
+  </enum16>
+  <float32 info="seconds" name="primary_noise_map_primary_animation_period" offset="0xc0"/>
+  <float32 name="primary_noise_map_primary_animation_direction_i_1" offset="0xc4"/>
+  <float32 name="primary_noise_map_primary_animation_direction_i_2" offset="0xc8"/>
+  <float32 name="primary_noise_map_primary_animation_direction_k" offset="0xcc"/>
+  <float32 name="primary_noise_map_primary_noise_map_scale" offset="0xd0"/>
+  <reference name="primary_noise_map_primary_noise_map" offset="0xd4"/>
+  <float32 info="seconds" name="secondary_noise_map_secondary_animation_period" offset="0x108"/>
+  <float32 name="secondary_noise_map_secondary_animation_direction_i_1" offset="0x10c"/>
+  <float32 name="secondary_noise_map_secondary_animation_direction_i_2" offset="0x110"/>
+  <float32 name="secondary_noise_map_secondary_animation_direction_k" offset="0x114"/>
+  <float32 name="secondary_noise_map_secondary_noise_map_scale" offset="0x118"/>
+  <reference name="secondary_noise_map_secondary_noise_map" offset="0x11c"/>
+</struct>

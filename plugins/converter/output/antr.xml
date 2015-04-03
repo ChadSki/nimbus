@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<struct name="antr" size="128">
+  <struct_array name="objects" offset="0x0" size="20">
+    <index name="animation" offset="0x0" struct_array="animations"/>
+    <enum16 name="function" offset="0x2">
+      <option name="a_out" value="0"/>
+      <option name="b_out" value="1"/>
+      <option name="c_out" value="2"/>
+      <option name="d_out" value="3"/>
+    </enum16>
+    <enum16 name="function_controls" offset="0x4">
+      <option name="frame" value="0"/>
+      <option name="scale" value="1"/>
+    </enum16>
+  </struct_array>
+  <struct_array name="units" offset="0xc" size="100">
+    <asciiz maxlength="32" name="label" offset="0x0"/>
+    <float32 info="radians" name="looking_screen_bounds_right_yaw_per_frame" offset="0x20"/>
+    <float32 info="radians" name="looking_screen_bounds_left_yaw_per_frame" offset="0x24"/>
+    <int16 name="looking_screen_bounds_right_yaw_frame_count" offset="0x28"/>
+    <int16 name="looking_screen_bounds_left_yaw_frame_count" offset="0x2a"/>
+    <float32 info="radians" name="looking_screen_bounds_down_pitch_per_frame" offset="0x2c"/>
+    <float32 info="radians" name="looking_screen_bounds_up_pitch_per_frame" offset="0x30"/>
+    <int16 name="looking_screen_bounds_down_pitch_frame_count" offset="0x34"/>
+    <int16 name="looking_screen_bounds_up_pitch_frame_count" offset="0x36"/>
+    <struct_array name="animations" offset="0x40" size="2">
+      <index name="animation" offset="0x0" struct_array="animations"/>
+    </struct_array>
+    <struct_array name="ik_points" offset="0x4c" size="64">
+      <asciiz info="the marker name on the object being attached" maxlength="32" name="marker" offset="0x0"/>
+      <asciiz info="the marker name object (weapon, vehicle, etc.) the above marker is being attached to" maxlength="32" name="attach_to_marker" offset="0x20"/>
+    </struct_array>
+    <struct_array name="weapons" offset="0x58" size="188">
+      <asciiz maxlength="32" name="name" offset="0x0"/>
+      <asciiz info="the marker name on the weapon to which the hand is attached (leave blank to use origin)" maxlength="32" name="grip_marker" offset="0x20"/>
+      <asciiz info="the marker name on the unit to which the weapon is attached" maxlength="32" name="hand_marker" offset="0x40"/>
+      <float32 info="radians" name="aiming_screen_bounds_right_yaw_per_frame" offset="0x60"/>
+      <float32 info="radians" name="aiming_screen_bounds_left_yaw_per_frame" offset="0x64"/>
+      <int16 name="aiming_screen_bounds_right_yaw_frame_count" offset="0x68"/>
+      <int16 name="aiming_screen_bounds_left_yaw_frame_count" offset="0x6a"/>
+      <float32 info="radians" name="aiming_screen_bounds_down_pitch_per_frame" offset="0x6c"/>
+      <float32 info="radians" name="aiming_screen_bounds_up_pitch_per_frame" offset="0x70"/>
+      <int16 name="aiming_screen_bounds_down_pitch_frame_count" offset="0x74"/>
+      <int16 name="aiming_screen_bounds_up_pitch_frame_count" offset="0x76"/>
+      <struct_array name="animations" offset="0x98" size="2">
+        <index name="animation" offset="0x0" struct_array="animations"/>
+      </struct_array>
+      <struct_array name="ik_points" offset="0xa4" size="64">
+        <asciiz info="the marker name on the object being attached" maxlength="32" name="marker" offset="0x0"/>
+        <asciiz info="the marker name object (weapon, vehicle, etc.) the above marker is being attached to" maxlength="32" name="attach_to_marker" offset="0x20"/>
+      </struct_array>
+      <struct_array name="weapon_types" offset="0xb0" size="60">
+        <asciiz maxlength="32" name="label" offset="0x0"/>
+        <struct_array name="animations" offset="0x30" size="2">
+          <index name="animation" offset="0x0" struct_array="animations"/>
+        </struct_array>
+      </struct_array>
+    </struct_array>
+  </struct_array>
+  <struct_array name="weapons" offset="0x18" size="28">
+    <struct_array name="animations" offset="0x10" size="2">
+      <index name="animation" offset="0x0" struct_array="animations"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="vehicles" offset="0x24" size="116">
+    <float32 info="radians" name="steering_screen_right_yaw_per_frame" offset="0x0"/>
+    <float32 info="radians" name="steering_screen_left_yaw_per_frame" offset="0x4"/>
+    <int16 name="steering_screen_right_yaw_frame_count" offset="0x8"/>
+    <int16 name="steering_screen_left_yaw_frame_count" offset="0xa"/>
+    <float32 info="radians" name="steering_screen_down_pitch_per_frame" offset="0xc"/>
+    <float32 info="radians" name="steering_screen_up_pitch_per_frame" offset="0x10"/>
+    <int16 name="steering_screen_down_pitch_frame_count" offset="0x14"/>
+    <int16 name="steering_screen_up_pitch_frame_count" offset="0x16"/>
+    <struct_array name="animations" offset="0x5c" size="2">
+      <index name="animation" offset="0x0" struct_array="animations"/>
+    </struct_array>
+    <struct_array name="suspension_animations" offset="0x68" size="20">
+      <int16 name="mass_point_index" offset="0x0"/>
+      <index name="animation" offset="0x2" struct_array="animations"/>
+      <float32 name="full_extension_ground_depth" offset="0x4"/>
+      <float32 name="full_compression_ground_depth" offset="0x8"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="devices" offset="0x30" size="96">
+    <struct_array name="animations_1_position_2_power" offset="0x54" size="2">
+      <index name="animation" offset="0x0" struct_array="animations"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="unit_damage" offset="0x3c" size="2">
+    <index name="animation" offset="0x0" struct_array="animations"/>
+  </struct_array>
+  <struct_array name="first_person_weapons" offset="0x48" size="28">
+    <struct_array name="animations" offset="0x10" size="2">
+      <index name="animation" offset="0x0" struct_array="animations"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="sound_references" offset="0x54" size="20">
+    <reference name="sound" offset="0x0"/>
+  </struct_array>
+  <float32 info="0 defaults to 0.04" name="limp_body_node_radius" offset="0x60"/>
+  <flag bit="7" name="compress_all_animations" offset="0x64"/>
+  <flag bit="6" name="force_idle_compression" offset="0x64"/>
+  <struct_array name="nodes" offset="0x68" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <index name="next_sibling_node_index" offset="0x20" struct_array="nodes"/>
+    <index name="first_child_node_index" offset="0x22" struct_array="nodes"/>
+    <index name="parent_node_index" offset="0x24" struct_array="nodes"/>
+    <flag bit="7" name="ball_socket" offset="0x28"/>
+    <flag bit="6" name="hinge" offset="0x28"/>
+    <flag bit="5" name="no_movement" offset="0x28"/>
+    <float32 name="base_vector_i_1" offset="0x2c"/>
+    <float32 name="base_vector_i_2" offset="0x30"/>
+    <float32 name="base_vector_k" offset="0x34"/>
+    <float32 name="vector_range" offset="0x38"/>
+  </struct_array>
+  <struct_array name="animations" offset="0x74" size="180">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <enum16 name="type" offset="0x20">
+      <option name="base" value="0"/>
+      <option name="overlay" value="1"/>
+      <option name="replacement" value="2"/>
+    </enum16>
+    <int16 name="frame_count" offset="0x22"/>
+    <int16 name="frame_size" offset="0x24"/>
+    <enum16 name="frame_info_type" offset="0x26">
+      <option name="none" value="0"/>
+      <option name="dx_dy" value="1"/>
+      <option name="dx_dy_dyaw" value="2"/>
+      <option name="dx_dy_dz_dyaw" value="3"/>
+    </enum16>
+    <int32 name="node_list_checksum" offset="0x28"/>
+    <int16 name="node_count" offset="0x2c"/>
+    <int16 name="loop_frame_index" offset="0x2e"/>
+    <float32 info="0 - 1 only" name="weight" offset="0x30"/>
+    <int16 name="key_frame_index" offset="0x34"/>
+    <int16 name="second_key_frame_index" offset="0x36"/>
+    <index name="next_animation" offset="0x38" struct_array="animations"/>
+    <flag bit="7" name="compressed_data" offset="0x3a"/>
+    <flag bit="6" name="world_relative" offset="0x3a"/>
+    <flag bit="5" name="pal_25hz" offset="0x3a"/>
+    <index name="sound" offset="0x3c" struct_array="sound_references"/>
+    <int16 name="sound_frame_index" offset="0x3e"/>
+    <int8 name="left_foot_frame_index" offset="0x40"/>
+    <int8 name="right_foot_frame_index" offset="0x41"/>
+    <int32 info="bytes" name="frame_info" offset="0x48"/>
+    <int32 name="node_translation_flag_data_1" offset="0x5c"/>
+    <int32 name="node_translation_flag_data_2" offset="0x60"/>
+    <int32 name="node_rotation_flag_data_1" offset="0x6c"/>
+    <int32 name="node_rotation_flag_data_2" offset="0x70"/>
+    <int32 name="node_scale_flag_data_1_unconfirmed_offset" offset="0x7c"/>
+    <int32 name="node_scale_flag_data_2_unconfirmed_offset" offset="0x80"/>
+    <int32 name="offset_to_compressed_data_bytes_unconfirmed_offset" offset="0x84"/>
+    <int32 info="bytes" name="default_data" offset="0x8c"/>
+    <int32 info="bytes" name="frame_data" offset="0xa0"/>
+  </struct_array>
+</struct>

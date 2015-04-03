@@ -1,0 +1,8 @@
+<plugin class="colo" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Colors" offset="0x00" size="48">
+	<string32 name="Name" offset="0x00"/>
+	<colorARGB name="Color" offset="0x20"/>
+</struct>
+
+</plugin>

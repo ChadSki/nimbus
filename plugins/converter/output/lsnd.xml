@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<struct name="lsnd" size="84">
+  <flag bit="7" name="deafening_to_ais" offset="0x0"/>
+  <flag bit="6" name="not_a_loop" offset="0x0"/>
+  <flag bit="5" name="stops_music" offset="0x0"/>
+  <float32 name="when_scale_is_zero_detail_sound_period" offset="0x4"/>
+  <float32 name="when_scale_is_one_detail_sound_period" offset="0x10"/>
+  <reference name="when_scale_is_one_continuous_damage_effect" offset="0x2c"/>
+  <struct_array info="play in parallel; loop continuously for duration" name="tracks" offset="0x3c" size="160">
+    <flag bit="7" name="fade_in_at_start" offset="0x0"/>
+    <flag bit="6" name="fade_out_at_stop" offset="0x0"/>
+    <flag bit="5" name="fade_in_alternate" offset="0x0"/>
+    <float32 info="0 - 1 only" name="gain" offset="0x4"/>
+    <float32 info="seconds" name="fade_in_duration" offset="0x8"/>
+    <float32 info="seconds" name="fade_out_duration" offset="0xc"/>
+    <reference name="start" offset="0x30"/>
+    <reference name="loop" offset="0x40"/>
+    <reference name="end" offset="0x50"/>
+    <reference name="alternate_loop" offset="0x80"/>
+    <reference name="alternate_end" offset="0x90"/>
+  </struct_array>
+  <struct_array info="play at random during the looping sound" name="detail_sounds" offset="0x48" size="104">
+    <reference name="sound" offset="0x0"/>
+    <float32 info="seconds; the time between successive playings of this sound will be chosen at random between these bounds" name="frequency_of_play_random_period_bounds_from" offset="0x10"/>
+    <float32 info="seconds; the time between successive playings of this sound will be chosen at random between these bounds" name="frequency_of_play_random_period_bounds_to" offset="0x14"/>
+    <float32 info="0 - 1 only" name="frequency_of_play_gain" offset="0x18"/>
+    <flag bit="7" name="dont_play_with_alternate" offset="0x1c"/>
+    <flag bit="6" name="dont_play_without_alternate" offset="0x1c"/>
+    <float32 info="radians; the sound's position along the horizon will be chosen at random between these bounds" name="random_spatialization_yaw_bounds_from" offset="0x50"/>
+    <float32 info="radians; the sound's position along the horizon will be chosen at random between these bounds" name="random_spatialization_yaw_bounds_to" offset="0x54"/>
+    <float32 info="radians; the sound's position above (positive values) or below (negative values) the horizon will be chosen at random between these bounds" name="random_spatialization_pitch_bounds_from" offset="0x58"/>
+    <float32 info="radians; the sound's position above (positive values) or below (negative values) the horizon will be chosen at random between these bounds" name="random_spatialization_pitch_bounds_to" offset="0x5c"/>
+    <float32 info="world units; the sound's distance (from its spatialized looping sound or from the listener's position if the looping sound is stereo) will be chosen at random between these bounds" name="random_spatialization_distance_bounds_from" offset="0x60"/>
+    <float32 info="world units; the sound's distance (from its spatialized looping sound or from the listener's position if the looping sound is stereo) will be chosen at random between these bounds" name="random_spatialization_distance_bounds_to" offset="0x64"/>
+  </struct_array>
+</struct>

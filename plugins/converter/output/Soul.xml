@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<struct name="soul" size="12">
+  <struct_array name="ui_widget_definitions" offset="0x0" size="16">
+    <reference name="ui_widget_definition" offset="0x0"/>
+  </struct_array>
+</struct>

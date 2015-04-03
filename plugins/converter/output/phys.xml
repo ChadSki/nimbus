@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<struct name="phys" size="128">
+  <float32 info="positive uses old inferior physics, negative uses new improved physics" name="radius" offset="0x0"/>
+  <float32 info="0 - 1 only" name="moment_scale" offset="0x4"/>
+  <float32 name="mass" offset="0x8"/>
+  <float32 name="center_of_mass_x" offset="0xc"/>
+  <float32 name="center_of_mass_y" offset="0x10"/>
+  <float32 name="center_of_mass_z" offset="0x14"/>
+  <float32 name="density" offset="0x18"/>
+  <float32 name="gravity_scale" offset="0x1c"/>
+  <float32 name="ground_friction" offset="0x20"/>
+  <float32 name="ground_depth" offset="0x24"/>
+  <float32 info="0 - 1 only" name="ground_damp_fraction" offset="0x28"/>
+  <float32 name="ground_normal_k1" offset="0x2c"/>
+  <float32 name="ground_normal_k0" offset="0x30"/>
+  <float32 name="water_friction" offset="0x38"/>
+  <float32 name="water_depth" offset="0x3c"/>
+  <float32 name="water_density" offset="0x40"/>
+  <float32 info="0 - 1 only" name="air_friction" offset="0x48"/>
+  <float32 name="xx_moment" offset="0x50"/>
+  <float32 name="yy_moment" offset="0x54"/>
+  <float32 name="zz_moment" offset="0x58"/>
+  <struct_array name="inertial_matrix_and_inverse" offset="0x5c" size="36">
+    <float32 name="yy_zz_xy_zx_i_1" offset="0x0"/>
+    <float32 name="yy_zz_xy_zx_i_2" offset="0x4"/>
+    <float32 name="yy_zz_xy_zx_k" offset="0x8"/>
+    <float32 name="xy_zz_xx_yz_i_1" offset="0xc"/>
+    <float32 name="xy_zz_xx_yz_i_2" offset="0x10"/>
+    <float32 name="xy_zz_xx_yz_k" offset="0x14"/>
+    <float32 name="zx_yz_xx_yy_i_1" offset="0x18"/>
+    <float32 name="zx_yz_xx_yy_i_2" offset="0x1c"/>
+    <float32 name="zx_yz_xx_yy_k" offset="0x20"/>
+  </struct_array>
+  <struct_array name="powered_mass_points" offset="0x68" size="128">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="ground_friction" offset="0x20"/>
+    <flag bit="6" name="water_friction" offset="0x20"/>
+    <flag bit="5" name="air_friction" offset="0x20"/>
+    <flag bit="4" name="water_lift" offset="0x20"/>
+    <flag bit="3" name="air_lift" offset="0x20"/>
+    <flag bit="2" name="thrust" offset="0x20"/>
+    <flag bit="1" name="antigravity" offset="0x20"/>
+    <float32 name="antigravity_strength" offset="0x24"/>
+    <float32 name="antigravity_offset" offset="0x28"/>
+    <float32 name="antigravity_height" offset="0x2c"/>
+    <float32 name="antigravity_damp_fraction" offset="0x30"/>
+    <float32 name="antigravity_normal_k1" offset="0x34"/>
+    <float32 name="antigravity_normal_k0" offset="0x38"/>
+  </struct_array>
+  <struct_array name="mass_points" offset="0x74" size="128">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <index name="powered_mass_point" offset="0x20" struct_array="powered_mass_points"/>
+    <int8 name="model_node" offset="0x22"/>
+    <flag bit="7" name="metallic" offset="0x24"/>
+    <float32 name="relative_mass" offset="0x28"/>
+    <float32 name="mass" offset="0x2c"/>
+    <float32 name="relative_density" offset="0x30"/>
+    <float32 name="density" offset="0x34"/>
+    <float32 name="position_x" offset="0x38"/>
+    <float32 name="position_y" offset="0x3c"/>
+    <float32 name="position_z" offset="0x40"/>
+    <float32 name="forward_i_1" offset="0x44"/>
+    <float32 name="forward_i_2" offset="0x48"/>
+    <float32 name="forward_k" offset="0x4c"/>
+    <float32 name="up_i_1" offset="0x50"/>
+    <float32 name="up_i_2" offset="0x54"/>
+    <float32 name="up_k" offset="0x58"/>
+    <enum16 name="friction_type" offset="0x5c">
+      <option name="point" value="0"/>
+      <option name="forward" value="1"/>
+      <option name="left" value="2"/>
+      <option name="up" value="3"/>
+    </enum16>
+    <float32 name="friction_parallel_scale" offset="0x60"/>
+    <float32 name="friction_perpendicular_scale" offset="0x64"/>
+    <float32 name="radius" offset="0x68"/>
+  </struct_array>
+</struct>

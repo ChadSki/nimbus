@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<struct name="devc" size="28">
+  <enum16 name="device_type" offset="0x0">
+    <option name="mouse_and_keyboard" value="0"/>
+    <option name="joysticksgamepadsetc" value="1"/>
+    <option name="full_profile_definition" value="2"/>
+  </enum16>
+  <flag bit="7" name="unused" offset="0x2"/>
+  <int32 info="bytes" name="device_id" offset="0x4"/>
+  <int32 info="bytes; uses Halo Savegame files with suffix '.sav' from your Documents folder" name="profile" offset="0x18"/>
+</struct>

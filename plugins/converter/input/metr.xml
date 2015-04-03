@@ -1,0 +1,30 @@
+<plugin class="metr" author="sparky" version="4.0" headersize="Main">
+
+<dependency name="Stencil Bitmaps" info="THESE BITMAPS ARE NOT HANDLED LIKE OTHERS; two bitmaps specifying the mask and the meter levels" offset="0x04"/>
+<dependency name="Source Bitmap" info="THESE BITMAPS ARE NOT HANDLED LIKE OTHERS; optional bitmap to draw into the unmasked regions of the meter (modulated by the colors below)" offset="0x14"/>
+
+<short name="Stencil Sequence Index" offset="0x24"/>
+<short name="Source Sequence Index" offset="0x26"/>
+
+<enum16 name="Interpolate Colors..." offset="0x3C">
+	<option name="Linearly" value="00"/>
+	<option name="Faster Near Empty" value="01"/>
+	<option name="Faster Near Full" value="02"/>
+	<option name="Through Random Noise" value="03"/>
+</enum16>
+
+<enum16 name="Anchor Colors..." offset="0x3E">
+	<option name="At Both Ends" value="00"/>
+	<option name="At Empty" value="01"/>
+	<option name="At Full" value="02"/>
+</enum16>
+
+<colorARGB name="Empty Color" offset="0x48"/>
+<colorARGB name="Full Color" offset="0x58"/>
+
+<float name="Unmask Distance" note="meter units" info="fade from fully masked to fully unmasked this distance BEYOND full (and BELOW empty)" offset="0x7C"/>
+<float name="Mask Distance" note="meter units" info="fade from fully masked to fully unmasked this distance BELOW full (and BEYOND empty)" offset="0x80"/>
+
+<long name="Encoded Stencil" note="bytes" offset="0x98"/>
+
+</plugin>

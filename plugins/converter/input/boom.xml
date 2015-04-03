@@ -1,0 +1,6 @@
+<plugin class="boom" author="sparky" version="4.0" headersize="Main">
+
+<short name="From Velocity" offset="0x00"/>
+<short name="From Acceleration" offset="0x02"/>
+
+</plugin>

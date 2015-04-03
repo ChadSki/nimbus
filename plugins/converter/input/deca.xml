@@ -1,0 +1,62 @@
+<plugin class="deca" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" info_img="deca Decal.png" offset="0x00">
+	<option name="Geometry Inherited by Next Decal in Chain" value="31"/>
+	<option name="Interpolate Color in HSV" value="30"/>
+	<option name="...More Colors" value="29"/>
+	<option name="No Random Rotation" value="28"/>
+	<option name="Water Effect" value="27"/>
+	<option name="SAPIEN - Snap to Axis" value="26"/>
+	<option name="SAPIEN - Incremental Counter" value="25"/>
+	<option name="Animation Loop" value="24"/>
+	<option name="Preserve Aspect" value="23"/>
+</bitmask32>
+
+<enum16 name="Type" info="controls how the decal wraps onto surface geometry" info_img="deca Decal.png" offset="0x02">
+	<option name="Scratch" value="00"/>
+	<option name="Splatter" value="01"/>
+	<option name="Burn" value="02"/>
+	<option name="Painted Sign" value="03"/>
+</enum16>
+
+<enum16 name="Layer" info_img="deca Decal.png" offset="0x04">
+	<option name="Primary" value="00"/>
+	<option name="Secondary" value="01"/>
+	<option name="Light" value="02"/>
+	<option name="Alpha-Tested" value="03"/>
+	<option name="Water" value="04"/>
+</enum16>
+
+<dependency name="Next Decal in Chain" info_img="deca Decal.png" offset="0x08"/>
+
+<float name="Radius and Color.Radius: from" note="world units; 0 defaults to 0.125" offset="0x18"/>
+<float name="Radius and Color.Radius: to" note="world units; 0 defaults to 0.125" offset="0x1C"/>
+<float name="Radius and Color.Intensity: from" note="0 - 1 only" info="1 = fully visible; 0 = invisible" offset="0x2C"/>
+<float name="Radius and Color.Intensity: to" note="0 - 1 only" info="1 = fully visible; 0 = invisible" offset="0x30"/>
+
+<colorRGB name="Radius and Color.Color Lower Bound" offset="0x34"/>
+<colorRGB name="Radius and Color.Color Upper Bound" offset="0x40"/>
+
+<short name="Animation.Animation Loop Frame" offset="0x58"/>
+<short name="Animation.Animation Speed" note="ticks per frame; 1 - 120 only" offset="0x5A"/>
+<float name="Animation.Lifetime: from" note="seconds" offset="0x78"/>
+<float name="Animation.Lifetime: to" note="seconds" offset="0x7C"/>
+<float name="Animation.Decay Time: from" note="seconds" offset="0x80"/>
+<float name="Animation.Decay Time: to" note="seconds" offset="0x84"/>
+
+<enum16 name="Shader.Framebuffer Blend Function" offset="0xC0">
+	<option name="Alpha Blend" value="00"/>
+	<option name="Multiply" value="01"/>
+	<option name="Double Multiply" value="02"/>
+	<option name="Add" value="03"/>
+	<option name="Subtract" value="04"/>
+	<option name="Component Minimum" value="05"/>
+	<option name="Component Maximum" value="06"/>
+	<option name="Alpha-Multiply Add" value="07"/>
+</enum16>
+
+<dependency name="Shader.Map" offset="0xD8"/>
+
+<float name="Sprite Info.Maximum Sprite Extent" note="pixels" offset="0xFC"/>
+
+</plugin>

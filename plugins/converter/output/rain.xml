@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<struct name="rain" size="48">
+  <struct_array name="particle_types" offset="0x24" size="604">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="interplate_colors_in_hsv" offset="0x20"/>
+    <flag bit="6" name="along_long_hue_path" offset="0x20"/>
+    <flag bit="5" name="random_rotation" offset="0x20"/>
+    <float32 info="world units; particles begin to fade into visibility beyond this distance" name="fade_in_start_distance" offset="0x24"/>
+    <float32 info="world units; particles become fully visible beyond this distance" name="fade_in_end_distance" offset="0x28"/>
+    <float32 info="world units; particles begin to fade out of visibility beyond this distance" name="fade_out_start_distance" offset="0x2c"/>
+    <float32 info="world units; particles become fully invisible beyond this distance" name="fade_out_end_distance" offset="0x30"/>
+    <float32 info="world units; particles begin to fade into visibility above this height" name="fade_in_start_height" offset="0x34"/>
+    <float32 info="world units; particles become fully visible above this height" name="fade_in_end_height" offset="0x38"/>
+    <float32 info="world units; particles begin to fade out of visibility above this height" name="fade_out_start_height" offset="0x3c"/>
+    <float32 info="world units; particles become fully invisible above this height" name="fade_out_end_height" offset="0x40"/>
+    <float32 info="particles per cubic world unit" name="particle_count_from" offset="0xa4"/>
+    <float32 info="particles per cubic world unit" name="particle_count_to" offset="0xa8"/>
+    <reference name="physics" offset="0xac"/>
+    <float32 name="acceleration_magnitude_from" offset="0xcc"/>
+    <float32 name="acceleration_magnitude_to" offset="0xd0"/>
+    <float32 info="0 - 1 only" name="acceleration_turning_rate" offset="0xd4"/>
+    <float32 name="acceleration_change_rate" offset="0xd8"/>
+    <float32 info="world units" name="particle_radius_from" offset="0xfc"/>
+    <float32 info="world units" name="particle_radius_to" offset="0x100"/>
+    <float32 info="frames per second" name="animation_rate_from" offset="0x104"/>
+    <float32 info="frames per second" name="animation_rate_to" offset="0x108"/>
+    <float32 info="radians per second" name="rotation_rate_from" offset="0x10c"/>
+    <float32 info="radians per second" name="rotation_rate_to" offset="0x110"/>
+    <colorARGB name="color_lower_bound" offset="0x134"/>
+    <colorARGB name="color_upper_bound" offset="0x144"/>
+    <reference name="shader_sprite_bitmap" offset="0x194"/>
+    <enum16 name="shader_render_mode" offset="0x1a4">
+      <option name="screen_facing" value="0"/>
+      <option name="parallel_to_direction" value="1"/>
+      <option name="perpendicular_to_direction" value="2"/>
+    </enum16>
+    <enum16 info="render modes that depend upon a direction will use this vector" name="shader_render_direction_source" offset="0x1a6">
+      <option name="from_velocity" value="0"/>
+      <option name="from_acceleration" value="1"/>
+    </enum16>
+    <flag bit="7" name="sort_bias" offset="0x1d0"/>
+    <flag bit="6" name="nonlinear_tint" offset="0x1d0"/>
+    <flag bit="5" name="dont_overdraw_first_person_weapon" offset="0x1d0"/>
+    <enum16 name="shader_framebuffer_blend_function" offset="0x1d2">
+      <option name="alpha_blend" value="0"/>
+      <option name="multiply" value="1"/>
+      <option name="double_multiply" value="2"/>
+      <option name="add" value="3"/>
+      <option name="subtract" value="4"/>
+      <option name="component_minimum" value="5"/>
+      <option name="component_maximum" value="6"/>
+      <option name="alpha_multiply_add" value="7"/>
+    </enum16>
+    <enum16 name="shader_framebuffer_fade_mode" offset="0x1d4">
+      <option name="none" value="0"/>
+      <option name="fade_when_perpendicular" value="1"/>
+      <option name="fade_when_parallel" value="2"/>
+    </enum16>
+    <flag bit="7" name="unfiltered" offset="0x1d6"/>
+    <reference name="secondary_map_bitmap" offset="0x1f4"/>
+    <enum16 name="secondary_map_anchor" offset="0x204">
+      <option name="with_primary" value="0"/>
+      <option name="with_screen_space" value="1"/>
+      <option name="z_sprite" value="2"/>
+    </enum16>
+    <flag bit="7" name="unfiltered" offset="0x206"/>
+    <enum16 name="secondary_map_u_animation_source" offset="0x208">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="secondary_map_u_animation_function" offset="0x20a">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="secondary_map_u_animation_period" offset="0x20c"/>
+    <float32 name="secondary_map_u_animation_phase" offset="0x210"/>
+    <float32 info="repeats; 0 defaults to 1" name="secondary_map_u_animation_scale" offset="0x214"/>
+    <enum16 name="secondary_map_v_animation_source" offset="0x218">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="secondary_map_v_animation_function" offset="0x21a">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="secondary_map_v_animation_period" offset="0x21c"/>
+    <float32 name="secondary_map_v_animation_phase" offset="0x220"/>
+    <float32 info="repeats; 0 defaults to 1" name="secondary_map_v_animation_scale" offset="0x224"/>
+    <enum16 name="secondary_map_rotation_animation_source" offset="0x228">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="secondary_map_rotation_animation_function" offset="0x22a">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="secondary_map_rotation_animation_period" offset="0x22c"/>
+    <float32 name="secondary_map_rotation_animation_phase" offset="0x230"/>
+    <float32 info="degrees; 0 defaults to 360" name="secondary_map_rotation_animation_scale" offset="0x234"/>
+    <float32 name="secondary_map_rotation_animation_center_x" offset="0x238"/>
+    <float32 name="secondary_map_rotation_animation_center_y" offset="0x23c"/>
+    <float32 name="secondary_map_zsprite_radius_scale" offset="0x244"/>
+  </struct_array>
+</struct>

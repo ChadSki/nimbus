@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<struct name="snde" size="56">
+  <int16 info="when multiple listeners are in different sound environments in split screen, the combined environment will be the one with the highest priority" name="priority" offset="0x4"/>
+  <float32 info="0 - 1 only; intensity of the room effect" name="room_intensity" offset="0x8"/>
+  <float32 info="0 - 1 only; intensity of the room effect above the High Frequency Reference" name="room_intensity_high_frequency" offset="0xc"/>
+  <float32 info="0 - 10 only; how quickly the room effect rolls off" name="room_rolloff" offset="0x10"/>
+  <float32 info="seconds; 0.1 - 20 only" name="decay_time" offset="0x14"/>
+  <float32 info="0.1 - 2 only" name="decay_high_frequency_ratio" offset="0x18"/>
+  <float32 info="0 - 1 only" name="reflections_intensity" offset="0x1c"/>
+  <float32 info="seconds; 0 - 0.3 only" name="reflections_delay" offset="0x20"/>
+  <float32 info="0 - 1 only" name="reverb_intensity" offset="0x24"/>
+  <float32 info="seconds; 0 - 0.1 only" name="reverb_delay" offset="0x28"/>
+  <float32 info="0 - 1 only" name="diffusion" offset="0x2c"/>
+  <float32 info="0 - 1 only" name="density" offset="0x30"/>
+  <float32 info="Herz; 20 - 20,000 only; for high frequency values, what value defines high frequency" name="high_frequency_reference" offset="0x34"/>
+</struct>

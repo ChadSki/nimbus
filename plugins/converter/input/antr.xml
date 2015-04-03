@@ -1,0 +1,344 @@
+<plugin class="antr" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Objects" offset="0x00" size="20">
+	<index name="Animation" offset="0x00" reflexive="main:Animations"/>
+	
+	<enum16 name="Function" offset="0x02">
+		<option name="A out" value="00"/>
+		<option name="B out" value="01"/>
+		<option name="C out" value="02"/>
+		<option name="D out" value="03"/>
+	</enum16>
+	
+	<enum16 name="Function Controls" offset="0x04">
+		<option name="Frame" value="00"/>
+		<option name="Scale" value="01"/>
+	</enum16>
+</struct>
+
+<struct name="Units" offset="0x0C" size="100">
+	<string32 name="Label" offset="0x00"/>
+	
+	<float name="Looking Screen Bounds.Right Yaw per Frame" note="radians" offset="0x20"/>
+	<float name="Looking Screen Bounds.Left Yaw per Frame" note="radians" offset="0x24"/>
+	
+	<short name="Looking Screen Bounds.Right Yaw Frame Count" offset="0x28"/>
+	<short name="Looking Screen Bounds.Left Yaw Frame Count" offset="0x2A"/>
+	
+	<float name="Looking Screen Bounds.Down Pitch per Frame" note="radians" offset="0x2C"/>
+	<float name="Looking Screen Bounds.Up Pitch per Frame" note="radians" offset="0x30"/>
+	
+	<short name="Looking Screen Bounds.Down Pitch Frame Count" offset="0x34"/>
+	<short name="Looking Screen Bounds.Up Pitch Frame Count" offset="0x36"/>
+	
+	<struct name="Animations" offset="0x40" size="2">
+		<index name="Animation" offset="0x00" reflexive="main:Animations"/>
+	</struct>
+	
+	<struct name="IK Points" offset="0x4C" size="64">
+		<string32 name="Marker" info="the marker name on the object being attached" offset="0x00"/>
+		<string32 name="Attach to Marker" info="the marker name object (weapon, vehicle, etc.) the above marker is being attached to" offset="0x20"/>
+	</struct>
+	
+	<struct name="Weapons" offset="0x58" size="188">
+		<string32 name="Name" offset="0x00"/>
+		<string32 name="Grip Marker" info="the marker name on the weapon to which the hand is attached (leave blank to use origin)" offset="0x20"/>
+		<string32 name="Hand Marker" info="the marker name on the unit to which the weapon is attached" offset="0x40"/>
+		
+		<float name="Aiming Screen Bounds.Right Yaw per Frame" note="radians" offset="0x60"/>
+		<float name="Aiming Screen Bounds.Left Yaw per Frame" note="radians" offset="0x64"/>
+		
+		<short name="Aiming Screen Bounds.Right Yaw Frame Count" offset="0x68"/>
+		<short name="Aiming Screen Bounds.Left Yaw Frame Count" offset="0x6A"/>
+		
+		<float name="Aiming Screen Bounds.Down Pitch per Frame" note="radians" offset="0x6C"/>
+		<float name="Aiming Screen Bounds.Up Pitch per Frame" note="radians" offset="0x70"/>
+		
+		<short name="Aiming Screen Bounds.Down Pitch Frame Count" offset="0x74"/>
+		<short name="Aiming Screen Bounds.Up Pitch Frame Count" offset="0x76"/>
+		
+		<struct name="Animations" offset="0x98" size="2">
+			<index name="Animation" offset="0x00" reflexive="main:Animations">
+				<option name="null" value="0" />
+				<option name="idle" value="01" />
+				<option name="gesture" value="02" />
+				<option name="turn-left" value="03" />
+				<option name="turn-right" value="04" />
+				<option name="drive-front" value="05" />
+				<option name="drive-back" value="06" />
+				<option name="drive-left" value="07" />
+				<option name="drive-right" value="08" />
+				<option name="move-front" value="09" />
+				<option name="move-back" value="10" />
+				<option name="move-left" value="11" />
+				<option name="move-right" value="12" />
+				<option name="slide-front" value="13" />
+				<option name="slide-back" value="14" />
+				<option name="slide-left" value="15" />
+				<option name="slide-right" value="16" />
+				<option name="airborne" value="17" />
+				<option name="land-soft" value="18" />
+				<option name="land-hard" value="19" />
+				<option name="unused" value="20" />
+				<option name="throw-grenade" value="21" />
+				<option name="disarm" value="22" />
+				<option name="drop" value="23" />
+				<option name="ready" value="24" />
+				<option name="put-away" value="25" />
+				<option name="aim-still" value="26" />
+				<option name="aim-move" value="27" />
+				<option name="surprise-front" value="28" />
+				<option name="surprise-back" value="29" />
+				<option name="berserk" value="30" />
+				<option name="evade-left" value="31" />
+				<option name="evade-right" value="32" />
+				<option name="signal-move" value="33" />
+				<option name="signal-attack" value="34" />
+				<option name="warn" value="35" />
+				<option name="stunned-front" value="36" />
+				<option name="stunned-back" value="37" />
+				<option name="stunned-left" value="38" />
+				<option name="stunned-right" value="39" />
+				<option name="melee" value="40" />
+				<option name="celebrate" value="41" />
+				<option name="panic" value="42" />
+				<option name="melee-airborne" value="43" />
+				<option name="flaming" value="44" />
+				<option name="resurrect-front" value="45" />
+				<option name="resurrect-back" value="46" />
+				<option name="melee-continuous" value="47" />
+				<option name="feeding" value="48" />
+				<option name="leap-start" value="49" />
+				<option name="leap-airborne" value="50" />
+				<option name="leap-melee" value="51" />
+				<option name="zapping" value="52" />
+				<option name="unused_53" value="53" />
+				<option name="unused_54" value="54" />
+				<option name="unused_55" value="55" />
+			</index>
+		</struct>
+		
+		<struct name="IK Points" offset="0xA4" size="64">
+			<string32 name="Marker" info="the marker name on the object being attached" offset="0x00"/>
+			<string32 name="Attach to Marker" info="the marker name object (weapon, vehicle, etc.) the above marker is being attached to" offset="0x20"/>
+		</struct>
+		
+		<struct name="Weapon Types" offset="0xB0" size="60">
+			<string32 name="Label" offset="0x00"/>
+			
+			<struct name="Animations" offset="0x30" size="2">
+				<index name="Animation" reflexive="main:Animations" offset="0x00">
+					<option name="null" value="0"/>
+					<option name="reload-1" value="1"/>
+					<option name="reload-2" value="2"/>
+					<option name="chamber-1" value="3"/>
+					<option name="chamber-2" value="4"/>
+					<option name="fire-1" value="5"/>
+					<option name="fire-2" value="6"/>
+					<option name="charged-1" value="7"/>
+					<option name="charged-2" value="8"/>
+					<option name="melee" value="9"/>
+					<option name="overheat" value="10"/>
+				</index>
+			</struct>
+		</struct>
+	</struct>
+</struct>
+
+<struct name="Weapons" offset="0x18" size="28">
+	<struct name="Animations" offset="0x10" size="2">
+		<index name="Animation" offset="0x00" reflexive="main:Animations">
+			<option name="null" value="0"/>
+			<option name="idle" value="1"/>
+			<option name="ready" value="2"/>
+			<option name="put-away" value="3"/>
+			<option name="reload-1" value="4"/>
+			<option name="reload-2" value="5"/>
+			<option name="chamber-1" value="6"/>
+			<option name="chamber-2" value="7"/>
+			<option name="charged-1" value="8"/>
+			<option name="charged-2" value="9"/>
+			<option name="fire-1" value="10"/>
+			<option name="fire-2" value="11"/>
+		</index>
+	</struct>
+</struct>
+
+<struct name="Vehicles" offset="0x24" size="116">
+	<float name="Steering Screen.Right Yaw per Frame" note="radians" offset="0x00"/>
+	<float name="Steering Screen.Left Yaw per Frame" note="radians" offset="0x04"/>
+	
+	<short name="Steering Screen.Right Yaw Frame Count" offset="0x08"/>
+	<short name="Steering Screen.Left Yaw Frame Count" offset="0x0A"/>
+	
+	<float name="Steering Screen.Down Pitch per Frame" note="radians" offset="0x0C"/>
+	<float name="Steering Screen.Up Pitch per Frame" note="radians" offset="0x10"/>
+	
+	<short name="Steering Screen.Down Pitch Frame Count" offset="0x14"/>
+	<short name="Steering Screen.Up Pitch Frame Count" offset="0x16"/>
+	
+	<struct name="Animations" offset="0x5C" size="2">
+		<index name="Animation" offset="0x00" reflexive="main:Animations">
+			<option name="null" value="0"/>
+			<option name="steering" value="1"/>
+			<option name="roll" value="2"/>
+			<option name="throttle" value="3"/>
+			<option name="velocity" value="4"/>
+			<option name="braking" value="5"/>
+			<option name="ground-speed" value="6"/>
+			<option name="occupied" value="7"/>
+			<option name="unoccupied" value="8"/>
+		</index>
+	</struct>
+	
+	<struct name="Suspension Animations" offset="0x68" size="20">
+		<short name="Mass Point Index" offset="0x00"/>
+
+		<index name="Animation" offset="0x02" reflexive="main:Animations"/>
+		
+		<float name="Full Extension Ground_Depth" offset="0x04"/>
+		<float name="Full Compression Ground_Depth" offset="0x08"/>
+	</struct>
+</struct>
+
+<struct name="Devices" offset="0x30" size="96">
+	<struct name="Animations (1 = 'position'; 2 = 'power')" offset="0x54" size="2">
+		<index name="Animation" offset="0x00" reflexive="main:Animations"/>
+	</struct>
+</struct>
+
+<struct name="Unit Damage" offset="0x3C" size="2">
+	<index name="Animation" offset="0x00" reflexive="main:Animations"/>
+</struct>
+
+<struct name="First Person Weapons" offset="0x48" size="28">
+	<struct name="Animations" offset="0x10" size="2">
+		<!--bitmask32 name="Animations Reference Guide 5" offset="0x00">
+			<option name="DON'T TOUCH THESE FLAGS" value="31"/>
+			<option name="FOR YOUR INFORMATION ONLY" value="31"/>
+			<option name="First Person Weapons -> Reflexives -> Animations #" value="31"/>
+			<option name="01. idle" value="31"/>
+			<option name="02. posing" value="30"/>
+			<option name="03. fire-1" value="29"/>
+			<option name="04. moving" value="28"/>
+			<option name="05. overlays" value="27"/>
+			<option name="06. light-off" value="26"/>
+			<option name="07. light-on" value="25"/>
+			<option name="08. reload-empty" value="24"/>
+			<option name="09. reload-full" value="23"/>
+			<option name="10. overheated" value="22"/>
+			<option name="11. ready" value="21"/>
+			<option name="12. put-away" value="20"/>
+			<option name="13. overcharged" value="19"/>
+			<option name="14. melee" value="18"/>
+			<option name="15. fire-2" value="17"/>
+			<option name="16. overcharged-jitter" value="16"/>
+			<option name="17. throw-grenade" value="15"/>
+			<option name="18. ammunition" value="14"/>
+			<option name="19. misfire-1" value="13"/>
+			<option name="20. misfire-2" value="12"/>
+			<option name="21. throw-overheated" value="11"/>
+			<option name="22. overheating" value="10"/>
+			<option name="23. overheating-again" value="09"/>
+			<option name="24. enter" value="08"/>
+			<option name="25. exit-empty" value="07"/>
+			<option name="26. exit-full" value="06"/>
+			<option name="27. o-h-exit" value="05"/>
+			<option name="28. o-h-s-enter" value="04"/>
+		</bitmask32-->
+		
+		<index name="Animation" offset="0x00" reflexive="main:Animations"/>
+	</struct>
+</struct>
+
+<struct name="Sound References" offset="0x54" size="20">
+	<dependency name="Sound" offset="0x00"/>
+</struct>
+
+<float name="Limp Body Node Radius" note="0 defaults to 0.04" offset="0x60"/>
+
+<bitmask16 name="Flags" offset="0x64">
+	<option name="Compress All Animations" value="15"/>
+	<option name="Force Idle Compression" value="14"/>
+</bitmask16>
+
+<struct name="Nodes" offset="0x68" size="64">
+	<string32 name="Name" offset="0x00"/>
+	
+	<index name="Next Sibling Node Index" offset="0x20" reflexive="main:Nodes"/>
+	<index name="First Child Node Index" offset="0x22" reflexive="main:Nodes"/>
+	<index name="Parent Node Index" offset="0x24" reflexive="main:Nodes"/>
+	
+	<bitmask16 name="Node Joint Flags" offset="0x28">
+		<option name="Ball-Socket" value="15"/>
+		<option name="Hinge" value="14"/>
+		<option name="No Movement" value="13"/>
+	</bitmask16>
+	
+	<float name="Base Vector: i (1)" offset="0x2C"/>
+	<float name="Base Vector: i (2)" offset="0x30"/>
+	<float name="Base Vector: k" offset="0x34"/>
+	
+	<float name="Vector Range" offset="0x38"/>
+</struct>
+
+<struct name="Animations" offset="0x74" size="180">
+	<string32 name="Name" offset="0x00"/>
+	
+	<enum16 name="Type" offset="0x20">
+		<option name="Base" value="00"/>
+		<option name="Overlay" value="01"/>
+		<option name="Replacement" value="02"/>
+	</enum16>
+	
+	<short name="Frame Count" offset="0x22"/>
+	<short name="Frame Size" offset="0x24"/>
+	
+	<enum16 name="Frame Info Type" offset="0x26">
+		<option name="None" value="00"/>
+		<option name="Dx, Dy" value="01"/>
+		<option name="Dx, Dy, Dyaw" value="02"/>
+		<option name="Dx, Dy, Dz, Dyaw" value="03"/>
+	</enum16>
+	
+	<long name="Node List Checksum" offset="0x28"/>
+	
+	<short name="Node Count" offset="0x2C"/>
+	<short name="Loop Frame Index" offset="0x2E"/>
+	
+	<float name="Weight" note="0 - 1 only" offset="0x30"/>
+	
+	<short name="Key Frame Index" offset="0x34"/>
+	<short name="Second Key Frame Index" offset="0x36"/>
+	
+	<index name="Next Animation" offset="0x38" reflexive="main:Animations"/>
+	
+	<bitmask16 name="Flags" offset="0x3A">
+		<option name="Compressed Data" value="15"/>
+		<option name="World Relative" value="14"/>
+		<option name="PAL_25Hz" value="13"/>
+	</bitmask16>
+	
+	<index name="Sound" offset="0x3C" reflexive="main:Sound References"/>
+	
+	<short name="Sound Frame Index" offset="0x3E"/>
+	
+	<char name="Left Foot Frame Index" offset="0x40"/>
+	<char name="Right Foot Frame Index" offset="0x41"/>
+	
+	<long name="Frame Info" note="bytes" offset="0x48"/>
+	
+	<long name="Node Translation Flag Data (1)" offset="0x5C"/>
+	<long name="Node Translation Flag Data (2)" offset="0x60"/>
+	<long name="Node Rotation Flag Data (1)" offset="0x6C"/>
+	<long name="Node Rotation Flag Data (2)" offset="0x70"/>
+	<long name="Node Scale Flag Data (1) UNCONFIRMED OFFSET" offset="0x7C"/>
+	<long name="Node Scale Flag Data (2) UNCONFIRMED OFFSET" offset="0x80"/>
+
+	<long name="Offset to Compressed Data (bytes) UNCONFIRMED OFFSET" offset="0x84"/>
+	
+	<long name="Default Data" note="bytes" offset="0x8C"/>
+	<long name="Frame Data" note="bytes" offset="0xA0"/>
+</struct>
+
+</plugin>

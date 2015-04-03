@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<struct name="dobc" size="80">
+  <enum16 name="collection_type" offset="0x0">
+    <option name="screen_facing" value="0"/>
+    <option name="viewer_facing" value="1"/>
+  </enum16>
+  <float32 info="applied to all detail objects in this collection so they don't float above the ground" name="global_z_offset" offset="0x4"/>
+  <reference name="sprite_plate" offset="0x34"/>
+  <struct_array name="types" offset="0x44" size="96">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <int8 name="sequence_index" offset="0x20"/>
+    <flag bit="7" name="unused" offset="0x21"/>
+    <flag bit="6" name="unused" offset="0x21"/>
+    <flag bit="5" name="interpolate_color_in_hsv" offset="0x21"/>
+    <flag bit="4" name="more_colors" offset="0x21"/>
+    <float32 info="0 - 1 only; fraction of detail object color to use instead of the base map color in the environment" name="color_override_factor" offset="0x24"/>
+    <float32 info="world units" name="near_fade_distance" offset="0x30"/>
+    <float32 info="world units" name="far_fade_distance" offset="0x34"/>
+    <float32 info="world units per pixel" name="size" offset="0x38"/>
+    <colorRGB name="minimum_color" offset="0x40"/>
+    <colorRGB name="maximum_color" offset="0x4c"/>
+    <colorbyte name="ambient_color" offset="0x58"/>
+  </struct_array>
+</struct>

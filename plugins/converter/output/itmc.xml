@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<struct name="itmc" size="14">
+  <struct_array name="item_permutations" offset="0x0" size="84">
+    <float32 info="relatively how likely this item will be chosen" name="weight" offset="0x20"/>
+    <reference info="eqip, garb, item or weap" name="item" offset="0x24"/>
+  </struct_array>
+  <int16 info="seconds; 0 = default" name="spawn_time" offset="0xc"/>
+</struct>

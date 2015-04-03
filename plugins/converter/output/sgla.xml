@@ -1,0 +1,77 @@
+<?xml version="1.0" ?>
+<struct name="sgla" size="452">
+  <flag bit="7" name="simple_parameterization" offset="0x0"/>
+  <flag bit="6" name="ignore_normals" offset="0x0"/>
+  <flag bit="5" name="transparent_lit" offset="0x0"/>
+  <enum16 info="affects the density of tessellation (high means slow)" name="radiosity_properties_detail_level" offset="0x2">
+    <option name="high" value="0"/>
+    <option name="medium" value="1"/>
+    <option name="low" value="2"/>
+    <option name="turd" value="3"/>
+  </enum16>
+  <float32 info="0 - infinity; power of emitted light" name="radiosity_properties_power" offset="0x4"/>
+  <colorRGB name="radiosity_properties_color_of_emitted_light" offset="0x8"/>
+  <colorRGB info="light passing through this surface, if it's transparent, will be tinted this color" name="radiosity_properties_tint_color" offset="0x14"/>
+  <enum16 name="physics_properties_material_type" offset="0x22">
+    <option name="dirt" value="0"/>
+    <option name="sand" value="1"/>
+    <option name="stone" value="2"/>
+    <option name="snow" value="3"/>
+    <option name="wood" value="4"/>
+    <option name="metal_hollow" value="5"/>
+    <option name="metal_thin" value="6"/>
+    <option name="metal_thick" value="7"/>
+    <option name="rubber" value="8"/>
+    <option name="glass" value="9"/>
+    <option name="force_field" value="10"/>
+    <option name="grunt" value="11"/>
+    <option name="hunter_armor" value="12"/>
+    <option name="hunter_skin" value="13"/>
+    <option name="elite" value="14"/>
+    <option name="jackal" value="15"/>
+    <option name="jackal_energy_shield" value="16"/>
+    <option name="engineer_skin" value="17"/>
+    <option name="engineer_force_field" value="18"/>
+    <option name="flood_combat_form" value="19"/>
+    <option name="flood_carrier_form" value="20"/>
+    <option name="cyborg_armor" value="21"/>
+    <option name="cyborg_energy_shield" value="22"/>
+    <option name="human_armor" value="23"/>
+    <option name="human_skin" value="24"/>
+    <option name="sentinel" value="25"/>
+    <option name="monitor" value="26"/>
+    <option name="plastic" value="27"/>
+    <option name="water" value="28"/>
+    <option name="leaves" value="29"/>
+    <option name="elite_energy_shield" value="30"/>
+    <option name="ice" value="31"/>
+    <option name="hunter_shield" value="32"/>
+  </enum16>
+  <flag bit="7" name="alpha_tested" offset="0x28"/>
+  <flag bit="6" name="decal" offset="0x28"/>
+  <flag bit="5" name="two_sided" offset="0x28"/>
+  <flag bit="4" name="bump_map_is_specular_mask" offset="0x28"/>
+  <colorRGB name="background_tint_properties_background_tint_color" offset="0x54"/>
+  <float32 info="0 defaults to 1" name="background_tint_properties_background_tint_map_scale" offset="0x60"/>
+  <reference name="background_tint_properties_background_tint_map" offset="0x64"/>
+  <enum16 name="reflection_properties_reflection_type" offset="0x8a">
+    <option name="bumped_cube_map" value="0"/>
+    <option name="flat_cube_map" value="1"/>
+    <option name="dynamic_mirror" value="2"/>
+  </enum16>
+  <float32 info="0 - 1 only" name="reflection_properties_perpendicular_brightness" offset="0x8c"/>
+  <colorRGB name="reflection_properties_perpendicular_tint_color" offset="0x90"/>
+  <float32 info="0 - 1 only" name="reflection_properties_parallel_brightness" offset="0x9c"/>
+  <colorRGB name="reflection_properties_parallel_tint_color" offset="0xa0"/>
+  <reference name="reflection_properties_reflection_map" offset="0xac"/>
+  <float32 name="reflection_properties_bump_map_scale" offset="0xbc"/>
+  <reference name="reflection_properties_bump_map" offset="0xc0"/>
+  <float32 info="0 defaults to 1" name="diffuse_properties_diffuse_map_scale" offset="0x154"/>
+  <reference name="diffuse_properties_diffuse_map" offset="0x158"/>
+  <float32 info="0 defaults to 1" name="diffuse_properties_diffuse_detail_map_scale" offset="0x168"/>
+  <reference name="diffuse_properties_diffuse_detail_map" offset="0x16c"/>
+  <float32 info="0 defaults to 1" name="specular_properties_specular_map_scale" offset="0x19c"/>
+  <reference name="specular_properties_specular_map" offset="0x1a0"/>
+  <float32 info="0 defaults to 1" name="specular_properties_specular_detail_map_scale" offset="0x1b0"/>
+  <reference name="specular_properties_specular_detail_map" offset="0x1b4"/>
+</struct>

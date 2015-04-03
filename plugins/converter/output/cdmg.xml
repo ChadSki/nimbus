@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<struct name="cdmg" size="484">
+  <float32 info="world units" name="radius_from" offset="0x0"/>
+  <float32 info="world units" name="radius_to" offset="0x4"/>
+  <float32 info="0 - 1 only" name="cutoff_scale" offset="0x8"/>
+  <float32 name="vibrate_parameters_low_frequency" offset="0x24"/>
+  <float32 name="vibrate_parameters_high_frequency" offset="0x28"/>
+  <float32 info="world units; in all directions" name="camera_shaking_random_translation" offset="0x44"/>
+  <float32 info="radians; in all directions" name="camera_shaking_random_rotation" offset="0x48"/>
+  <enum16 info="perturbs the effect's behavior over time" name="camera_shaking_wobble_function" offset="0x58">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="ticks; '30' = 1 second" name="camera_shaking_wobble_function_period" offset="0x5c"/>
+  <float32 info="0.0 = wobble function has no effect; 1.0 = effect will not be felt when the wobble function's value is zero" name="camera_shaking_wobble_weight" offset="0x60"/>
+  <enum16 name="damage_side_effect" offset="0x124">
+    <option name="none" value="0"/>
+    <option name="harmless" value="1"/>
+    <option name="lethal_to_the_unsuspecting" value="2"/>
+    <option name="emp" value="3"/>
+  </enum16>
+  <enum16 name="damage_category" offset="0x126">
+    <option name="none" value="0"/>
+    <option name="falling" value="1"/>
+    <option name="bullet" value="2"/>
+    <option name="grenade" value="3"/>
+    <option name="high_explosive" value="4"/>
+    <option name="sniper" value="5"/>
+    <option name="melee" value="6"/>
+    <option name="flame" value="7"/>
+    <option name="mounted_weapon" value="8"/>
+    <option name="vehicle" value="9"/>
+    <option name="plasma" value="10"/>
+    <option name="needle" value="11"/>
+    <option name="shotgun" value="12"/>
+  </enum16>
+  <flag bit="7" name="does_not_hurt_owner" offset="0x128"/>
+  <flag bit="6" name="can_cause_headshots" offset="0x128"/>
+  <flag bit="5" name="pings_resistant_units" offset="0x128"/>
+  <flag bit="4" name="does_not_hurt_friends" offset="0x128"/>
+  <flag bit="3" name="does_not_ping_units" offset="0x128"/>
+  <flag bit="2" name="detonates_explosives" offset="0x128"/>
+  <flag bit="1" name="only_hurts_shields" offset="0x128"/>
+  <flag bit="0" name="causes_flaming_death" offset="0x128"/>
+  <flag bit="7" name="damage_indicators_always_point_down" offset="0x129"/>
+  <flag bit="6" name="skips_shields" offset="0x129"/>
+  <flag bit="5" name="only_hurts_one_infection_form" offset="0x129"/>
+  <flag bit="4" name="can_cause_multiplayer_headshots" offset="0x129"/>
+  <flag bit="3" name="infection_form_pop" offset="0x129"/>
+  <float32 name="damage_damage_lower_bound" offset="0x130"/>
+  <float32 name="damage_damage_upper_bound_from" offset="0x134"/>
+  <float32 name="damage_damage_upper_bound_to" offset="0x138"/>
+  <float32 info="0 - 1 only; 0 damages passengers in vehicles; 1 does not" name="damage_vehicle_passthrough_penalty" offset="0x13c"/>
+  <float32 info="0 - 1 only; amount of stun added to damaged unit" name="damage_stun" offset="0x144"/>
+  <float32 info="0 - 1 only; damaged unit's stun will never exceed this amount; also check the matg Globals tag value!" name="damage_maximum_stun" offset="0x148"/>
+  <float32 info="seconds; duration of stun due to this damage" name="damage_stun_time" offset="0x14c"/>
+  <float32 info="0 - infinity" name="damage_instantaneous_acceleration_force" offset="0x154"/>
+  <float32 info="0 - infinity; Note: 1.0 = 100% normal damage taken" name="damage_modifiers_1_dirt" offset="0x160"/>
+  <float32 info="0 - infinity" name="damage_modifiers_2_sand" offset="0x164"/>
+  <float32 info="0 - infinity" name="damage_modifiers_3_stone" offset="0x168"/>
+  <float32 info="0 - infinity" name="damage_modifiers_4_snow" offset="0x16c"/>
+  <float32 info="0 - infinity" name="damage_modifiers_5_wood" offset="0x170"/>
+  <float32 info="0 - infinity" name="damage_modifiers_6_metal_hollow" offset="0x174"/>
+  <float32 info="0 - infinity" name="damage_modifiers_7_metal_thin" offset="0x178"/>
+  <float32 info="0 - infinity" name="damage_modifiers_8_metal_thick" offset="0x17c"/>
+  <float32 info="0 - infinity" name="damage_modifiers_9_rubber" offset="0x180"/>
+  <float32 info="0 - infinity" name="damage_modifiers_10_glass" offset="0x184"/>
+  <float32 info="0 - infinity" name="damage_modifiers_11_forcefield" offset="0x188"/>
+  <float32 info="0 - infinity" name="damage_modifiers_12_grunt" offset="0x18c"/>
+  <float32 info="0 - infinity" name="damage_modifiers_13_hunter_armor" offset="0x190"/>
+  <float32 info="0 - infinity" name="damage_modifiers_14_hunter_skin" offset="0x194"/>
+  <float32 info="0 - infinity" name="damage_modifiers_15_elite" offset="0x198"/>
+  <float32 info="0 - infinity" name="damage_modifiers_16_jackal" offset="0x19c"/>
+  <float32 info="0 - infinity" name="damage_modifiers_17_jackal_energy_shield" offset="0x1a0"/>
+  <float32 info="0 - infinity" name="damage_modifiers_18_engineer" offset="0x1a4"/>
+  <float32 info="0 - infinity" name="damage_modifiers_19_engineer_force_field" offset="0x1a8"/>
+  <float32 info="0 - infinity" name="damage_modifiers_20_flood_combat_form" offset="0x1ac"/>
+  <float32 info="0 - infinity" name="damage_modifiers_21_flood_carrier_form" offset="0x1b0"/>
+  <float32 info="0 - infinity" name="damage_modifiers_22_cyborg" offset="0x1b4"/>
+  <float32 info="0 - infinity" name="damage_modifiers_23_cyborg_energy_shield" offset="0x1b8"/>
+  <float32 info="0 - infinity" name="damage_modifiers_24_armored_human" offset="0x1bc"/>
+  <float32 info="0 - infinity" name="damage_modifiers_25_human" offset="0x1c0"/>
+  <float32 info="0 - infinity" name="damage_modifiers_26_sentinel" offset="0x1c4"/>
+  <float32 info="0 - infinity" name="damage_modifiers_27_monitor" offset="0x1c8"/>
+  <float32 info="0 - infinity" name="damage_modifiers_28_plastic" offset="0x1cc"/>
+  <float32 info="0 - infinity" name="damage_modifiers_29_water" offset="0x1d0"/>
+  <float32 info="0 - infinity" name="damage_modifiers_30_leaves" offset="0x1d4"/>
+  <float32 info="0 - infinity" name="damage_modifiers_31_elite_energy_shield" offset="0x1d8"/>
+  <float32 info="0 - infinity" name="damage_modifiers_32_ice" offset="0x1dc"/>
+  <float32 info="0 - infinity" name="damage_modifiers_33_hunter_shield" offset="0x1e0"/>
+</struct>

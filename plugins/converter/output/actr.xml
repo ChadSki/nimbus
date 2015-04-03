@@ -1,0 +1,243 @@
+<?xml version="1.0" ?>
+<struct name="actr" size="1032">
+  <flag bit="7" name="can_see_in_darkness" offset="0x0"/>
+  <flag bit="6" name="sneak_uncovering_target" offset="0x0"/>
+  <flag bit="5" name="sneak_uncovering_pursuit_position" offset="0x0"/>
+  <flag bit="4" name="unused" offset="0x0"/>
+  <flag bit="3" name="shoot_at_targets_last_location" offset="0x0"/>
+  <flag bit="2" name="try_to_stay_still_when_crouched" offset="0x0"/>
+  <flag bit="1" name="crouch_when_not_in_combat" offset="0x0"/>
+  <flag bit="0" name="crouch_when_guarding" offset="0x0"/>
+  <flag bit="7" name="unused" offset="0x1"/>
+  <flag bit="6" name="must_crouch_to_shoot" offset="0x1"/>
+  <flag bit="5" name="panic_when_surprised" offset="0x1"/>
+  <flag bit="4" name="always_charge_at_enemies" offset="0x1"/>
+  <flag bit="3" name="gets_in_vehicles_with_player" offset="0x1"/>
+  <flag bit="2" name="start_firing_before_aligned" offset="0x1"/>
+  <flag bit="1" name="standing_must_move_forward" offset="0x1"/>
+  <flag bit="0" name="crouching_must_move_forward" offset="0x1"/>
+  <flag bit="7" name="defensive_crouch_while_charging" offset="0x2"/>
+  <flag bit="6" name="use_stalking_behavior" offset="0x2"/>
+  <flag bit="5" name="stalking_freeze_if_exposed" offset="0x2"/>
+  <flag bit="4" name="always_berserk_in_attacking_mode" offset="0x2"/>
+  <flag bit="3" name="berserking_uses_panicked_movement" offset="0x2"/>
+  <flag bit="2" name="flying" offset="0x2"/>
+  <flag bit="1" name="panicked_by_unopposable_enemy" offset="0x2"/>
+  <flag bit="0" name="crouch_when_hiding_from_unopposable" offset="0x2"/>
+  <flag bit="7" name="always_charge_in_attacking_mode" offset="0x3"/>
+  <flag bit="6" name="dive_off_ledges" offset="0x3"/>
+  <flag bit="5" name="swarm" offset="0x3"/>
+  <flag bit="4" name="suicidal_melee_attack" offset="0x3"/>
+  <flag bit="3" name="cannot_move_while_crouching" offset="0x3"/>
+  <flag bit="2" name="fixed_crouch_facing" offset="0x3"/>
+  <flag bit="1" name="crouch_when_in_line_of_fire" offset="0x3"/>
+  <flag bit="0" name="avoid_friends_line_of_fire" offset="0x3"/>
+  <flag bit="7" name="avoid_all_enemy_attack_vectors" offset="0x4"/>
+  <flag bit="6" name="must_stand_to_fire" offset="0x4"/>
+  <flag bit="5" name="must_stop_to_fire" offset="0x4"/>
+  <flag bit="4" name="disallow_vehicle_combat" offset="0x4"/>
+  <flag bit="3" name="pathfinding_ignores_danger" offset="0x4"/>
+  <flag bit="2" name="panic_in_groups" offset="0x4"/>
+  <flag bit="1" name="no_corpse_shooting" offset="0x4"/>
+  <enum16 name="type" offset="0x14">
+    <option name="elite" value="0"/>
+    <option name="jackal" value="1"/>
+    <option name="grunt" value="2"/>
+    <option name="hunter" value="3"/>
+    <option name="engineer" value="4"/>
+    <option name="assassin" value="5"/>
+    <option name="player" value="6"/>
+    <option name="marine" value="7"/>
+    <option name="crew" value="8"/>
+    <option name="combat_form" value="9"/>
+    <option name="infection_form" value="10"/>
+    <option name="carrier_form" value="11"/>
+    <option name="monitor" value="12"/>
+    <option name="sentinel" value="13"/>
+    <option name="none" value="14"/>
+    <option name="mounted_weapon" value="15"/>
+  </enum16>
+  <float32 info="world units" name="perception_max_vision_distance" offset="0x18"/>
+  <float32 info="radians; horizontal angle within which we see targets out to our maximum range" name="perception_central_vision_angle" offset="0x1c"/>
+  <float32 info="radians; maximum horizontal angle within which we see targets at range" name="perception_max_vision_angle" offset="0x20"/>
+  <float32 info="radians; maximum horizontal angle within which we can see targets out of the corner of our eye" name="perception_peripheral_vision_angle" offset="0x28"/>
+  <float32 info="world units" name="perception_peripheral_distance" offset="0x2c"/>
+  <float32 info="offset of gun from feet when standing" name="perception_standing_gun_offset_i" offset="0x34"/>
+  <float32 info="offset of gun from feet when standing" name="perception_standing_gun_offset_i" offset="0x38"/>
+  <float32 info="offset of gun from feet when standing" name="perception_standing_gun_offset_k" offset="0x3c"/>
+  <float32 info="offset of gun from feet when crouching" name="perception_crouching_gun_offset_i" offset="0x40"/>
+  <float32 info="offset of gun from feet when crouching" name="perception_crouching_gun_offset_i" offset="0x44"/>
+  <float32 info="offset of gun from feet when crouching" name="perception_crouching_gun_offset_k" offset="0x48"/>
+  <float32 info="world units" name="perception_hearing_distance" offset="0x4c"/>
+  <float32 info="0 - 1 only (random)" name="perception_notice_projectile_chance" offset="0x50"/>
+  <float32 info="0 - 1 only (random)" name="perception_notice_vehicle_chance" offset="0x54"/>
+  <float32 info="seconds; time req'd to acknowledge a visible enemy when in combat or searching" name="perception_combat_perception_time" offset="0x60"/>
+  <float32 info="seconds; time req'd to acknowledge a visible enemy when alerted" name="perception_guard_perception_time" offset="0x64"/>
+  <float32 info="seconds; time req'd to acknowledge a visible enemy when not alerted" name="perception_non_combat_perception_time" offset="0x68"/>
+  <float32 info="0 - 1 only; chance of running a dive animation when moving into cover" name="movement_dive_into_cover_chance" offset="0x80"/>
+  <float32 info="0 - 1 only; chance of running an emerge animation when uncovering a target" name="movement_emerge_from_cover_chance" offset="0x84"/>
+  <float32 info="0 - 1 only; chance of running a dive animation when moving away from a grenade" name="movement_dive_from_grenade_chance" offset="0x88"/>
+  <float32 info="world units" name="movement_pathfinding_radius" offset="0x8c"/>
+  <float32 info="0 - 1 only; chance of not noticing that breakable surfaces have been destroyed" name="movement_glass_ignorance_chance" offset="0x90"/>
+  <float32 info="world units; movement distance considered 'stationary' when determining whether to crouch" name="movement_stationary_movement_distance" offset="0x94"/>
+  <float32 info="world units; distance of sidestepping allowed for flying units" name="movement_free_flying_sidestep" offset="0x98"/>
+  <float32 info="radians; must face this close to the target before applying throttle" name="movement_begin_moving_angle" offset="0x9c"/>
+  <float32 info="radians; how far we can turn our weapon" name="looking_maximum_aiming_deviation_y" offset="0xa4"/>
+  <float32 info="radians; how far we can turn our weapon" name="looking_maximum_aiming_deviation_p" offset="0xa8"/>
+  <float32 info="radians; how far we can turn our head" name="looking_maximum_looking_deviation_y" offset="0xac"/>
+  <float32 info="radians; how far we can turn our head" name="looking_maximum_looking_deviation_p" offset="0xb0"/>
+  <float32 info="radians; how far we can turn our head left away from our aiming vector when not in combat" name="looking_noncombat_look_delta_l" offset="0xb4"/>
+  <float32 info="radians; how far we can turn our head right away from our aiming vector when not in combat" name="looking_noncombat_look_delta_r" offset="0xb8"/>
+  <float32 info="radians; how far we can turn our head left away from our aiming vector when in combat" name="looking_combat_look_delta_l" offset="0xbc"/>
+  <float32 info="radians; how far we can turn our head right away from our aiming vector when in combat" name="looking_combat_look_delta_r" offset="0xc0"/>
+  <float32 info="radians; range in which we select random angles to aim" name="looking_idle_aiming_range_y" offset="0xc4"/>
+  <float32 info="radians; range in which we select random angles to aim" name="looking_idle_aiming_range_p" offset="0xc8"/>
+  <float32 info="radians; range in which we select random angles to look" name="looking_idle_looking_range_y" offset="0xcc"/>
+  <float32 info="radians; range in which we select random angles to look" name="looking_idle_looking_range_p" offset="0xd0"/>
+  <float32 info="multiplier; how long to look at interesting events" name="looking_event_look_time_modifier_from" offset="0xd4"/>
+  <float32 info="multiplier; how long to look at interesting events" name="looking_event_look_time_modifier_to" offset="0xd8"/>
+  <float32 info="seconds; rate of changing random facing direction when idle and at peace" name="looking_noncombat_idle_facing_from" offset="0xdc"/>
+  <float32 info="seconds; rate of changing random facing direction when idle and at peace" name="looking_noncombat_idle_facing_to" offset="0xe0"/>
+  <float32 info="seconds; rate of changing random aiming direction when idle and at peace" name="looking_noncombat_idle_aiming_from" offset="0xe4"/>
+  <float32 info="seconds; rate of changing random aiming direction when idle and at peace" name="looking_noncombat_idle_aiming_to" offset="0xe8"/>
+  <float32 info="seconds; rate of changing random looking around when idle and at peace" name="looking_noncombat_idle_looking_from" offset="0xec"/>
+  <float32 info="seconds; rate of changing random looking around when idle and at peace" name="looking_noncombat_idle_looking_to" offset="0xf0"/>
+  <float32 info="seconds; rate of changing random facing direction when idle and guarding" name="looking_guard_idle_facing_from" offset="0xf4"/>
+  <float32 info="seconds; rate of changing random facing direction when idle and guarding" name="looking_guard_idle_facing_to" offset="0xf8"/>
+  <float32 info="seconds; rate of changing random aiming direction when idle and guarding" name="looking_guard_idle_aiming_from" offset="0xfc"/>
+  <float32 info="seconds; rate of changing random aiming direction when idle and guarding" name="looking_guard_idle_aiming_to" offset="0x100"/>
+  <float32 info="seconds; rate of changing random looking around when idle and guarding" name="looking_guard_idle_looking_from" offset="0x104"/>
+  <float32 info="seconds; rate of changing random looking around when idle and guarding" name="looking_guard_idle_looking_to" offset="0x108"/>
+  <float32 info="seconds; rate of changing random facing direction when searching or in combat" name="looking_combat_idle_facing_from" offset="0x10c"/>
+  <float32 info="seconds; rate of changing random facing direction when searching or in combat" name="looking_combat_idle_facing_to" offset="0x110"/>
+  <float32 info="seconds; rate of changing random aiming direction when searching or in combat" name="looking_combat_idle_aiming_from" offset="0x114"/>
+  <float32 info="seconds; rate of changing random aiming direction when searching or in combat" name="looking_combat_idle_aiming_to" offset="0x118"/>
+  <float32 info="seconds; rate of changing random looking around when searching or in combat" name="looking_combat_idle_looking_from" offset="0x11c"/>
+  <float32 info="seconds; rate of changing random looking around when searching or in combat" name="looking_combat_idle_looking_to" offset="0x120"/>
+  <enum16 info="danger level of an unreachable enemy which triggers a retreat if persisting" name="unopposable_unreachable_danger_trigger" offset="0x268">
+    <option name="never" value="0"/>
+    <option name="visible" value="1"/>
+    <option name="shooting" value="2"/>
+    <option name="shooting_near_us" value="3"/>
+    <option name="damaging_us" value="4"/>
+    <option name="unused_1" value="5"/>
+    <option name="unused_2" value="6"/>
+    <option name="unused_3" value="7"/>
+    <option name="unused_4" value="8"/>
+    <option name="unused_5" value="9"/>
+  </enum16>
+  <enum16 info="danger level of a vehicle-based enemy which triggers a retreat if persisting" name="unopposable_vehicle_danger_trigger" offset="0x26a">
+    <option name="never" value="0"/>
+    <option name="visible" value="1"/>
+    <option name="shooting" value="2"/>
+    <option name="shooting_near_us" value="3"/>
+    <option name="damaging_us" value="4"/>
+    <option name="unused_1" value="5"/>
+    <option name="unused_2" value="6"/>
+    <option name="unused_3" value="7"/>
+    <option name="unused_4" value="8"/>
+    <option name="unused_5" value="9"/>
+  </enum16>
+  <enum16 info="danger level of an enemy player which triggers a retreat if persisting" name="unopposable_player_danger_trigger" offset="0x26c">
+    <option name="never" value="0"/>
+    <option name="visible" value="1"/>
+    <option name="shooting" value="2"/>
+    <option name="shooting_near_us" value="3"/>
+    <option name="damaging_us" value="4"/>
+    <option name="unused_1" value="5"/>
+    <option name="unused_2" value="6"/>
+    <option name="unused_3" value="7"/>
+    <option name="unused_4" value="8"/>
+    <option name="unused_5" value="9"/>
+  </enum16>
+  <float32 info="seconds; how long before an unopposable enemy of the set danger level triggers my retreat" name="unopposable_danger_trigger_time_from" offset="0x270"/>
+  <float32 info="seconds; how long before an unopposable enemy of the set danger level triggers my retreat" name="unopposable_danger_trigger_time_to" offset="0x274"/>
+  <int16 info="0 = don't use; how many friends must be killed by an unopposable enemy before we retreat" name="unopposable_friends_killed_trigger" offset="0x278"/>
+  <int16 info="0 = don't use; how many friends must be retreating before we retreat" name="unopposable_friends_retreating_trigger" offset="0x27a"/>
+  <float32 info="seconds; duration of my retreat" name="unopposable_retreat_time_from" offset="0x288"/>
+  <float32 info="seconds; duration of my retreat" name="unopposable_retreat_time_to" offset="0x28c"/>
+  <float32 info="seconds; how long to hide in cover after panic" name="panic_cowering_time_from" offset="0x298"/>
+  <float32 info="seconds; how long to hide in cover after panic" name="panic_cowering_time_to" offset="0x29c"/>
+  <float32 info="0 - 1 only; chance of panicking when nearby friend killed and enemy looking at us" name="panic_friend_killed_panic_chance" offset="0x2a0"/>
+  <enum16 info="if we see a friend of this type killed, we have a chance of panicking" name="panic_leader_type" offset="0x2a4">
+    <option name="elite" value="0"/>
+    <option name="jackal" value="1"/>
+    <option name="grunt" value="2"/>
+    <option name="hunter" value="3"/>
+    <option name="engineer" value="4"/>
+    <option name="assassin" value="5"/>
+    <option name="player" value="6"/>
+    <option name="marine" value="7"/>
+    <option name="crew" value="8"/>
+    <option name="combat_form" value="9"/>
+    <option name="infection_form" value="10"/>
+    <option name="carrier_form" value="11"/>
+    <option name="monitor" value="12"/>
+    <option name="sentinel" value="13"/>
+    <option name="none" value="14"/>
+    <option name="mounted_weapon" value="15"/>
+  </enum16>
+  <float32 info="0 - 1 only; chance of panicking when we see a leader killed" name="panic_leader_killed_panic_chance" offset="0x2a8"/>
+  <float32 info="0 - 1 only; panic if this much damage is taken in a short period of time" name="panic_panic_damage_threshold" offset="0x2ac"/>
+  <float32 info="world units; the distance at which newly acknowledged props or weapon impacts are considered 'close' for surprise purposes" name="panic_surprise_distance" offset="0x2b0"/>
+  <float32 info="seconds; how long to stay behind cover after seeking cover" name="defensive_hide_behind_cover_time_from" offset="0x2d0"/>
+  <float32 info="seconds; how long to stay behind cover after seeking cover" name="defensive_hide_behind_cover_time_to" offset="0x2d4"/>
+  <float32 info="seconds; how long to stay behind cover after seeking cover" name="defensive_hide_target_not_visible_time_to" offset="0x2d8"/>
+  <float32 info="0 - 1 only; elites and jackals only seek cover when their shields are below this level" name="defensive_hide_shield_fraction" offset="0x2dc"/>
+  <float32 info="0 - 1 only; elites and jackals only emerge from cover to attack when their shields are above this level" name="defensive_attack_shield_fraction" offset="0x2e0"/>
+  <float32 info="0 - 1 only; elites and jackals only emerge from cover to pursue when their shields are above this level" name="defensive_pursue_shield_fraction" offset="0x2e4"/>
+  <enum16 name="defensive_defensive_crouch_type" offset="0x2f8">
+    <option name="never" value="0"/>
+    <option name="danger" value="1"/>
+    <option name="low_shields" value="2"/>
+    <option name="hide_behind_shield" value="3"/>
+    <option name="any_target" value="4"/>
+    <option name="flood_shamble" value="5"/>
+  </enum16>
+  <float32 info="when attacking, crouch when shields below this number or danger above this number (based on crouch type)" name="defensive_attacking_crouch_threshold" offset="0x2fc"/>
+  <float32 info="when defending, crouch when shields below this number or danger above this number (based on crouch type)" name="defensive_defending_crouch_threshold" offset="0x300"/>
+  <float32 info="seconds; 0 = default; minimum time to remain standing" name="defensive_minimum_stand_time" offset="0x304"/>
+  <float32 info="seconds; 0 = default; minimum time to remain crouching" name="defensive_minimum_crouch_time" offset="0x308"/>
+  <float32 info="seconds? multiplier?; how much longer to hide behind cover while in defensive mode" name="defensive_defending_hide_time_modifier" offset="0x30c"/>
+  <float32 info="if danger level this high while attacking, consider seeking cover or evading" name="defensive_attacking_evasion_threshold" offset="0x310"/>
+  <float32 info="if danger level this high while defending, consider seeking cover or evading" name="defensive_defending_evasion_threshold" offset="0x314"/>
+  <float32 info="0 - 1 only; chance of seeking cover, else we evade" name="defensive_evasion_seek_cover_chance" offset="0x318"/>
+  <float32 info="seconds; minimum time period between evasion moves" name="defensive_evasion_delay_time" offset="0x31c"/>
+  <float32 info="world units; 0 = default; maximum distance we will consider running to find cover" name="defensive_max_seek_cover_distance" offset="0x320"/>
+  <float32 info="0 - 1 only; 0 = always allowed to seek cover; how much damage we must take before we are allowed to seek cover" name="defensive_cover_damage_threshold" offset="0x324"/>
+  <float32 info="seconds; 0 = never stop stalking; if my target sees me for this long, my cover is blown and I do something else" name="defensive_stalking_discovery_time" offset="0x328"/>
+  <float32 info="world units; don't bother stalking if beyond this distance" name="defensive_stalking_max_distance" offset="0x32c"/>
+  <float32 info="radians; outside this, we must abandon our stationary facing direction and suffer any penalties" name="defensive_stationary_facing_angle" offset="0x330"/>
+  <float32 info="seconds; how long we must stand up after changing our fixed stationary facing direction" name="defensive_change_facing_stand_time" offset="0x334"/>
+  <float32 info="seconds; time spent looking at target's position after it becomes visible, before reacting" name="pursuit_uncover_delay_time_from" offset="0x33c"/>
+  <float32 info="seconds; time spent looking at target's position after it becomes visible, before reacting" name="pursuit_uncover_delay_time_to" offset="0x340"/>
+  <float32 info="seconds; time spent searching at target's position" name="pursuit_target_search_time_from" offset="0x344"/>
+  <float32 info="seconds; time spent searching at target's position" name="pursuit_target_search_time_to" offset="0x348"/>
+  <float32 info="seconds; time spent searching at a pursuit position" name="pursuit_pursuit_position_time_from" offset="0x34c"/>
+  <float32 info="seconds; time spent searching at a pursuit position" name="pursuit_pursuit_position_time_to" offset="0x350"/>
+  <int16 info="0,n; number of pursuit positions to check when in coordinated group search mode" name="pursuit_number_of_positions_coordinated" offset="0x354"/>
+  <int16 info="0,n; number of pursuit positions to check when in normal search mode" name="pursuit_number_of_positions_normal" offset="0x356"/>
+  <float32 info="seconds; how long to wait between attempting melee attacks" name="berserk_melee_attack_delay" offset="0x378"/>
+  <float32 info="world units; how far in front of the target to start the attack... negative values aim through the target" name="berserk_melee_fudge_factor" offset="0x37c"/>
+  <float32 info="seconds; maximum duration of charging toward a target before giving up" name="berserk_melee_charge_time" offset="0x380"/>
+  <float32 info="world units; 0 = can't leap; can leap at targets within these ranges" name="berserk_melee_leap_range_from" offset="0x384"/>
+  <float32 info="world units; 0 = can't leap; can leap at targets within these ranges" name="berserk_melee_leap_range_to" offset="0x388"/>
+  <float32 info="world units per tick; how fast to spring at targets when launching a melee attack" name="berserk_melee_leap_velocity" offset="0x38c"/>
+  <float32 info="0 - 1 only; percent chance of starting to melee a ground unit; flying targets are always meleed" name="berserk_melee_leap_chance" offset="0x390"/>
+  <float32 info="0 - 1 only; fraction controlling how ballistic the leaping melee trajectory is" name="berserk_melee_leap_ballistic" offset="0x394"/>
+  <float32 info="0 - 1 only; percent of body life damaged in a short time that prompts berserk mode" name="berserk_berserk_damage_amount" offset="0x398"/>
+  <float32 info="0 - 1 only; how low in percentage our body health must become before we consider berserking" name="berserk_berserk_damage_threshold" offset="0x39c"/>
+  <float32 info="world units; if we ever get this close to a target, we go berserk" name="berserk_berserk_proximity" offset="0x3a0"/>
+  <float32 info="world units; when this close to a target, check to see if they are escaping, and if so, blow up" name="berserk_suicide_sensing_distance" offset="0x3a4"/>
+  <float32 info="0 - 1 only; percent chance of going berserk when we have a dangerous projectile stuck to us" name="berserk_berserk_grenade_chance" offset="0x3a8"/>
+  <float32 info="seconds; 0 = never; change guard positions after this duration" name="firing_positions_guard_position_time_from" offset="0x3b8"/>
+  <float32 info="seconds; 0 = never; change guard positions after this duration" name="firing_positions_guard_position_time_to" offset="0x3bc"/>
+  <float32 info="seconds; 0 = never; change combat firing positions after this duration)" name="firing_positions_combat_position_time_from" offset="0x3c0"/>
+  <float32 info="seconds; 0 = never; change combat firing positions after this duration" name="firing_positions_combat_position_time_to" offset="0x3c4"/>
+  <float32 info="world units; stay this far away from our last discarded firing position" name="firing_positions_old_position_avoid_distance" offset="0x3c8"/>
+  <float32 info="world units; stay this far away from friends" name="firing_positions_friend_avoid_distance" offset="0x3cc"/>
+  <float32 info="seconds; time between idle vocalizations when we are not in combat" name="communication_noncombat_idle_speech_time_from" offset="0x3f8"/>
+  <float32 info="seconds; time between idle vocalizations when we are not in combat" name="communication_noncombat_idle_speech_time_to" offset="0x3fc"/>
+  <float32 info="seconds; time between idle vocalizations when we are searching or in combat" name="communication_combat_idle_speech_time_from" offset="0x400"/>
+  <float32 info="seconds; time between idle vocalizations when we are searching or in combat" name="communication_combat_idle_speech_time_to" offset="0x404"/>
+</struct>

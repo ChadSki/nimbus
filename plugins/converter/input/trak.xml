@@ -1,0 +1,13 @@
+<plugin class="trak" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Control Points" offset="0x04" size="60">
+	<float name="Position: i (1)" offset="0x00"/>
+	<float name="Position: i (2)" offset="0x04"/>
+	<float name="Position: k" offset="0x08"/>
+	<float name="Orientation: i (1)" offset="0x0C"/>
+	<float name="Orientation: i (2)" offset="0x10"/>
+	<float name="Orientation: k" offset="0x14"/>
+	<float name="Orientation: w" offset="0x18"/>
+</struct>
+
+</plugin>

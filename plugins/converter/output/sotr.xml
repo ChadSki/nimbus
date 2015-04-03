@@ -1,0 +1,594 @@
+<?xml version="1.0" ?>
+<struct name="sotr" size="108">
+  <flag bit="7" name="simple_parameterization" offset="0x0"/>
+  <flag bit="6" name="ignore_normals" offset="0x0"/>
+  <flag bit="5" name="transparent_lit" offset="0x0"/>
+  <enum16 info="affects the density of tessellation (high means slow)" name="radiosity_properties_detail_level" offset="0x2">
+    <option name="high" value="0"/>
+    <option name="medium" value="1"/>
+    <option name="low" value="2"/>
+    <option name="turd" value="3"/>
+  </enum16>
+  <float32 info="0 - infinity; power of emitted light" name="radiosity_properties_power" offset="0x4"/>
+  <colorRGB name="radiosity_properties_color_of_emitted_light" offset="0x8"/>
+  <colorRGB info="light passing through this surface, if it's transparent, will be tinted this color" name="radiosity_properties_tint_color" offset="0x14"/>
+  <enum16 name="physics_properties_material_type" offset="0x22">
+    <option name="dirt" value="0"/>
+    <option name="sand" value="1"/>
+    <option name="stone" value="2"/>
+    <option name="snow" value="3"/>
+    <option name="wood" value="4"/>
+    <option name="metal_hollow" value="5"/>
+    <option name="metal_thin" value="6"/>
+    <option name="metal_thick" value="7"/>
+    <option name="rubber" value="8"/>
+    <option name="glass" value="9"/>
+    <option name="force_field" value="10"/>
+    <option name="grunt" value="11"/>
+    <option name="hunter_armor" value="12"/>
+    <option name="hunter_skin" value="13"/>
+    <option name="elite" value="14"/>
+    <option name="jackal" value="15"/>
+    <option name="jackal_energy_shield" value="16"/>
+    <option name="engineer_skin" value="17"/>
+    <option name="engineer_force_field" value="18"/>
+    <option name="flood_combat_form" value="19"/>
+    <option name="flood_carrier_form" value="20"/>
+    <option name="cyborg_armor" value="21"/>
+    <option name="cyborg_energy_shield" value="22"/>
+    <option name="human_armor" value="23"/>
+    <option name="human_skin" value="24"/>
+    <option name="sentinel" value="25"/>
+    <option name="monitor" value="26"/>
+    <option name="plastic" value="27"/>
+    <option name="water" value="28"/>
+    <option name="leaves" value="29"/>
+    <option name="elite_energy_shield" value="30"/>
+    <option name="ice" value="31"/>
+    <option name="hunter_shield" value="32"/>
+  </enum16>
+  <int8 info="0 - 255 only" name="generic_transparent_shader_numeric_counter_limit" offset="0x28"/>
+  <flag bit="7" name="alpha_tested" offset="0x29"/>
+  <flag bit="6" name="decal" offset="0x29"/>
+  <flag bit="5" name="two_sided" offset="0x29"/>
+  <flag bit="4" name="first_map_is_in_screenspace" offset="0x29"/>
+  <flag bit="3" name="draw_before_water" offset="0x29"/>
+  <flag bit="2" name="ignore_effect" offset="0x29"/>
+  <flag bit="1" name="scale_first_map_with_distance" offset="0x29"/>
+  <flag bit="0" name="numeric" offset="0x29"/>
+  <enum16 name="generic_transparent_shader_first_map_type" offset="0x2a">
+    <option name="map_2d" value="0"/>
+    <option name="first_map_is_reflection_cube_map" value="1"/>
+    <option name="first_map_is_object_centered_cube_map" value="2"/>
+    <option name="first_map_is_viewer_centered_cube_map" value="3"/>
+  </enum16>
+  <enum16 name="generic_transparent_shader_framebuffer_blend_function" offset="0x2c">
+    <option name="alpha_blend" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="double_multiply" value="2"/>
+    <option name="add" value="3"/>
+    <option name="subtract" value="4"/>
+    <option name="component_minimum" value="5"/>
+    <option name="component_maximum" value="6"/>
+    <option name="alpha_multiply_add" value="7"/>
+  </enum16>
+  <enum16 name="generic_transparent_shader_framebuffer_fade_mode" offset="0x2e">
+    <option name="none" value="0"/>
+    <option name="fade_when_perpendicular" value="1"/>
+    <option name="fade_when_parallel" value="2"/>
+  </enum16>
+  <enum16 info="fade is multiplied by this external value" name="generic_transparent_shader_framebuffer_fade_source" offset="0x30">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <float32 info="world units; 0 = place a single lens flare" name="lens_flares_lens_flare_spacing" offset="0x34"/>
+  <reference name="lens_flares_lens_flare" offset="0x38"/>
+  <struct_array name="extra_layers" offset="0x48" size="16">
+    <reference name="shader" offset="0x0"/>
+  </struct_array>
+  <struct_array name="maps" offset="0x54" size="100">
+    <flag bit="7" name="unfiltered" offset="0x0"/>
+    <flag bit="6" name="u_clamped" offset="0x0"/>
+    <flag bit="5" name="v_clamped" offset="0x0"/>
+    <float32 info="0 defaults to 1" name="map_u_scale" offset="0x4"/>
+    <float32 info="0 defaults to 1" name="map_v_scale" offset="0x8"/>
+    <float32 name="map_u_offset" offset="0xc"/>
+    <float32 name="map_v_offset" offset="0x10"/>
+    <float32 info="degrees" name="map_rotation" offset="0x14"/>
+    <float32 info="0 - 1 only" name="mipmap_bias" offset="0x18"/>
+    <reference name="map" offset="0x1c"/>
+    <enum16 name="texture_2d_animation_u_animation_source" offset="0x2c">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="texture_2d_animation_u_animation_function" offset="0x2e">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="texture_2d_animation_u_animation_period" offset="0x30"/>
+    <float32 name="texture_2d_animation_u_animation_phase" offset="0x34"/>
+    <float32 info="repeats; 0 defaults to 1" name="texture_2d_animation_u_animation_scale" offset="0x38"/>
+    <enum16 name="texture_2d_animation_v_animation_source" offset="0x3c">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="texture_2d_animation_v_animation_function" offset="0x3e">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="texture_2d_animation_v_animation_period" offset="0x40"/>
+    <float32 name="texture_2d_animation_v_animation_phase" offset="0x44"/>
+    <float32 info="repeats; 0 defaults to 1" name="texture_2d_animation_v_animation_scale" offset="0x48"/>
+    <enum16 name="texture_2d_animation_rotation_animation_source" offset="0x4c">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="texture_2d_animation_rotation_animation_function" offset="0x4e">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="texture_2d_animation_rotation_animation_period" offset="0x50"/>
+    <float32 name="texture_2d_animation_rotation_animation_phase" offset="0x54"/>
+    <float32 info="degrees; 0 defaults to 360" name="texture_2d_animation_rotation_animation_scale" offset="0x58"/>
+    <float32 name="texture_2d_animation_rotation_animation_center_x" offset="0x5c"/>
+    <float32 name="texture_2d_animation_rotation_animation_center_y" offset="0x60"/>
+  </struct_array>
+  <struct_array name="stages" offset="0x60" size="112">
+    <flag bit="7" name="color_mux" offset="0x0"/>
+    <flag bit="6" name="alpha_mux" offset="0x0"/>
+    <flag bit="5" name="a_out_controls_color_0_animation" offset="0x0"/>
+    <enum16 name="constants_and_animation_color_0_source" offset="0x4">
+      <option name="none" value="0"/>
+      <option name="_a" value="1"/>
+      <option name="_b" value="2"/>
+      <option name="_c" value="3"/>
+      <option name="_d" value="4"/>
+    </enum16>
+    <enum16 name="constants_and_animation_color_0_animation_function" offset="0x6">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="constants_and_animation_color_0_animation_period" offset="0x8"/>
+    <colorARGB name="constants_and_animation_color_0_animation_lower_bound" offset="0xc"/>
+    <colorARGB name="constants_and_animation_color_0_animation_upper_bound" offset="0x1c"/>
+    <colorARGB name="constants_and_animation_color_1" offset="0x2c"/>
+    <enum16 name="color_inputs_input_a" offset="0x3c">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_half" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+      <option name="vertex_color_0_diffuse_light" value="9"/>
+      <option name="vertex_color_1_fade_perpendicular" value="10"/>
+      <option name="scratch_color_0" value="11"/>
+      <option name="scratch_color_1" value="12"/>
+      <option name="constant_color_0" value="13"/>
+      <option name="constant_color_1" value="14"/>
+      <option name="map_alpha_0" value="15"/>
+      <option name="map_alpha_1" value="16"/>
+      <option name="map_alpha_2" value="17"/>
+      <option name="map_alpha_3" value="18"/>
+      <option name="vertex_alpha_0_fade_none" value="19"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="20"/>
+      <option name="scratch_alpha_0" value="21"/>
+      <option name="scratch_alpha_1" value="22"/>
+      <option name="constant_alpha_0" value="23"/>
+      <option name="constant_alpha_1" value="24"/>
+    </enum16>
+    <enum16 name="color_inputs_input_a_mapping" offset="0x3e">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="color_inputs_input_b" offset="0x40">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+      <option name="vertex_color_0_diffuse_light" value="9"/>
+      <option name="vertex_color_1_fade_perpendicular" value="10"/>
+      <option name="scratch_color_0" value="11"/>
+      <option name="scratch_color_1" value="12"/>
+      <option name="constant_color_0" value="13"/>
+      <option name="constant_color_1" value="14"/>
+      <option name="map_alpha_0" value="15"/>
+      <option name="map_alpha_1" value="16"/>
+      <option name="map_alpha_2" value="17"/>
+      <option name="map_alpha_3" value="18"/>
+      <option name="vertex_alpha_0_fade_none" value="19"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="20"/>
+      <option name="scratch_alpha_0" value="21"/>
+      <option name="scratch_alpha_1" value="22"/>
+      <option name="constant_alpha_0" value="23"/>
+      <option name="constant_alpha_1" value="24"/>
+    </enum16>
+    <enum16 name="color_inputs_input_b_mapping" offset="0x42">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="color_inputs_input_c" offset="0x44">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+      <option name="vertex_color_0_diffuse_light" value="9"/>
+      <option name="vertex_color_1_fade_perpendicular" value="10"/>
+      <option name="scratch_color_0" value="11"/>
+      <option name="scratch_color_1" value="12"/>
+      <option name="constant_color_0" value="13"/>
+      <option name="constant_color_1" value="14"/>
+      <option name="map_alpha_0" value="15"/>
+      <option name="map_alpha_1" value="16"/>
+      <option name="map_alpha_2" value="17"/>
+      <option name="map_alpha_3" value="18"/>
+      <option name="vertex_alpha_0_fade_none" value="19"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="20"/>
+      <option name="scratch_alpha_0" value="21"/>
+      <option name="scratch_alpha_1" value="22"/>
+      <option name="constant_alpha_0" value="23"/>
+      <option name="constant_alpha_1" value="24"/>
+    </enum16>
+    <enum16 name="color_inputs_input_c_mapping" offset="0x46">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="color_inputs_input_d" offset="0x48">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+      <option name="vertex_color_0_diffuse_light" value="9"/>
+      <option name="vertex_color_1_fade_perpendicular" value="10"/>
+      <option name="scratch_color_0" value="11"/>
+      <option name="scratch_color_1" value="12"/>
+      <option name="constant_color_0" value="13"/>
+      <option name="constant_color_1" value="14"/>
+      <option name="map_alpha_0" value="15"/>
+      <option name="map_alpha_1" value="16"/>
+      <option name="map_alpha_2" value="17"/>
+      <option name="map_alpha_3" value="18"/>
+      <option name="vertex_alpha_0_fade_none" value="19"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="20"/>
+      <option name="scratch_alpha_0" value="21"/>
+      <option name="scratch_alpha_1" value="22"/>
+      <option name="constant_alpha_0" value="23"/>
+      <option name="constant_alpha_1" value="24"/>
+    </enum16>
+    <enum16 name="color_inputs_input_d_mapping" offset="0x4a">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="color_outputs_output_ab" offset="0x4c">
+      <option name="discard" value="0"/>
+      <option name="scratch_color_0_final_color" value="1"/>
+      <option name="scratch_color_1" value="2"/>
+      <option name="vertex_color_0" value="3"/>
+      <option name="vertex_color_1" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+    </enum16>
+    <enum16 name="color_outputs_output_ab_function" offset="0x4e">
+      <option name="multiply" value="0"/>
+      <option name="dot_product" value="1"/>
+    </enum16>
+    <enum16 name="color_outputs_output_cd" offset="0x50">
+      <option name="discard" value="0"/>
+      <option name="scratch_color_0_final_color" value="1"/>
+      <option name="scratch_color_1" value="2"/>
+      <option name="vertex_color_0" value="3"/>
+      <option name="vertex_color_1" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+    </enum16>
+    <enum16 name="color_outputs_output_cd_function" offset="0x52">
+      <option name="multiply" value="0"/>
+      <option name="dot_product" value="1"/>
+    </enum16>
+    <enum16 name="color_outputs_output_ab_cd_mux_sum" offset="0x54">
+      <option name="discard" value="0"/>
+      <option name="scratch_color_0_final_color" value="1"/>
+      <option name="scratch_color_1" value="2"/>
+      <option name="vertex_color_0" value="3"/>
+      <option name="vertex_color_1" value="4"/>
+      <option name="map_color_0" value="5"/>
+      <option name="map_color_1" value="6"/>
+      <option name="map_color_2" value="7"/>
+      <option name="map_color_3" value="8"/>
+    </enum16>
+    <enum16 name="color_outputs_output_mapping" offset="0x56">
+      <option name="identity" value="0"/>
+      <option name="scale_by_one_half" value="1"/>
+      <option name="scale_by_2" value="2"/>
+      <option name="scale_by_4" value="3"/>
+      <option name="bias_by_negative_one_half" value="4"/>
+      <option name="expand_normal" value="5"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_a" offset="0x58">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+      <option name="vertex_alpha_0_fade_none" value="9"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="10"/>
+      <option name="scratch_alpha_0" value="11"/>
+      <option name="scratch_alpha_1" value="12"/>
+      <option name="constant_alpha_0" value="13"/>
+      <option name="constant_alpha_1" value="14"/>
+      <option name="map_blue_0" value="15"/>
+      <option name="map_blue_1" value="16"/>
+      <option name="map_blue_2" value="17"/>
+      <option name="map_blue_3" value="18"/>
+      <option name="vertex_blue_0_blue_light" value="19"/>
+      <option name="vertex_blue_1_fade_parallel" value="20"/>
+      <option name="scratch_blue_0" value="21"/>
+      <option name="scratch_blue_1" value="22"/>
+      <option name="constant_blue_0" value="23"/>
+      <option name="constant_blue_1" value="24"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_a_mapping" offset="0x5a">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_b" offset="0x5c">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+      <option name="vertex_alpha_0_fade_none" value="9"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="10"/>
+      <option name="scratch_alpha_0" value="11"/>
+      <option name="scratch_alpha_1" value="12"/>
+      <option name="constant_alpha_0" value="13"/>
+      <option name="constant_alpha_1" value="14"/>
+      <option name="map_blue_0" value="15"/>
+      <option name="map_blue_1" value="16"/>
+      <option name="map_blue_2" value="17"/>
+      <option name="map_blue_3" value="18"/>
+      <option name="vertex_blue_0_blue_light" value="19"/>
+      <option name="vertex_blue_1_fade_parallel" value="20"/>
+      <option name="scratch_blue_0" value="21"/>
+      <option name="scratch_blue_1" value="22"/>
+      <option name="constant_blue_0" value="23"/>
+      <option name="constant_blue_1" value="24"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_b_mapping" offset="0x5e">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_c" offset="0x60">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+      <option name="vertex_alpha_0_fade_none" value="9"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="10"/>
+      <option name="scratch_alpha_0" value="11"/>
+      <option name="scratch_alpha_1" value="12"/>
+      <option name="constant_alpha_0" value="13"/>
+      <option name="constant_alpha_1" value="14"/>
+      <option name="map_blue_0" value="15"/>
+      <option name="map_blue_1" value="16"/>
+      <option name="map_blue_2" value="17"/>
+      <option name="map_blue_3" value="18"/>
+      <option name="vertex_blue_0_blue_light" value="19"/>
+      <option name="vertex_blue_1_fade_parallel" value="20"/>
+      <option name="scratch_blue_0" value="21"/>
+      <option name="scratch_blue_1" value="22"/>
+      <option name="constant_blue_0" value="23"/>
+      <option name="constant_blue_1" value="24"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_c_mapping" offset="0x62">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_d" offset="0x64">
+      <option name="zero" value="0"/>
+      <option name="one" value="1"/>
+      <option name="one_half" value="2"/>
+      <option name="negative_one" value="3"/>
+      <option name="negative_one_half" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+      <option name="vertex_alpha_0_fade_none" value="9"/>
+      <option name="vertex_alpha_1_fade_perpendicular" value="10"/>
+      <option name="scratch_alpha_0" value="11"/>
+      <option name="scratch_alpha_1" value="12"/>
+      <option name="constant_alpha_0" value="13"/>
+      <option name="constant_alpha_1" value="14"/>
+      <option name="map_blue_0" value="15"/>
+      <option name="map_blue_1" value="16"/>
+      <option name="map_blue_2" value="17"/>
+      <option name="map_blue_3" value="18"/>
+      <option name="vertex_blue_0_blue_light" value="19"/>
+      <option name="vertex_blue_1_fade_parallel" value="20"/>
+      <option name="scratch_blue_0" value="21"/>
+      <option name="scratch_blue_1" value="22"/>
+      <option name="constant_blue_0" value="23"/>
+      <option name="constant_blue_1" value="24"/>
+    </enum16>
+    <enum16 name="alpha_inputs_input_d_mapping" offset="0x66">
+      <option name="mapping_0" value="0"/>
+      <option name="mapping_1" value="1"/>
+      <option name="mapping_2" value="2"/>
+      <option name="mapping_3" value="3"/>
+      <option name="mapping_4" value="4"/>
+      <option name="mapping_5" value="5"/>
+      <option name="mapping_6" value="6"/>
+      <option name="mapping_7" value="7"/>
+    </enum16>
+    <enum16 name="alpha_outputs_output_ab" offset="0x68">
+      <option name="discard" value="0"/>
+      <option name="scratch_alpha_0_final_alpha" value="1"/>
+      <option name="scratch_alpha_1" value="2"/>
+      <option name="vertex_alpha_0_fog" value="3"/>
+      <option name="vertex_alpha_1" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+    </enum16>
+    <enum16 name="alpha_outputs_output_cd" offset="0x6a">
+      <option name="discard" value="0"/>
+      <option name="scratch_alpha_0_final_alpha" value="1"/>
+      <option name="scratch_alpha_1" value="2"/>
+      <option name="vertex_alpha_0_fog" value="3"/>
+      <option name="vertex_alpha_1" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+    </enum16>
+    <enum16 name="alpha_outputs_output_ab_cd_mux_sum" offset="0x6c">
+      <option name="discard" value="0"/>
+      <option name="scratch_alpha_0_final_alpha" value="1"/>
+      <option name="scratch_alpha_1" value="2"/>
+      <option name="vertex_alpha_0_fog" value="3"/>
+      <option name="vertex_alpha_1" value="4"/>
+      <option name="map_alpha_0" value="5"/>
+      <option name="map_alpha_1" value="6"/>
+      <option name="map_alpha_2" value="7"/>
+      <option name="map_alpha_3" value="8"/>
+    </enum16>
+    <enum16 name="alpha_outputs_output_mapping" offset="0x6e">
+      <option name="identity" value="0"/>
+      <option name="scale_by_one_half" value="1"/>
+      <option name="scale_by_2" value="2"/>
+      <option name="scale_by_4" value="3"/>
+      <option name="bias_by_negative_one_half" value="4"/>
+      <option name="expand_normal" value="5"/>
+    </enum16>
+  </struct_array>
+</struct>

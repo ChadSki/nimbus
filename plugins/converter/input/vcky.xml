@@ -1,0 +1,69 @@
+<plugin class="vcky" author="sparky" version="4.0" headersize="Main">
+
+<dependency name="Display Font" offset="0x00"/>
+<dependency name="Background Bitmap" offset="0x10"/>
+<dependency name="Special Key Labels String List" offset="0x20"/>
+
+<struct name="Virtual Keys" info="must have 44 keys/chunks" offset="0x30" size="80">
+	<enum16 name="Keyboard Key" offset="0x00">
+		<option name="1" value="00"/>
+		<option name="2" value="01"/>
+		<option name="3" value="02"/>
+		<option name="4" value="03"/>
+		<option name="5" value="04"/>
+		<option name="6" value="05"/>
+		<option name="7" value="06"/>
+		<option name="8" value="07"/>
+		<option name="9" value="08"/>
+		<option name="0" value="09"/>
+		<option name="A" value="10"/>
+		<option name="B" value="11"/>
+		<option name="C" value="12"/>
+		<option name="D" value="13"/>
+		<option name="E" value="14"/>
+		<option name="F" value="15"/>
+		<option name="G" value="16"/>
+		<option name="H" value="17"/>
+		<option name="I" value="18"/>
+		<option name="J" value="19"/>
+		<option name="K" value="20"/>
+		<option name="L" value="21"/>
+		<option name="M" value="22"/>
+		<option name="N" value="23"/>
+		<option name="O" value="24"/>
+		<option name="P" value="25"/>
+		<option name="Q" value="26"/>
+		<option name="R" value="27"/>
+		<option name="S" value="28"/>
+		<option name="T" value="29"/>
+		<option name="U" value="30"/>
+		<option name="V" value="31"/>
+		<option name="W" value="32"/>
+		<option name="X" value="33"/>
+		<option name="Y" value="34"/>
+		<option name="Z" value="35"/>
+		<option name="DONE" value="36"/>
+		<option name="SHIFT" value="37"/>
+		<option name="CAPS LOCK" value="38"/>
+		<option name="SYMBOLS" value="39"/>
+		<option name="BACKSPACE" value="40"/>
+		<option name="LEFT" value="41"/>
+		<option name="RIGHT" value="42"/>
+		<option name="SPACE" value="43"/>
+	</enum16>
+	
+	<short name="Key Codes.Lowercase Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x02"/>
+	<short name="Key Codes.Shift Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x04"/>
+	<short name="Key Codes.Caps Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x06"/>
+	<short name="Key Codes.Symbols Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x08"/>
+	<short name="Key Codes.Shift+Caps Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x0A"/>
+	<short name="Key Codes.Shift+Symbols Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x0C"/>
+	<short name="Key Codes.Caps+Symbols Character" info_img="vcky Virtual Keys.Key Codes.png" offset="0x0E"/>
+	
+	<dependency name="Key Codes.Unselected Background Bitmap" info_img="vcky Virtual Keys.Key Codes.png" offset="0x10"/>
+	<dependency name="Key Codes.Selected Background Bitmap" info_img="vcky Virtual Keys.Key Codes.png" offset="0x20"/>
+	<dependency name="Key Codes.Active Background Bitmap" info_img="vcky Virtual Keys.Key Codes.png" offset="0x30"/>
+	<dependency name="Key Codes.Sticky Background Bitmap" info_img="vcky Virtual Keys.Key Codes.png" offset="0x40"/>
+</struct>
+
+</plugin>

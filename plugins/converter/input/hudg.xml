@@ -1,0 +1,183 @@
+<plugin class="hudg" author="sparky" version="4.0" headersize="Main">
+
+<enum16 name="Messaging Parameters.Anchor" offset="0x00">
+	<option name="Top Left" value="00"/>
+	<option name="Top Right" value="01"/>
+	<option name="Bottom Left" value="02"/>
+	<option name="Bottom Right" value="03"/>
+	<option name="Center" value="04"/>
+</enum16>
+
+<short name="Messaging Parameters.Anchor Offset: x" offset="0x24"/>
+<short name="Messaging Parameters.Anchor Offset: y" offset="0x26"/>
+
+<float name="Messaging Parameters.Width Scale" offset="0x28"/>
+<float name="Messaging Parameters.Height Scale" offset="0x2C"/>
+
+<bitmask16 name="Messaging Parameters.Scaling Flags" offset="0x30">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Messaging Parameters.Single Player Font" offset="0x48"/>
+<dependency name="Messaging Parameters.Multiplayer Font" offset="0x58"/>
+
+<float name="Messaging Parameters.Up Time" offset="0x68"/>
+<float name="Messaging Parameters.Fade Time" offset="0x6C"/>
+
+<colorARGB name="Messaging Parameters.Icon Color" offset="0x70"/>
+<colorARGB name="Messaging Parameters.Text Color" offset="0x80"/>
+
+<float name="Messaging Parameters.Text Spacing" offset="0x90"/>
+
+<dependency name="Messaging Parameters.Item Message Text" offset="0x94"/>
+<dependency name="Messaging Parameters.Icon Bitmap" offset="0xA4"/>
+<dependency name="Messaging Parameters.Alternate Icon Text" offset="0xB4"/>
+
+<struct name="Button Icons" info="a, b, x, y, black, white, left trigger, right trigger, dpad up, dpad down, dpad left, dpad right, start, back, left thumb, right thumb, left stick (not a button), right stick (not a button)" offset="0xC4" size="16">
+	<short name="Messaging Information.Sequence Index" info="into the global HUD icon bitmap" offset="0x00"/>
+	<short name="Messaging Information.Width Offset" info="extra spacing beyond bitmap width for text alignment" offset="0x02"/>
+	<short name="Messaging Information.Offset From Reference Corner: x" offset="0x04"/>
+	<short name="Messaging Information.Offset From Reference Corner: y" offset="0x06"/>
+	
+	<colorbyte name="Messaging Information.Override Icon Color" offset="0x08"/>
+	
+	<char name="Messaging Information.Frame Rate" note="0 - 30 only" offset="0x0C"/>
+	
+	<bitmask16 name="Messaging Information.Flags" offset="0x0D">
+		<option name="Use Text From String_List Instead" value="15"/>
+		<option name="Override Default Color" value="14"/>
+		<option name="Width Offset is Absolute Icon Width" value="13"/>
+	</bitmask16>
+	
+	<short name="Messaging Information.Text Index" offset="0x0E"/>
+</struct>
+
+<colorbyte name="HUD Help Text Color.Default Color" offset="0xD0"/>
+<colorbyte name="HUD Help Text Color.Flashing Color" offset="0xD4"/>
+
+<float name="HUD Help Text Color.Flash Period" offset="0xD8"/>
+<float name="HUD Help Text Color.Flash Delay" offset="0xDC"/>
+
+<short name="HUD Help Text Color.Number of Flashes" offset="0xE0"/>
+
+<bitmask8 name="HUD Help Text Color.Flash Flags" offset="0xE2">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="HUD Help Text Color.Flash Length" offset="0xE4"/>
+
+<colorbyte name="HUD Help Text Color.Disabled Color" offset="0xE8"/>
+
+<dependency name="Other HUD Messaging Data.HUD Messages" offset="0xF0"/>
+
+<colorbyte name="Objective Colors.Default Color" offset="0x100"/>
+<colorbyte name="Objective Colors.Flashing Color" offset="0x104"/>
+
+<float name="Objective Colors.Flash Period" offset="0x108"/>
+<float name="Objective Colors.Flash Delay" offset="0x10C"/>
+
+<short name="Objective Colors.Number of Flashes" offset="0x110"/>
+
+<bitmask8 name="Objective Colors.Flash Flags" offset="0x112">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Objective Colors.Flash Length" offset="0x114"/>
+
+<colorbyte name="Objective Colors.Disabled Color" offset="0x118"/>
+
+<short name="Objective Colors.Uptime Ticks" offset="0x11C"/>
+<short name="Objective Colors.Fade Ticks" offset="0x11E"/>
+
+<float name="Waypoint Parameters.Top Offset" info_img="hudg Waypoint Parameters.png" offset="0x120"/>
+<float name="Waypoint Parameters.Bottom Offset" info_img="hudg Waypoint Parameters.png" offset="0x124"/>
+<float name="Waypoint Parameters.Left Offset" info_img="hudg Waypoint Parameters.png" offset="0x128"/>
+<float name="Waypoint Parameters.Right Offset" info_img="hudg Waypoint Parameters.png" offset="0x12C"/>
+
+<dependency name="Waypoint Parameters.Arrow Bitmap" info_img="hudg Waypoint Parameters.png" offset="0x150"/>
+
+<struct name="Waypoint Arrows" offset="0x160" size="104">
+	<string32 name="Name" offset="0x00"/>
+	
+	<colorbyte name="Color" offset="0x28"/>
+	
+	<float name="Opacity" offset="0x2C"/>
+	<float name="Translucency" offset="0x30"/>
+	
+	<short name="On-Screen Sequence Index" offset="0x34"/>
+	<short name="Off-Screen Sequence Index" offset="0x36"/>
+	<short name="Occluded Sequence Index" offset="0x38"/>
+	
+	<bitmask8 name="Flags" offset="0x4C">
+		<option name="Don't Rotate When Pointing Off-Screen" value="07"/>
+	</bitmask8>
+</struct>
+
+<float name="Multiplayer Parameters.HUD Scale in Multiplayer" offset="0x1BC"/>
+
+<dependency name="HUD Globals.Default Weapon HUD" offset="0x2C0"/>
+<float name="HUD Globals.Motion Sensor Range" offset="0x2D0"/>
+<float name="HUD Globals.Motion Sensor Velocity Sensitivity" info="how fast something moves to show up on the motion sensor; remember to consider uphill/downhill speed multipliers!" offset="0x2D4"/>
+<float name="HUD Globals.Motion Sensor Scale" info="DON'T TOUCH EVER" offset="0x2D8"/>
+
+<short name="HUD Globals.Default Chapter Title Bounds: top" offset="0x2DC"/>
+<short name="HUD Globals.Default Chapter Title Bounds: left" offset="0x2DE"/>
+<short name="HUD Globals.Default Chapter Title Bounds: bottom" offset="0x2E0"/>
+<short name="HUD Globals.Default Chapter Title Bounds: right" offset="0x2E2"/>
+
+<short name="HUD Damage Indicators.Top Offset" offset="0x310"/>
+<short name="HUD Damage Indicators.Bottom Offset" offset="0x312"/>
+<short name="HUD Damage Indicators.Left Offset" offset="0x314"/>
+<short name="HUD Damage Indicators.Right Offset" offset="0x316"/>
+
+<dependency name="HUD Damage Indicators.Indicator Bitmap" offset="0x338"/>
+
+<short name="HUD Damage Indicators.Sequence Index" offset="0x348"/>
+<short name="HUD Damage Indicators.Multiplayer Sequence Index" offset="0x34A"/>
+
+<colorbyte name="HUD Damage Indicators.Color" offset="0x34C"/>
+
+<colorbyte name="HUD Timer Definitions.Not Much Time Left Flash Color.Default Color" offset="0x360"/>
+<colorbyte name="HUD Timer Definitions.Not Much Time Left Flash Color.Flashing Color" offset="0x364"/>
+
+<float name="HUD Timer Definitions.Not Much Time Left Flash Color.Flash Period" offset="0x368"/>
+<float name="HUD Timer Definitions.Not Much Time Left Flash Color.Flash Delay" offset="0x36C"/>
+
+<short name="HUD Timer Definitions.Not Much Time Left Flash Color.Number of Flashes" offset="0x370"/>
+
+<bitmask8 name="HUD Timer Definitions.Not Much Time Left Flash Color.Flash Flags" offset="0x372">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="HUD Timer Definitions.Not Much Time Left Flash Color.Flash Length" offset="0x374"/>
+
+<colorbyte name="HUD Timer Definitions.Not Much Time Left Flash Color.Disabled Color" offset="0x378"/>
+
+<colorbyte name="HUD Timer Definitions.Time Out Flash Color.Default Color" offset="0x380"/>
+<colorbyte name="HUD Timer Definitions.Time Out Flash Color.Flashing Color" offset="0x384"/>
+
+<float name="HUD Timer Definitions.Time Out Flash Color.Flash Period" offset="0x388"/>
+<float name="HUD Timer Definitions.Time Out Flash Color.Flash Delay" offset="0x38C"/>
+
+<short name="HUD Timer Definitions.Time Out Flash Color.Number of Flashes" offset="0x390"/>
+
+<bitmask8 name="HUD Timer Definitions.Time Out Flash Color.Flash Flags" offset="0x392">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="HUD Timer Definitions.Time Out Flash Color.Flash Length" offset="0x394"/>
+
+<colorbyte name="HUD Timer Definitions.Time Out Flash Color.Disabled Color" offset="0x398"/>
+
+<dependency name="HUD Timer Definitions.Time Out Flash Color.Carnage Report Bitmap" offset="0x3C8"/>
+
+<short name="HUD Info That Wouldn't Fit Anywhere Else.Loading Begin Text" offset="0x3D8"/>
+<short name="HUD Info That Wouldn't Fit Anywhere Else.Loading End Text" offset="0x3DA"/>
+<short name="HUD Info That Wouldn't Fit Anywhere Else.Checkpoint Begin Text" offset="0x3DC"/>
+<short name="HUD Info That Wouldn't Fit Anywhere Else.Checkpoint End Text" offset="0x3DE"/>
+
+<dependency name="HUD Info That Wouldn't Fit Anywhere Else.Checkpoint Sound" offset="0x3E0"/>
+
+</plugin>

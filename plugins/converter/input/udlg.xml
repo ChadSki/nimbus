@@ -1,0 +1,182 @@
+<plugin class="udlg" author="sparky" version="4.0" headersize="Main">
+
+<dependency name="Idle.Idle Noncombat" info="played randomly and intermittently whenever we aren't in combat" info_img="udlg Idle.png" offset="0x10"/>
+<dependency name="Idle.Idle Combat" info="played randomly and intermittently whenever we're in combat" info_img="udlg Idle.png" offset="0x20"/>
+<dependency name="Idle.Idle Flee" info="played continuously while we are fleeing" info_img="udlg Idle.png" offset="0x30"/>
+
+<dependency name="Involuntary.Pain Body Minor" info="took body damage" info_img="udlg Involuntary.png" offset="0x70"/>
+<dependency name="Involuntary.Pain Body Major" info="took a significant amount of body damage" info_img="udlg Involuntary.png" offset="0x80"/>
+<dependency name="Involuntary.Pain Shield" info="took shield damage" info_img="udlg Involuntary.png" offset="0x90"/>
+<dependency name="Involuntary.Pain Falling" info="took damage from falling" info_img="udlg Involuntary.png" offset="0xA0"/>
+<dependency name="Involuntary.Scream Fear" info="screaming in fear (falling to your death, explosive stuck to you)" info_img="udlg Involuntary.png" offset="0xB0"/>
+<dependency name="Involuntary.Scream Pain" info="screaming in pain (being flamed)" info_img="udlg Involuntary.png" offset="0xC0"/>
+<dependency name="Involuntary.Maimed Limb" info="limb body part (arm or leg) was destroyed" info_img="udlg Involuntary.png" offset="0xD0"/>
+<dependency name="Involuntary.Maimed Head" info="head body part was destroyed" info_img="udlg Involuntary.png" offset="0xE0"/>
+<dependency name="Involuntary.Death Quiet" info="died from minor damage, or was unprepared" info_img="udlg Involuntary.png" offset="0xF0"/>
+<dependency name="Involuntary.Death Violent" info="died from violent trauma" info_img="udlg Involuntary.png" offset="0x100"/>
+<dependency name="Involuntary.Death Falling" info="died from falling" info_img="udlg Involuntary.png" offset="0x110"/>
+<dependency name="Involuntary.Death Agonizing" info="died in a horribly painful fashion (burnt to death)" info_img="udlg Involuntary.png" offset="0x120"/>
+<dependency name="Involuntary.Death Instant" info="died instantly" info_img="udlg Involuntary.png" offset="0x130"/>
+<dependency name="Involuntary.Death Flying" info="died and was blown up into the airdeath instant" info_img="udlg Involuntary.png" offset="0x140"/>
+
+<dependency name="Hurting People.Damaged Friend" info="hurt a friendly AI" offset="0x160"/>
+<dependency name="Hurting People.Damaged Friend Player" info="hurt a friendly player" offset="0x170"/>
+<dependency name="Hurting People.Damaged Enemy" info="hurt an enemy" offset="0x180"/>
+<dependency name="Hurting People.Damaged Enemy Comment" info="hurt an enemy: comment to friend" offset="0x190"/>
+
+<dependency name="Being Hurt.Hurt Friend" info="hurt by a friendly AI" offset="0x1E0"/>
+<dependency name="Being Hurt.Hurt Friend Response" info="hurt by a friendly AI: response from that friend" offset="0x1F0"/>
+<dependency name="Being Hurt.Hurt Friend Player" info="hurt by a friendly player" offset="0x200"/>
+<dependency name="Being Hurt.Hurt Enemy" info="hurt by an enemy" offset="0x210"/>
+<dependency name="Being Hurt.Hurt Enemy Response" info="hurt by an enemy: response from the enemy that hurt us ('you like that?')" offset="0x220"/>
+<dependency name="Being Hurt.Hurt Enemy Comment" info="hurt by an enemy: comment from a friend of ours" offset="0x230"/>
+<dependency name="Being Hurt.Hurt Enemy Bullet" info="hurt by an enemy with bullets" offset="0x240"/>
+<dependency name="Being Hurt.Hurt Enemy Needler" info="hurt by an enemy with needles" offset="0x250"/>
+<dependency name="Being Hurt.Hurt Enemy Plasma" info="hurt by an enemy with a plasma bolt" offset="0x260"/>
+<dependency name="Being Hurt.Hurt Enemy Sniper" info="hurt by an enemy with a sniper weapon" offset="0x270"/>
+<dependency name="Being Hurt.Hurt Enemy Grenade" info="a grenade is stuck to us" offset="0x280"/>
+<dependency name="Being Hurt.Hurt Enemy Explosion" info="hurt by an enemy with an explosive weapon" offset="0x290"/>
+<dependency name="Being Hurt.Hurt Enemy Melee" info="hurt by an enemy with a melee weapon" offset="0x2A0"/>
+<dependency name="Being Hurt.Hurt Enemy Flame" info="hurt by an enemy with flamethrower" offset="0x2B0"/>
+<dependency name="Being Hurt.Hurt Enemy Shotgun" info="hurt by an enemy with a shotgun" offset="0x2C0"/>
+<dependency name="Being Hurt.Hurt Enemy Vehicle" info="hurt by an enemy with a vehicle" offset="0x2D0"/>
+<dependency name="Being Hurt.Hurt Enemy Mounted Weapon" note="hurt by an enemy with a fixed weapon" offset="0x2E0"/>
+
+<dependency name="Killing People.Killed Friend" info="killed a friendly AI" offset="0x320"/>
+<dependency name="Killing People.Killed Friend Comment" info="killed a friendly AI: comment from a friend" offset="0x330"/>
+<dependency name="Killing People.Killed Friend Player" info="killed a friendly player" offset="0x340"/>
+<dependency name="Killing People.Killed Friend Player Comment" info="killed a friendly player: comment from a friend" offset="0x350"/>
+<dependency name="Killing People.Killed Enemy" info="killed an enemy" offset="0x360"/>
+<dependency name="Killing People.Killed Enemy Comment" info="killed an enemy: comment from a friend" offset="0x370"/>
+<dependency name="Killing People.Killed Enemy Player" info="killed an enemy player" offset="0x380"/>
+<dependency name="Killing People.Killed Enemy Player Comment" info="killed an enemy player: comment from a friend" offset="0x390"/>
+<dependency name="Killing People.Killed Enemy Covenant" info="killed an enemy covenant" offset="0x3A0"/>
+<dependency name="Killing People.Killed Enemy Covenant Comment" info="killed an enemy covenant: comment from a friend" offset="0x3B0"/>
+<dependency name="Killing People.Killed Enemy Floodcombat" info="killed an enemy flood combat form" offset="0x3C0"/>
+<dependency name="Killing People.Killed Enemy Floodcombat Comment" info="killed an enemy flood combat form: comment from a friend" offset="0x3D0"/>
+<dependency name="Killing People.Killed Enemy Floodcarrier" info="killed an enemy flood carrier form" offset="0x3E0"/>
+<dependency name="Killing People.Killed Enemy Floodcarrier Comment" info="killed an enemy flood carrier form: comment from a friend" offset="0x3F0"/>
+<dependency name="Killing People.Killed Enemy Sentinel" info="killed an enemy sentinel" offset="0x400"/>
+<dependency name="Killing People.Killed Enemy Sentinel Comment" info="killed an enemy sentinel: comment from a friend" offset="0x410"/>
+<dependency name="Killing People.Killed Enemy Bullet" info="killed an enemy with bullets" offset="0x420"/>
+<dependency name="Killing People.Killed Enemy Needler" info="killed an enemy with needles" offset="0x430"/>
+<dependency name="Killing People.Killed Enemy Plasma" info="killed an enemy with a plasma bolt" offset="0x440"/>
+<dependency name="Killing People.Killed Enemy Sniper" info="killed an enemy with a sniper weapon" offset="0x450"/>
+<dependency name="Killing People.Killed Enemy Grenade" info="killed an enemy with a grenade" offset="0x460"/>
+<dependency name="Killing People.Killed Enemy Explosion" info="killed an enemy with an explosive weapon" offset="0x470"/>
+<dependency name="Killing People.Killed Enemy Melee" info="killed an enemy with a melee weapon" offset="0x480"/>
+<dependency name="Killing People.Killed Enemy Flame" info="killed an enemy with flamethrower" offset="0x490"/>
+<dependency name="Killing People.Killed Enemy Shotgun" info="killed an enemy with a shotgun" offset="0x4A0"/>
+<dependency name="Killing People.Killed Enemy Vehicle" info="killed an enemy by hitting them with a vehicle" offset="0x4B0"/>
+<dependency name="Killing People.Killed Enemy Mounted Weapon" info="killed an enemy with a fixed weapon" offset="0x4C0"/>
+<dependency name="Killing People.Killing Spree" info="we are on a killing spree" offset="0x4D0"/>
+
+<dependency name="Player Kill Responses.Player Kill Comment" info="response to the player killing an enemy" info_img="udlg Player Kill Responses.png" offset="0x510"/>
+<dependency name="Player Kill Responses.Player Kill Bullet Comment" info="response to the player killing an enemy with bullets" info_img="udlg Player Kill Responses.png" offset="0x520"/>
+<dependency name="Player Kill Responses.Player Kill Needler Comment" info="response to the player killing an enemy with needles" info_img="udlg Player Kill Responses.png" offset="0x530"/>
+<dependency name="Player Kill Responses.Player Kill Plasma Comment" info="response to the player killing an enemy with a plasma bolt" info_img="udlg Player Kill Responses.png" offset="0x540"/>
+<dependency name="Player Kill Responses.Player Kill Sniper Comment" info="response to the player killing an enemy with a sniper weapon" info_img="udlg Player Kill Responses.png" offset="0x550"/>
+<dependency name="Player Kill Responses.ANYONE Kill Grenade Comment" info="response to _anyone_ killing an enemy with a grenade" info_img="udlg Player Kill Responses.png" offset="0x560"/>
+<dependency name="Player Kill Responses.Player Kill Explosion Comment" info="response to the player killing an enemy with an explosive weapon" info_img="udlg Player Kill Responses.png" offset="0x570"/>
+<dependency name="Player Kill Responses.Player Kill Melee Comment" info="response to the player killing an enemy with a melee weapon" info_img="udlg Player Kill Responses.png" offset="0x580"/>
+<dependency name="Player Kill Responses.Player Kill Flame Comment" info="response to the player killing an enemy with flamethrower" info_img="udlg Player Kill Responses.png" offset="0x590"/>
+<dependency name="Player Kill Responses.Player Kill Shotgun Comment" info="response to the player killing an enemy with a shotgun" info_img="udlg Player Kill Responses.png" offset="0x5A0"/>
+<dependency name="Player Kill Responses.Player Kill Vehicle Comment" info="response to the player killing an enemy by hitting them with a vehicle" info_img="udlg Player Kill Responses.png" offset="0x5B0"/>
+<dependency name="Player Kill Responses.Player Kill Mounted Weapon Comment" info="response to the player killing an enemy with a fixed weapon" info_img="udlg Player Kill Responses.png" offset="0x5C0"/>
+<dependency name="Player Kill Responses.Player Killing Spree Comment" info="response to the player going on a killing spree" info_img="udlg Player Kill Responses.png" offset="0x5D0"/>
+
+<dependency name="Friends Dying.Friend Died" info="a friendly AI died" offset="0x610"/>
+<dependency name="Friends Dying.Friend Player Died" info="a friendly player died" offset="0x620"/>
+<dependency name="Friends Dying.Friend Killed by Friend" info="a friend died from friendly fire" offset="0x630"/>
+<dependency name="Friends Dying.Friend Killed by Friendly Player" info="friend died from player's friendly fire" offset="0x640"/>
+<dependency name="Friends Dying.Friend Killed by Enemy" info="a friend died from enemy fire" offset="0x650"/>
+<dependency name="Friends Dying.Friend Killed by Enemy Player" info="friend died from an enemy player" offset="0x660"/>
+<dependency name="Friends Dying.Friend Killed by Covenant" info="a friend died from covenant fire" offset="0x670"/>
+<dependency name="Friends Dying.Friend Killed by Flood" info="a friend died from the flood" offset="0x680"/>
+<dependency name="Friends Dying.Friend Killed by Sentinel" info="a friend died from sentinel fire" offset="0x690"/>
+<dependency name="Friends Dying.Friend Betrayed" info="a friend was deliberately killed by an ally that we don't trust (e.g. player killed a marine)" offset="0x6A0"/>
+
+<dependency name="Shouting.New Combat Alone" info="see an enemy and we have not previously been in combat" info_img="udlg Shouting.png" offset="0x6D0"/>
+<dependency name="Shouting.New Enemy Recent Combat" info="see a new enemy and we have recently been in combat" info_img="udlg Shouting.png" offset="0x6E0"/>
+<dependency name="Shouting.Old Enemy Sighted" info="see an enemy that we are currently looking for" info_img="udlg Shouting.png" offset="0x6F0"/>
+<dependency name="Shouting.Unexpected Enemy" info="unexpectedly encounters enemy (behind or to the side)" info_img="udlg Shouting.png" offset="0x700"/>
+<dependency name="Shouting.Dead Friend Found" info="unexpectedly finds a dead body of a friend" info_img="udlg Shouting.png" offset="0x710"/>
+<dependency name="Shouting.Alliance Broken" info="we decide that a former ally is now a traitor" info_img="udlg Shouting.png" offset="0x720"/>
+<dependency name="Shouting.Alliance Reformed" info="we forgive a traitor and make him our friend again" info_img="udlg Shouting.png" offset="0x730"/>
+<dependency name="Shouting.Grenade Throwing" info="throwing a grenade" info_img="udlg Shouting.png" offset="0x740"/>
+<dependency name="Shouting.Grenade Sighted" info="see an enemy grenade" info_img="udlg Shouting.png" offset="0x750"/>
+<dependency name="Shouting.Grenade Startle" info="alerted by a grenade bouncing near us" info_img="udlg Shouting.png" offset="0x760"/>
+<dependency name="Shouting.Grenade Danger Enemy" info="in danger from an enemy grenade" info_img="udlg Shouting.png" offset="0x770"/>
+<dependency name="Shouting.Grenade Danger Self" info="in danger from your own grenade" info_img="udlg Shouting.png" offset="0x780"/>
+<dependency name="Shouting.Grenade Danger Friend" info="in danger from a friendly grenade (not our own)" info_img="udlg Shouting.png" offset="0x790"/>
+
+<dependency name="Group Communication.New Combat Group Response" info="reply to a nearby friend who alerted us to an enemy" info_img="udlg Group Communication.png" offset="0x7C0"/>
+<dependency name="Group Communication.New Combat Nearby Response" info="reply to a distant friend who alerted us to an enemy" info_img="udlg Group Communication.png" offset="0x7D0"/>
+<dependency name="Group Communication.Alert Friend" info="alert a friend who is in a noncombat state" info_img="udlg Group Communication.png" offset="0x7E0"/>
+<dependency name="Group Communication.Alert Friend Response" info="alerted by a friend when in a noncombat state" info_img="udlg Group Communication.png" offset="0x7F0"/>
+<dependency name="Group Communication.Alert Lost Contact" info="alert friends that target was not at expected location" info_img="udlg Group Communication.png" offset="0x800"/>
+<dependency name="Group Communication.Alert Lost Contact Response" info="alert friends that target was not at expected location: response" info_img="udlg Group Communication.png" offset="0x810"/>
+<dependency name="Group Communication.Blocked" info="friend is blocking us from moving or firing" info_img="udlg Group Communication.png" offset="0x820"/>
+<dependency name="Group Communication.Blocked Response" info="friend is blocking us from moving or firing: response" info_img="udlg Group Communication.png" offset="0x830"/>
+<dependency name="Group Communication.Search Start" info="starting to search" info_img="udlg Group Communication.png" offset="0x840"/>
+<dependency name="Group Communication.Search Query" info="asking searchers whether they have found anything" info_img="udlg Group Communication.png" offset="0x850"/>
+<dependency name="Group Communication.Search Query Response" info="asking searchers whether they have found anything: response" info_img="udlg Group Communication.png" offset="0x860"/>
+<dependency name="Group Communication.Search Report" info="searcher reporting that an area is clear" info_img="udlg Group Communication.png" offset="0x870"/>
+<dependency name="Group Communication.Search Abandon" info="searcher giving up on search" info_img="udlg Group Communication.png" offset="0x880"/>
+<dependency name="Group Communication.Search Group Abandon" info="search coordinator giving up on search" info_img="udlg Group Communication.png" offset="0x890"/>
+<dependency name="Group Communication.Group Uncover" info="starting to uncover target with friend" info_img="udlg Group Communication.png" offset="0x8A0"/>
+<dependency name="Group Communication.Group Uncover Response" info="starting to uncover target: response" info_img="udlg Group Communication.png" offset="0x8B0"/>
+<dependency name="Group Communication.Advance" info="our platoon starts to attack or advance" info_img="udlg Group Communication.png" offset="0x8C0"/>
+<dependency name="Group Communication.Advance Response" info="our platoon starts to attack or advance: response" info_img="udlg Group Communication.png" offset="0x8D0"/>
+<dependency name="Group Communication.Retreat" info="our platoon starts to defend or retreat" info_img="udlg Group Communication.png" offset="0x8E0"/>
+<dependency name="Group Communication.Retreat Response" info="our platoon starts to defend or retreat: response" info_img="udlg Group Communication.png" offset="0x8F0"/>
+<dependency name="Group Communication.Cover" info="telling friends to seek cover" info_img="udlg Group Communication.png" offset="0x900"/>
+
+<dependency name="Actions.Sighted Friend Player" info="sighted a new friendly player" info_img="udlg Actions.png" offset="0x950"/>
+<dependency name="Actions.Shooting" info="shooting at an enemy" info_img="udlg Actions.png" offset="0x960"/>
+<dependency name="Actions.Shooting Vehicle" info="shooting from a vehicle at an enemy" info_img="udlg Actions.png" offset="0x970"/>
+<dependency name="Actions.Shooting Berserk" info="shooting at an enemy while berserk" info_img="udlg Actions.png" offset="0x980"/>
+<dependency name="Actions.Shooting Group" info="shooting at a group of enemies" info_img="udlg Actions.png" offset="0x990"/>
+<dependency name="Actions.Shooting Traitor" info="shooting at a traitorous player" info_img="udlg Actions.png" offset="0x9A0"/>
+<dependency name="Actions.Taunt" info="taunting the enemy" info_img="udlg Actions.png" offset="0x9B0"/>
+<dependency name="Actions.Taunt Response" info="taunted by an enemy: response" info_img="udlg Actions.png" offset="0x9C0"/>
+<dependency name="Actions.Flee" info="fleeing in panic" info_img="udlg Actions.png" offset="0x9D0"/>
+<dependency name="Actions.Flee Response" info="fleeing in panic: response" info_img="udlg Actions.png" offset="0x9E0"/>
+<dependency name="Actions.Flee Leader Died" info="fleeing in panic because our leaders are all dead" info_img="udlg Actions.png" offset="0x9F0"/>
+<dependency name="Actions.Attempted Flee" info="unable to flee because a leader is nearby" info_img="udlg Actions.png" offset="0xA00"/>
+<dependency name="Actions.Attempted Flee Response" info="unable to flee because a leader is nearby: response" info_img="udlg Actions.png" offset="0xA10"/>
+<dependency name="Actions.Lost Contact" info="target was not at expected location" info_img="udlg Actions.png" offset="0xA20"/>
+<dependency name="Actions.Hiding Finished" info="stops hiding and pursues target" info_img="udlg Actions.png" offset="0xA30"/>
+<dependency name="Actions.Vehicle Entry" info="enters vehicle" info_img="udlg Actions.png" offset="0xA40"/>
+<dependency name="Actions.Vehicle Exit" info="exits vehicle" info_img="udlg Actions.png" offset="0xA50"/>
+<dependency name="Actions.Vehicle 'WooHoo'" info="excited while in vehicle (big air, etc)" info_img="udlg Actions.png" offset="0xA60"/>
+<dependency name="Actions.Vehicle Scared" info="scared while in vehicle (imminent crash)" info_img="udlg Actions.png" offset="0xA70"/>
+<dependency name="Actions.Vehicle Collision" info="riding in a vehicle and the driver collides with something" info_img="udlg Actions.png" offset="0xA80"/>
+<dependency name="Actions.Partially Sighted" info="saw something suspicious but not sure it was an enemy" info_img="udlg Actions.png" offset="0xA90"/>
+<dependency name="Actions.Nothing There" info="decided that a suspicious sighting was nothing after all" info_img="udlg Actions.png" offset="0xAA0"/>
+<dependency name="Actions.Pleading" info="pleading for the player to spare our pitiable lives" info_img="udlg Actions.png" offset="0xAB0"/>
+
+<dependency name="Exclamations.Surprise" info="surprised by an enemy, noise, body or weapon impact" info_img="udlg Exclamations.png" offset="0xB20"/>
+<dependency name="Exclamations.Berserk" info="went berserk" info_img="udlg Exclamations.png" offset="0xB30"/>
+<dependency name="Exclamations.Melee Attack" info="attacked an enemy in melee" info_img="udlg Exclamations.png" offset="0xB40"/>
+<dependency name="Exclamations.Dive" info="dove away from danger or into cover" info_img="udlg Exclamations.png" offset="0xB50"/>
+<dependency name="Exclamations.Uncover Exclamation" info="leapt out of corner to uncover a suspected target" info_img="udlg Exclamations.png" offset="0xB60"/>
+<dependency name="Exclamations.Leap Attack" info="begin a leap attack" info_img="udlg Exclamations.png" offset="0xB70"/>
+<dependency name="Exclamations.Resurrection" info="arise and return to life" info_img="udlg Exclamations.png" offset="0xB80"/>
+
+<dependency name="Post-Combat Actions.Celebration" info="all enemies defeated" info_img="udlg Post-Combat Actions.png" offset="0xBD0"/>
+<dependency name="Post-Combat Actions.Check Body Enemy" info="post-combat checking an enemy's dead body" info_img="udlg Post-Combat Actions.png" offset="0xBE0"/>
+<dependency name="Post-Combat Actions.Check Body Friend" info="post-combat checking a friend's dead body" info_img="udlg Post-Combat Actions.png" offset="0xBF0"/>
+<dependency name="Post-Combat Actions.Shooting Dead Enemy" info="post-combat shooting an enemy's dead body" info_img="udlg Post-Combat Actions.png" offset="0xC00"/>
+<dependency name="Post-Combat Actions.Shooting Dead Enemy Player" info="post-combat shooting an enemy player's dead body" info_img="udlg Post-Combat Actions.png" offset="0xC10"/>
+
+<dependency name="Post-Combat Chatter.Alone" info="post-combat all friends killed" info_img="udlg Post-Combat Chatter.png" offset="0xC60"/>
+<dependency name="Post-Combat Chatter.Unscathed" info="post-combat we were not hurt" info_img="udlg Post-Combat Chatter.png" offset="0xC70"/>
+<dependency name="Post-Combat Chatter.Seriously Wounded" info="post-combat we were badly hurt" info_img="udlg Post-Combat Chatter.png" offset="0xC80"/>
+<dependency name="Post-Combat Chatter.Seriously Wounded Response" info="post-combat replying to a friend who was badly hurt" info_img="udlg Post-Combat Chatter.png" offset="0xC90"/>
+<dependency name="Post-Combat Chatter.Massacre" info="post-combat our friends took heavy casualties" info_img="udlg Post-Combat Chatter.png" offset="0xCA0"/>
+<dependency name="Post-Combat Chatter.Massacre Response" info="post-combat reply: our friends took heavy casualties" info_img="udlg Post-Combat Chatter.png" offset="0xCB0"/>
+<dependency name="Post-Combat Chatter.Rout" info="post-combat our friends kicked alien ass" info_img="udlg Post-Combat Chatter.png" offset="0xCC0"/>
+<dependency name="Post-Combat Chatter.Rout Response" info="post-combat reply: our friends kicked alien ass" info_img="udlg Post-Combat Chatter.png" offset="0xCD0"/>
+
+</plugin>

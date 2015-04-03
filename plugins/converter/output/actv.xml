@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<struct name="actv" size="568">
+  <flag bit="7" name="can_shoot_while_flying" offset="0x0"/>
+  <flag bit="6" name="interpolate_color_in_hsv" offset="0x0"/>
+  <flag bit="5" name="has_unlimited_grenades" offset="0x0"/>
+  <flag bit="4" name="moveswitch_stay_w_friends" offset="0x0"/>
+  <flag bit="3" name="active_camouflage" offset="0x0"/>
+  <flag bit="2" name="super_active_camouflage" offset="0x0"/>
+  <flag bit="1" name="cannot_use_ranged_weapons" offset="0x0"/>
+  <flag bit="0" name="prefer_passenger_seat" offset="0x0"/>
+  <reference name="actor_definition" offset="0x4"/>
+  <reference info="biped, unit or vehicle" name="unit" offset="0x14"/>
+  <reference name="major_variant" offset="0x24"/>
+  <enum16 name="movement_switching_movement_type" offset="0x4c">
+    <option name="always_run" value="0"/>
+    <option name="always_crouch" value="1"/>
+    <option name="switch_types" value="2"/>
+  </enum16>
+  <float32 info="0 - 1 only; actors try to maintain this fraction of crouched actors" name="movement_switching_initial_crouch_chance" offset="0x50"/>
+  <float32 info="seconds; how long to stay crouched before running" name="movement_switching_crouch_time_from" offset="0x54"/>
+  <float32 info="seconds; how long to stay crouched before running" name="movement_switching_crouch_time_to" offset="0x58"/>
+  <float32 info="seconds; how long to run before moving to a crouch" name="movement_switching_run_time_from" offset="0x5c"/>
+  <float32 info="seconds; how long to run before moving to a crouch" name="movement_switching_run_time_to" offset="0x60"/>
+  <reference name="ranged_combat_weapon" offset="0x64"/>
+  <float32 info="world units; only fire at targets within this distance" name="ranged_combat_maximum_firing_distance" offset="0x74"/>
+  <float32 name="ranged_combat_rate_of_fire" offset="0x78"/>
+  <float32 info="radians" name="ranged_combat_projectile_error" offset="0x7c"/>
+  <float32 info="seconds" name="ranged_combat_fire_burst_delay_time_from" offset="0x80"/>
+  <float32 info="seconds" name="ranged_combat_fire_burst_delay_time_to" offset="0x84"/>
+  <float32 info="seconds" name="ranged_combat_new_target_firing_pattern_time" offset="0x88"/>
+  <float32 info="seconds" name="ranged_combat_surprise_delay_time" offset="0x8c"/>
+  <float32 info="seconds" name="ranged_combat_surprise_fire_wildly_time" offset="0x90"/>
+  <float32 info="0 - 1 only" name="ranged_combat_death_fire_wildly_chance" offset="0x94"/>
+  <float32 info="seconds" name="ranged_combat_death_fire_wildly_time" offset="0x98"/>
+  <float32 info="world units" name="ranged_combat_desired_combat_range_from" offset="0x9c"/>
+  <float32 info="world units" name="ranged_combat_desired_combat_range_to" offset="0xa0"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_stand_gun_offset_i" offset="0xa4"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_stand_gun_offset_i" offset="0xa8"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_stand_gun_offset_k" offset="0xac"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_crouch_gun_offset_i" offset="0xb0"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_crouch_gun_offset_i" offset="0xb4"/>
+  <float32 info="overrides the default in the base actor" name="ranged_combat_custom_crouch_gun_offset_k" offset="0xb8"/>
+  <float32 info="0 - 1 only; how much to follow the target while shooting" name="ranged_combat_target_tracking" offset="0xbc"/>
+  <float32 info="0 - 1 only; lead prediction accuracy" name="ranged_combat_target_leading" offset="0xc0"/>
+  <float32 info="0 = default; fraction of normal damage to inflict" name="ranged_combat_weapon_damage_modifier" offset="0xc4"/>
+  <float32 info="used if WDM = 0; how much damage to inflict on target per second while firing a burst at them" name="ranged_combat_damage_per_second" offset="0xc8"/>
+  <float32 info="world units" name="burst_geometry_burst_origin_radius" offset="0xcc"/>
+  <float32 info="radians" name="burst_geometry_burst_origin_angle" offset="0xd0"/>
+  <float32 info="world units" name="burst_geometry_burst_return_length_from" offset="0xd4"/>
+  <float32 info="world units" name="burst_geometry_burst_return_length_to" offset="0xd8"/>
+  <float32 info="radians" name="burst_geometry_burst_return_angle" offset="0xdc"/>
+  <float32 info="seconds" name="burst_geometry_burst_duration_from" offset="0xe0"/>
+  <float32 info="seconds" name="burst_geometry_burst_duration_to" offset="0xe4"/>
+  <float32 info="seconds" name="burst_geometry_burst_separation_from" offset="0xe8"/>
+  <float32 info="seconds" name="burst_geometry_burst_separation_to" offset="0xec"/>
+  <float32 info="radians per second" name="burst_geometry_burst_angular_velocity" offset="0xf0"/>
+  <float32 info="0 - 1 only" name="burst_geometry_special_damage_modifier" offset="0xf8"/>
+  <float32 info="radians" name="burst_geometry_special_projectile_error" offset="0xfc"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_new_target_burst_duration" offset="0x100"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_new_target_burst_separation" offset="0x104"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_new_target_rate_of_fire" offset="0x108"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_new_target_projectile_error" offset="0x10c"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_moving_burst_duration" offset="0x118"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_moving_burst_separation" offset="0x11c"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_moving_rate_of_fire" offset="0x120"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_moving_projectile_error" offset="0x124"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_berserk_burst_duration" offset="0x130"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_berserk_burst_separation" offset="0x134"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_berserk_rate_of_fire" offset="0x138"/>
+  <float32 info="multiplier; 0 = unchanged" name="firing_patterns_berserk_projectile_error" offset="0x13c"/>
+  <float32 info="aim shots super-ballistically if target is outside this range" name="special_case_firing_properties_super_ballistic_range" offset="0x148"/>
+  <float32 info="offset burst targets randomly by this range when firing at non-visible enemies" name="special_case_firing_properties_bombardment_range" offset="0x14c"/>
+  <float32 info="any custom vision range this actv has" name="special_case_firing_properties_modified_vision_range" offset="0x150"/>
+  <enum16 info="type of special weapon fire possible" name="special_case_firing_properties_special_fire_mode" offset="0x154">
+    <option name="none" value="0"/>
+    <option name="overcharge" value="1"/>
+    <option name="secondary_trigger" value="2"/>
+  </enum16>
+  <enum16 info="when to use special weapon mode" name="special_case_firing_properties_special_fire_situation" offset="0x156">
+    <option name="never" value="0"/>
+    <option name="enemy_visible" value="1"/>
+    <option name="enemy_out_of_sight" value="2"/>
+    <option name="strafing" value="3"/>
+  </enum16>
+  <float32 info="0 - 1 only; how likely to use this" name="special_case_firing_properties_special_fire_chance" offset="0x158"/>
+  <float32 info="seconds; waiting period between mode uses" name="special_case_firing_properties_special_fire_delay" offset="0x15c"/>
+  <float32 info="world units" name="berserking_and_melee_melee_range" offset="0x160"/>
+  <float32 info="world units" name="berserking_and_melee_melee_abort_range" offset="0x164"/>
+  <float32 info="world units" name="berserking_and_melee_berserk_firing_range_from" offset="0x168"/>
+  <float32 info="world units" name="berserking_and_melee_berserk_firing_range_to" offset="0x16c"/>
+  <float32 info="world units" name="berserking_and_melee_berserk_melee_range" offset="0x170"/>
+  <float32 info="world units" name="berserking_and_melee_berserk_melee_abort_range" offset="0x174"/>
+  <enum16 info="type of grenades thrown" name="grenades_grenade_type" offset="0x180">
+    <option name="human_fragmentation" value="0"/>
+    <option name="covenant_plasma" value="1"/>
+  </enum16>
+  <enum16 info="how grenades are thrown" name="grenades_trajectory_type" offset="0x182">
+    <option name="toss" value="0"/>
+    <option name="lob" value="1"/>
+    <option name="bounce" value="2"/>
+  </enum16>
+  <enum16 info="what causes us to consider throwing a grenade" name="grenade_grenade_stimulus" offset="0x184">
+    <option name="never" value="0"/>
+    <option name="visible_target" value="1"/>
+    <option name="seek_cover" value="2"/>
+  </enum16>
+  <int16 info="how many enemies must be within the radius of the grenade before we consider throwing it there" name="grenades_minimum_enemy_count" offset="0x186"/>
+  <float32 info="world units; consider enemies within this radius of throw location" name="grenades_enemy_radius" offset="0x188"/>
+  <float32 info="world units per second; how fast to throw the grenades" name="grenades_grenade_velocity" offset="0x190"/>
+  <float32 info="world units; ranges within which to consider throwing grenade" name="grenades_grenade_ranges_from" offset="0x194"/>
+  <float32 info="world units; ranges within which to consider throwing grenade" name="grenades_grenade_ranges_to" offset="0x198"/>
+  <float32 info="world units; don't throw if friendlies are within this range of target" name="grenades_collateral_damage_radius" offset="0x19c"/>
+  <float32 info="0 - 1 only; how likely to throw a grenade" name="grenades_grenade_chance" offset="0x1a0"/>
+  <float32 info="seconds; how often to consider throwing a grenade while stimulated" name="grenades_grenade_check_time" offset="0x1a4"/>
+  <float32 info="seconds; don't throw grenade if another actor within my encounter threw one this recently" name="grenades_encounter_grenade_timeout" offset="0x1a8"/>
+  <reference info="drops upon death" name="items_equipment" offset="0x1c0"/>
+  <int16 info="number of grenades that we start with" name="items_grenade_count_from" offset="0x1d0"/>
+  <int16 info="number of grenades that we start with" name="items_grenade_count_to" offset="0x1d2"/>
+  <float32 info="0 - 1 only; how likely to NOT drop grenades, even if we still have some" name="items_dont_drop_grenades_chance" offset="0x1d4"/>
+  <float32 info="fractions of a clip, eg. 0.3 to 0.5" name="items_drop_weapon_loaded_from" offset="0x1d8"/>
+  <float32 info="fractions of a clip, eg. 0.3 to 0.5; amount of ammo loaded into the weapon that drops" name="items_drop_weapon_loaded_to" offset="0x1dc"/>
+  <int16 info="total ammo in the dropped weapon" name="items_drop_weapon_ammo_from" offset="0x1e0"/>
+  <int16 info="total ammo in the dropped weapon" name="items_drop_weapon_ammo_to" offset="0x1e2"/>
+  <float32 info="maximum body vitality of the unit" name="unit_body_vitality" offset="0x200"/>
+  <float32 info="maximum shield vitality of the unit" name="unit_shield_vitality" offset="0x204"/>
+  <float32 info="world units; how far away we can drain the player's shields" name="unit_shield_sapping_radius" offset="0x208"/>
+  <int16 info="if nonzero, overrides the unit's shader permutation" name="unit_force_shader_permutation" offset="0x20c"/>
+  <struct_array name="change_colors" offset="0x22c" size="32">
+    <colorRGB name="color_lower_bound" offset="0x0"/>
+    <colorRGB name="color_upper_bound" offset="0xc"/>
+  </struct_array>
+</struct>

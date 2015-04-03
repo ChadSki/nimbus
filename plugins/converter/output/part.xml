@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<struct name="part" size="336">
+  <flag bit="7" name="can_animate_backwards" offset="0x0"/>
+  <flag bit="6" name="animation_stops_at_rest" offset="0x0"/>
+  <flag bit="5" name="animation_starts_on_random_frame" offset="0x0"/>
+  <flag bit="4" name="animate_once_per_frame" offset="0x0"/>
+  <flag bit="3" name="dies_at_rest" offset="0x0"/>
+  <flag bit="2" name="dies_on_contact_with_structure" offset="0x0"/>
+  <flag bit="1" name="tint_from_diffuse_texture" offset="0x0"/>
+  <flag bit="0" name="dies_on_contact_with_water" offset="0x0"/>
+  <flag bit="7" name="dies_on_contact_with_air" offset="0x1"/>
+  <flag bit="6" name="self_illuminated" offset="0x1"/>
+  <flag bit="5" name="random_horizontal_mirroring" offset="0x1"/>
+  <flag bit="4" name="random_vertical_mirroring" offset="0x1"/>
+  <reference name="bitmap" offset="0x4"/>
+  <reference name="physics" offset="0x14"/>
+  <reference info="Sparky is trading his health for these plugins" name="marty_traded_his_kids_for_this" offset="0x24"/>
+  <float32 info="seconds" name="lifespan_from" offset="0x38"/>
+  <float32 info="seconds" name="lifespan_to" offset="0x3c"/>
+  <float32 name="fade_in_time" offset="0x40"/>
+  <float32 name="fade_out_time" offset="0x44"/>
+  <reference name="collision_effect" offset="0x48"/>
+  <reference name="death_effect" offset="0x58"/>
+  <float32 info="pixels; in the distance, don't get any smaller than this size on the screen" name="minimum_size" offset="0x68"/>
+  <float32 info="when created, the radius is multiplied by the first number; at the end of the lifetime, the radius is multiplied by the second number" name="radius_animation_from" offset="0x74"/>
+  <float32 info="when created, the radius is multiplied by the first number; at the end of the lifetime, the radius is multiplied by the second number" name="radius_animation_to" offset="0x78"/>
+  <float32 info="frames per second; rate at which the particle animates" name="animation_rate_from" offset="0x80"/>
+  <float32 info="frames per second; rate at which the particle animates" name="animation_rate_to" offset="0x84"/>
+  <float32 info="the decrease in the frame rate caused by a collision" name="contact_deterioration" offset="0x88"/>
+  <float32 info="pixels; begin fading out the particle when it is smaller than this size on the screen" name="fade_start_size" offset="0x8c"/>
+  <float32 info="pixels; remove particle when it is smaller than this size on the screen" name="fade_end_size" offset="0x90"/>
+  <int16 info="the index of the first sequence in the bitmap group used by this particle" name="first_sequence_index" offset="0x98"/>
+  <int16 name="initial_sequence_count" offset="0x9a"/>
+  <int16 name="looping_sequence_count" offset="0x9c"/>
+  <int16 name="final_sequence_count" offset="0x9e"/>
+  <float32 info="0 - 1 only? multiplier?; density? scale?" name="unknown_usage_1" offset="0xa8"/>
+  <int32 info="multiplier?; sequence layer count?" name="unknown_usage_2" offset="0xd4"/>
+  <enum16 name="orientation" offset="0xac">
+    <option name="screen_facing" value="0"/>
+    <option name="parallel_to_direction" value="1"/>
+    <option name="perpendicular_to_direction" value="2"/>
+  </enum16>
+  <flag bit="7" name="sort_bias" offset="0xd8"/>
+  <flag bit="6" name="nonlinear_tint" offset="0xd8"/>
+  <flag bit="5" name="dont_overdraw_first_person_weapon" offset="0xd8"/>
+  <enum16 name="framebuffer_blend_function" offset="0xda">
+    <option name="alpha_blend" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="double_multiply" value="2"/>
+    <option name="add" value="3"/>
+    <option name="subtract" value="4"/>
+    <option name="component_minimum" value="5"/>
+    <option name="component_maximum" value="6"/>
+    <option name="alpha_multiply_add" value="7"/>
+  </enum16>
+  <enum16 name="framebuffer_fade_mode" offset="0xdc">
+    <option name="none" value="0"/>
+    <option name="fade_when_perpendicular" value="1"/>
+    <option name="fade_when_parallel" value="2"/>
+  </enum16>
+  <flag bit="7" name="unfiltered" offset="0xde"/>
+  <reference name="secondary_map_bitmap" offset="0xfc"/>
+  <enum16 name="secondary_map_anchor" offset="0x10c">
+    <option name="with_primary" value="0"/>
+    <option name="with_screen_space" value="1"/>
+    <option name="z_sprite" value="2"/>
+  </enum16>
+  <flag bit="7" name="unfiltered" offset="0x10e"/>
+  <enum16 name="secondary_map_u_animation_source" offset="0x110">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_u_animation_function" offset="0x112">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_u_animation_period" offset="0x114"/>
+  <float32 name="secondary_map_u_animation_phase" offset="0x118"/>
+  <float32 info="repeats; 0 defaults to 1" name="secondary_map_u_animation_scale" offset="0x11c"/>
+  <enum16 name="secondary_map_v_animation_source" offset="0x120">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_v_animation_function" offset="0x122">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_v_animation_period" offset="0x124"/>
+  <float32 name="secondary_map_v_animation_phase" offset="0x128"/>
+  <float32 info="repeats; 0 defaults to 1" name="secondary_map_v_animation_scale" offset="0x12c"/>
+  <enum16 name="secondary_map_rotation_animation_source" offset="0x130">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_rotation_animation_function" offset="0x132">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_rotation_animation_period" offset="0x134"/>
+  <float32 name="secondary_map_rotation_animation_phase" offset="0x138"/>
+  <float32 info="degrees; 0 defaults to 360" name="secondary_map_rotation_animation_scale" offset="0x13c"/>
+  <float32 name="secondary_map_rotation_animation_center_x" offset="0x140"/>
+  <float32 name="secondary_map_rotation_animation_center_y" offset="0x144"/>
+  <float32 name="secondary_map_zsprite_radius_scale" offset="0x14c"/>
+</struct>

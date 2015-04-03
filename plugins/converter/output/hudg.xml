@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<struct name="hudg" size="1008">
+  <enum16 name="messaging_parameters_anchor" offset="0x0">
+    <option name="top_left" value="0"/>
+    <option name="top_right" value="1"/>
+    <option name="bottom_left" value="2"/>
+    <option name="bottom_right" value="3"/>
+    <option name="center" value="4"/>
+  </enum16>
+  <int16 name="messaging_parameters_anchor_offset_x" offset="0x24"/>
+  <int16 name="messaging_parameters_anchor_offset_y" offset="0x26"/>
+  <float32 name="messaging_parameters_width_scale" offset="0x28"/>
+  <float32 name="messaging_parameters_height_scale" offset="0x2c"/>
+  <flag bit="7" name="dont_scale_offset" offset="0x30"/>
+  <flag bit="6" name="dont_scale_size" offset="0x30"/>
+  <flag bit="5" name="use_high_resolution_scale" offset="0x30"/>
+  <reference name="messaging_parameters_single_player_font" offset="0x48"/>
+  <reference name="messaging_parameters_multiplayer_font" offset="0x58"/>
+  <float32 name="messaging_parameters_up_time" offset="0x68"/>
+  <float32 name="messaging_parameters_fade_time" offset="0x6c"/>
+  <colorARGB name="messaging_parameters_icon_color" offset="0x70"/>
+  <colorARGB name="messaging_parameters_text_color" offset="0x80"/>
+  <float32 name="messaging_parameters_text_spacing" offset="0x90"/>
+  <reference name="messaging_parameters_item_message_text" offset="0x94"/>
+  <reference name="messaging_parameters_icon_bitmap" offset="0xa4"/>
+  <reference name="messaging_parameters_alternate_icon_text" offset="0xb4"/>
+  <struct_array info="a, b, x, y, black, white, left trigger, right trigger, dpad up, dpad down, dpad left, dpad right, start, back, left thumb, right thumb, left stick (not a button), right stick (not a button)" name="button_icons" offset="0xc4" size="16">
+    <int16 info="into the global HUD icon bitmap" name="messaging_information_sequence_index" offset="0x0"/>
+    <int16 info="extra spacing beyond bitmap width for text alignment" name="messaging_information_width_offset" offset="0x2"/>
+    <int16 name="messaging_information_offset_from_reference_corner_x" offset="0x4"/>
+    <int16 name="messaging_information_offset_from_reference_corner_y" offset="0x6"/>
+    <colorbyte name="messaging_information_override_icon_color" offset="0x8"/>
+    <int8 info="0 - 30 only" name="messaging_information_frame_rate" offset="0xc"/>
+    <flag bit="7" name="use_text_from_string_list_instead" offset="0xd"/>
+    <flag bit="6" name="override_default_color" offset="0xd"/>
+    <flag bit="5" name="width_offset_is_absolute_icon_width" offset="0xd"/>
+    <int16 name="messaging_information_text_index" offset="0xe"/>
+  </struct_array>
+  <colorbyte name="hud_help_text_color_default_color" offset="0xd0"/>
+  <colorbyte name="hud_help_text_color_flashing_color" offset="0xd4"/>
+  <float32 name="hud_help_text_color_flash_period" offset="0xd8"/>
+  <float32 name="hud_help_text_color_flash_delay" offset="0xdc"/>
+  <int16 name="hud_help_text_color_number_of_flashes" offset="0xe0"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0xe2"/>
+  <float32 name="hud_help_text_color_flash_length" offset="0xe4"/>
+  <colorbyte name="hud_help_text_color_disabled_color" offset="0xe8"/>
+  <reference name="other_hud_messaging_data_hud_messages" offset="0xf0"/>
+  <colorbyte name="objective_colors_default_color" offset="0x100"/>
+  <colorbyte name="objective_colors_flashing_color" offset="0x104"/>
+  <float32 name="objective_colors_flash_period" offset="0x108"/>
+  <float32 name="objective_colors_flash_delay" offset="0x10c"/>
+  <int16 name="objective_colors_number_of_flashes" offset="0x110"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0x112"/>
+  <float32 name="objective_colors_flash_length" offset="0x114"/>
+  <colorbyte name="objective_colors_disabled_color" offset="0x118"/>
+  <int16 name="objective_colors_uptime_ticks" offset="0x11c"/>
+  <int16 name="objective_colors_fade_ticks" offset="0x11e"/>
+  <float32 name="waypoint_parameters_top_offset" offset="0x120"/>
+  <float32 name="waypoint_parameters_bottom_offset" offset="0x124"/>
+  <float32 name="waypoint_parameters_left_offset" offset="0x128"/>
+  <float32 name="waypoint_parameters_right_offset" offset="0x12c"/>
+  <reference name="waypoint_parameters_arrow_bitmap" offset="0x150"/>
+  <struct_array name="waypoint_arrows" offset="0x160" size="104">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <colorbyte name="color" offset="0x28"/>
+    <float32 name="opacity" offset="0x2c"/>
+    <float32 name="translucency" offset="0x30"/>
+    <int16 name="on_screen_sequence_index" offset="0x34"/>
+    <int16 name="off_screen_sequence_index" offset="0x36"/>
+    <int16 name="occluded_sequence_index" offset="0x38"/>
+    <flag bit="7" name="dont_rotate_when_pointing_off_screen" offset="0x4c"/>
+  </struct_array>
+  <float32 name="multiplayer_parameters_hud_scale_in_multiplayer" offset="0x1bc"/>
+  <reference name="hud_globals_default_weapon_hud" offset="0x2c0"/>
+  <float32 name="hud_globals_motion_sensor_range" offset="0x2d0"/>
+  <float32 info="how fast something moves to show up on the motion sensor; remember to consider uphill/downhill speed multipliers!" name="hud_globals_motion_sensor_velocity_sensitivity" offset="0x2d4"/>
+  <float32 info="DON'T TOUCH EVER" name="hud_globals_motion_sensor_scale" offset="0x2d8"/>
+  <int16 name="hud_globals_default_chapter_title_bounds_top" offset="0x2dc"/>
+  <int16 name="hud_globals_default_chapter_title_bounds_left" offset="0x2de"/>
+  <int16 name="hud_globals_default_chapter_title_bounds_bottom" offset="0x2e0"/>
+  <int16 name="hud_globals_default_chapter_title_bounds_right" offset="0x2e2"/>
+  <int16 name="hud_damage_indicators_top_offset" offset="0x310"/>
+  <int16 name="hud_damage_indicators_bottom_offset" offset="0x312"/>
+  <int16 name="hud_damage_indicators_left_offset" offset="0x314"/>
+  <int16 name="hud_damage_indicators_right_offset" offset="0x316"/>
+  <reference name="hud_damage_indicators_indicator_bitmap" offset="0x338"/>
+  <int16 name="hud_damage_indicators_sequence_index" offset="0x348"/>
+  <int16 name="hud_damage_indicators_multiplayer_sequence_index" offset="0x34a"/>
+  <colorbyte name="hud_damage_indicators_color" offset="0x34c"/>
+  <colorbyte name="hud_timer_definitions_not_much_time_left_flash_color_default_color" offset="0x360"/>
+  <colorbyte name="hud_timer_definitions_not_much_time_left_flash_color_flashing_color" offset="0x364"/>
+  <float32 name="hud_timer_definitions_not_much_time_left_flash_color_flash_period" offset="0x368"/>
+  <float32 name="hud_timer_definitions_not_much_time_left_flash_color_flash_delay" offset="0x36c"/>
+  <int16 name="hud_timer_definitions_not_much_time_left_flash_color_number_of_flashes" offset="0x370"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0x372"/>
+  <float32 name="hud_timer_definitions_not_much_time_left_flash_color_flash_length" offset="0x374"/>
+  <colorbyte name="hud_timer_definitions_not_much_time_left_flash_color_disabled_color" offset="0x378"/>
+  <colorbyte name="hud_timer_definitions_time_out_flash_color_default_color" offset="0x380"/>
+  <colorbyte name="hud_timer_definitions_time_out_flash_color_flashing_color" offset="0x384"/>
+  <float32 name="hud_timer_definitions_time_out_flash_color_flash_period" offset="0x388"/>
+  <float32 name="hud_timer_definitions_time_out_flash_color_flash_delay" offset="0x38c"/>
+  <int16 name="hud_timer_definitions_time_out_flash_color_number_of_flashes" offset="0x390"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0x392"/>
+  <float32 name="hud_timer_definitions_time_out_flash_color_flash_length" offset="0x394"/>
+  <colorbyte name="hud_timer_definitions_time_out_flash_color_disabled_color" offset="0x398"/>
+  <reference name="hud_timer_definitions_time_out_flash_color_carnage_report_bitmap" offset="0x3c8"/>
+  <int16 name="hud_info_that_wouldnt_fit_anywhere_else_loading_begin_text" offset="0x3d8"/>
+  <int16 name="hud_info_that_wouldnt_fit_anywhere_else_loading_end_text" offset="0x3da"/>
+  <int16 name="hud_info_that_wouldnt_fit_anywhere_else_checkpoint_begin_text" offset="0x3dc"/>
+  <int16 name="hud_info_that_wouldnt_fit_anywhere_else_checkpoint_end_text" offset="0x3de"/>
+  <reference name="hud_info_that_wouldnt_fit_anywhere_else_checkpoint_sound" offset="0x3e0"/>
+</struct>

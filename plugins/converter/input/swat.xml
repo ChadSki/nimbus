@@ -1,0 +1,97 @@
+<plugin class="swat" author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Radiosity Properties.Flags" offset="0x00">
+	<option name="Simple Parameterization" info="lightmap texture parameterization should correspond to diffuse texture parameterization" value="15"/>
+	<option name="Ignore Normals" info="light independent of normals (trees)" value="14"/>
+	<option name="Transparent Lit" value="13"/>
+</bitmask16>
+
+<enum16 name="Radiosity Properties.Detail Level" info="affects the density of tessellation (high means slow)" offset="0x02">
+	<option name="High" value="00"/>
+	<option name="Medium" value="01"/>
+	<option name="Low" value="02"/>
+	<option name="Turd" value="03"/>
+</enum16>
+
+<float name="Radiosity Properties.Power" note="0 - infinity" info="power of emitted light" offset="0x04"/>
+
+<colorRGB name="Radiosity Properties.Color of Emitted Light" offset="0x08"/>
+<colorRGB name="Radiosity Properties.Tint Color" info="light passing through this surface, if it's transparent, will be tinted this color" offset="0x14"/>
+
+<enum16 name="Physics Properties.Material Type" offset="0x22">
+	<option name="Dirt" value="00"/>
+	<option name="Sand" value="01"/>
+	<option name="Stone" value="02"/>
+	<option name="Snow" value="03"/>
+	<option name="Wood" value="04"/>
+	<option name="Metal (hollow)" value="05"/>
+	<option name="Metal (thin)" value="06"/>
+	<option name="Metal (thick)" value="07"/>
+	<option name="Rubber" value="08"/>
+	<option name="Glass" value="09"/>
+	<option name="Force Field" value="10"/>
+	<option name="Grunt" value="11"/>
+	<option name="Hunter Armor" value="12"/>
+	<option name="Hunter Skin" value="13"/>
+	<option name="Elite" value="14"/>
+	<option name="Jackal" value="15"/>
+	<option name="Jackal Energy Shield" value="16"/>
+	<option name="Engineer Skin" value="17"/>
+	<option name="Engineer Force Field" value="18"/>
+	<option name="Flood Combat Form" value="19"/>
+	<option name="Flood Carrier Form" value="20"/>
+	<option name="Cyborg Armor" value="21"/>
+	<option name="Cyborg Energy Shield" value="22"/>
+	<option name="Human Armor" value="23"/>
+	<option name="Human Skin" value="24"/>
+	<option name="Sentinel" value="25"/>
+	<option name="Monitor" value="26"/>
+	<option name="Plastic" value="27"/>
+	<option name="Water" value="28"/>
+	<option name="Leaves" value="29"/>
+	<option name="Elite Energy Shield" value="30"/>
+	<option name="Ice" value="31"/>
+	<option name="Hunter Shield" value="32"/>
+</enum16>
+
+<bitmask16 name="Water Shader.Flags" info_img="swat Water Shader.png" offset="0x28">
+	<option name="Base Map Alpha Modulates Reflection Brightness" value="15"/>
+	<option name="Base Map Color Modulates Background" value="14"/>
+	<option name="Atmospheric Fog" value="13"/>
+	<option name="Draw Before Fog" value="12"/>
+</bitmask16>
+
+<dependency name="Water Shader.Base Map" info="controls reflection brightness and background tint" info_img="swat Water Shader.png" offset="0x4C"/>
+
+<float name="Water Shader.View Perpendicular Brightness" note="0 - 1 only" info_img="swat Water Shader.png" offset="0x6C"/>
+<colorRGB name="Water Shader.View Perpendicular Tint Color" info_img="swat Water Shader.png" offset="0x70"/>
+
+<float name="Water Shader.View Parallel Brightness" note="0 - 1 only; 0 defaults to 1" info_img="swat Water Shader.png" offset="0x7C"/>
+<colorRGB name="Water Shader.View Parallel Tint Color" info_img="swat Water Shader.png" offset="0x80"/>
+
+<dependency name="Water Shader.Reflection Map" info_img="swat Water Shader.png" offset="0x9C"/>
+
+<float name="Water Shader.Ripple Animation Angle" note="radians" info="0 - 6.283185 only, which is 0 - 360 degrees" info_img="swat Water Shader.png" offset="0xBC"/>
+<float name="Water Shader.Ripple Animation Velocity" info_img="swat Water Shader.png" offset="0xC0"/>
+
+<float name="Water Shader.Ripple Scale" note="0 defaults to 1" info_img="swat Water Shader.png" offset="0xC4"/>
+
+<dependency name="Water Shader.Ripple Maps" info_img="swat Water Shader.png" offset="0xC8"/>
+
+<short name="Water Shader.Ripple Mipmap Levels" note="0 defaults to 1" info_img="swat Water Shader.png" offset="0xD8"/>
+
+<float name="Water Shader.Ripple Mipmap Fade Factor" note="0 - 1 only" info="flatness of last mipmap" info_img="swat Water Shader.png" offset="0xDC"/>
+<float name="Water Shader.Ripple Mipmap Detail Bias" info_img="swat Water Shader.png" offset="0xE0"/>
+
+<struct name="Ripples" offset="0x124" size="76">
+	<float name="Contribution Factor" note="0 - 1 only; 0 defaults to 1" offset="0x04"/>
+	<float name="Animation Angle" note="radians" info="0 - 6.283185 only, which is 0 - 360 degrees" offset="0x28"/>
+	<float name="Animation Velocity" offset="0x2C"/>
+	<float name="Map Offset: i (1)" offset="0x30"/>
+	<float name="Map Offset: i (2)" offset="0x34"/>
+	
+	<short name="Maximum Repeats" note="0 defaults to 1" offset="0x38"/>
+	<short name="Map Index" info="index into ripple maps" offset="0x3A"/>
+</struct>
+
+</plugin>

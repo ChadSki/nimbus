@@ -1,0 +1,100 @@
+<plugin class="sgla" author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Radiosity Properties.Flags" offset="0x00">
+	<option name="Simple Parameterization" info="lightmap texture parameterization should correspond to diffuse texture parameterization" value="15"/>
+	<option name="Ignore Normals" info="light independent of normals (trees)" value="14"/>
+	<option name="Transparent Lit" value="13"/>
+</bitmask16>
+
+<enum16 name="Radiosity Properties.Detail Level" info="affects the density of tessellation (high means slow)" offset="0x02">
+	<option name="High" value="00"/>
+	<option name="Medium" value="01"/>
+	<option name="Low" value="02"/>
+	<option name="Turd" value="03"/>
+</enum16>
+
+<float name="Radiosity Properties.Power" note="0 - infinity" info="power of emitted light" offset="0x04"/>
+
+<colorRGB name="Radiosity Properties.Color of Emitted Light" offset="0x08"/>
+<colorRGB name="Radiosity Properties.Tint Color" info="light passing through this surface, if it's transparent, will be tinted this color" offset="0x14"/>
+
+<enum16 name="Physics Properties.Material Type" offset="0x22">
+	<option name="Dirt" value="00"/>
+	<option name="Sand" value="01"/>
+	<option name="Stone" value="02"/>
+	<option name="Snow" value="03"/>
+	<option name="Wood" value="04"/>
+	<option name="Metal (hollow)" value="05"/>
+	<option name="Metal (thin)" value="06"/>
+	<option name="Metal (thick)" value="07"/>
+	<option name="Rubber" value="08"/>
+	<option name="Glass" value="09"/>
+	<option name="Force Field" value="10"/>
+	<option name="Grunt" value="11"/>
+	<option name="Hunter Armor" value="12"/>
+	<option name="Hunter Skin" value="13"/>
+	<option name="Elite" value="14"/>
+	<option name="Jackal" value="15"/>
+	<option name="Jackal Energy Shield" value="16"/>
+	<option name="Engineer Skin" value="17"/>
+	<option name="Engineer Force Field" value="18"/>
+	<option name="Flood Combat Form" value="19"/>
+	<option name="Flood Carrier Form" value="20"/>
+	<option name="Cyborg Armor" value="21"/>
+	<option name="Cyborg Energy Shield" value="22"/>
+	<option name="Human Armor" value="23"/>
+	<option name="Human Skin" value="24"/>
+	<option name="Sentinel" value="25"/>
+	<option name="Monitor" value="26"/>
+	<option name="Plastic" value="27"/>
+	<option name="Water" value="28"/>
+	<option name="Leaves" value="29"/>
+	<option name="Elite Energy Shield" value="30"/>
+	<option name="Ice" value="31"/>
+	<option name="Hunter Shield" value="32"/>
+</enum16>
+
+<bitmask16 name="Glass Shader.Flags" offset="0x28">
+	<option name="Alpha-Tested" value="15"/>
+	<option name="Decal" value="14"/>
+	<option name="Two-Sided" value="13"/>
+	<option name="Bump Map is Specular Mask" value="12"/>
+</bitmask16>
+
+<colorRGB name="Background Tint Properties.Background Tint Color" info_img="sgla Background Tint Properties.png" offset="0x54"/>
+
+<float name="Background Tint Properties.Background Tint Map Scale" note="0 defaults to 1" info_img="sgla Background Tint Properties.png" offset="0x60"/>
+
+<dependency name="Background Tint Properties.Background Tint Map" info_img="sgla Background Tint Properties.png" offset="0x64"/>
+
+<enum16 name="Reflection Properties.Reflection Type" info_img="sgla Reflection Properties.png" offset="0x8A">
+	<option name="Bumped Cube-Map" value="00"/>
+	<option name="Flat Cube-Map" value="01"/>
+	<option name="Dynamic Mirror" value="02"/>
+</enum16>
+
+<float name="Reflection Properties.Perpendicular Brightness" note="0 - 1 only" info_img="sgla Reflection Properties.png" offset="0x8C"/>
+<colorRGB name="Reflection Properties.Perpendicular Tint Color" info_img="sgla Reflection Properties.png" offset="0x90"/>
+
+<float name="Reflection Properties.Parallel Brightness" note="0 - 1 only" info_img="sgla Reflection Properties.png" offset="0x9C"/>
+<colorRGB name="Reflection Properties.Parallel Tint Color" info_img="sgla Reflection Properties.png" offset="0xA0"/>
+
+<dependency name="Reflection Properties.Reflection Map" info_img="sgla Reflection Properties.png" offset="0xAC"/>
+
+<float name="Reflection Properties.Bump Map Scale" info_img="sgla Reflection Properties.png" offset="0xBC"/>
+
+<dependency name="Reflection Properties.Bump Map" info_img="sgla Reflection Properties.png" offset="0xC0"/>
+
+<float name="Diffuse Properties.Diffuse Map Scale" note="0 defaults to 1" info_img="sgla Diffuse Properties.png" offset="0x154"/>
+<dependency name="Diffuse Properties.Diffuse Map" info_img="sgla Diffuse Properties.png" offset="0x158"/>
+
+<float name="Diffuse Properties.Diffuse Detail Map Scale" note="0 defaults to 1" info_img="sgla Diffuse Properties.png" offset="0x168"/>
+<dependency name="Diffuse Properties.Diffuse Detail Map" info_img="sgla Diffuse Properties.png" offset="0x16C"/>
+
+<float name="Specular Properties.Specular Map Scale" note="0 defaults to 1" info_img="sgla Specular Properties.png" offset="0x19C"/>
+<dependency name="Specular Properties.Specular Map" info_img="sgla Specular Properties.png" offset="0x1A0"/>
+
+<float name="Specular Properties.Specular Detail Map Scale" note="0 defaults to 1" info_img="sgla Specular Properties.png" offset="0x1B0"/>
+<dependency name="Specular Properties.Specular Detail Map" info_img="sgla Specular Properties.png" offset="0x1B4"/>
+
+</plugin>

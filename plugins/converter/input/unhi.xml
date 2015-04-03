@@ -1,0 +1,1381 @@
+<plugin class="unhi" author="sparky" version="4.0" headersize="Main">
+
+<enum16 name="Weapon HUD Screen Alignment.Anchor" offset="0x00">
+	<option name="Top Left" value="00"/>
+	<option name="Top Right" value="01"/>
+	<option name="Bottom Left" value="02"/>
+	<option name="Bottom Right" value="03"/>
+	<option name="Center" value="04"/>
+</enum16>
+
+<!-- UNIT HUD BACKGROUND (1) -->
+
+<short name="Unit HUD Background.Anchor Offset: x" offset="0x24"/>
+<short name="Unit HUD Background.Anchor Offset: y" offset="0x26"/>
+
+<float name="Unit HUD Background.Width Scale" offset="0x28"/>
+<float name="Unit HUD Background.Height Scale" offset="0x2C"/>
+
+<bitmask16 name="Unit HUD Background.Scaling Flags" offset="0x30">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Unit HUD Background.Interface Bitmap" offset="0x48"/>
+
+<colorbyte name="Unit HUD Background.Default Color" offset="0x58"/>
+<colorbyte name="Unit HUD Background.Flashing Color" offset="0x5C"/>
+
+<float name="Unit HUD Background.Flash Period" offset="0x60"/>
+<float name="Unit HUD Background.Flash Delay" offset="0x64"/>
+
+<short name="Unit HUD Background.Number of Flashes" offset="0x68"/>
+
+<bitmask8 name="Unit HUD Background.Flash Flags" offset="0x6A">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Unit HUD Background.Flash Length" offset="0x6C"/>
+
+<colorbyte name="Unit HUD Background.Disabled Color" offset="0x70"/>
+
+<short name="Unit HUD Background.Sequence Index" offset="0x78"/>
+
+<!-- UNIT HUD BACKGROUND (1) MULTITEXTURE OVERLAY -->
+
+<struct name="Unit HUD Background.MultiTexture Overlay" offset="0x7C" size="480">
+	<short name="Type" offset="0x02"/>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x04">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+	<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+	<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+	<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+	<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+	<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+	
+	<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+	<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+	<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+	<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+	<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+	<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+	
+	<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+	<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+	<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+	
+	<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<struct name="Effectors" offset="0x154" size="220">
+		<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+			<option name="Tint (0 - 1 only)" value="00"/>
+			<option name="Horizontal Offset" value="01"/>
+			<option name="Vertical Offset" value="02"/>
+			<option name="Fade (0 - 1 only)" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+			<option name="Geometry Offset" value="00"/>
+			<option name="Primary Map" value="01"/>
+			<option name="Secondary Map" value="02"/>
+			<option name="Tertiary Map" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+			<option name="Player Pitch" value="00"/>
+			<option name="Player Pitch Tangent" value="01"/>
+			<option name="Player Yaw" value="02"/>
+			<option name="Weapon Ammo (total)" value="03"/>
+			<option name="Weapon Ammo (loaded)" value="04"/>
+			<option name="Weapon Heat" value="05"/>
+			<option name="Explicit (uses low bound)" value="06"/>
+			<option name="Weapon Zoom Level" value="07"/>
+		</enum16>
+		
+		<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+		<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+		<float name="In / Out Bounds.Out Bounds: from" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+		<float name="In / Out Bounds.Out Bounds: to" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+		
+		<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+		<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+		
+		<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+			<option name="One" value="00"/>
+			<option name="Zero" value="01"/>
+			<option name="Cosine" value="02"/>
+			<option name="Cosine (variable period)" value="03"/>
+			<option name="Diagonal Wave" value="04"/>
+			<option name="Diagonal Wave (variable period)" value="05"/>
+			<option name="Slide" value="06"/>
+			<option name="Slide (variable period)" value="07"/>
+			<option name="Noise" value="08"/>
+			<option name="Jitter" value="09"/>
+			<option name="Wander" value="10"/>
+			<option name="Spark" value="11"/>
+		</enum16>
+		
+		<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+		<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+	</struct>
+</struct>
+
+<!-- SHIELD PANEL BACKGROUND (2) -->
+
+<short name="Shield Panel Background.Anchor Offset: x" offset="0x8C"/>
+<short name="Shield Panel Background.Anchor Offset: y" offset="0x8E"/>
+
+<float name="Shield Panel Background.Width Scale" offset="0x90"/>
+<float name="Shield Panel Background.Height Scale" offset="0x94"/>
+
+<bitmask16 name="Shield Panel Background.Scaling Flags" offset="0x98">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Shield Panel Background.Interface Bitmap" offset="0xB0"/>
+
+<colorbyte name="Shield Panel Background.Default Color" offset="0xC0"/>
+<colorbyte name="Shield Panel Background.Flashing Color" offset="0xC4"/>
+
+<float name="Shield Panel Background.Flash Period" offset="0xC8"/>
+<float name="Shield Panel Background.Flash Delay" offset="0xCC"/>
+
+<short name="Shield Panel Background.Number of Flashes" offset="0xD0"/>
+
+<bitmask8 name="Shield Panel Background.Flash Flags" offset="0xD2">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Shield Panel Background.Flash Length" offset="0xD4"/>
+
+<colorbyte name="Shield Panel Background.Disabled Color" offset="0xD8"/>
+
+<short name="Shield Panel Background.Sequence Index" offset="0xE0"/>
+
+<!-- SHIELD PANEL BACKGROUND (2) MULTITEXTURE OVERLAY -->
+
+<struct name="Shield Panel Background.MultiTexture Overlay" offset="0xE4" size="480">
+	<short name="Type" offset="0x02"/>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x04">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+	<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+	<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+	<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+	<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+	<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+	
+	<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+	<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+	<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+	<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+	<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+	<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+	
+	<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+	<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+	<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+	
+	<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<struct name="Effectors" offset="0x154" size="220">
+		<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+			<option name="Tint (0 - 1 only)" value="00"/>
+			<option name="Horizontal Offset" value="01"/>
+			<option name="Vertical Offset" value="02"/>
+			<option name="Fade (0 - 1 only)" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+			<option name="Geometry Offset" value="00"/>
+			<option name="Primary Map" value="01"/>
+			<option name="Secondary Map" value="02"/>
+			<option name="Tertiary Map" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+			<option name="Player Pitch" value="00"/>
+			<option name="Player Pitch Tangent" value="01"/>
+			<option name="Player Yaw" value="02"/>
+			<option name="Weapon Ammo (total)" value="03"/>
+			<option name="Weapon Ammo (loaded)" value="04"/>
+			<option name="Weapon Heat" value="05"/>
+			<option name="Explicit (uses low bound)" value="06"/>
+			<option name="Weapon Zoom Level" value="07"/>
+		</enum16>
+		
+		<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+		<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+		<float name="In / Out Bounds.Out Bounds: from" note="pixels" info="DOES NOT WORK WITH PANEL-TYPE BACKGROUNDS" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+		<float name="In / Out Bounds.Out Bounds: to" note="pixels" info="DOES NOT WORK WITH PANEL-TYPE BACKGROUNDS" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+		
+		<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+		<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+		
+		<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+			<option name="One" value="00"/>
+			<option name="Zero" value="01"/>
+			<option name="Cosine" value="02"/>
+			<option name="Cosine (variable period)" value="03"/>
+			<option name="Diagonal Wave" value="04"/>
+			<option name="Diagonal Wave (variable period)" value="05"/>
+			<option name="Slide" value="06"/>
+			<option name="Slide (variable period)" value="07"/>
+			<option name="Noise" value="08"/>
+			<option name="Jitter" value="09"/>
+			<option name="Wander" value="10"/>
+			<option name="Spark" value="11"/>
+		</enum16>
+		
+		<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+		<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+	</struct>
+</struct>
+
+<!-- SHIELD PANEL METER (3) -->
+
+<short name="Shield Panel Meter.Anchor Offset: x" offset="0xF4"/>
+<short name="Shield Panel Meter.Anchor Offset: y" offset="0xF6"/>
+
+<float name="Shield Panel Meter.Width Scale" offset="0xF8"/>
+<float name="Shield Panel Meter.Height Scale" offset="0xFC"/>
+
+<bitmask16 name="Shield Panel Meter.Scaling Flags" offset="0x100">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Shield Panel Meter.Meter Bitmap" offset="0x118"/>
+
+<colorbyte name="Shield Panel Meter.Color at Meter Minimum" offset="0x128"/>
+<colorbyte name="Shield Panel Meter.Color at Meter Maximum" offset="0x12C"/>
+<colorbyte name="Shield Panel Meter.Flash Color" offset="0x130"/>
+<colorbyte name="Shield Panel Meter.Empty Color" offset="0x134"/>
+
+<bitmask16 name="Shield Panel Meter.Flags" offset="0x138">
+	<option name="Use Minimum / Maximum for State Changes" value="15"/>
+	<option name="Interpolate Between Minimum / Maximum Flash Colors as State Changes" value="14"/>
+	<option name="Interpolate Color Along HSV Space" value="13"/>
+	<option name="...More Colors for HSV Interpolation" value="12"/>
+	<option name="Invert Interpolation" value="11"/>
+</bitmask16>
+
+<char name="Shield Panel Meter.Minimum Meter Value" offset="0x139"/>
+<short name="Shield Panel Meter.Sequence Index" offset="0x13A"/>
+<char name="Shield Panel Meter.Alpha Multiplier" offset="0x13C"/>
+<char name="Shield Panel Meter.Alpha Bias" offset="0x13D"/>
+<char name="Shield Panel Meter.Value Scale" info="used for non-integral values, ie. health and shields" offset="0x13E"/>
+
+<float name="Shield Panel Meter.Opacity" offset="0x140"/>
+<float name="Shield Panel Meter.Translucency" offset="0x144"/>
+
+<colorbyte name="Shield Panel Meter.Disabled Color" offset="0x148"/>
+
+<colorbyte name="Shield Panel Meter.Overcharge Minimum Color" offset="0x15C"/>
+<colorbyte name="Shield Panel Meter.Overcharge Maximum Color" offset="0x160"/>
+<colorbyte name="Shield Panel Meter.Overcharge Flash Color" offset="0x164"/>
+<colorbyte name="Shield Panel Meter.Overcharge Empty Color" offset="0x168"/>
+
+<!-- HEALTH PANEL BACKGROUND (4) -->
+
+<short name="Health Panel Background.Anchor Offset: x" offset="0x17C"/>
+<short name="Health Panel Background.Anchor Offset: y" offset="0x17E"/>
+
+<float name="Health Panel Background.Width Scale" offset="0x180"/>
+<float name="Health Panel Background.Height Scale" offset="0x184"/>
+
+<bitmask16 name="Health Panel Background.Scaling Flags" offset="0x188">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Health Panel Background.Interface Bitmap" offset="0x1A0"/>
+
+<colorbyte name="Health Panel Background.Default Color" offset="0x1B0"/>
+<colorbyte name="Health Panel Background.Flashing Color" offset="0x1B4"/>
+
+<float name="Health Panel Background.Flash Period" offset="0x1B8"/>
+<float name="Health Panel Background.Flash Delay" offset="0x1BC"/>
+
+<short name="Health Panel Background.Number of Flashes" offset="0x1C0"/>
+
+<bitmask8 name="Health Panel Background.Flash Flags" offset="0x1C2">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Health Panel Background.Flash Length" offset="0x1C4"/>
+
+<colorbyte name="Health Panel Background.Disabled Color" offset="0x1C8"/>
+
+<short name="Health Panel Background.Sequence Index" offset="0x1D0"/>
+
+<!-- HEALTH PANEL BACKGROUND (4) MULTITEXTURE OVERLAY -->
+
+<struct name="Health Panel Background.MultiTexture Overlay" offset="0x1D4" size="480">
+	<short name="Type" offset="0x02"/>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x04">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+	<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+	<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+	<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+	<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+	<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+	
+	<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+	<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+	<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+	<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+	<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+	<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+	
+	<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+	<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+	<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+	
+	<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<struct name="Effectors" offset="0x154" size="220">
+		<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+			<option name="Tint (0 - 1 only)" value="00"/>
+			<option name="Horizontal Offset" value="01"/>
+			<option name="Vertical Offset" value="02"/>
+			<option name="Fade (0 - 1 only)" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+			<option name="Geometry Offset" value="00"/>
+			<option name="Primary Map" value="01"/>
+			<option name="Secondary Map" value="02"/>
+			<option name="Tertiary Map" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+			<option name="Player Pitch" value="00"/>
+			<option name="Player Pitch Tangent" value="01"/>
+			<option name="Player Yaw" value="02"/>
+			<option name="Weapon Ammo (total)" value="03"/>
+			<option name="Weapon Ammo (loaded)" value="04"/>
+			<option name="Weapon Heat" value="05"/>
+			<option name="Explicit (uses low bound)" value="06"/>
+			<option name="Weapon Zoom Level" value="07"/>
+		</enum16>
+		
+		<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+		<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+		<float name="In / Out Bounds.Out Bounds: from" note="pixels" info="DOES NOT WORK WITH PANEL-TYPE BACKGROUNDS" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+		<float name="In / Out Bounds.Out Bounds: to" note="pixels" info="DOES NOT WORK WITH PANEL-TYPE BACKGROUNDS" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+		
+		<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+		<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+		
+		<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+			<option name="One" value="00"/>
+			<option name="Zero" value="01"/>
+			<option name="Cosine" value="02"/>
+			<option name="Cosine (variable period)" value="03"/>
+			<option name="Diagonal Wave" value="04"/>
+			<option name="Diagonal Wave (variable period)" value="05"/>
+			<option name="Slide" value="06"/>
+			<option name="Slide (variable period)" value="07"/>
+			<option name="Noise" value="08"/>
+			<option name="Jitter" value="09"/>
+			<option name="Wander" value="10"/>
+			<option name="Spark" value="11"/>
+		</enum16>
+		
+		<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+		<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+	</struct>
+</struct>
+
+<!-- HEALTH PANEL METER (5) -->
+
+<short name="Health Panel Meter.Anchor Offset: x" offset="0x1E4"/>
+<short name="Health Panel Meter.Anchor Offset: y" offset="0x1E6"/>
+
+<float name="Health Panel Meter.Width Scale" offset="0x1E8"/>
+<float name="Health Panel Meter.Height Scale" offset="0x1EC"/>
+
+<bitmask16 name="Health Panel Meter.Scaling Flags" offset="0x1F0">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Health Panel Meter.Meter Bitmap" offset="0x208"/>
+
+<colorbyte name="Health Panel Meter.Color at Meter Minimum" offset="0x218"/>
+<colorbyte name="Health Panel Meter.Color at Meter Maximum" offset="0x21C"/>
+<colorbyte name="Health Panel Meter.Flash Color" offset="0x220"/>
+<colorbyte name="Health Panel Meter.Empty Color" offset="0x224"/>
+
+<bitmask16 name="Health Panel Meter.Flags" offset="0x228">
+	<option name="Use Minimum / Maximum for State Changes" value="15"/>
+	<option name="Interpolate Between Minimum / Maximum Flash Colors as State Changes" value="14"/>
+	<option name="Interpolate Color Along HSV Space" value="13"/>
+	<option name="...More Colors for HSV Interpolation" value="12"/>
+	<option name="Invert Interpolation" value="11"/>
+</bitmask16>
+
+<char name="Health Panel Meter.Minimum Meter Value" offset="0x229"/>
+<short name="Health Panel Meter.Sequence Index" offset="0x22A"/>
+<char name="Health Panel Meter.Alpha Multiplier" offset="0x22C"/>
+<char name="Health Panel Meter.Alpha Bias" offset="0x22D"/>
+<char name="Health Panel Meter.Value Scale" info="used for non-integral values, ie. health and shields" offset="0x22E"/>
+
+<float name="Health Panel Meter.Opacity" offset="0x230"/>
+<float name="Health Panel Meter.Translucency" offset="0x234"/>
+
+<colorbyte name="Health Panel Meter.Disabled Color" offset="0x238"/>
+
+<colorbyte name="Health Panel Meter.Medium Health Left Color" offset="0x24C"/>
+
+<float name="Health Panel Meter.Maximum Color Health Fraction Cutoff" offset="0x250"/>
+<float name="Health Panel Meter.Minimum Color Health Fraction Cutoff" offset="0x254"/>
+
+<!-- MOTION SENSOR BACKGROUND (6) -->
+
+<short name="Motion Sensor Background.Anchor Offset: x" offset="0x26C"/>
+<short name="Motion Sensor Background.Anchor Offset: y" offset="0x26E"/>
+
+<float name="Motion Sensor Background.Width Scale" offset="0x270"/>
+<float name="Motion Sensor Background.Height Scale" offset="0x274"/>
+
+<bitmask16 name="Motion Sensor Background.Scaling Flags" offset="0x278">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Motion Sensor Background.Interface Bitmap" offset="0x290"/>
+
+<colorbyte name="Motion Sensor Background.Default Color" offset="0x2A0"/>
+<colorbyte name="Motion Sensor Background.Flashing Color" offset="0x2A4"/>
+
+<float name="Motion Sensor Background.Flash Period" offset="0x2A8"/>
+<float name="Motion Sensor Background.Flash Delay" offset="0x2AC"/>
+
+<short name="Motion Sensor Background.Number of Flashes" offset="0x2B0"/>
+
+<bitmask8 name="Motion Sensor Background.Flash Flags" offset="0x2B2">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Motion Sensor Background.Flash Length" offset="0x2B4"/>
+
+<colorbyte name="Motion Sensor Background.Disabled Color" offset="0x2B8"/>
+
+<short name="Motion Sensor Background.Sequence Index" offset="0x2C0"/>
+
+<!-- MOTION SENSOR BACKGROUND (6) MULTITEXTURE OVERLAY -->
+
+<struct name="Motion Sensor Background.MultiTexture Overlay" offset="0x2C4" size="480">
+	<short name="Type" offset="0x02"/>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x04">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+	<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+	<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+	<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+	<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+	<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+	
+	<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+	<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+	<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+	<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+	<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+	<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+	
+	<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+	<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+	<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+	
+	<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<struct name="Effectors" offset="0x154" size="220">
+		<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+			<option name="Tint (0 - 1 only)" value="00"/>
+			<option name="Horizontal Offset" value="01"/>
+			<option name="Vertical Offset" value="02"/>
+			<option name="Fade (0 - 1 only)" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+			<option name="Geometry Offset" value="00"/>
+			<option name="Primary Map" value="01"/>
+			<option name="Secondary Map" value="02"/>
+			<option name="Tertiary Map" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+			<option name="Player Pitch" value="00"/>
+			<option name="Player Pitch Tangent" value="01"/>
+			<option name="Player Yaw" value="02"/>
+			<option name="Weapon Ammo (total)" value="03"/>
+			<option name="Weapon Ammo (loaded)" value="04"/>
+			<option name="Weapon Heat" value="05"/>
+			<option name="Explicit (uses low bound)" value="06"/>
+			<option name="Weapon Zoom Level" value="07"/>
+		</enum16>
+		
+		<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+		<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+		<float name="In / Out Bounds.Out Bounds: from" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+		<float name="In / Out Bounds.Out Bounds: to" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+		
+		<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+		<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+		
+		<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+			<option name="One" value="00"/>
+			<option name="Zero" value="01"/>
+			<option name="Cosine" value="02"/>
+			<option name="Cosine (variable period)" value="03"/>
+			<option name="Diagonal Wave" value="04"/>
+			<option name="Diagonal Wave (variable period)" value="05"/>
+			<option name="Slide" value="06"/>
+			<option name="Slide (variable period)" value="07"/>
+			<option name="Noise" value="08"/>
+			<option name="Jitter" value="09"/>
+			<option name="Wander" value="10"/>
+			<option name="Spark" value="11"/>
+		</enum16>
+		
+		<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+		<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+	</struct>
+</struct>
+
+<!-- MOTION SENSOR FOREGROUND (8) -->
+
+<short name="Motion Sensor Foreground.Anchor Offset: x" offset="0x2D4"/>
+<short name="Motion Sensor Foreground.Anchor Offset: y" offset="0x2D6"/>
+
+<float name="Motion Sensor Foreground.Width Scale" offset="0x2D8"/>
+<float name="Motion Sensor Foreground.Height Scale" offset="0x2DC"/>
+
+<bitmask16 name="Motion Sensor Foreground.Scaling Flags" offset="0x2E0">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<dependency name="Motion Sensor Foreground.Interface Bitmap" offset="0x2F8"/>
+
+<colorbyte name="Motion Sensor Foreground.Default Color" offset="0x308"/>
+<colorbyte name="Motion Sensor Foreground.Flashing Color" offset="0x30C"/>
+
+<float name="Motion Sensor Foreground.Flash Period" offset="0x310"/>
+<float name="Motion Sensor Foreground.Flash Delay" offset="0x314"/>
+
+<short name="Motion Sensor Foreground.Number of Flashes" offset="0x318"/>
+
+<bitmask8 name="Motion Sensor Foreground.Flash Flags" offset="0x31A">
+	<option name="Reverse Default / Flashing Colors" value="07"/>
+</bitmask8>
+
+<float name="Motion Sensor Foreground.Flash Length" offset="0x31C"/>
+
+<colorbyte name="Motion Sensor Foreground.Disabled Color" offset="0x320"/>
+
+<short name="Motion Sensor Foreground.Sequence Index" offset="0x328"/>
+
+<!-- MOTION SENSOR FOREGROUND (8) MULTITEXTURE OVERLAY -->
+
+<struct name="Motion Sensor Foreground.MultiTexture Overlay" offset="0x32C" size="480">
+	<short name="Type" offset="0x02"/>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x04">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+		<option name="Texture" value="00"/>
+		<option name="Screen" value="01"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+		<option name="Add" value="00"/>
+		<option name="Subtract" value="01"/>
+		<option name="Multiply" value="02"/>
+		<option name="Multiply 2x" value="03"/>
+		<option name="Dot" value="04"/>
+	</enum16>
+	
+	<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+	<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+	<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+	<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+	<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+	<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+	
+	<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+	<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+	<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+	<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+	<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+	<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+	
+	<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+	<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+	<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+	
+	<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+		<option name="Clamp" value="00"/>
+		<option name="Wrap" value="01"/>
+	</enum16>
+	
+	<struct name="Effectors" offset="0x154" size="220">
+		<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+			<option name="Tint (0 - 1 only)" value="00"/>
+			<option name="Horizontal Offset" value="01"/>
+			<option name="Vertical Offset" value="02"/>
+			<option name="Fade (0 - 1 only)" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+			<option name="Geometry Offset" value="00"/>
+			<option name="Primary Map" value="01"/>
+			<option name="Secondary Map" value="02"/>
+			<option name="Tertiary Map" value="03"/>
+		</enum16>
+		
+		<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+			<option name="Player Pitch" value="00"/>
+			<option name="Player Pitch Tangent" value="01"/>
+			<option name="Player Yaw" value="02"/>
+			<option name="Weapon Ammo (total)" value="03"/>
+			<option name="Weapon Ammo (loaded)" value="04"/>
+			<option name="Weapon Heat" value="05"/>
+			<option name="Explicit (uses low bound)" value="06"/>
+			<option name="Weapon Zoom Level" value="07"/>
+		</enum16>
+		
+		<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+		<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+		<float name="In / Out Bounds.Out Bounds: from" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+		<float name="In / Out Bounds.Out Bounds: to" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+		
+		<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+		<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+		
+		<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+			<option name="One" value="00"/>
+			<option name="Zero" value="01"/>
+			<option name="Cosine" value="02"/>
+			<option name="Cosine (variable period)" value="03"/>
+			<option name="Diagonal Wave" value="04"/>
+			<option name="Diagonal Wave (variable period)" value="05"/>
+			<option name="Slide" value="06"/>
+			<option name="Slide (variable period)" value="07"/>
+			<option name="Noise" value="08"/>
+			<option name="Jitter" value="09"/>
+			<option name="Wander" value="10"/>
+			<option name="Spark" value="11"/>
+		</enum16>
+		
+		<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+		<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+	</struct>
+</struct>
+
+<!-- MOTION SENSOR CENTER (9) -->
+
+<short name="Motion Sensor Center.Anchor Offset: x" offset="0x35C"/>
+<short name="Motion Sensor Center.Anchor Offset: y" offset="0x35E"/>
+
+<float name="Motion Sensor Center.Width Scale" offset="0x360"/>
+<float name="Motion Sensor Center.Height Scale" offset="0x364"/>
+
+<bitmask16 name="Motion Sensor Center.Scaling Flags" offset="0x368">
+	<option name="Don't Scale Offset" value="15"/>
+	<option name="Don't Scale Size" value="14"/>
+	<option name="Use High-Resolution Scale" value="13"/>
+</bitmask16>
+
+<!-- AUXILIARY OVERLAYS (10) -->
+
+<enum16 name="Auxiliary Overlays.Anchor" offset="0x380">
+	<option name="Top Left" value="00"/>
+	<option name="Top Right" value="01"/>
+	<option name="Bottom Left" value="02"/>
+	<option name="Bottom Right" value="03"/>
+	<option name="Center" value="04"/>
+</enum16>
+
+<!-- AUXILIARY OVERLAYS (10) OVERLAYS -->
+
+<struct name="Auxiliary Overlays.Overlays" offset="0x3A4" size="132">
+	
+	<short name="Anchor Offset: x" offset="0x00"/>
+	<short name="Anchor Offset: y" offset="0x02"/>
+	
+	<float name="Width Scale" offset="0x04"/>
+	<float name="Height Scale" offset="0x08"/>
+	
+	<bitmask16 name="Scaling Flags" offset="0x0C">
+		<option name="Don't Scale Offset" value="15"/>
+		<option name="Don't Scale Size" value="14"/>
+		<option name="Use High-Resolution Scale" value="13"/>
+	</bitmask16>
+	
+	<dependency name="Interface Bitmap" offset="0x24"/>
+	
+	<colorbyte name="Default Color" offset="0x34"/>
+	<colorbyte name="Flashing Color" offset="0x38"/>
+	
+	<float name="Flash Period" offset="0x3C"/>
+	<float name="Flash Delay" offset="0x40"/>
+	
+	<short name="Number of Flashes" offset="0x44"/>
+	
+	<bitmask8 name="Flash Flags" offset="0x46">
+		<option name="Reverse Default / Flashing Colors" value="07"/>
+	</bitmask8>
+	
+	<float name="Flash Length" offset="0x48"/>
+	
+	<colorbyte name="Disabled Color" offset="0x4C"/>
+	
+	<short name="Sequence Index" offset="0x54"/>
+	
+	<struct name="MultiTexture Overlay" offset="0x58" size="480">
+		<short name="Type" offset="0x02"/>
+		
+		<enum16 name="Shader.Framebuffer Blend Function" offset="0x04">
+			<option name="Alpha Blend" value="00"/>
+			<option name="Multiply" value="01"/>
+			<option name="Double Multiply" value="02"/>
+			<option name="Add" value="03"/>
+			<option name="Subtract" value="04"/>
+			<option name="Component Minimum" value="05"/>
+			<option name="Component Maximum" value="06"/>
+			<option name="Alpha-Multiply Add" value="07"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+			<option name="Add" value="00"/>
+			<option name="Subtract" value="01"/>
+			<option name="Multiply" value="02"/>
+			<option name="Multiply 2x" value="03"/>
+			<option name="Dot" value="04"/>
+		</enum16>
+		
+		<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+			<option name="Add" value="00"/>
+			<option name="Subtract" value="01"/>
+			<option name="Multiply" value="02"/>
+			<option name="Multiply 2x" value="03"/>
+			<option name="Dot" value="04"/>
+		</enum16>
+		
+		<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+		<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+		<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+		<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+		<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+		<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+		
+		<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+		<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+		<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+		<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+		<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+		<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+		
+		<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+		<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+		<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+		
+		<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<struct name="Effectors" offset="0x154" size="220">
+			<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+				<option name="Tint (0 - 1 only)" value="00"/>
+				<option name="Horizontal Offset" value="01"/>
+				<option name="Vertical Offset" value="02"/>
+				<option name="Fade (0 - 1 only)" value="03"/>
+			</enum16>
+			
+			<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+				<option name="Geometry Offset" value="00"/>
+				<option name="Primary Map" value="01"/>
+				<option name="Secondary Map" value="02"/>
+				<option name="Tertiary Map" value="03"/>
+			</enum16>
+			
+			<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+				<option name="Player Pitch" value="00"/>
+				<option name="Player Pitch Tangent" value="01"/>
+				<option name="Player Yaw" value="02"/>
+				<option name="Weapon Ammo (total)" value="03"/>
+				<option name="Weapon Ammo (loaded)" value="04"/>
+				<option name="Weapon Heat" value="05"/>
+				<option name="Explicit (uses low bound)" value="06"/>
+				<option name="Weapon Zoom Level" value="07"/>
+			</enum16>
+			
+			<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+			<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+			<float name="In / Out Bounds.Out Bounds: from" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+			<float name="In / Out Bounds.Out Bounds: to" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+			
+			<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+			<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+			
+			<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+				<option name="One" value="00"/>
+				<option name="Zero" value="01"/>
+				<option name="Cosine" value="02"/>
+				<option name="Cosine (variable period)" value="03"/>
+				<option name="Diagonal Wave" value="04"/>
+				<option name="Diagonal Wave (variable period)" value="05"/>
+				<option name="Slide" value="06"/>
+				<option name="Slide (variable period)" value="07"/>
+				<option name="Noise" value="08"/>
+				<option name="Jitter" value="09"/>
+				<option name="Wander" value="10"/>
+				<option name="Spark" value="11"/>
+			</enum16>
+			
+			<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+			<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+		</struct>
+	</struct>
+	
+	<enum16 name="Type" offset="0x68">
+		<option name="Team Icon" value="00"/>
+	</enum16>
+	
+	<bitmask8 name="Flags" offset="0x6A">
+		<option name="Use Team Color" value="07"/>
+	</bitmask8>
+</struct>
+
+<!-- HUD WARNING SOUNDS (11) -->
+
+<struct name="HUD Warning Sounds" offset="0x3C0" size="56">
+	<dependency name="Sound" offset="0x00"/>
+	
+	<bitmask32 name="Latched To" offset="0x10">
+		<option name="Shield Recharging" value="31"/>
+		<option name="Shield Damaged" value="30"/>
+		<option name="Shield Low" value="29"/>
+		<option name="Shield Empty" value="28"/>
+		<option name="Health Low" value="27"/>
+		<option name="Health Empty" value="26"/>
+		<option name="Health Minor Damage" value="25"/>
+		<option name="Health Major Damage" value="24"/>
+	</bitmask32>
+	
+	<float name="Scale" offset="0x14"/>
+</struct>
+
+<!-- AUXILIARY HUD METERS (12) -->
+
+<struct name="Auxiliary HUD Meters" offset="0x3CC" size="324">
+	<enum16 name="Type" offset="0x00">
+		<option name="Integrated Light" value="00"/>
+	</enum16>
+	
+	<short name="Background.Anchor Offset: x" offset="0x14"/>
+	<short name="Background.Anchor Offset: y" offset="0x16"/>
+	
+	<float name="Background.Width Scale" offset="0x18"/>
+	<float name="Background.Height Scale" offset="0x1C"/>
+	
+	<bitmask16 name="Background.Scaling Flags" offset="0x20">
+		<option name="Don't Scale Offset" value="15"/>
+		<option name="Don't Scale Size" value="14"/>
+		<option name="Use High-Resolution Scale" value="13"/>
+	</bitmask16>
+	
+	<dependency name="Background.Interface Bitmap" offset="0x38"/>
+	
+	<colorbyte name="Background.Default Color" offset="0x48"/>
+	<colorbyte name="Background.Flashing Color" offset="0x4C"/>
+	
+	<float name="Background.Flash Period" offset="0x50"/>
+	<float name="Background.Flash Delay" offset="0x54"/>
+	
+	<short name="Background.Number of Flashes" offset="0x58"/>
+	
+	<bitmask8 name="Background.Flash Flags" offset="0x5A">
+		<option name="Reverse Default / Flashing Colors" value="07"/>
+	</bitmask8>
+	
+	<float name="Background.Flash Length" offset="0x5C"/>
+	
+	<colorbyte name="Background.Disabled Color" offset="0x60"/>
+	
+	<short name="Background.Sequence Index" offset="0x68"/>
+	
+	<struct name="Background.MultiTexture Overlay" offset="0x6C" size="480">
+		<short name="Type" offset="0x02"/>
+		
+		<enum16 name="Shader.Framebuffer Blend Function" offset="0x04">
+			<option name="Alpha Blend" value="00"/>
+			<option name="Multiply" value="01"/>
+			<option name="Double Multiply" value="02"/>
+			<option name="Add" value="03"/>
+			<option name="Subtract" value="04"/>
+			<option name="Component Minimum" value="05"/>
+			<option name="Component Maximum" value="06"/>
+			<option name="Alpha-Multiply Add" value="07"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Primary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x28">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Secondary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2A">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Anchors.Tertiary Anchor" info_img="unhi MultiTex Overlay.Anchors.png" offset="0x2C">
+			<option name="Texture" value="00"/>
+			<option name="Screen" value="01"/>
+		</enum16>
+		
+		<enum16 name="Blending Function.0 to 1 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x2E">
+			<option name="Add" value="00"/>
+			<option name="Subtract" value="01"/>
+			<option name="Multiply" value="02"/>
+			<option name="Multiply 2x" value="03"/>
+			<option name="Dot" value="04"/>
+		</enum16>
+		
+		<enum16 name="Blending Function.1 to 2 Blending Function" info_img="unhi MultiTex Overlay.Blending Function.png" offset="0x30">
+			<option name="Add" value="00"/>
+			<option name="Subtract" value="01"/>
+			<option name="Multiply" value="02"/>
+			<option name="Multiply 2x" value="03"/>
+			<option name="Dot" value="04"/>
+		</enum16>
+		
+		<float name="Map Scales.Primary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x34"/>
+		<float name="Map Scales.Primary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x38"/>
+		<float name="Map Scales.Secondary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x3C"/>
+		<float name="Map Scales.Secondary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x40"/>
+		<float name="Map Scales.Tertiary Scale: x" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x44"/>
+		<float name="Map Scales.Tertiary Scale: y" info_img="unhi MultiTex Overlay.Map Scales.png" offset="0x48"/>
+		
+		<float name="Map Offsets.Primary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x4C"/>
+		<float name="Map Offsets.Primary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x50"/>
+		<float name="Map Offsets.Secondary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x54"/>
+		<float name="Map Offsets.Secondary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x58"/>
+		<float name="Map Offsets.Tertiary Offset: x" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x5C"/>
+		<float name="Map Offsets.Tertiary Offset: y" info_img="unhi MultiTex Overlay.Map Offsets.png" offset="0x60"/>
+		
+		<dependency name="Map.Primary" info_img="unhi MultiTex Overlay.Map.png" offset="0x64"/>
+		<dependency name="Map.Secondary" info_img="unhi MultiTex Overlay.Map.png" offset="0x74"/>
+		<dependency name="Map.Tertiary" info_img="unhi MultiTex Overlay.Map.png" offset="0x84"/>
+		
+		<enum16 name="Map.Primary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x94">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<enum16 name="Map.Secondary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x96">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<enum16 name="Map.Tertiary Wrap Mode" info_img="unhi MultiTex Overlay.Map.png" offset="0x98">
+			<option name="Clamp" value="00"/>
+			<option name="Wrap" value="01"/>
+		</enum16>
+		
+		<struct name="Effectors" offset="0x154" size="220">
+			<enum16 name="Source / Destination.Destination Type" info_img="unhi Effectors.Source,Destination.png" offset="0x40">
+				<option name="Tint (0 - 1 only)" value="00"/>
+				<option name="Horizontal Offset" value="01"/>
+				<option name="Vertical Offset" value="02"/>
+				<option name="Fade (0 - 1 only)" value="03"/>
+			</enum16>
+			
+			<enum16 name="Source / Destination.Destination" info_img="unhi Effectors.Source,Destination.png" offset="0x42">
+				<option name="Geometry Offset" value="00"/>
+				<option name="Primary Map" value="01"/>
+				<option name="Secondary Map" value="02"/>
+				<option name="Tertiary Map" value="03"/>
+			</enum16>
+			
+			<enum16 name="Source / Destination.Source" info_img="unhi Effectors.Source,Destination.png" offset="0x44">
+				<option name="Player Pitch" value="00"/>
+				<option name="Player Pitch Tangent" value="01"/>
+				<option name="Player Yaw" value="02"/>
+				<option name="Weapon Ammo (total)" value="03"/>
+				<option name="Weapon Ammo (loaded)" value="04"/>
+				<option name="Weapon Heat" value="05"/>
+				<option name="Explicit (uses low bound)" value="06"/>
+				<option name="Weapon Zoom Level" value="07"/>
+			</enum16>
+			
+			<float name="In / Out Bounds.In Bounds: from" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x48"/>
+			<float name="In / Out Bounds.In Bounds: to" note="source units" info_img="unhi Effectors.In,Out Bounds.png" offset="0x4C"/>
+			<float name="In / Out Bounds.Out Bounds: from" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x50"/>
+			<float name="In / Out Bounds.Out Bounds: to" note="pixels" info_img="unhi Effectors.In,Out Bounds.png" offset="0x54"/>
+			
+			<colorRGB name="Tint Color Bounds.Tint Color Lower Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0x98"/>
+			<colorRGB name="Tint Color Bounds.Tint Color Upper Bound" info_img="unhi Effectors.Tint Color Bounds.png" offset="0xA4"/>
+			
+			<enum16 name="Periodic Functions.Periodic Function" info_img="unhi Effectors.Periodic Functions.png" offset="0xB0">
+				<option name="One" value="00"/>
+				<option name="Zero" value="01"/>
+				<option name="Cosine" value="02"/>
+				<option name="Cosine (variable period)" value="03"/>
+				<option name="Diagonal Wave" value="04"/>
+				<option name="Diagonal Wave (variable period)" value="05"/>
+				<option name="Slide" value="06"/>
+				<option name="Slide (variable period)" value="07"/>
+				<option name="Noise" value="08"/>
+				<option name="Jitter" value="09"/>
+				<option name="Wander" value="10"/>
+				<option name="Spark" value="11"/>
+			</enum16>
+			
+			<float name="Periodic Functions.Function Period" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB4"/>
+			<float name="Periodic Functions.Function Phase" note="seconds" info_img="unhi Effectors.Periodic Functions.png" offset="0xB8"/>
+		</struct>
+	</struct>
+	
+	<short name="Meter.Anchor Offset: x" offset="0x7C"/>
+	<short name="Meter.Anchor Offset: y" offset="0x7E"/>
+	
+	<float name="Meter.Width Scale" offset="0x80"/>
+	<float name="Meter.Height Scale" offset="0x84"/>
+	
+	<bitmask16 name="Meter.Scaling Flags" offset="0x88">
+		<option name="Don't Scale Offset" value="15"/>
+		<option name="Don't Scale Size" value="14"/>
+		<option name="Use High-Resolution Scale" value="13"/>
+	</bitmask16>
+	
+	<dependency name="Meter.Meter Bitmap" offset="0xA0"/>
+	
+	<colorbyte name="Meter.Color at Meter Minimum" offset="0xB0"/>
+	<colorbyte name="Meter.Color at Meter Maximum" offset="0xB4"/>
+	<colorbyte name="Meter.Flash Color" offset="0xB8"/>
+	<colorbyte name="Meter.Empty Color" offset="0xBC"/>
+	
+	<bitmask16 name="Meter.Flags" offset="0xC0">
+		<option name="Use Minimum / Maximum for State Changes" value="15"/>
+		<option name="Interpolate Between Minimum / Maximum Flash Colors as State Changes" value="14"/>
+		<option name="Interpolate Color Along HSV Space" value="13"/>
+		<option name="...More Colors for HSV Interpolation" value="12"/>
+		<option name="Invert Interpolation" value="11"/>
+	</bitmask16>
+	
+	<char name="Meter.Minimum Meter Value" offset="0xC1"/>
+	<short name="Meter.Sequence Index" offset="0xC2"/>
+	<char name="Meter.Alpha Multiplier" offset="0xC4"/>
+	<char name="Meter.Alpha Bias" offset="0xC5"/>
+	<char name="Meter.Value Scale" info="used for non-integral values, ie. health and shields" offset="0xC6"/>
+	
+	<float name="Meter.Opacity" offset="0xC8"/>
+	<float name="Meter.Translucency" offset="0xCC"/>
+	
+	<colorbyte name="Meter.Disabled Color" offset="0xD0"/>
+	
+	<float name="Meter.Minimum Fraction Cutoff" offset="0xE4"/>
+	
+	<bitmask16 name="Meter.Flags" offset="0xE8">
+		<option name="Show Only When Active" value="15"/>
+		<option name="Flash Once if Activated While Disabled" value="14"/>
+	</bitmask16>
+</struct>
+
+<bitmask16 name="Vehicle HUD." info="Sparky: 'This is nonexistent, just showing its header name'" offset="0x00">
+</bitmask16>
+
+</plugin>

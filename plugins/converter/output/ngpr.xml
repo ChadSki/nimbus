@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<struct name="ngpr" size="94">
+  <asciiz maxlength="32" name="name" offset="0x0"/>
+  <colorRGB name="primary_color" offset="0x20"/>
+  <colorRGB name="secondary_color" offset="0x2c"/>
+  <reference name="pattern" offset="0x38"/>
+  <int16 name="pattern_bitmap_index" offset="0x48"/>
+  <reference name="decal" offset="0x4c"/>
+  <int16 name="decal_bitmap_index" offset="0x5c"/>
+</struct>

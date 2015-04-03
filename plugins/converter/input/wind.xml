@@ -1,0 +1,14 @@
+<plugin class="wind" author="sparky" version="4.0" headersize="Main">
+
+<!-- Note that the velocity measurement units were originally listed as 'world units', but I think it makes more sense as 'world units per second'. -->
+<float name="Velocity: from" note="world units per second" info="the wind magnitude in the weather region scales the wind between these bounds" offset="0x00"/>
+<float name="Velocity: to" note="world units per second" info="the wind magnitude in the weather region scales the wind between these bounds" offset="0x04"/>
+
+<float name="Variation Area: yaw" note="radians" info="the wind direction varies inside a box defined by these angles on either side of the direction from the weather region" offset="0x08"/>
+<float name="Variation Area: pitch" note="radians" info="the wind direction varies inside a box defined by these angles on either side of the direction from the weather region" offset="0x0C"/>
+
+<float name="Local Variation Weight" offset="0x10"/>
+<float name="Local Variation Rate" offset="0x14"/>
+<float name="Damping" offset="0x18"/>
+
+</plugin>

@@ -1,0 +1,35 @@
+<plugin class="dobc" author="sparky" version="4.0" headersize="Main">
+
+<enum16 name="Collection Type" offset="0x00">
+	<option name="Screen-Facing" value="00"/>
+	<option name="Viewer-Facing" value="01"/>
+</enum16>
+
+<float name="Global Z Offset" info="applied to all detail objects in this collection so they don't float above the ground" offset="0x04"/>
+
+<dependency name="Sprite Plate" offset="0x34"/>
+
+<struct name="Types" offset="0x44" size="96">
+	<string32 name="Name" offset="0x00"/>
+	
+	<char name="Sequence Index" offset="0x20"/>
+	
+	<bitmask8 name="Type Flags" offset="0x21">
+		<option name="Unused" value="7"/>
+		<option name="Unused" value="6"/>
+		<option name="Interpolate Color in HSV" value="5"/>
+		<option name="...More Colors" info="Sparky: 'I can has moar colors?'; Tiny Tim: 'Please, Sir, I'd like some more...'" value="4"/>
+	</bitmask8>
+		
+	<float name="Color Override Factor" note="0 - 1 only" info="fraction of detail object color to use instead of the base map color in the environment" offset="0x24"/>
+	
+	<float name="Near Fade Distance" note="world units" offset="0x30"/>
+	<float name="Far Fade Distance" note="world units" offset="0x34"/>
+	<float name="Size" note="world units per pixel" offset="0x38"/>
+	
+	<colorRGB name="Minimum Color" offset="0x40"/>
+	<colorRGB name="Maximum Color" offset="0x4C"/>
+	<colorbyte name="Ambient Color" offset="0x58"/>
+</struct>
+
+</plugin>

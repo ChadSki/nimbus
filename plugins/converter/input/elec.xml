@@ -1,0 +1,90 @@
+<plugin class="elec" author="sparky" version="4.0" headersize="Main">
+
+<short name="Lightning.Count" note="0 defaults to 1" info="number of overlapping lightning effects to render" offset="0x02"/>
+
+<float name="Lightning.Near Fade Distance" note="world units" info="distance at which lightning is at full brightness" offset="0x14"/>
+<float name="Lightning.Far Fade Distance" note="world units" info="distance at which lightning is at zero brightness" offset="0x18"/>
+
+<enum16 name="Lightning.Jitter Scale Source" offset="0x2C">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Lightning.Thickness Scale Source" offset="0x2E">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Lightning.Tint Modulation Source" offset="0x30">
+	<option name="None" value="00"/>
+	<option name="A" value="01"/>
+	<option name="B" value="02"/>
+	<option name="C" value="03"/>
+	<option name="D" value="04"/>
+</enum16>
+
+<enum16 name="Lightning.Brightness Scale Source" offset="0x32">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<dependency name="Lightning.Bitmap" offset="0x34"/>
+
+<struct name="Markers" offset="0x98" size="228">
+	<string32 name="Attachment Marker" offset="0x00"/>
+	
+	<bitmask8 name="Flags" offset="0x20">	
+		<option name="Not Connected To Next Marker" value="07"/>
+	</bitmask8>
+	
+	<short name="Octaves to Next Marker" offset="0x24"/>
+	
+	<float name="Random Position Bounds: i (1)" note="world units" offset="0x74"/>
+	<float name="Random Position Bounds: i (2)" note="world units" offset="0x78"/>
+	<float name="Random Position Bounds: k" note="world units" offset="0x7C"/>
+	<float name="Random Jitter" note="world units" offset="0x80"/>
+	<float name="Thickness" note="world units" offset="0x84"/>
+
+	<colorARGB name="Tint" note="alpha is brightness" offset="0x88"/>
+</struct>
+
+<struct name="Shader" note="maximum of one" offset="0xA4" size="32">
+	
+	<bitmask16 name="Shader Flags" offset="0x28">
+		<option name="Sort Bias" value="15"/>
+		<option name="Nonlinear Tint" value="14"/>
+		<option name="Don't Overdraw First-Person Weapon" value="13"/>
+	</bitmask16>
+	
+	<enum16 name="Framebuffer Blend Function" offset="0x2A">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+
+	<enum16 name="Framebuffer Fade Mode" offset="0x2C">
+		<option name="None" value="00"/>
+		<option name="Fade When Perpendicular" value="01"/>
+		<option name="Fade When Parallel" value="02"/>
+	</enum16>
+
+	<bitmask8 name="Map Flags" offset="0x2E">
+		<option name="Unfiltered" value="07"/>
+	</bitmask8>
+</struct>
+
+</plugin>

@@ -1,0 +1,7 @@
+<plugin class="Soul" author="sparky" version="4.0" headersize="Main">
+
+<struct name="UI Widget Definitions" offset="0x00" size="16">
+	<dependency name="UI Widget Definition" offset="0x00"/>
+</struct>
+
+</plugin>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<struct name="colo" size="12">
+  <struct_array name="colors" offset="0x0" size="48">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <colorARGB name="color" offset="0x20"/>
+  </struct_array>
+</struct>

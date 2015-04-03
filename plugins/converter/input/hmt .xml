@@ -1,0 +1,17 @@
+<plugin class="hmt " author="sparky" version="4.0r1" headersize="Main">
+
+<long name="Text Data" note="bytes" offset="0x00"/>
+
+<struct name="Message Elements" offset="0x14" size="2">
+	<char name="Type" offset="0x00"/>
+	<char name="Data" offset="0x01"/>
+</struct>
+
+<struct name="Messages" offset="0x20" size="64">
+	<string32 name="Name" offset="0x00"/>
+	<short name="Start Index Into Text Blob" offset="0x20"/>
+	<short name="Start Index of Message Block" offset="0x22"/>
+	<short name="Panel Count" offset="0x24"/>
+</struct>
+
+</plugin>

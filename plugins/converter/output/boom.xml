@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<struct name="boom" size="4">
+  <int16 name="from_velocity" offset="0x0"/>
+  <int16 name="from_acceleration" offset="0x2"/>
+</struct>

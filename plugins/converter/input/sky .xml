@@ -1,0 +1,55 @@
+<plugin class="sky " author="sparky" version="4.0" headersize="Main">
+
+<dependency name="Model" offset="0x00"/>
+<dependency name="Animation Graph" offset="0x10"/>
+
+<colorRGB name="Indoor Ambient Radiosity Color" info="the indoor ambient light color" offset="0x38"/>
+<float name="Indoor Ambient Radiosity Power" note="0 - infinity" info="the indoor ambient light power" offset="0x44"/>
+
+<colorRGB name="Outdoor Ambient Radiosity Color" info="the outdoor ambient light color" offset="0x48"/>
+<float name="Outdoor Ambient Radiosity Power" note="0 - infinity" info="the outdoor ambient light power" offset="0x54"/>
+
+<colorRGB name="Outdoor Fog Color" offset="0x58"/>
+<float name="Outdoor Fog Maximum Density" note="0 - 1 only; 0 defaults to 1" info="density at opaque distance" offset="0x6C"/>
+
+<float name="Outdoor Fog Start Distance" note="world units" info="below this distance there is no fog" offset="0x70"/>
+<float name="Outdoor Fog Opaque Distance" note="world units" info="beyond this distance, surfaces are completely fogged" offset="0x74"/>
+
+<colorRGB name="Indoor Fog Color" offset="0x78"/>
+<float name="Indoor Fog Maximum Density" note="0 - 1 only; 0 defaults to 1" info="density at opaque distance" offset="0x8C"/>
+
+<float name="Indoor Fog Start Distance" note="world units" info="below this distance there is no fog" offset="0x90"/>
+<float name="Indoor Fog Opaque Distance" note="world units" info="beyond this distance, surfaces are completely fogged" offset="0x94"/>
+
+<dependency name="Indoor Fog Screen" info="used for FOG SCREEN only; not for planar fog - make sure the fog screen flag is checked in fog tag" offset="0x98"/>
+
+<struct name="Shader Functions" offset="0xAC" size="36">
+	<string32 name="Global Function Name" info="the global function that controls this shader value" offset="0x00"/>
+</struct>
+
+<struct name="Animations" offset="0xB8" size="36">
+	<short name="Animation Index" info="the index of the animation in the antr animation graph" offset="0x00"/>
+	<float name="Period" note="seconds" offset="0x04"/>
+</struct>
+
+<struct name="Lights" offset="0xC4" size="116">
+	<dependency name="Lens Flare.Lens Flare" offset="0x00"/>
+	<string32 name="Lens Flare.Lens Flare Marker Name" info="the lens flare for this light will be attached to the specified marker in the model" offset="0x10"/>
+	
+	<bitmask32 name="Radiosity.Flags" info_img="sky Lights.Radiosity.png" offset="0x4C">
+		<option name="Affects Exteriors" value="31"/>
+		<option name="Affects Interiors" value="30"/>
+	</bitmask32>
+	
+	<colorRGB name="Radiosity.Color" info="light color" info_img="sky Lights.Radiosity.png" offset="0x50"/>
+	
+	<float name="Radiosity.Power" note="0 - infinity" info="light power" info_img="sky Lights.Radiosity.png" offset="0x5C"/>
+	<float name="Radiosity.Test Distance" note="world units?" info="the length of the ray for shadow testing" info_img="sky Lights.Radiosity.png" offset="0x60"/>
+	
+	<float name="Radiosity.Direction: y = left/right" note="radians" info="position of the light source in the sky" info_img="sky Lights.Radiosity.png" offset="0x68"/>
+	<float name="Radiosity.Direction: p = down/up" note="radians" info="position of the light source in the sky" info_img="sky Lights.Radiosity.png" offset="0x6C"/>
+	
+	<float name="Radiosity.Diameter" note="radians" info="angular diameter of the light source in the sky" info_img="sky Lights.Radiosity.png" offset="0x70"/>
+</struct>
+
+</plugin>

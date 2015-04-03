@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<struct name="flag" size="96">
+  <enum16 name="trailing_edge_shape" offset="0x4">
+    <option name="flat" value="0"/>
+    <option name="concave_triangular" value="1"/>
+    <option name="convex_triangular" value="2"/>
+    <option name="trapezoid_short_top" value="3"/>
+    <option name="trapezoid_short_bottom" value="4"/>
+  </enum16>
+  <int16 info="vertices; zero places the shape exactly on the trailing edge, positive numbers push it off the edge" name="trailing_edge_shape_offset" offset="0x6"/>
+  <enum16 name="attached_edge_shape" offset="0x8">
+    <option name="flat" value="0"/>
+    <option name="concave_triangular" value="1"/>
+  </enum16>
+  <int16 info="vertices; flag size from attached to trailing edge" name="width" offset="0xc"/>
+  <int16 info="vertices; flag size along the direction of attachment (should be odd)" name="height" offset="0xe"/>
+  <float32 info="world units; width of the cell between each pair of vertices" name="cell_width" offset="0x10"/>
+  <float32 info="world units; height of the cell between each pair of vertices" name="cell_height" offset="0x14"/>
+  <reference name="red_flag_shader" offset="0x18"/>
+  <reference name="physics" offset="0x28"/>
+  <float32 info="world units per second" name="wind_noise" offset="0x38"/>
+  <reference name="blue_flag_shader" offset="0x44"/>
+  <struct_array name="attachment_points" offset="0x54" size="52">
+    <int16 info="vertices; flag vertices between this attachment point and the next" name="height_to_next_attachment" offset="0x0"/>
+    <asciiz maxlength="32" name="marker_name" offset="0x14"/>
+  </struct_array>
+</struct>

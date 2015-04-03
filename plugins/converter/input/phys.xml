@@ -1,0 +1,103 @@
+<plugin class="phys" author="sparky" version="4.0" headersize="Main">
+
+<float name="Radius" info="positive uses old inferior physics, negative uses new improved physics" offset="0x00"/>
+<float name="Moment Scale" note="0 - 1 only" offset="0x04"/>
+<float name="Mass" offset="0x08"/>
+<float name="Center of Mass: x" offset="0x0C"/>
+<float name="Center of Mass: y" offset="0x10"/>
+<float name="Center of Mass: z" offset="0x14"/>
+
+<float name="Density" offset="0x18"/>
+<float name="Gravity Scale" offset="0x1C"/>
+<float name="Ground Friction" offset="0x20"/>
+<float name="Ground Depth" offset="0x24"/>
+<float name="Ground Damp Fraction" note="0 - 1 only" offset="0x28"/>
+
+<float name="Ground Normal k1" offset="0x2C"/>
+<float name="Ground Normal k0" offset="0x30"/>
+
+<float name="Water Friction" offset="0x38"/>
+<float name="Water Depth" offset="0x3C"/>
+<float name="Water Density" offset="0x40"/>
+
+<float name="Air Friction" note="0 - 1 only" offset="0x48"/>
+<float name="XX Moment" offset="0x50"/>
+<float name="YY Moment" offset="0x54"/>
+<float name="ZZ Moment" offset="0x58"/>
+
+<struct name="Inertial Matrix and Inverse" offset="0x5C" size="36">
+	<float name="yy + zz    -xy    -zx    : i (1)" offset="0x00"/>
+	<float name="yy + zz    -xy    -zx    : i (2)" offset="0x04"/>
+	<float name="yy + zz    -xy    -zx    : k" offset="0x08"/>
+	
+	<float name="-xy    zz + xx    -yz    : i (1)" offset="0x0C"/>
+	<float name="-xy    zz + xx    -yz    : i (2)" offset="0x10"/>
+	<float name="-xy    zz + xx    -yz    : k" offset="0x14"/>
+	
+	<float name="-zx    -yz    xx + yy    : i (1)" offset="0x18"/>
+	<float name="-zx    -yz    xx + yy    : i (2)" offset="0x1C"/>
+	<float name="-zx    -yz    xx + yy    : k" offset="0x20"/>
+</struct>
+
+<struct name="Powered Mass Points" offset="0x68" size="128">
+	<string32 name="Name" offset="0x00"/>
+	
+	<bitmask16 name="Flags" offset="0x20">
+		<option name="Ground Friction" value="15"/>
+		<option name="Water Friction" value="14"/>
+		<option name="Air Friction" value="13"/>
+		<option name="Water Lift" value="12"/>
+		<option name="Air Lift" value="11"/>
+		<option name="Thrust" value="10"/>
+		<option name="Antigravity" value="09"/>
+	</bitmask16>
+	
+	<float name="Antigravity Strength" offset="0x24"/>
+	<float name="Antigravity Offset" offset="0x28"/>
+	<float name="Antigravity Height" offset="0x2C"/>
+	<float name="Antigravity Damp Fraction" offset="0x30"/>
+	<float name="Antigravity Normal k1" offset="0x34"/>
+	<float name="Antigravity Normal k0" offset="0x38"/>
+</struct>
+
+<struct name="Mass Points" offset="0x74" size="128">
+	<string32 name="Name" offset="0x00"/>
+	
+	<index name="Powered Mass Point" offset="0x20" reflexive="main:Powered Mass Points"/>
+	
+	<char name="Model Node" offset="0x22"/>
+	
+	<bitmask8 name="Flags" offset="0x24">
+		<option name="Metallic" value="07"/>
+	</bitmask8>
+	
+	<float name="Relative Mass" offset="0x28"/>
+	<float name="Mass" offset="0x2C"/>
+	<float name="Relative Density" offset="0x30"/>
+	<float name="Density" offset="0x34"/>
+	
+	<float name="Position: x" offset="0x38"/>
+	<float name="Position: y" offset="0x3C"/>
+	<float name="Position: z" offset="0x40"/>
+	
+	<float name="Forward: i (1)" offset="0x44"/>
+	<float name="Forward: i (2)" offset="0x48"/>
+	<float name="Forward: k" offset="0x4C"/>
+	
+	<float name="Up: i (1)" offset="0x50"/>
+	<float name="Up: i (2)" offset="0x54"/>
+	<float name="Up: k" offset="0x58"/>
+	
+	<enum16 name="Friction Type" offset="0x5C">
+		<option name="Point" value="00"/>
+		<option name="Forward" value="01"/>
+		<option name="Left" value="02"/>
+		<option name="Up" value="03"/>
+	</enum16>
+	
+	<float name="Friction Parallel Scale" offset="0x60"/>
+	<float name="Friction Perpendicular Scale" offset="0x64"/>
+	<float name="Radius" offset="0x68"/>
+</struct>
+
+</plugin>

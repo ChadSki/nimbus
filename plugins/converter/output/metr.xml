@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<struct name="metr" size="156">
+  <reference info="THESE BITMAPS ARE NOT HANDLED LIKE OTHERS; two bitmaps specifying the mask and the meter levels" name="stencil_bitmaps" offset="0x4"/>
+  <reference info="THESE BITMAPS ARE NOT HANDLED LIKE OTHERS; optional bitmap to draw into the unmasked regions of the meter (modulated by the colors below)" name="source_bitmap" offset="0x14"/>
+  <int16 name="stencil_sequence_index" offset="0x24"/>
+  <int16 name="source_sequence_index" offset="0x26"/>
+  <enum16 name="interpolate_colors" offset="0x3c">
+    <option name="linearly" value="0"/>
+    <option name="faster_near_empty" value="1"/>
+    <option name="faster_near_full" value="2"/>
+    <option name="through_random_noise" value="3"/>
+  </enum16>
+  <enum16 name="anchor_colors" offset="0x3e">
+    <option name="at_both_ends" value="0"/>
+    <option name="at_empty" value="1"/>
+    <option name="at_full" value="2"/>
+  </enum16>
+  <colorARGB name="empty_color" offset="0x48"/>
+  <colorARGB name="full_color" offset="0x58"/>
+  <float32 info="meter units; fade from fully masked to fully unmasked this distance BEYOND full (and BELOW empty)" name="unmask_distance" offset="0x7c"/>
+  <float32 info="meter units; fade from fully masked to fully unmasked this distance BELOW full (and BEYOND empty)" name="mask_distance" offset="0x80"/>
+  <int32 info="bytes" name="encoded_stencil" offset="0x98"/>
+</struct>

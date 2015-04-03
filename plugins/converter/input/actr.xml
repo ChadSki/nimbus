@@ -1,0 +1,270 @@
+<plugin class="actr" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00" >
+	<option name="Can See in Darkness" value="31"/>
+	<option name="Sneak Uncovering Target" value="30"/>
+	<option name="Sneak Uncovering Pursuit Position" value="29"/>
+	<option name="Unused" value="28"/>
+	<option name="Shoot at Target's Last Location" value="27"/>
+	<option name="Try to Stay Still When Crouched" value="26"/>
+	<option name="Crouch When Not in Combat" value="25"/>
+	<option name="Crouch When Guarding" value="24"/>
+	<option name="Unused" value="23"/>
+	<option name="Must Crouch to Shoot" value="22"/>
+	<option name="Panic When Surprised" value="21"/>
+	<option name="Always Charge at Enemies" value="20"/>
+	<option name="Gets in Vehicles with Player" value="19"/>
+	<option name="Start Firing Before Aligned" value="18"/>
+	<option name="Standing Must Move Forward" value="17"/>
+	<option name="Crouching Must Move Forward" value="16"/>
+	<option name="Defensive Crouch While Charging" value="15"/>
+	<option name="Use Stalking Behavior" value="14"/>
+	<option name="Stalking Freeze if Exposed" value="13"/>
+	<option name="Always Berserk in Attacking Mode" value="12"/>
+	<option name="Berserking Uses Panicked Movement" value="11"/>
+	<option name="Flying" value="10"/>
+	<option name="Panicked by Unopposable Enemy" value="09"/>
+	<option name="Crouch When Hiding From Unopposable" value="08"/>
+	<option name="Always Charge in 'Attacking' Mode" value="07"/>
+	<option name="Dive Off Ledges" value="06"/>
+	<option name="Swarm" value="05"/>
+	<option name="Suicidal Melee Attack" value="04"/>
+	<option name="Cannot Move While Crouching" value="03"/>
+	<option name="Fixed Crouch Facing" value="02"/>
+	<option name="Crouch When in Line of Fire" value="01"/>
+	<option name="Avoid Friends' Line of Fire" value="00"/>
+</bitmask32>
+
+<bitmask32 name="More Flags" offset="0x04" >
+	<option name="Avoid All Enemy Attack Vectors" value="31"/>
+	<option name="Must Stand to Fire" value="30"/>
+	<option name="Must Stop to Fire" value="29"/>
+	<option name="Disallow Vehicle Combat" value="28"/>
+	<option name="Pathfinding Ignores Danger" value="27"/>
+	<option name="Panic in Groups" value="26"/>
+	<option name="No Corpse Shooting" value="25"/>
+</bitmask32>
+
+<enum16 name="Type" offset="0x14" >
+	<option name="Elite" value="00"/>
+	<option name="Jackal" value="01"/>
+	<option name="Grunt" value="02"/>
+	<option name="Hunter" value="03"/>
+	<option name="Engineer" value="04"/>
+	<option name="Assassin" value="05"/>
+	<option name="Player" value="06"/>
+	<option name="Marine" value="07"/>
+	<option name="Crew" value="08"/>
+	<option name="Combat Form" value="09"/>
+	<option name="Infection Form" value="10"/>
+	<option name="Carrier Form" value="11"/>
+	<option name="Monitor" value="12"/>
+	<option name="Sentinel" value="13"/>
+	<option name="None" value="14"/>
+	<option name="Mounted Weapon" value="15"/>
+</enum16>
+
+<float name="Perception.Max Vision Distance" note="world units" offset="0x18" />
+<float name="Perception.Central Vision Angle" note="radians" info="horizontal angle within which we see targets out to our maximum range" offset="0x1C" />
+<float name="Perception.Max Vision Angle" note="radians" info="maximum horizontal angle within which we see targets at range" offset="0x20" />
+<float name="Perception.Peripheral Vision Angle" note="radians" info="maximum horizontal angle within which we can see targets out of the corner of our eye" offset="0x28" />
+<float name="Perception.Peripheral Distance" info="world units" info_img="maximum range at which we can see targets out of the corner of our eye" offset="0x2C" />
+<float name="Perception.Standing Gun Offset: i" info="offset of gun from feet when standing" offset="0x34" />
+<float name="Perception.Standing Gun Offset: i" info="offset of gun from feet when standing" offset="0x38" />
+<float name="Perception.Standing Gun Offset: k" info="offset of gun from feet when standing" offset="0x3C" />
+<float name="Perception.Crouching Gun Offset: i" info="offset of gun from feet when crouching" offset="0x40" />
+<float name="Perception.Crouching Gun Offset: i" info="offset of gun from feet when crouching" offset="0x44" />
+<float name="Perception.Crouching Gun Offset: k" info="offset of gun from feet when crouching" offset="0x48" />
+<float name="Perception.Hearing Distance" note="world units" offset="0x4C" />
+<float name="Perception.Notice Projectile Chance" note="0 - 1 only (random)" offset="0x50" />
+<float name="Perception.Notice Vehicle Chance" note="0 - 1 only (random)" offset="0x54" />
+<float name="Perception.Combat Perception Time" note="seconds" info="time req'd to acknowledge a visible enemy when in combat or searching" offset="0x60" />
+<float name="Perception.Guard Perception Time" note="seconds" info="time req'd to acknowledge a visible enemy when alerted" offset="0x64" />
+<float name="Perception.Non-Combat Perception Time" note="seconds" info="time req'd to acknowledge a visible enemy when not alerted" offset="0x68" />
+
+<float name="Movement.Dive into Cover Chance" note="0 - 1 only" info="chance of running a dive animation when moving into cover" offset="0x80" />
+<float name="Movement.Emerge From Cover Chance" note="0 - 1 only" info="chance of running an emerge animation when uncovering a target" offset="0x84" />
+<float name="Movement.Dive From Grenade Chance" note="0 - 1 only" info="chance of running a dive animation when moving away from a grenade" offset="0x88" />
+<float name="Movement.Pathfinding Radius" note="world units" offset="0x8C" />
+<float name="Movement.Glass Ignorance Chance" note="0 - 1 only" info="chance of not noticing that breakable surfaces have been destroyed" offset="0x90" />
+<float name="Movement.Stationary Movement Distance" note="world units" info="movement distance considered 'stationary' when determining whether to crouch" offset="0x94" />
+<float name="Movement.Free-Flying Sidestep" note="world units" info="distance of sidestepping allowed for flying units" offset="0x98" />
+<float name="Movement.Begin Moving Angle" note="radians" info="must face this close to the target before applying throttle" offset="0x9C" />
+
+<float name="Looking.Maximum Aiming Deviation: y" note="radians" info="how far we can turn our weapon" offset="0xA4" />
+<float name="Looking.Maximum Aiming Deviation: p" note="radians" info="how far we can turn our weapon" offset="0xA8" />
+<float name="Looking.Maximum Looking Deviation: y" note="radians" info="how far we can turn our head" offset="0xAC" />
+<float name="Looking.Maximum Looking Deviation: p" note="radians" info="how far we can turn our head" offset="0xB0" />
+<float name="Looking.Noncombat Look Delta L" note="radians" info="how far we can turn our head left away from our aiming vector when not in combat" offset="0xB4" />
+<float name="Looking.Noncombat Look Delta R" note="radians" info="how far we can turn our head right away from our aiming vector when not in combat" offset="0xB8" />
+<float name="Looking.Combat Look Delta L" note="radians" info="how far we can turn our head left away from our aiming vector when in combat" offset="0xBC" />
+<float name="Looking.Combat Look Delta R" note="radians" info="how far we can turn our head right away from our aiming vector when in combat" offset="0xC0" />
+<float name="Looking.Idle Aiming Range: y" note="radians" info="range in which we select random angles to aim" offset="0xC4" />
+<float name="Looking.Idle Aiming Range: p" note="radians" info="range in which we select random angles to aim" offset="0xC8" />
+<float name="Looking.Idle Looking Range: y" note="radians" info="range in which we select random angles to look" offset="0xCC" />
+<float name="Looking.Idle Looking Range: p" note="radians" info="range in which we select random angles to look" offset="0xD0" />
+<float name="Looking.Event Look Time Modifier: from" note="multiplier" info="how long to look at interesting events" offset="0xD4" />
+<float name="Looking.Event Look Time Modifier: to" note="multiplier" info="how long to look at interesting events" offset="0xD8" />
+<float name="Looking.Noncombat Idle Facing: from" note="seconds" info="rate of changing random facing direction when idle and at peace" offset="0xDC" />
+<float name="Looking.Noncombat Idle Facing: to" note="seconds" info="rate of changing random facing direction when idle and at peace" offset="0xE0" />
+<float name="Looking.Noncombat Idle Aiming: from" note="seconds" info="rate of changing random aiming direction when idle and at peace" offset="0xE4" />
+<float name="Looking.Noncombat Idle Aiming: to" note="seconds" info="rate of changing random aiming direction when idle and at peace" offset="0xE8" />
+<float name="Looking.Noncombat Idle Looking: from" note="seconds" info="rate of changing random looking around when idle and at peace" offset="0xEC" />
+<float name="Looking.Noncombat Idle Looking: to" note="seconds" info="rate of changing random looking around when idle and at peace" offset="0xF0" />
+<float name="Looking.Guard Idle Facing: from" note="seconds" info="rate of changing random facing direction when idle and guarding" offset="0xF4" />
+<float name="Looking.Guard Idle Facing: to" note="seconds" info="rate of changing random facing direction when idle and guarding" offset="0xF8" />
+<float name="Looking.Guard Idle Aiming: from" note="seconds" info="rate of changing random aiming direction when idle and guarding" offset="0xFC" />
+<float name="Looking.Guard Idle Aiming: to" note="seconds" info="rate of changing random aiming direction when idle and guarding" offset="0x100" />
+<float name="Looking.Guard Idle Looking: from" note="seconds" info="rate of changing random looking around when idle and guarding" offset="0x104" />
+<float name="Looking.Guard Idle Looking: to" note="seconds" info="rate of changing random looking around when idle and guarding" offset="0x108" />
+<float name="Looking.Combat Idle Facing: from" note="seconds" info="rate of changing random facing direction when searching or in combat" offset="0x10C" />
+<float name="Looking.Combat Idle Facing: to" note="seconds" info="rate of changing random facing direction when searching or in combat" offset="0x110" />
+<float name="Looking.Combat Idle Aiming: from" note="seconds" info="rate of changing random aiming direction when searching or in combat" offset="0x114" />
+<float name="Looking.Combat Idle Aiming: to" note="seconds" info="rate of changing random aiming direction when searching or in combat" offset="0x118" />
+<float name="Looking.Combat Idle Looking: from" note="seconds" info="rate of changing random looking around when searching or in combat" offset="0x11C" />
+<float name="Looking.Combat Idle Looking: to" note="seconds" info="rate of changing random looking around when searching or in combat" offset="0x120" />
+
+<enum16 name="Unopposable.Unreachable Danger Trigger" info="danger level of an unreachable enemy which triggers a retreat if persisting" offset="0x268" >
+	<option name="Never" value="00"/>
+	<option name="Visible" value="01"/>
+	<option name="Shooting" value="02"/>
+	<option name="Shooting Near Us" value="03"/>
+	<option name="Damaging Us" value="04"/>
+	<option name="Unused (1)" value="05"/>
+	<option name="Unused (2)" value="06"/>
+	<option name="Unused (3)" value="07"/>
+	<option name="Unused (4)" value="08"/>
+	<option name="Unused (5)" value="09"/>
+</enum16>
+
+<enum16 name="Unopposable.Vehicle Danger Trigger" info="danger level of a vehicle-based enemy which triggers a retreat if persisting" offset="0x26A" >
+	<option name="Never" value="00"/>
+	<option name="Visible" value="01"/>
+	<option name="Shooting" value="02"/>
+	<option name="Shooting Near Us" value="03"/>
+	<option name="Damaging Us" value="04"/>
+	<option name="Unused (1)" value="05"/>
+	<option name="Unused (2)" value="06"/>
+	<option name="Unused (3)" value="07"/>
+	<option name="Unused (4)" value="08"/>
+	<option name="Unused (5)" value="09"/>
+</enum16>
+
+<enum16 name="Unopposable.Player Danger Trigger" info="danger level of an enemy player which triggers a retreat if persisting" offset="0x26C" >
+	<option name="Never" value="00"/>
+	<option name="Visible" value="01"/>
+	<option name="Shooting" value="02"/>
+	<option name="Shooting Near Us" value="03"/>
+	<option name="Damaging Us" value="04"/>
+	<option name="Unused (1)" value="05"/>
+	<option name="Unused (2)" value="06"/>
+	<option name="Unused (3)" value="07"/>
+	<option name="Unused (4)" value="08"/>
+	<option name="Unused (5)" value="09"/>
+</enum16>
+
+<float name="Unopposable.Danger Trigger Time: from" note="seconds" info="how long before an unopposable enemy of the set danger level triggers my retreat" offset="0x270" />
+<float name="Unopposable.Danger Trigger Time: to" note="seconds" info="how long before an unopposable enemy of the set danger level triggers my retreat" offset="0x274" />
+
+<short name="Unopposable.Friends Killed Trigger" note="0 = don't use" info="how many friends must be killed by an unopposable enemy before we retreat" offset="0x278" />
+<short name="Unopposable.Friends Retreating Trigger" note="0 = don't use" info="how many friends must be retreating before we retreat" offset="0x27A" />
+
+<float name="Unopposable.Retreat Time: from" note="seconds" info="duration of my retreat" offset="0x288" />
+<float name="Unopposable.Retreat Time: to" note="seconds" info="duration of my retreat" offset="0x28C" />
+
+<float name="Panic.Cowering Time: from" note="seconds" info="how long to hide in cover after panic" offset="0x298" />
+<float name="Panic.Cowering Time: to" note="seconds" info="how long to hide in cover after panic" offset="0x29C" />
+<float name="Panic.Friend Killed Panic Chance" note="0 - 1 only" info="chance of panicking when nearby friend killed and enemy looking at us" offset="0x2A0" />
+
+<enum16 name="Panic.Leader Type" info="if we see a friend of this type killed, we have a chance of panicking" offset="0x2A4" >
+	<option name="Elite" value="00"/>
+	<option name="Jackal" value="01"/>
+	<option name="Grunt" value="02"/>
+	<option name="Hunter" value="03"/>
+	<option name="Engineer" value="04"/>
+	<option name="Assassin" value="05"/>
+	<option name="Player" value="06"/>
+	<option name="Marine" value="07"/>
+	<option name="Crew" value="08"/>
+	<option name="Combat Form" value="09"/>
+	<option name="Infection Form" value="10"/>
+	<option name="Carrier Form" value="11"/>
+	<option name="Monitor" value="12"/>
+	<option name="Sentinel" value="13"/>
+	<option name="None" value="14"/>
+	<option name="Mounted Weapon" value="15"/>
+</enum16>
+
+<float name="Panic.Leader Killed Panic Chance" note="0 - 1 only" info="chance of panicking when we see a leader killed" offset="0x2A8" />
+<float name="Panic.Panic Damage Threshold" note="0 - 1 only" info="panic if this much damage is taken in a short period of time" offset="0x2AC" />
+<float name="Panic.Surprise Distance" note="world units" info="the distance at which newly acknowledged props or weapon impacts are considered 'close' for surprise purposes" offset="0x2B0" />
+
+<float name="Defensive.Hide Behind Cover Time: from" note="seconds" info="how long to stay behind cover after seeking cover" info_img="actr Defensive.png" offset="0x2D0" />
+<float name="Defensive.Hide Behind Cover Time: to" note="seconds" info="how long to stay behind cover after seeking cover" info_img="actr Defensive.png" offset="0x2D4" />
+<float name="Defensive.Hide Target-Not-Visible Time: to" note="seconds" info="how long to stay behind cover after seeking cover" info_img="actr Defensive.png" offset="0x2D8" />
+<float name="Defensive.Hide Shield Fraction" note="0 - 1 only" info="elites and jackals only seek cover when their shields are below this level" info_img="actr Defensive.png" offset="0x2DC" />
+<float name="Defensive.Attack Shield Fraction" note="0 - 1 only" info="elites and jackals only emerge from cover to attack when their shields are above this level" info_img="actr Defensive.png" offset="0x2E0" />
+<float name="Defensive.Pursue Shield Fraction" note="0 - 1 only" info="elites and jackals only emerge from cover to pursue when their shields are above this level" info_img="actr Defensive.png" offset="0x2E4" />
+
+<enum16 name="Defensive.Defensive Crouch Type" info_img="actr Defensive.png" offset="0x2F8" >
+	<option name="Never" value="00"/>
+	<option name="Danger" value="01"/>
+	<option name="Low Shields" value="02"/>
+	<option name="Hide Behind Shield" value="03"/>
+	<option name="Any Target" value="04"/>
+	<option name="Flood Shamble" value="05"/>
+</enum16>
+
+<float name="Defensive.Attacking Crouch Threshold" info="when attacking, crouch when shields below this number or danger above this number (based on crouch type)" info_img="actr Defensive.png" offset="0x2FC" />
+<float name="Defensive.Defending Crouch Threshold" info="when defending, crouch when shields below this number or danger above this number (based on crouch type)" info_img="actr Defensive.png" offset="0x300" />
+<float name="Defensive.Minimum Stand Time" note="seconds; 0 = default" info="minimum time to remain standing" info_img="actr Defensive.png" offset="0x304" />
+<float name="Defensive.Minimum Crouch Time" note="seconds; 0 = default" info="minimum time to remain crouching" info_img="actr Defensive.png" offset="0x308" />
+<float name="Defensive.Defending Hide Time Modifier" note="seconds? multiplier?" info="how much longer to hide behind cover while in defensive mode" info_img="actr Defensive.png" offset="0x30C" />
+<float name="Defensive.Attacking Evasion Threshold" info="if danger level this high while attacking, consider seeking cover or evading" info_img="actr Defensive.png" offset="0x310" />
+<float name="Defensive.Defending Evasion Threshold" info="if danger level this high while defending, consider seeking cover or evading" info_img="actr Defensive.png" offset="0x314" />
+<float name="Defensive.Evasion Seek-Cover Chance" note="0 - 1 only" info="chance of seeking cover, else we evade" info_img="actr Defensive.png" offset="0x318" />
+<float name="Defensive.Evasion Delay Time" note="seconds" info="minimum time period between evasion moves" info_img="actr Defensive.png" offset="0x31C" />
+<float name="Defensive.Max Seek-Cover Distance" note="world units; 0 = default" info="maximum distance we will consider running to find cover" info_img="actr Defensive.png" offset="0x320" />
+<float name="Defensive.Cover Damage Threshold" note="0 - 1 only; 0 = always allowed to seek cover" info="how much damage we must take before we are allowed to seek cover" info_img="actr Defensive.png" offset="0x324" />
+<float name="Defensive.Stalking Discovery Time" note="seconds; 0 = never stop stalking" info="if my target sees me for this long, my cover is blown and I do something else" info_img="actr Defensive.png" offset="0x328" />
+<float name="Defensive.Stalking Max Distance" note="world units" info="don't bother stalking if beyond this distance" info_img="actr Defensive.png" offset="0x32C" />
+<float name="Defensive.Stationary Facing Angle" note="radians" info="outside this, we must abandon our stationary facing direction and suffer any penalties" info_img="actr Defensive.png" offset="0x330" />
+<float name="Defensive.Change-Facing Stand Time" note="seconds" info="how long we must stand up after changing our fixed stationary facing direction" info_img="actr Defensive.png" offset="0x334" />
+
+<float name="Pursuit.Uncover Delay Time: from" note="seconds" info="time spent looking at target's position after it becomes visible, before reacting" offset="0x33C" />
+<float name="Pursuit.Uncover Delay Time: to" note="seconds" info="time spent looking at target's position after it becomes visible, before reacting" offset="0x340" />
+<float name="Pursuit.Target Search Time: from" note="seconds" info="time spent searching at target's position" offset="0x344" />
+<float name="Pursuit.Target Search Time: to" note="seconds" info="time spent searching at target's position" offset="0x348" />
+<float name="Pursuit.Pursuit-Position Time: from" note="seconds" info="time spent searching at a pursuit position" offset="0x34C" />
+<float name="Pursuit.Pursuit-Position Time: to" note="seconds" info="time spent searching at a pursuit position" offset="0x350" />
+
+<short name="Pursuit.Number of Positions (coordinated)" note="0,n" info="number of pursuit positions to check when in coordinated group search mode" offset="0x354" />
+<short name="Pursuit.Number of Positions (normal)" note="0,n" info="number of pursuit positions to check when in normal search mode" offset="0x356" />
+
+<float name="Berserk.Melee Attack Delay" note="seconds" info="how long to wait between attempting melee attacks" offset="0x378" />
+<float name="Berserk.Melee Fudge Factor" note="world units" info="how far in front of the target to start the attack... negative values aim through the target" offset="0x37C" />
+<float name="Berserk.Melee Charge Time" note="seconds" info="maximum duration of charging toward a target before giving up" offset="0x380" />
+<float name="Berserk.Melee Leap Range: from" note="world units; 0 = can't leap" info="can leap at targets within these ranges" offset="0x384" />
+<float name="Berserk.Melee Leap Range: to" note="world units; 0 = can't leap" info="can leap at targets within these ranges" offset="0x388" />
+<float name="Berserk.Melee Leap Velocity" note="world units per tick" info="how fast to spring at targets when launching a melee attack" offset="0x38C" />
+<float name="Berserk.Melee Leap Chance" note="0 - 1 only" info="percent chance of starting to melee a ground unit; flying targets are always meleed" offset="0x390" />
+<float name="Berserk.Melee Leap Ballistic" note="0 - 1 only" info="fraction controlling how ballistic the leaping melee trajectory is" offset="0x394" />
+<float name="Berserk.Berserk Damage Amount" note="0 - 1 only" info="percent of body life damaged in a short time that prompts berserk mode" offset="0x398" />
+<float name="Berserk.Berserk Damage Threshold" note="0 - 1 only" info="how low in percentage our body health must become before we consider berserking" offset="0x39C" />
+<float name="Berserk.Berserk Proximity" note="world units" info="if we ever get this close to a target, we go berserk" offset="0x3A0" />
+<float name="Berserk.Suicide Sensing Distance" note="world units" info="when this close to a target, check to see if they are escaping, and if so, blow up" offset="0x3A4" />
+<float name="Berserk.Berserk Grenade Chance" note="0 - 1 only" info="percent chance of going berserk when we have a dangerous projectile stuck to us" offset="0x3A8" />
+
+<float name="Firing Positions.Guard Position Time: from" note="seconds; 0 = never" info="change guard positions after this duration" offset="0x3B8" />
+<float name="Firing Positions.Guard Position Time: to" note="seconds; 0 = never" info="change guard positions after this duration" offset="0x3BC" />
+<float name="Firing Positions.Combat Position Time: from   (" note="seconds; 0 = never" info="change combat firing positions after this duration)" offset="0x3C0" />
+<float name="Firing Positions.Combat Position Time: to" note="seconds; 0 = never" info="change combat firing positions after this duration" offset="0x3C4" />
+<float name="Firing Positions.Old Position Avoid Distance" note="world units" info="stay this far away from our last discarded firing position" offset="0x3C8" />
+<float name="Firing Positions.Friend Avoid Distance" note="world units" info="stay this far away from friends" offset="0x3CC" />
+
+<float name="Communication.Noncombat Idle Speech Time: from" note="seconds" info="time between idle vocalizations when we are not in combat" offset="0x3F8" />
+<float name="Communication.Noncombat Idle Speech Time: to" note="seconds" info="time between idle vocalizations when we are not in combat" offset="0x3FC" />
+<float name="Communication.Combat Idle Speech Time: from" note="seconds" info="time between idle vocalizations when we are searching or in combat" offset="0x400" />
+<float name="Communication.Combat Idle Speech Time: to" note="seconds" info="time between idle vocalizations when we are searching or in combat" offset="0x404" />
+
+</plugin>

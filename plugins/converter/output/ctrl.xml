@@ -1,0 +1,348 @@
+<?xml version="1.0" ?>
+<struct name="ctrl" size="792">
+  <flag bit="7" name="does_not_cast_shadow" offset="0x2"/>
+  <flag bit="6" name="transparent_self_occlusion" offset="0x2"/>
+  <flag bit="5" name="brighter_than_it_should_be" offset="0x2"/>
+  <flag bit="4" name="not_a_pathfinding_obstacle" offset="0x2"/>
+  <float32 info="world units" name="bounding_radius" offset="0x4"/>
+  <float32 name="bounding_offset_x" offset="0x8"/>
+  <float32 name="bounding_offset_y" offset="0xc"/>
+  <float32 name="bounding_offset_z" offset="0x10"/>
+  <float32 name="origin_offset_x" offset="0x14"/>
+  <float32 name="origin_offset_y" offset="0x18"/>
+  <float32 name="origin_offset_z" offset="0x1c"/>
+  <float32 name="acceleration_scale" offset="0x20"/>
+  <reference name="model" offset="0x28"/>
+  <reference name="animation_graph" offset="0x38"/>
+  <reference name="collision_model" offset="0x70"/>
+  <reference name="physics" offset="0x80"/>
+  <reference name="modifier_shader" offset="0x90"/>
+  <reference name="creation_effect" offset="0xa0"/>
+  <float32 info="world units" name="render_bounding_radius" offset="0x104"/>
+  <enum16 name="export_to_functions_a_in" offset="0x108">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_b_in" offset="0x10a">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_c_in" offset="0x10c">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_d_in" offset="0x10e">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <int16 name="export_to_functions_hud_text_message_index" offset="0x13c"/>
+  <int16 name="export_to_functions_forced_shader_permutation_index" offset="0x13e"/>
+  <struct_array name="attachments" offset="0x140" size="72">
+    <reference name="type" offset="0x0"/>
+    <asciiz maxlength="32" name="marker" offset="0x10"/>
+    <enum16 name="primary_scale" offset="0x30">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="secondary_scale" offset="0x32">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="change_color" offset="0x34">
+      <option name="none" value="0"/>
+      <option name="_a" value="1"/>
+      <option name="_b" value="2"/>
+      <option name="_c" value="3"/>
+      <option name="_d" value="4"/>
+    </enum16>
+  </struct_array>
+  <struct_array name="widgets" offset="0x14c" size="32">
+    <reference info="antenna, flag, glow, light_volume or lightning" name="reference" offset="0x0"/>
+  </struct_array>
+  <struct_array name="functions" offset="0x158" size="360">
+    <flag bit="7" name="invert" offset="0x0"/>
+    <flag bit="6" name="additive" offset="0x0"/>
+    <flag bit="5" name="always_active" offset="0x0"/>
+    <float32 info="seconds; lower values make the function oscillate quickly, higher values make it oscillate more slowly" name="period" offset="0x4"/>
+    <enum16 info="multiply this function by the above period" name="scale_period_by" offset="0x8">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="function" offset="0xa">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <enum16 info="multiply this function by the result of the above function" name="scale_function_by" offset="0xc">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 info="the curve used for the wobble" name="wobble_function" offset="0xe">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; the length of time it takes for the magnitude of this function to complete a wobble" name="wobble_period" offset="0x10"/>
+    <float32 info="percent; the amount of random wobble in the magnitude" name="wobble_magnitude" offset="0x14"/>
+    <float32 info="0 - 1 only; if non-zero, all values above the square wave threshold are snapped to 1.0, and all values below it are snapped to 0.0 to create a square wave" name="square_wave_threshold" offset="0x18"/>
+    <int16 info="the number of discrete values to snap to; eg. a step count of 5 would snap the function to 0, 0.25, 0.5, 0.75 or 1" name="step_count" offset="0x1c"/>
+    <enum16 name="map_to" offset="0x1e">
+      <option name="linear" value="0"/>
+      <option name="early" value="1"/>
+      <option name="very_early" value="2"/>
+      <option name="late" value="3"/>
+      <option name="very_late" value="4"/>
+      <option name="cosine" value="5"/>
+    </enum16>
+    <int16 info="the number of times this function should repeat; eg. 5 would give the function a value of 1.0 at each of 0.25, 0.50, 0.75 and 1.0" name="sawtooth_count" offset="0x20"/>
+    <enum16 info="add this function to the final result of all the above math" name="add" offset="0x22">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 info="multiply this function (from a weapon, vehicle, etc.) by the final result of all the above math" name="scale_result_by" offset="0x24">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 info="controls how the bounds, below, are used" name="bounds_mode" offset="0x26">
+      <option name="clip" value="0"/>
+      <option name="clip_and_normalize" value="1"/>
+      <option name="scale_to_fit" value="2"/>
+    </enum16>
+    <float32 info="0 - 1 only" name="bounds_from" offset="0x28"/>
+    <float32 info="0 - 1 only" name="bounds_to" offset="0x2c"/>
+    <enum16 info="If the specified function is off, so is this function" name="turn_off_with" offset="0x36">
+      <option name="a_out_function_1" value="0"/>
+      <option name="b_out_function_2" value="1"/>
+      <option name="c_out_function_3" value="2"/>
+      <option name="d_out_function_4" value="3"/>
+      <option name="none" value="65535"/>
+    </enum16>
+    <float32 info="applied before clip; ignored if zero" name="scale_by" offset="0x38"/>
+    <float32 info="0 = function is disabled; tested by 002. 'When playing with the banshee's wingtip, I noticed that 0 disabled the contrail, causing the contrail sound to be at lowest. Setting it to 50 causes the function to speed up in acceleration and maxed out the contrail and contrail pitch, reminding me why they called it the 'Banshee'.'" name="function_acceleration_scale" offset="0x138"/>
+    <asciiz maxlength="32" name="usage" offset="0x148"/>
+  </struct_array>
+  <struct_array name="change_colors" offset="0x164" size="44">
+    <enum16 name="darken_by" offset="0x0">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="scale_by" offset="0x2">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <flag bit="7" name="blend_in_hsv" offset="0x4"/>
+    <flag bit="6" name="more_colors" offset="0x4"/>
+    <colorRGB name="color_lower_bound" offset="0x8"/>
+    <colorRGB name="color_upper_bound" offset="0x14"/>
+    <struct_array name="permutations" offset="0x20" size="28">
+      <float32 info="confusing formula, ask Sparky for help if this matters to you, otherwise don't touch" name="weight" offset="0x0"/>
+      <colorRGB name="color_lower_bound" offset="0x4"/>
+      <colorRGB name="color_upper_bound" offset="0x10"/>
+    </struct_array>
+  </struct_array>
+  <flag bit="7" name="position_loops" offset="0x17c"/>
+  <flag bit="6" name="position_not_interpolated" offset="0x17c"/>
+  <float32 info="seconds" name="device_power_transition_time" offset="0x180"/>
+  <float32 info="seconds" name="device_power_acceleration_time" offset="0x184"/>
+  <float32 info="seconds" name="device_position_transition_time" offset="0x188"/>
+  <float32 info="seconds" name="device_position_acceleration_time" offset="0x18c"/>
+  <float32 info="seconds" name="device_depowered_position_transition_time" offset="0x190"/>
+  <float32 info="seconds" name="device_depowered_position_acceleration_time" offset="0x194"/>
+  <enum16 name="device_a_in" offset="0x198">
+    <option name="none" value="0"/>
+    <option name="power" value="1"/>
+    <option name="change_in_power" value="2"/>
+    <option name="position" value="3"/>
+    <option name="change_in_position" value="4"/>
+    <option name="locked" value="5"/>
+    <option name="delay" value="6"/>
+  </enum16>
+  <enum16 name="device_b_in" offset="0x19a">
+    <option name="none" value="0"/>
+    <option name="power" value="1"/>
+    <option name="change_in_power" value="2"/>
+    <option name="position" value="3"/>
+    <option name="change_in_position" value="4"/>
+    <option name="locked" value="5"/>
+    <option name="delay" value="6"/>
+  </enum16>
+  <enum16 name="device_c_in" offset="0x19c">
+    <option name="none" value="0"/>
+    <option name="power" value="1"/>
+    <option name="change_in_power" value="2"/>
+    <option name="position" value="3"/>
+    <option name="change_in_position" value="4"/>
+    <option name="locked" value="5"/>
+    <option name="delay" value="6"/>
+  </enum16>
+  <enum16 name="device_d_in" offset="0x19e">
+    <option name="none" value="0"/>
+    <option name="power" value="1"/>
+    <option name="change_in_power" value="2"/>
+    <option name="position" value="3"/>
+    <option name="change_in_position" value="4"/>
+    <option name="locked" value="5"/>
+    <option name="delay" value="6"/>
+  </enum16>
+  <reference info="effe, snd!" name="device_open_up" offset="0x1a0"/>
+  <reference info="effe, snd!" name="device_close_down" offset="0x1b0"/>
+  <reference info="effe, snd!" name="device_opened" offset="0x1c0"/>
+  <reference info="effe, snd!" name="device_closed" offset="0x1d0"/>
+  <reference info="effe, snd!" name="device_depowered" offset="0x1e0"/>
+  <reference info="effe, snd!" name="device_repowered" offset="0x1f0"/>
+  <float32 info="seconds" name="device_delay_time" offset="0x200"/>
+  <reference info="effe, snd!" name="device_delay_effect" offset="0x20c"/>
+  <float32 info="world units; activate when player is this close; also use scnr flags (distance from the parent frame when exported?)" name="device_automatic_activation_radius" offset="0x21c"/>
+  <enum16 name="control_type" offset="0x290">
+    <option name="toggle_switch" value="0"/>
+    <option name="on_button" value="1"/>
+    <option name="off_button" value="2"/>
+    <option name="call_button" value="3"/>
+  </enum16>
+  <enum16 name="control_triggers_when" offset="0x292">
+    <option name="touched_by_player" value="0"/>
+    <option name="destroyed" value="1"/>
+  </enum16>
+  <float32 info="0 - 1 only" name="control_call_value" offset="0x294"/>
+  <reference info="effe, snd!" name="control_on" offset="0x2e8"/>
+  <reference info="effe, snd!" name="control_off" offset="0x2f8"/>
+  <reference info="effe, snd!" name="control_deny" offset="0x308"/>
+</struct>

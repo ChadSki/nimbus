@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<struct name="hmt" size="44">
+  <int32 info="bytes" name="text_data" offset="0x0"/>
+  <struct_array name="message_elements" offset="0x14" size="2">
+    <int8 name="type" offset="0x0"/>
+    <int8 name="data" offset="0x1"/>
+  </struct_array>
+  <struct_array name="messages" offset="0x20" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <int16 name="start_index_into_text_blob" offset="0x20"/>
+    <int16 name="start_index_of_message_block" offset="0x22"/>
+    <int16 name="panel_count" offset="0x24"/>
+  </struct_array>
+</struct>

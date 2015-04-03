@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<struct name="mply" size="12">
+  <struct_array name="multiplayer_scenarios" offset="0x0" size="68">
+    <reference name="descriptive_bitmap" offset="0x0"/>
+    <reference name="displayed_map_name" offset="0x10"/>
+    <asciiz maxlength="32" name="scenario_tag_directory_path" offset="0x20"/>
+  </struct_array>
+</struct>

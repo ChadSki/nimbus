@@ -1,0 +1,36 @@
+<plugin class="font" author="sparky" version="4.0" headersize="Main">
+
+<short name="Flags" offset="0x00"/>
+<short name="Ascending Height" offset="0x04"/>
+<short name="Descending Height" offset="0x06"/>
+<short name="Leading Height" offset="0x08"/>
+<short name="Leading Width" offset="0x0A"/>
+
+<struct name="Character Tables" offset="0x30" size="12">
+
+	<struct name="Character Table" offset="0x00" size="2">
+
+		<index name="Character Index" offset="0x00" reflexive="main:Characters"/>
+
+	</struct>
+
+</struct>
+
+<dependency name="Bold" offset="0x3C"/>
+<dependency name="Italic" offset="0x4C"/>
+<dependency name="Condense" offset="0x5C"/>
+<dependency name="Underline" offset="0x6C"/>
+
+<struct name="Characters" offset="0x7C" size="20">
+	<short name="Character" offset="0x00"/>
+	<short name="Character Width" offset="0x02"/>
+	<short name="Bitmap Width" offset="0x04"/>
+	<short name="Bitmap Height" offset="0x06"/>
+	<short name="Bitmap Origin X" offset="0x08"/>
+	<short name="Bitmap Origin Y" offset="0x0A"/>
+	<short name="Hardware Character Index" offset="0x0C"/>
+
+	<short name="Pixels Offset" info="Sparky says, 'Don't touch this, data type unsupported by Eschaton'" offset="0x0E"/>
+</struct>
+
+</plugin>

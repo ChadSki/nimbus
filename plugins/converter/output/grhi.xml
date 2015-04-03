@@ -1,0 +1,331 @@
+<?xml version="1.0" ?>
+<struct name="grhi" size="456">
+  <enum16 name="grenade_hud_screen_alignment_anchor" offset="0x0">
+    <option name="top_left" value="0"/>
+    <option name="top_right" value="1"/>
+    <option name="bottom_left" value="2"/>
+    <option name="bottom_right" value="3"/>
+    <option name="center" value="4"/>
+  </enum16>
+  <int16 name="grenade_hud_background_anchor_offset_x" offset="0x24"/>
+  <int16 name="grenade_hud_background_anchor_offset_y" offset="0x26"/>
+  <float32 name="grenade_hud_background_width_scale" offset="0x28"/>
+  <float32 name="grenade_hud_background_height_scale" offset="0x2c"/>
+  <flag bit="7" name="dont_scale_offset" offset="0x30"/>
+  <flag bit="6" name="dont_scale_size" offset="0x30"/>
+  <flag bit="5" name="use_high_resolution_scale" offset="0x30"/>
+  <reference name="grenade_hud_background_interface_bitmap" offset="0x48"/>
+  <colorbyte name="grenade_hud_background_default_color" offset="0x58"/>
+  <colorbyte name="grenade_hud_background_flashing_color" offset="0x5c"/>
+  <float32 name="grenade_hud_background_flash_period" offset="0x60"/>
+  <float32 name="grenade_hud_background_flash_delay" offset="0x64"/>
+  <int16 name="grenade_hud_background_number_of_flashes" offset="0x68"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0x6a"/>
+  <float32 name="grenade_hud_background_flash_length" offset="0x6c"/>
+  <colorbyte name="grenade_hud_background_disabled_color" offset="0x70"/>
+  <int16 name="grenade_hud_background_sequence_index" offset="0x78"/>
+  <struct_array name="grenade_hud_background_multitexture_overlay" offset="0x7c" size="480">
+    <int16 name="type" offset="0x2"/>
+    <enum16 name="framebuffer_blend_function" offset="0x4">
+      <option name="alpha_blend" value="0"/>
+      <option name="multiply" value="1"/>
+      <option name="double_multiply" value="2"/>
+      <option name="add" value="3"/>
+      <option name="subtract" value="4"/>
+      <option name="component_minimum" value="5"/>
+      <option name="component_maximum" value="6"/>
+      <option name="alpha_multiply_add" value="7"/>
+    </enum16>
+    <enum16 name="anchors_primary_anchor" offset="0x28">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="anchors_secondary_anchor" offset="0x2a">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="anchors_tertiary_anchor" offset="0x2c">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="blending_function_0_to_1_blending_function" offset="0x2e">
+      <option name="add" value="0"/>
+      <option name="subtract" value="1"/>
+      <option name="multiply" value="2"/>
+      <option name="multiply_2x" value="3"/>
+      <option name="dot" value="4"/>
+    </enum16>
+    <enum16 name="blending_function_1_to_2_blending_function" offset="0x30">
+      <option name="add" value="0"/>
+      <option name="subtract" value="1"/>
+      <option name="multiply" value="2"/>
+      <option name="multiply_2x" value="3"/>
+      <option name="dot" value="4"/>
+    </enum16>
+    <float32 name="map_scales_primary_scale_x" offset="0x34"/>
+    <float32 name="map_scales_primary_scale_y" offset="0x38"/>
+    <float32 name="map_scales_secondary_scale_x" offset="0x3c"/>
+    <float32 name="map_scales_secondary_scale_y" offset="0x40"/>
+    <float32 name="map_scales_tertiary_scale_x" offset="0x44"/>
+    <float32 name="map_scales_tertiary_scale_y" offset="0x48"/>
+    <float32 name="map_offsets_primary_offset_x" offset="0x4c"/>
+    <float32 name="map_offsets_primary_offset_y" offset="0x50"/>
+    <float32 name="map_offsets_secondary_offset_x" offset="0x54"/>
+    <float32 name="map_offsets_secondary_offset_y" offset="0x58"/>
+    <float32 name="map_offsets_tertiary_offset_x" offset="0x5c"/>
+    <float32 name="map_offsets_tertiary_offset_y" offset="0x60"/>
+    <reference name="map_primary" offset="0x64"/>
+    <reference name="map_secondary" offset="0x74"/>
+    <reference name="map_tertiary" offset="0x84"/>
+    <enum16 name="map_primary_wrap_mode" offset="0x94">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <enum16 name="map_secondary_wrap_mode" offset="0x96">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <enum16 name="map_tertiary_wrap_mode" offset="0x98">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <struct_array name="effectors" offset="0x154" size="220">
+      <enum16 name="source_destination_destination_type" offset="0x40">
+        <option name="tint_0_1_only" value="0"/>
+        <option name="horizontal_offset" value="1"/>
+        <option name="vertical_offset" value="2"/>
+        <option name="fade_0_1_only" value="3"/>
+      </enum16>
+      <enum16 name="source_destination_destination" offset="0x42">
+        <option name="geometry_offset" value="0"/>
+        <option name="primary_map" value="1"/>
+        <option name="secondary_map" value="2"/>
+        <option name="tertiary_map" value="3"/>
+      </enum16>
+      <enum16 name="source_destination_source" offset="0x44">
+        <option name="player_pitch" value="0"/>
+        <option name="player_pitch_tangent" value="1"/>
+        <option name="player_yaw" value="2"/>
+        <option name="weapon_ammo_total" value="3"/>
+        <option name="weapon_ammo_loaded" value="4"/>
+        <option name="weapon_heat" value="5"/>
+        <option name="explicit_uses_low_bound" value="6"/>
+        <option name="weapon_zoom_level" value="7"/>
+      </enum16>
+      <float32 info="source units" name="in_out_bounds_in_bounds_from" offset="0x48"/>
+      <float32 info="source units" name="in_out_bounds_in_bounds_to" offset="0x4c"/>
+      <float32 info="pixels" name="in_out_bounds_out_bounds_from" offset="0x50"/>
+      <float32 info="pixels" name="in_out_bounds_out_bounds_to" offset="0x54"/>
+      <colorRGB name="tint_color_bounds_tint_color_lower_bound" offset="0x98"/>
+      <colorRGB name="tint_color_bounds_tint_color_upper_bound" offset="0xa4"/>
+      <enum16 name="periodic_functions_periodic_function" offset="0xb0">
+        <option name="one" value="0"/>
+        <option name="zero" value="1"/>
+        <option name="cosine" value="2"/>
+        <option name="cosine_variable_period" value="3"/>
+        <option name="diagonal_wave" value="4"/>
+        <option name="diagonal_wave_variable_period" value="5"/>
+        <option name="slide" value="6"/>
+        <option name="slide_variable_period" value="7"/>
+        <option name="noise" value="8"/>
+        <option name="jitter" value="9"/>
+        <option name="wander" value="10"/>
+        <option name="spark" value="11"/>
+      </enum16>
+      <float32 info="seconds" name="periodic_functions_function_period" offset="0xb4"/>
+      <float32 info="seconds" name="periodic_functions_function_phase" offset="0xb8"/>
+    </struct_array>
+  </struct_array>
+  <int16 name="total_grenades_background_anchor_offset_x" offset="0x8c"/>
+  <int16 name="total_grenades_background_anchor_offset_y" offset="0x8e"/>
+  <float32 name="total_grenades_background_width_scale" offset="0x90"/>
+  <float32 name="total_grenades_background_height_scale" offset="0x94"/>
+  <flag bit="7" name="dont_scale_offset" offset="0x98"/>
+  <flag bit="6" name="dont_scale_size" offset="0x98"/>
+  <flag bit="5" name="use_high_resolution_scale" offset="0x98"/>
+  <reference name="total_grenades_background_interface_bitmap" offset="0xb0"/>
+  <colorbyte name="total_grenades_background_default_color" offset="0xc0"/>
+  <colorbyte name="total_grenades_background_flashing_color" offset="0xc4"/>
+  <float32 name="total_grenades_background_flash_period" offset="0xc8"/>
+  <float32 name="total_grenades_background_flash_delay" offset="0xcc"/>
+  <int16 name="total_grenades_background_number_of_flashes" offset="0xd0"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0xd2"/>
+  <float32 name="total_grenades_background_flash_length" offset="0xd4"/>
+  <colorbyte name="total_grenades_background_disabled_color" offset="0xd8"/>
+  <int16 name="total_grenades_background_sequence_index" offset="0xe0"/>
+  <struct_array name="total_grenades_background_multitexture_overlay" offset="0xe4" size="480">
+    <int16 name="type" offset="0x2"/>
+    <enum16 name="framebuffer_blend_function" offset="0x4">
+      <option name="alpha_blend" value="0"/>
+      <option name="multiply" value="1"/>
+      <option name="double_multiply" value="2"/>
+      <option name="add" value="3"/>
+      <option name="subtract" value="4"/>
+      <option name="component_minimum" value="5"/>
+      <option name="component_maximum" value="6"/>
+      <option name="alpha_multiply_add" value="7"/>
+    </enum16>
+    <enum16 name="anchors_primary_anchor" offset="0x28">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="anchors_secondary_anchor" offset="0x2a">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="anchors_tertiary_anchor" offset="0x2c">
+      <option name="texture" value="0"/>
+      <option name="screen" value="1"/>
+    </enum16>
+    <enum16 name="blending_function_0_to_1_blending_function" offset="0x2e">
+      <option name="add" value="0"/>
+      <option name="subtract" value="1"/>
+      <option name="multiply" value="2"/>
+      <option name="multiply_2x" value="3"/>
+      <option name="dot" value="4"/>
+    </enum16>
+    <enum16 name="blending_function_1_to_2_blending_function" offset="0x30">
+      <option name="add" value="0"/>
+      <option name="subtract" value="1"/>
+      <option name="multiply" value="2"/>
+      <option name="multiply_2x" value="3"/>
+      <option name="dot" value="4"/>
+    </enum16>
+    <float32 name="map_scales_primary_scale_x" offset="0x34"/>
+    <float32 name="map_scales_primary_scale_y" offset="0x38"/>
+    <float32 name="map_scales_secondary_scale_x" offset="0x3c"/>
+    <float32 name="map_scales_secondary_scale_y" offset="0x40"/>
+    <float32 name="map_scales_tertiary_scale_x" offset="0x44"/>
+    <float32 name="map_scales_tertiary_scale_y" offset="0x48"/>
+    <float32 name="map_offsets_primary_offset_x" offset="0x4c"/>
+    <float32 name="map_offsets_primary_offset_y" offset="0x50"/>
+    <float32 name="map_offsets_secondary_offset_x" offset="0x54"/>
+    <float32 name="map_offsets_secondary_offset_y" offset="0x58"/>
+    <float32 name="map_offsets_tertiary_offset_x" offset="0x5c"/>
+    <float32 name="map_offsets_tertiary_offset_y" offset="0x60"/>
+    <reference name="map_primary" offset="0x64"/>
+    <reference name="map_secondary" offset="0x74"/>
+    <reference name="map_tertiary" offset="0x84"/>
+    <enum16 name="map_primary_wrap_mode" offset="0x94">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <enum16 name="map_secondary_wrap_mode" offset="0x96">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <enum16 name="map_tertiary_wrap_mode" offset="0x98">
+      <option name="clamp" value="0"/>
+      <option name="wrap" value="1"/>
+    </enum16>
+    <struct_array name="effectors" offset="0x154" size="220">
+      <enum16 name="source_destination_destination_type" offset="0x40">
+        <option name="tint_0_1_only" value="0"/>
+        <option name="horizontal_offset" value="1"/>
+        <option name="vertical_offset" value="2"/>
+        <option name="fade_0_1_only" value="3"/>
+      </enum16>
+      <enum16 name="source_destination_destination" offset="0x42">
+        <option name="geometry_offset" value="0"/>
+        <option name="primary_map" value="1"/>
+        <option name="secondary_map" value="2"/>
+        <option name="tertiary_map" value="3"/>
+      </enum16>
+      <enum16 name="source_destination_source" offset="0x44">
+        <option name="player_pitch" value="0"/>
+        <option name="player_pitch_tangent" value="1"/>
+        <option name="player_yaw" value="2"/>
+        <option name="weapon_ammo_total" value="3"/>
+        <option name="weapon_ammo_loaded" value="4"/>
+        <option name="weapon_heat" value="5"/>
+        <option name="explicit_uses_low_bound" value="6"/>
+        <option name="weapon_zoom_level" value="7"/>
+      </enum16>
+      <float32 info="source units" name="in_out_bounds_in_bounds_from" offset="0x48"/>
+      <float32 info="source units" name="in_out_bounds_in_bounds_to" offset="0x4c"/>
+      <float32 info="pixels" name="in_out_bounds_out_bounds_from" offset="0x50"/>
+      <float32 info="pixels" name="in_out_bounds_out_bounds_to" offset="0x54"/>
+      <colorRGB name="tint_color_bounds_tint_color_lower_bound" offset="0x98"/>
+      <colorRGB name="tint_color_bounds_tint_color_upper_bound" offset="0xa4"/>
+      <enum16 name="periodic_functions_periodic_function" offset="0xb0">
+        <option name="one" value="0"/>
+        <option name="zero" value="1"/>
+        <option name="cosine" value="2"/>
+        <option name="cosine_variable_period" value="3"/>
+        <option name="diagonal_wave" value="4"/>
+        <option name="diagonal_wave_variable_period" value="5"/>
+        <option name="slide" value="6"/>
+        <option name="slide_variable_period" value="7"/>
+        <option name="noise" value="8"/>
+        <option name="jitter" value="9"/>
+        <option name="wander" value="10"/>
+        <option name="spark" value="11"/>
+      </enum16>
+      <float32 info="seconds" name="periodic_functions_function_period" offset="0xb4"/>
+      <float32 info="seconds" name="periodic_functions_function_phase" offset="0xb8"/>
+    </struct_array>
+  </struct_array>
+  <int16 name="total_grenades_numbers_anchor_offset_x" offset="0xf4"/>
+  <int16 name="total_grenades_numbers_anchor_offset_y" offset="0xf6"/>
+  <float32 name="total_grenades_numbers_width_scale" offset="0xf8"/>
+  <float32 name="total_grenades_numbers_height_scale" offset="0xfc"/>
+  <flag bit="7" name="dont_scale_offset" offset="0x100"/>
+  <flag bit="6" name="dont_scale_size" offset="0x100"/>
+  <flag bit="5" name="use_high_resolution_scale" offset="0x100"/>
+  <colorbyte name="total_grenades_numbers_default_color" offset="0x118"/>
+  <colorbyte name="total_grenades_numbers_flashing_color" offset="0x11c"/>
+  <float32 name="total_grenades_numbers_flash_period" offset="0x120"/>
+  <float32 name="total_grenades_numbers_flash_delay" offset="0x124"/>
+  <int16 name="total_grenades_numbers_number_of_flashes" offset="0x128"/>
+  <flag bit="7" name="reverse_default_flashing_colors" offset="0x12a"/>
+  <float32 name="total_grenades_numbers_flash_length" offset="0x12c"/>
+  <colorbyte name="total_grenades_numbers_disabled_color" offset="0x130"/>
+  <int8 name="total_grenades_numbers_maximum_number_of_digits" offset="0x138"/>
+  <flag bit="7" name="show_leading_zeros" offset="0x139"/>
+  <flag bit="6" name="only_show_when_zoomed" offset="0x139"/>
+  <flag bit="5" name="draw_a_trailing_m" offset="0x139"/>
+  <int8 name="total_grenades_numbers_number_of_fractional_digits" offset="0x13a"/>
+  <int16 name="total_grenades_numbers_flash_cutoff" offset="0x148"/>
+  <reference name="total_grenades_overlays_overlay_bitmap" offset="0x14c"/>
+  <struct_array name="overlays" offset="0x15c" size="136">
+    <int16 name="anchor_offset_x" offset="0x0"/>
+    <int16 name="anchor_offset_y" offset="0x2"/>
+    <float32 name="width_scale" offset="0x4"/>
+    <float32 name="height_scale" offset="0x8"/>
+    <flag bit="7" name="dont_scale_offset" offset="0xc"/>
+    <flag bit="6" name="dont_scale_size" offset="0xc"/>
+    <flag bit="5" name="use_high_resolution_scale" offset="0xc"/>
+    <colorbyte name="default_color" offset="0x24"/>
+    <colorbyte name="flashing_color" offset="0x28"/>
+    <float32 name="flash_period" offset="0x2c"/>
+    <float32 name="flash_delay" offset="0x30"/>
+    <int16 name="number_of_flashes" offset="0x34"/>
+    <flag bit="7" name="reverse_default_flashing_colors" offset="0x36"/>
+    <float32 name="flash_length" offset="0x38"/>
+    <colorbyte name="disabled_color" offset="0x3c"/>
+    <float32 name="frame_rate" offset="0x44"/>
+    <int16 name="sequence_index" offset="0x48"/>
+    <flag bit="7" name="show_on_flashing" offset="0x4a"/>
+    <flag bit="6" name="show_on_empty" offset="0x4a"/>
+    <flag bit="5" name="show_on_default" offset="0x4a"/>
+    <flag bit="4" name="show_always" offset="0x4a"/>
+    <flag bit="7" name="flashes_when_active" offset="0x4c"/>
+  </struct_array>
+  <struct_array name="warning_sounds" offset="0x168" size="56">
+    <reference name="sound" offset="0x0"/>
+    <flag bit="7" name="low_grenade_count" offset="0x10"/>
+    <flag bit="6" name="no_grenades_left" offset="0x10"/>
+    <flag bit="5" name="throw_on_no_grenades" offset="0x10"/>
+    <float32 name="scale" offset="0x14"/>
+  </struct_array>
+  <int16 info="into the global HUD icon bitmap" name="messaging_information_sequence_index" offset="0x1b8"/>
+  <int16 info="extra spacing beyond bitmap width for text alignment" name="messaging_information_width_offset" offset="0x1ba"/>
+  <int16 name="messaging_information_offset_from_reference_corner_x" offset="0x1bc"/>
+  <int16 name="messaging_information_offset_from_reference_corner_y" offset="0x1be"/>
+  <colorbyte name="messaging_information_override_icon_color" offset="0x1c0"/>
+  <int8 info="0 - 30 only" name="messaging_information_frame_rate" offset="0x1c4"/>
+  <flag bit="7" name="use_text_from_string_list_instead" offset="0x1c5"/>
+  <flag bit="6" name="override_default_color" offset="0x1c5"/>
+  <flag bit="5" name="width_offset_is_absolute_icon_width" offset="0x1c5"/>
+  <int16 name="messaging_information_text_index" offset="0x1c6"/>
+</struct>

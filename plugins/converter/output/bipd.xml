@@ -1,0 +1,542 @@
+<?xml version="1.0" ?>
+<struct name="bipd" size="1268">
+  <flag bit="7" name="does_not_cast_shadow" offset="0x2"/>
+  <flag bit="6" name="transparent_self_occlusion" offset="0x2"/>
+  <flag bit="5" name="brighter_than_it_should_be" offset="0x2"/>
+  <flag bit="4" name="not_a_pathfinding_obstacle" offset="0x2"/>
+  <float32 info="world units" name="bounding_radius" offset="0x4"/>
+  <float32 name="bounding_offset_x" offset="0x8"/>
+  <float32 name="bounding_offset_y" offset="0xc"/>
+  <float32 name="bounding_offset_z" offset="0x10"/>
+  <float32 name="origin_offset_x" offset="0x14"/>
+  <float32 name="origin_offset_y" offset="0x18"/>
+  <float32 name="origin_offset_z" offset="0x1c"/>
+  <float32 name="acceleration_scale" offset="0x20"/>
+  <reference name="model" offset="0x28"/>
+  <reference name="animation_graph" offset="0x38"/>
+  <reference name="collision_model" offset="0x70"/>
+  <reference name="physics" offset="0x80"/>
+  <reference name="modifier_shader" offset="0x90"/>
+  <reference name="creation_effect" offset="0xa0"/>
+  <float32 info="world units" name="render_bounding_radius" offset="0x104"/>
+  <enum16 name="export_to_functions_a_in" offset="0x108">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_b_in" offset="0x10a">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_c_in" offset="0x10c">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <enum16 name="export_to_functions_d_in" offset="0x10e">
+    <option name="none" value="0"/>
+    <option name="body_vitality" value="1"/>
+    <option name="shield_vitality" value="2"/>
+    <option name="recent_body_damage" value="3"/>
+    <option name="recent_shield_damage" value="4"/>
+    <option name="random_constant" value="5"/>
+    <option name="umbrella_shield_vitality" value="6"/>
+    <option name="shield_stun" value="7"/>
+    <option name="recent_umbrella_shield_vitality" value="8"/>
+    <option name="umbrella_shield_stun" value="9"/>
+    <option name="region_00_damage" value="10"/>
+    <option name="region_01_damage" value="11"/>
+    <option name="region_02_damage" value="12"/>
+    <option name="region_03_damage" value="13"/>
+    <option name="region_04_damage" value="14"/>
+    <option name="region_05_damage" value="15"/>
+    <option name="region_06_damage" value="16"/>
+    <option name="region_07_damage" value="17"/>
+    <option name="alive" value="18"/>
+    <option name="compass" value="19"/>
+  </enum16>
+  <int16 name="export_to_functions_hud_text_message_index" offset="0x13c"/>
+  <int16 name="export_to_functions_forced_shader_permutation_index" offset="0x13e"/>
+  <struct_array name="attachments" offset="0x140" size="72">
+    <reference name="type" offset="0x0"/>
+    <asciiz maxlength="32" name="marker" offset="0x10"/>
+    <enum16 name="primary_scale" offset="0x30">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="secondary_scale" offset="0x32">
+      <option name="none" value="0"/>
+      <option name="a_out" value="1"/>
+      <option name="b_out" value="2"/>
+      <option name="c_out" value="3"/>
+      <option name="d_out" value="4"/>
+    </enum16>
+    <enum16 name="change_color" offset="0x34">
+      <option name="none" value="0"/>
+      <option name="_a" value="1"/>
+      <option name="_b" value="2"/>
+      <option name="_c" value="3"/>
+      <option name="_d" value="4"/>
+    </enum16>
+  </struct_array>
+  <struct_array name="widgets" offset="0x14c" size="32">
+    <reference info="antenna, flag, glow, light_volume or lightning" name="reference" offset="0x0"/>
+  </struct_array>
+  <struct_array name="functions" offset="0x158" size="360">
+    <flag bit="7" name="invert" offset="0x0"/>
+    <flag bit="6" name="additive" offset="0x0"/>
+    <flag bit="5" name="always_active" offset="0x0"/>
+    <float32 info="seconds" name="period" offset="0x4"/>
+    <enum16 name="scale_period_by" offset="0x8">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="function" offset="0xa">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <enum16 name="scale_function_by" offset="0xc">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="wobble_function" offset="0xe">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 name="wobble_period" offset="0x10"/>
+    <float32 name="wobble_magnitude" offset="0x14"/>
+    <float32 info="0 - 1 only" name="square_wave_threshold" offset="0x18"/>
+    <int16 name="step_count" offset="0x1c"/>
+    <enum16 name="map_to" offset="0x1e">
+      <option name="linear" value="0"/>
+      <option name="early" value="1"/>
+      <option name="very_early" value="2"/>
+      <option name="late" value="3"/>
+      <option name="very_late" value="4"/>
+      <option name="cosine" value="5"/>
+    </enum16>
+    <int16 name="sawtooth_count" offset="0x20"/>
+    <enum16 name="add" offset="0x22">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="scale_result_by" offset="0x24">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="bounds_mode" offset="0x26">
+      <option name="clip" value="0"/>
+      <option name="clip_and_normalize" value="1"/>
+      <option name="scale_to_fit" value="2"/>
+    </enum16>
+    <float32 info="0 - 1 only" name="bounds_from" offset="0x28"/>
+    <float32 info="0 - 1 only" name="bounds_to" offset="0x2c"/>
+    <enum16 info="NOTE: This is a hack, use Indexes type instead." name="turn_off_with" offset="0x36">
+      <option name="a_out_function_1" value="0"/>
+      <option name="b_out_function_2" value="1"/>
+      <option name="c_out_function_3" value="2"/>
+      <option name="d_out_function_4" value="3"/>
+      <option name="none" value="65535"/>
+    </enum16>
+    <index info="Functions/Chunks 1-4 = 'A out' through 'D out'" name="turn_off_with" offset="0x36" struct_array="functions"/>
+    <float32 info="applied before clip; ignored if zero" name="scale_by" offset="0x38"/>
+    <float32 info="0 = function is disabled; tested by 002. 'When playing with the banshee's wingtip, I noticed that 0 disabled the contrail, causing the contrail sound to be at lowest. Setting it to 50 causes the function to speed up in acceleration and maxed out the contrail and contrail pitch, reminding me why they called it the 'Banshee'.'" name="function_acceleration_scale" offset="0x138"/>
+    <asciiz maxlength="32" name="usage" offset="0x148"/>
+  </struct_array>
+  <struct_array name="change_colors" offset="0x164" size="72">
+    <enum16 name="darken_by" offset="0x0">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <enum16 name="scale_by" offset="0x2">
+      <option name="none" value="0"/>
+      <option name="a_in" value="1"/>
+      <option name="b_in" value="2"/>
+      <option name="c_in" value="3"/>
+      <option name="d_in" value="4"/>
+      <option name="a_out" value="5"/>
+      <option name="b_out" value="6"/>
+      <option name="c_out" value="7"/>
+      <option name="d_out" value="8"/>
+    </enum16>
+    <flag bit="7" name="blend_in_hsv" offset="0x4"/>
+    <flag bit="6" name="more_colors" offset="0x4"/>
+    <colorRGB name="color_lower_bound" offset="0x8"/>
+    <colorRGB name="color_upper_bound" offset="0x14"/>
+    <struct_array name="permutations" offset="0x20" size="28">
+      <float32 info="confusing formula, ask Sparky for help if this matters to you, otherwise don't touch" name="weight" offset="0x0"/>
+      <colorRGB name="color_lower_bound" offset="0x4"/>
+      <colorRGB name="color_upper_bound" offset="0x10"/>
+    </struct_array>
+  </struct_array>
+  <struct_array info="Note: Useless, don't touch, doesn't even exist" name="predicted_resources" offset="0x170" size="6">
+    <enum16 name="type" offset="0x0">
+      <option name="bitmap" value="0"/>
+      <option name="sound" value="1"/>
+    </enum16>
+    <int16 name="resource_index" offset="0x2"/>
+    <int16 name="tag_index" offset="0x4"/>
+  </struct_array>
+  <flag bit="7" name="circular_aiming" offset="0x17c"/>
+  <flag bit="6" name="destroyed_after_dying" offset="0x17c"/>
+  <flag bit="5" name="half_speed_interpolation" offset="0x17c"/>
+  <flag bit="4" name="fires_from_camera" offset="0x17c"/>
+  <flag bit="3" name="entrance_inside_bounding_sphere" offset="0x17c"/>
+  <flag bit="2" name="unused" offset="0x17c"/>
+  <flag bit="1" name="causes_passenger_dialogue" offset="0x17c"/>
+  <flag bit="0" name="resists_pings" offset="0x17c"/>
+  <flag bit="7" name="melee_attack_is_fatal" offset="0x17d"/>
+  <flag bit="6" name="dont_reface_during_pings" offset="0x17d"/>
+  <flag bit="5" name="has_no_aiming" offset="0x17d"/>
+  <flag bit="4" name="simple_creature" offset="0x17d"/>
+  <flag bit="3" name="impact_melee_attaches_to_unit" offset="0x17d"/>
+  <flag bit="2" name="impact_melee_dies_on_shields" offset="0x17d"/>
+  <flag bit="1" name="cannot_open_doors_automatically" offset="0x17d"/>
+  <flag bit="0" name="melee_attackers_cannot_attach" offset="0x17d"/>
+  <flag bit="7" name="not_instantly_killed_by_melee" offset="0x17e"/>
+  <flag bit="6" name="shield_sapping" offset="0x17e"/>
+  <flag bit="5" name="runs_around_flaming" offset="0x17e"/>
+  <flag bit="4" name="inconsequential" offset="0x17e"/>
+  <flag bit="3" name="special_cinematic_unit" offset="0x17e"/>
+  <flag bit="2" name="ignored_by_autoaiming" offset="0x17e"/>
+  <flag bit="1" name="shields_fry_infection_forms" offset="0x17e"/>
+  <flag bit="0" name="integrated_light_controls_weapon" offset="0x17e"/>
+  <flag bit="7" name="integrated_light_lasts_forever" offset="0x17f"/>
+  <enum16 name="unit_default_team" offset="0x180">
+    <option name="none" value="0"/>
+    <option name="player" value="1"/>
+    <option name="human" value="2"/>
+    <option name="covenant" value="3"/>
+    <option name="flood" value="4"/>
+    <option name="sentinel" value="5"/>
+    <option name="unused_6" value="6"/>
+    <option name="unused_7" value="7"/>
+    <option name="unused_8" value="8"/>
+    <option name="unused_9" value="9"/>
+  </enum16>
+  <enum16 name="unit_constant_sound_volume" offset="0x182">
+    <option name="silent" value="0"/>
+    <option name="medium" value="1"/>
+    <option name="loud" value="2"/>
+    <option name="shout" value="3"/>
+    <option name="quiet" value="4"/>
+  </enum16>
+  <float32 info="this percentage of damage goes through to our children (ie. riders)" name="unit_rider_damage_fraction" offset="0x184"/>
+  <reference info="effe" name="unit_integrated_light_toggle" offset="0x188"/>
+  <enum16 name="unit_a_in" offset="0x198">
+    <option name="none" value="0"/>
+    <option name="driver_seat_power" value="1"/>
+    <option name="gunner_seat_power" value="2"/>
+    <option name="aiming_change" value="3"/>
+    <option name="mouth_aperture" value="4"/>
+    <option name="integrated_light_power" value="5"/>
+    <option name="can_blink" value="6"/>
+    <option name="shield_sapping" value="7"/>
+  </enum16>
+  <enum16 name="unit_b_in" offset="0x19a">
+    <option name="none" value="0"/>
+    <option name="driver_seat_power" value="1"/>
+    <option name="gunner_seat_power" value="2"/>
+    <option name="aiming_change" value="3"/>
+    <option name="mouth_aperture" value="4"/>
+    <option name="integrated_light_power" value="5"/>
+    <option name="can_blink" value="6"/>
+    <option name="shield_sapping" value="7"/>
+  </enum16>
+  <enum16 name="unit_c_in" offset="0x19c">
+    <option name="none" value="0"/>
+    <option name="driver_seat_power" value="1"/>
+    <option name="gunner_seat_power" value="2"/>
+    <option name="aiming_change" value="3"/>
+    <option name="mouth_aperture" value="4"/>
+    <option name="integrated_light_power" value="5"/>
+    <option name="can_blink" value="6"/>
+    <option name="shield_sapping" value="7"/>
+  </enum16>
+  <enum16 name="unit_d_in" offset="0x19e">
+    <option name="none" value="0"/>
+    <option name="driver_seat_power" value="1"/>
+    <option name="gunner_seat_power" value="2"/>
+    <option name="aiming_change" value="3"/>
+    <option name="mouth_aperture" value="4"/>
+    <option name="integrated_light_power" value="5"/>
+    <option name="can_blink" value="6"/>
+    <option name="shield_sapping" value="7"/>
+  </enum16>
+  <float32 info="radians" name="unit_camera_field_of_view" offset="0x1a0"/>
+  <float32 name="unit_camera_stiffness" offset="0x1a4"/>
+  <asciiz maxlength="32" name="unit_camera_marker_name" offset="0x1a8"/>
+  <asciiz maxlength="32" name="unit_camera_submerged_marker_name" offset="0x1c8"/>
+  <float32 info="radians" name="unit_pitch_auto_level" offset="0x1e8"/>
+  <float32 info="radians" name="unit_pitch_range_from" offset="0x1ec"/>
+  <float32 info="radians" name="unit_pitch_range_to" offset="0x1f0"/>
+  <struct_array name="unit_camera_tracks" offset="0x1f4" size="28">
+    <reference name="track" offset="0x0"/>
+  </struct_array>
+  <float32 name="unit_seat_acceleration_scale_i_1" offset="0x200"/>
+  <float32 name="unit_seat_acceleration_scale_i_2" offset="0x204"/>
+  <float32 name="unit_seat_acceleration_scale_k" offset="0x208"/>
+  <float32 info="0 - 1 only" name="unit_soft_ping_threshold" offset="0x218"/>
+  <float32 info="seconds" name="unit_soft_ping_interrupt_time" offset="0x21c"/>
+  <float32 info="0 - 1 only" name="unit_hard_ping_threshold" offset="0x220"/>
+  <float32 info="seconds" name="unit_hard_ping_interrupt_time" offset="0x224"/>
+  <float32 info="0 - 1 only" name="unit_hard_death_threshold" offset="0x228"/>
+  <float32 info="0 - 1 only" name="unit_feign_death_threshold" offset="0x22c"/>
+  <float32 info="seconds" name="unit_feign_death_time" offset="0x230"/>
+  <float32 info="world units; must be set to tell the AI how far the animation moves us" name="unit_distance_of_evade_animation" offset="0x234"/>
+  <float32 info="world units; must be set to tell the AI how far the animation moves us" name="unit_distance_of_dive_animation" offset="0x238"/>
+  <float32 info="0 - 1 only; play 'stunned movement' animations when this much damage is taken in a short period of time" name="unit_stunned_movement_threshold" offset="0x240"/>
+  <float32 info="0 - 1 only" name="unit_feign_death_chance" offset="0x244"/>
+  <float32 info="0 - 1 only" name="unit_feign_repeat_chance" offset="0x248"/>
+  <reference info="actv; spawns when we are destroyed or self-destruct" name="unit_spawned_actor" offset="0x24c"/>
+  <int16 info="number of actors which we spawn" name="unit_spawned_actor_count_from" offset="0x25c"/>
+  <int16 info="number of actors which we spawn" name="unit_spawned_actor_count_to" offset="0x25e"/>
+  <float32 info="velocity at which we throw spawned actors" name="unit_spawned_velocity" offset="0x260"/>
+  <float32 info="radians per second" name="unit_aiming_velocity_maximum" offset="0x264"/>
+  <float32 info="radians per second squared" name="unit_aiming_acceleration_maximum" offset="0x268"/>
+  <float32 info="0 - 1 only" name="unit_casual_aiming_modifier" offset="0x26c"/>
+  <float32 info="radians per second" name="unit_looking_velocity_maximum" offset="0x270"/>
+  <float32 info="radians per second squared" name="unit_looking_acceleration_maximum" offset="0x274"/>
+  <float32 info="0 = use bounding sphere radius; radius around this unit that the AI tries to avoid when entering it as a vehicle" name="unit_ai_vehicle_radius" offset="0x280"/>
+  <float32 info="danger radius around this unit that the AI tries to avoid" name="unit_ai_danger_radius" offset="0x284"/>
+  <reference name="unit_melee_damage" offset="0x288"/>
+  <enum16 name="unit_motion_sensor_blip_size" offset="0x298">
+    <option name="medium" value="0"/>
+    <option name="small" value="1"/>
+    <option name="large" value="2"/>
+  </enum16>
+  <struct_array name="unit_new_hud_interfaces_defaultsolo_player_hud_multiplayer_hud" offset="0x2a8" size="48">
+    <reference name="unit_hud_interface" offset="0x0"/>
+  </struct_array>
+  <struct_array name="unit_dialogue_variants" offset="0x2b4" size="24">
+    <int16 info="must match suffix in the permutations on the unit's model" name="variant_number" offset="0x0"/>
+    <reference name="dialogue" offset="0x8"/>
+  </struct_array>
+  <float32 info="world units per second" name="unit_grenade_velocity" offset="0x2c0"/>
+  <enum16 name="unit_grenade_type" offset="0x2c4">
+    <option name="human_fragmentation" value="0"/>
+    <option name="covenant_plasma" value="1"/>
+  </enum16>
+  <int16 name="unit_grenade_count" offset="0x2c6"/>
+  <struct_array name="unit_powered_seats_chunk_1_driver_chunk_2_gunner" offset="0x2cc" size="68">
+    <float32 info="seconds" name="driver_powerup_time" offset="0x4"/>
+    <float32 info="seconds" name="driver_powerdown_time" offset="0x8"/>
+  </struct_array>
+  <struct_array name="unit_weapons" offset="0x2d8" size="36">
+    <reference name="weapon" offset="0x0"/>
+  </struct_array>
+  <struct_array name="unit_seats" offset="0x2e4" size="284">
+    <flag bit="7" name="invisible" offset="0x0"/>
+    <flag bit="6" name="locked" offset="0x0"/>
+    <flag bit="5" name="driver" offset="0x0"/>
+    <flag bit="4" name="gunner" offset="0x0"/>
+    <flag bit="3" name="third_person_camera" offset="0x0"/>
+    <flag bit="2" name="allows_weapons" offset="0x0"/>
+    <flag bit="1" name="third_person_on_enter" offset="0x0"/>
+    <flag bit="0" name="first_person_camera_slaved_to_gun" offset="0x0"/>
+    <flag bit="7" name="allow_vehicle_communication_animations" offset="0x1"/>
+    <flag bit="6" name="not_valid_without_driver" offset="0x1"/>
+    <flag bit="5" name="allow_ai_noncombatants" offset="0x1"/>
+    <asciiz maxlength="32" name="unit_seats_label" offset="0x4"/>
+    <asciiz maxlength="32" name="unit_seats_marker_name" offset="0x24"/>
+    <float32 name="unit_seats_acceleration_scale_i_1" offset="0x64"/>
+    <float32 name="unit_seats_acceleration_scale_i_2" offset="0x68"/>
+    <float32 name="unit_seats_acceleration_scale_k" offset="0x6c"/>
+    <float32 info="degrees(!) per second" name="unit_seats_yaw_rate" offset="0x7c"/>
+    <float32 info="degrees(!) per second" name="unit_seats_pitch_rate" offset="0x80"/>
+    <asciiz maxlength="32" name="unit_seats_camera_marker_name" offset="0x84"/>
+    <asciiz maxlength="32" name="unit_seats_camera_submerged_marker_name" offset="0xa4"/>
+    <float32 info="radians" name="unit_seats_pitch_auto_level" offset="0xc4"/>
+    <float32 info="radians" name="unit_seats_pitch_range_from" offset="0xc8"/>
+    <float32 info="radians" name="unit_seats_pitch_range_to" offset="0xcc"/>
+    <struct_array name="camera_tracks_loose_tight" offset="0xd0" size="28">
+      <reference name="track" offset="0x0"/>
+    </struct_array>
+    <struct_array name="unit_hud_interface_defaultsolo_player_hud_multiplayer_hud" offset="0xdc" size="48">
+      <reference name="unit_hud_interface" offset="0x0"/>
+    </struct_array>
+    <int16 name="unit_seats_hud_text_message_index" offset="0xec"/>
+    <float32 info="radians" name="unit_seats_yaw_minimum" offset="0xf0"/>
+    <float32 info="radians" name="unit_seats_yaw_maximum" offset="0xf4"/>
+    <reference info="actv" name="unit_seats_built_in_gunner" offset="0xf8"/>
+  </struct_array>
+  <float32 info="radians per second" name="biped_moving_turning_speed" offset="0x2f0"/>
+  <flag bit="7" name="turns_without_animating" offset="0x2f4"/>
+  <flag bit="6" name="uses_player_physics" offset="0x2f4"/>
+  <flag bit="5" name="flying" offset="0x2f4"/>
+  <flag bit="4" name="physics_pill_centered_at_origin" offset="0x2f4"/>
+  <flag bit="3" name="spherical" offset="0x2f4"/>
+  <flag bit="2" name="passes_through_other_bipeds" offset="0x2f4"/>
+  <flag bit="1" name="can_climb_any_surface" offset="0x2f4"/>
+  <flag bit="0" name="immune_to_falling_damage" offset="0x2f4"/>
+  <flag bit="7" name="rotate_while_airborne" offset="0x2f5"/>
+  <flag bit="6" name="uses_limp_body_physics" offset="0x2f5"/>
+  <flag bit="5" name="has_no_dying_airborne" offset="0x2f5"/>
+  <flag bit="4" name="random_speed_increase" offset="0x2f5"/>
+  <flag bit="3" name="unit_uses_old_ntsc_player_physics" offset="0x2f5"/>
+  <float32 info="radians" name="biped_stationary_turning_threshold" offset="0x2f8"/>
+  <enum16 name="biped_a_in" offset="0x30c">
+    <option name="none" value="0"/>
+    <option name="flying_velocity" value="1"/>
+  </enum16>
+  <enum16 name="biped_b_in" offset="0x30e">
+    <option name="none" value="0"/>
+    <option name="flying_velocity" value="1"/>
+  </enum16>
+  <enum16 name="biped_c_in" offset="0x310">
+    <option name="none" value="0"/>
+    <option name="flying_velocity" value="1"/>
+  </enum16>
+  <enum16 name="biped_d_in" offset="0x312">
+    <option name="none" value="0"/>
+    <option name="flying_velocity" value="1"/>
+  </enum16>
+  <float32 info="radians; angle at which we bank left/right when sidestepping or turning while moving forwards" name="flying_bank_angle" offset="0x324"/>
+  <float32 info="seconds; time it takes us to apply a bank" name="flying_bank_apply_time" offset="0x328"/>
+  <float32 info="seconds; time it takes us to recover from a bank" name="flying_bank_decay_time" offset="0x32c"/>
+  <float32 info="amount that we pitch up/down when moving up/down" name="flying_pitch_ratio" offset="0x330"/>
+  <float32 info="world units per second; when not crouching" name="flying_max_velocity" offset="0x334"/>
+  <float32 info="world units per second; max sideways or up/down velocity when not crouching" name="flying_max_sidestep_velocity" offset="0x338"/>
+  <float32 info="world units per second squared" name="flying_acceleration" offset="0x33c"/>
+  <float32 info="world units per second squared" name="flying_deceleration" offset="0x340"/>
+  <float32 info="radians per second; turn rate" name="flying_angular_velocity_maximum" offset="0x344"/>
+  <float32 info="radians per second squared; turn acceleration rate" name="flying_angular_acceleration_maximum" offset="0x348"/>
+  <float32 info="0 - 1 only; 0 = same speed; how much slower we fly if crouching" name="flying_crouch_velocity_modifier" offset="0x34c"/>
+  <float32 info="radians" name="movement_maximum_slope_angle" offset="0x358"/>
+  <float32 info="radians" name="movement_downhill_falloff_angle" offset="0x35c"/>
+  <float32 info="radians" name="movement_downhill_cutoff_angle" offset="0x360"/>
+  <float32 name="movement_downhill_velocity_scale" offset="0x364"/>
+  <float32 info="radians" name="movement_uphill_falloff_angle" offset="0x368"/>
+  <float32 info="radians" name="movement_uphill_cutoff_angle" offset="0x36c"/>
+  <float32 name="movement_uphill_velocity_scale" offset="0x370"/>
+  <reference name="movement_footsteps" offset="0x38c"/>
+  <float32 info="world units per second" name="jumping_and_landing_jump_velocity" offset="0x3b4"/>
+  <float32 info="seconds; the longest amount of time the biped can take to recover from a soft landing" name="jumping_and_landing_maximum_soft_landing_time" offset="0x3d4"/>
+  <float32 info="seconds; the longest amount of time the biped can take to recover from a hard landing" name="jumping_and_landing_maximum_hard_landing_time" offset="0x3d8"/>
+  <float32 info="world units per second; below this velocity, the biped does not react when landing" name="jumping_and_landing_minimum_soft_landing_velocity" offset="0x3dc"/>
+  <float32 info="world units per second; below this velocity, the biped will not do a soft landing when returning to the ground" name="jumping_and_landing_maximum_hard_landing_velocity" offset="0x3e0"/>
+  <float32 info="world units per second; the velocity corresponding to the maximum landing time" name="jumping_and_landing_maximum_hard_landing_velocity" offset="0x3e4"/>
+  <float32 info="world units per second; the maximum velocity at which a character can strike the ground and live" name="jumping_and_landing_death_hard_landing_velocity" offset="0x3e8"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_standing_camera_height" offset="0x400"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_crouching_camera_height" offset="0x404"/>
+  <float32 info="seconds" name="camera_collision_and_autoaim_crouch_transition_time" offset="0x408"/>
+  <float32 info="0 - 1 only; tested by 002. 0 = normal; 1 = instant crouch" name="camera_collision_and_autoaim_camera_crouch_transition_speed_modifier" offset="0x4cc"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_standing_collision_height" offset="0x424"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_crouching_collision_height" offset="0x428"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_collision_radius" offset="0x42c"/>
+  <float32 info="0 - 1 only; tested by 002. 0 = walk on walls; 1 = constantly drifting and cannot walk up ramps (think moonwalking)" name="camera_collision_and_autoaim_collision_ground_friction_scale_modifier" offset="0x4d0"/>
+  <float32 info="world units" name="camera_collision_and_autoaim_autoaim_width" offset="0x458"/>
+  <struct_array name="camera_collision_and_autoaim_contact_points" offset="0x4e8" size="64">
+    <asciiz info="the point where the biped touches the ground" maxlength="32" name="marker_name" offset="0x20"/>
+  </struct_array>
+</struct>

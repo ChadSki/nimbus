@@ -1,0 +1,65 @@
+<plugin class="foot" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Effects" offset="0x00" size="28">
+	
+	<!--bitmask32 name="Effects Chunk Reference Guide" offset="0x08">
+		<option name="This list order is mandatory:" value="00"/>
+		<option name="1 - Walk" value="00"/>
+		<option name="2 - Run" value="00"/>
+		<option name="3 - Sliding" value="00"/>
+		<option name="4 - Shuffle" value="00"/>
+		<option name="5 - Jump" value="00"/>
+		<option name="6 - Jump Land" value="00"/>
+		<option name="7 - Biped Unused 1" value="00"/>
+		<option name="8 - Biped Unused 2" value="00"/>
+		<option name="9 - Impact" value="00"/>
+		<option name="10 - Vehicle Tire Slip" value="00"/>
+		<option name="11 - Vehicle Chassis Slip" value="00"/>
+		<option name="12 - Vehicle Unused 1" value="00"/>
+		<option name="13 - Vehicle Unused 2" value="00"/>
+	</bitmask32-->
+
+	<struct name="Materials" offset="0x00" size="48">
+			
+		<!--bitmask32 name="Materials Chunk Reference Guide" offset="0x20">
+			<option name="1 - dirt" value="00"/>
+			<option name="2 - sand" value="00"/>
+			<option name="3 - stone" value="00"/>
+			<option name="4 - snow" value="00"/>
+			<option name="5 - wood" value="00"/>
+			<option name="6 - metal (hollow)" value="00"/>
+			<option name="7 - metal (thin)" value="00"/>
+			<option name="8 - metal (thick)" value="00"/>
+			<option name="9 - rubber" value="00"/>
+			<option name="10 - glass" value="00"/>
+			<option name="11 - force field" value="00"/>
+			<option name="12 - grunt" value="00"/>
+			<option name="13 - hunter armor" value="00"/>
+			<option name="14 - hunter skin" value="00"/>
+			<option name="15 - elite" value="00"/>
+			<option name="16 - jackal" value="00"/>
+			<option name="17 - jackal energy shield" value="00"/>
+			<option name="18 - engineer skin" value="00"/>
+			<option name="19 - engineer force field" value="00"/>
+			<option name="20 - flood combat form" value="00"/>
+			<option name="21 - flood carrier form" value="00"/>
+			<option name="22 - cyborg armor" value="00"/>
+			<option name="23 - cyborg energy shield" value="00"/>
+			<option name="24 - human armor" value="00"/>
+			<option name="25 - human skin" value="00"/>
+			<option name="26 - sentinel" value="00"/>
+			<option name="27 - monitor" value="00"/>
+			<option name="28 - plastic" value="00"/>
+			<option name="29 - water" value="00"/>
+			<option name="30 - leaves" value="00"/>
+			<option name="31 - elite energy shield" value="00"/>
+			<option name="32 - ice" value="00"/>
+			<option name="33 - hunter shield" value="00"/>
+		</bitmask32-->
+		
+		<dependency name="Effect" offset="0x00"/>
+		<dependency name="Sound" offset="0x10"/>
+	</struct>
+</struct>
+
+</plugin>

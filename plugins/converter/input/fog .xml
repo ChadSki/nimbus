@@ -1,0 +1,50 @@
+<plugin class="fog " author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Flags.Flags" info_img="fog Flags.png" offset="0x00">
+	<option name="Is Water" value="15"/>
+	<option name="Atmosphere Dominant" value="14"/>
+	<option name="Fog Screen Only" value="13"/>
+</bitmask16>
+
+<float name="Density.Maximum Density" note="0 - 1 only" info="planar fog density is clamped to this value" offset="0x58"/>
+<float name="Density.Opaque Distance" note="world units" info="the fog becomes opaque at this distance from the viewer" offset="0x60"/>
+<float name="Density.Opaque Depth" note="world units" info="the fog becomes opaque at this distance from its surface" offset="0x68"/>
+<float name="Density.Distance to Water Plane" note="world units" info="the fog becomes water at this distance from its surface" offset="0x74"/>
+
+<colorRGB name="Color.Color" offset="0x78"/>
+
+<bitmask16 name="Screen Layers.Flags" offset="0x84">
+	<option name="No Environment Multipass" value="15"/>
+	<option name="No Model Multipass" value="14"/>
+	<option name="No Texture-Based Falloff" value="13"/>
+</bitmask16>
+
+<short name="Screen Layers.Layer Count" note="0 - 4 only; 0 layers disables the effect" offset="0x86"/>
+
+<float name="Screen Layers.Distance to Gradient: from" note="world units" offset="0x88"/>
+<float name="Screen Layers.Distance to Gradient: to" note="world units" offset="0x8C"/>
+<float name="Screen Layers.Density Gradient: from" note="0 - 1 only" offset="0x90"/>
+<float name="Screen Layers.Density Gradient: to" note="0 - 1 only" offset="0x94"/>
+<float name="Screen Layers.Start Distance From Fog Plane" info="do NOT set this to the same value as 'maximum depth' {Sparky says, 'do they mean maximum density???'}" offset="0x98"/>
+
+<colorbyte name="Screen Layers.Color" note="0 defaults to planar fog color" offset="0xA0"/>
+
+<float name="Screen Layers.Rotation Multiplier" note="0 - 1 only" offset="0xA4"/>
+<float name="Screen Layers.Strafing Multiplier" note="0 - 1 only" offset="0xA8"/>
+<float name="Screen Layers.Zoom Multiplier" note="0 - 1 only" offset="0xAC"/>
+<float name="Screen Layers.Map Scale" note="0 defaults to 1" offset="0xB8"/>
+
+<dependency name="Screen Layers.Map" offset="0xBC"/>
+
+<float name="Screen Layer Animation.Animation Period" note="seconds" offset="0xCC"/>
+<float name="Screen Layer Animation.Wind Velocity: from" note="world units per second" offset="0xD4"/>
+<float name="Screen Layer Animation.Wind Velocity: to" note="world units per second" offset="0xD8"/>
+<float name="Screen Layer Animation.Wind Period: from" note="seconds; 0 defaults to 1" offset="0xDC"/>
+<float name="Screen Layer Animation.Wind Period: to" note="seconds; 0 defaults to 1" offset="0xE0"/>
+<float name="Screen Layer Animation.Wind Acceleration Weight" note="0 - 1 only" offset="0xE4"/>
+<float name="Screen Layer Animation.Wind Perpendicular Weight" note="0 - 1 only" offset="0xE8"/>
+
+<dependency name="Sound.Background Sound" offset="0xF4"/>
+<dependency name="Sound.Sound Environment" offset="0x104"/>
+
+</plugin>

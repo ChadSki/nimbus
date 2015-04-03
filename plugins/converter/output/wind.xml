@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<struct name="wind" size="28">
+  <float32 info="world units per second; the wind magnitude in the weather region scales the wind between these bounds" name="velocity_from" offset="0x0"/>
+  <float32 info="world units per second; the wind magnitude in the weather region scales the wind between these bounds" name="velocity_to" offset="0x4"/>
+  <float32 info="radians; the wind direction varies inside a box defined by these angles on either side of the direction from the weather region" name="variation_area_yaw" offset="0x8"/>
+  <float32 info="radians; the wind direction varies inside a box defined by these angles on either side of the direction from the weather region" name="variation_area_pitch" offset="0xc"/>
+  <float32 name="local_variation_weight" offset="0x10"/>
+  <float32 name="local_variation_rate" offset="0x14"/>
+  <float32 name="damping" offset="0x18"/>
+</struct>

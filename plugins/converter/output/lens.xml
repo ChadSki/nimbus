@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<struct name="lens" size="208">
+  <float32 info="radians" name="lens_flare_falloff_angle" offset="0x0"/>
+  <float32 info="radians" name="lens_flare_cutoff_angle" offset="0x4"/>
+  <float32 info="tested by 002. 1 = normal; any other value will prevent the camera from whiting out when aimed at the light source" name="lens_flare_occlusion_modifier" offset="0x8"/>
+  <float32 info="world units; radius of the square used to test occlusion" name="occlusion_occlusion_radius" offset="0x10"/>
+  <enum16 name="occlusion_occlusion_offset_direction" offset="0x14">
+    <option name="toward_viewer" value="0"/>
+    <option name="marker_forward" value="1"/>
+    <option name="none" value="2"/>
+  </enum16>
+  <float32 info="world units; distance at which the lens flare brightness is maximum" name="occlusion_near_fade_distance" offset="0x18"/>
+  <float32 info="world units; 0 = distance fading disabled; distance at which the lens flare brightness is minimum" name="occlusion_far_fade_distance" offset="0x1c"/>
+  <reference info="used by reflections" name="bitmaps_bitmap" offset="0x20"/>
+  <flag bit="7" name="sun" offset="0x30"/>
+  <enum16 name="corona_rotation_rotation_function" offset="0x80">
+    <option name="none" value="0"/>
+    <option name="rotation_a" value="1"/>
+    <option name="rotation_b" value="2"/>
+    <option name="rotation_translation" value="3"/>
+    <option name="translation" value="4"/>
+  </enum16>
+  <float32 info="radians" name="corona_rotation_rotation_function_scale" offset="0x84"/>
+  <float32 info="0 defaults to 1; amount to stretch the corona along the horizontal axis" name="corona_radius_scale_horizontal_scale" offset="0xa0"/>
+  <float32 info="0 defaults to 1; amount to stretch the corona along the vertical axis" name="corona_radius_scale_vertical_scale" offset="0xa4"/>
+  <struct_array name="reflections" offset="0xc4" size="128">
+    <flag bit="7" name="align_rotation_with_screen_center" offset="0x0"/>
+    <flag bit="6" name="radius_not_scaled_by_distance" offset="0x0"/>
+    <flag bit="5" name="radius_scaled_by_occlusion_factor" offset="0x0"/>
+    <flag bit="4" name="occluded_by_solid_objects" offset="0x0"/>
+    <int16 name="bitmap_index" offset="0x4"/>
+    <float32 info="0 = on top of light; 1 = opposite the light; 0.5 = center of the screen" name="position_along_flare_axis" offset="0x1c"/>
+    <float32 info="degrees" name="rotation_offset" offset="0x20"/>
+    <float32 info="world units; interpolated by light scale" name="radius_from" offset="0x28"/>
+    <float32 info="world units; interpolated by light scale" name="radius_to" offset="0x2c"/>
+    <enum16 name="radius_scaled_by" offset="0x30">
+      <option name="none" value="0"/>
+      <option name="rotation" value="1"/>
+      <option name="rotation_and_strafing" value="2"/>
+      <option name="distance_from_center" value="3"/>
+    </enum16>
+    <float32 info="0 - 1 only; interpolated by light scale" name="brightness_from" offset="0x34"/>
+    <float32 info="0 - 1 only; interpolated by light scale" name="brightness_to" offset="0x38"/>
+    <enum16 name="brightness_scaled_by" offset="0x3c">
+      <option name="none" value="0"/>
+      <option name="rotation" value="1"/>
+      <option name="rotation_and_strafing" value="2"/>
+      <option name="distance_from_center" value="3"/>
+    </enum16>
+    <colorARGB info="if all values = 0, use light color instead; alpha blends between modulation and tinting" name="tint_color" offset="0x40"/>
+    <colorARGB info="all 0's defaults to all 1's" name="animation_color_lower_bound" offset="0x50"/>
+    <colorARGB info="all 0's defaults to all 1's" name="animation_color_upper_bound" offset="0x60"/>
+    <flag bit="7" name="interpolate_color_in_hsv" offset="0x70"/>
+    <flag bit="6" name="more_colors" offset="0x70"/>
+    <enum16 name="animation_animation_function" offset="0x72">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds; 0 defaults to 1" name="animation_animation_period" offset="0x74"/>
+    <float32 info="seconds" name="animation_animation_phase" offset="0x78"/>
+  </struct_array>
+</struct>

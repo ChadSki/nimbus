@@ -1,0 +1,289 @@
+<?xml version="1.0" ?>
+<struct name="matg" size="428">
+  <struct_array name="sounds" offset="0xf8" size="16">
+    <reference name="sound" offset="0x0"/>
+  </struct_array>
+  <struct_array name="camera" offset="0x104" size="16">
+    <reference name="default_unit_camera_track" offset="0x0"/>
+  </struct_array>
+  <struct_array name="player_control" offset="0x110" size="128">
+    <float32 info="how much the crosshair slows over enemies" name="magnetism_friction" offset="0x0"/>
+    <float32 info="how much the crosshair sticks over enemies" name="magnetism_adhesion" offset="0x4"/>
+    <float32 info="scales magnetism level for inconsequential targets like infection forms" name="inconsequential_target_scale" offset="0x8"/>
+    <float32 info="seconds; time for a pegged look to reach maximum effect" name="look_acceleration_time" offset="0x40"/>
+    <float32 info="maximum effect of a pegged look (scales last value in the look function below)" name="look_acceleration_scale" offset="0x44"/>
+    <float32 info="0 - 1 only; magnitude of yaw for pegged acceleration to kick in" name="look_peg_threshold" offset="0x48"/>
+    <float32 info="degrees" name="look_default_pitch_rate" offset="0x4c"/>
+    <float32 info="degrees" name="look_default_yaw_rate" offset="0x50"/>
+    <float32 info="1 is fast, 0 is none, over 1 is probably really fast" name="look_auto_leveling_scale" offset="0x54"/>
+    <int16 info="amount of time player needs to hold ACTION to pick up a weapon" name="minimum_weapon_swap_ticks" offset="0x6c"/>
+    <int16 info="amount of time player needs to move without looking up/down before autoleveling kicks in" name="minimum_auto_leveling_ticks" offset="0x6e"/>
+    <float32 info="radians; 0 means vehicle's up vector is along the ground, 90 means it's straight up" name="minimum_angle_for_vehicle_flipping" offset="0x70"/>
+    <struct_array name="look_function" offset="0x74" size="4">
+      <float32 info="the end bounds of a chunk; beginning bounds of each is 1.0 / total chunk count, times the chunk's number, starting with 0 and ending with 1" name="scale" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="difficulty" offset="0x11c" size="644">
+    <float32 info="enemy damage multiplier on easy difficulty" name="health_easy_enemy_damage" offset="0x0"/>
+    <float32 info="enemy damage multiplier on normal difficulty" name="health_normal_enemy_damage" offset="0x4"/>
+    <float32 info="enemy damage multiplier on hard difficulty" name="health_hard_enemy_damage" offset="0x8"/>
+    <float32 info="enemy damage multiplier on impossible difficulty" name="health_impossible_enemy_damage" offset="0xc"/>
+    <float32 info="enemy maximum body vitality scale on easy difficulty" name="health_easy_enemy_vitality" offset="0x10"/>
+    <float32 info="enemy maximum body vitality scale on normal difficulty" name="health_normal_enemy_vitality" offset="0x14"/>
+    <float32 info="enemy maximum body vitality scale on hard difficulty" name="health_hard_enemy_vitality" offset="0x18"/>
+    <float32 info="enemy maximum body vitality scale on impossible difficulty" name="health_impossible_enemy_vitality" offset="0x1c"/>
+    <float32 info="enemy maximum shield vitality scale on easy difficulty" name="health_easy_enemy_shield" offset="0x20"/>
+    <float32 info="enemy maximum shield vitality scale on normal difficulty" name="health_normal_enemy_shield" offset="0x24"/>
+    <float32 info="enemy maximum shield vitality scale on hard difficulty" name="health_hard_enemy_shield" offset="0x28"/>
+    <float32 info="enemy maximum shield vitality scale on impossible difficulty" name="health_impossible_enemy_shield" offset="0x2c"/>
+    <float32 info="enemy shield recharge scale on easy difficulty" name="health_easy_enemy_recharge" offset="0x30"/>
+    <float32 info="enemy shield recharge scale on normal difficulty" name="health_normal_enemy_recharge" offset="0x34"/>
+    <float32 info="enemy shield recharge scale on hard difficulty" name="health_hard_enemy_recharge" offset="0x38"/>
+    <float32 info="enemy shield recharge scale on impossible difficulty" name="health_impossible_enemy_recharge" offset="0x3c"/>
+    <float32 info="friend damage multiplier on easy difficulty" name="health_easy_friend_damage" offset="0x40"/>
+    <float32 info="friend damage multiplier on normal difficulty" name="health_normal_friend_damage" offset="0x44"/>
+    <float32 info="friend damage multiplier on hard difficulty" name="health_hard_friend_damage" offset="0x48"/>
+    <float32 info="friend damage multiplier on impossible difficulty" name="health_impossible_friend_damage" offset="0x4c"/>
+    <float32 info="friend maximum body vitality scale on easy difficulty" name="health_easy_friend_vitality" offset="0x50"/>
+    <float32 info="friend maximum body vitality scale on normal difficulty" name="health_normal_friend_vitality" offset="0x54"/>
+    <float32 info="friend maximum body vitality scale on hard difficulty" name="health_hard_friend_vitality" offset="0x58"/>
+    <float32 info="friend maximum body vitality scale on impossible difficulty" name="health_impossible_friend_vitality" offset="0x5c"/>
+    <float32 info="friend maximum shield vitality scale on easy difficulty" name="health_easy_friend_shield" offset="0x60"/>
+    <float32 info="friend maximum shield vitality scale on normal difficulty" name="health_normal_friend_shield" offset="0x64"/>
+    <float32 info="friend maximum shield vitality scale on hard difficulty" name="health_hard_friend_shield" offset="0x68"/>
+    <float32 info="friend maximum shield vitality scale on impossible difficulty" name="health_impossible_friend_shield" offset="0x6c"/>
+    <float32 info="friend shield recharge scale on easy difficulty" name="health_easy_friend_recharge" offset="0x70"/>
+    <float32 info="friend shield recharge scale on normal difficulty" name="health_normal_friend_recharge" offset="0x74"/>
+    <float32 info="friend shield recharge scale on hard difficulty" name="health_hard_friend_recharge" offset="0x78"/>
+    <float32 info="friend shield recharge scale on impossible difficulty" name="health_impossible_friend_recharge" offset="0x7c"/>
+    <float32 info="toughness of infection forms (may be negative) on easy difficulty" name="health_easy_infection_forms" offset="0x80"/>
+    <float32 info="toughness of infection forms (may be negative) on normal difficulty" name="health_normal_infection_forms" offset="0x84"/>
+    <float32 info="toughness of infection forms (may be negative) on hard difficulty" name="health_hard_infection_forms" offset="0x88"/>
+    <float32 info="toughness of infection forms (may be negative) on impossible difficulty" name="health_impossible_infection_forms" offset="0x8c"/>
+    <float32 info="enemy rate of fire scale on easy difficulty" name="ranged_fire_easy_rate_of_fire" offset="0xa0"/>
+    <float32 info="enemy rate of fire scale on normal difficulty" name="ranged_fire_normal_rate_of_fire" offset="0xa4"/>
+    <float32 info="enemy rate of fire scale on hard difficulty" name="ranged_fire_hard_rate_of_fire" offset="0xa8"/>
+    <float32 info="enemy rate of fire scale on impossible difficulty" name="ranged_fire_impossible_rate_of_fire" offset="0xac"/>
+    <float32 info="enemy projectile error scale, as a fraction of their base firing error, on easy difficulty" name="ranged_fire_easy_projectile_error" offset="0xb0"/>
+    <float32 info="enemy projectile error scale, as a fraction of their base firing error, on normal difficulty" name="ranged_fire_normal_projectile_error" offset="0xb4"/>
+    <float32 info="enemy projectile error scale, as a fraction of their base firing error, on hard difficulty" name="ranged_fire_hard_projectile_error" offset="0xb8"/>
+    <float32 info="enemy projectile error scale, as a fraction of their base firing error, on impossible difficulty" name="ranged_fire_impossible_projectile_error" offset="0xbc"/>
+    <float32 info="enemy burst error scale; reduces intra-shot distance; on easy difficulty" name="ranged_fire_easy_burst_error" offset="0xc0"/>
+    <float32 info="enemy burst error scale; reduces intra-shot distance; on normal difficulty" name="ranged_fire_normal_burst_error" offset="0xc4"/>
+    <float32 info="enemy burst error scale; reduces intra-shot distance; on hard difficulty" name="ranged_fire_hard_burst_error" offset="0xc8"/>
+    <float32 info="enemy burst error scale; reduces intra-shot distance; on impossible difficulty" name="ranged_fire_impossible_burst_error" offset="0xcc"/>
+    <float32 info="enemy new-target delay scale factor on easy difficulty" name="ranged_fire_easy_new_target_delay" offset="0xd0"/>
+    <float32 info="enemy new-target delay scale factor on normal difficulty" name="ranged_fire_normal_new_target_delay" offset="0xd4"/>
+    <float32 info="enemy new-target delay scale factor on hard difficulty" name="ranged_fire_hard_new_target_delay" offset="0xd8"/>
+    <float32 name="ranged_fire_impossible_new_target_delay_enemy_new_target_delay_scale_factor_on_impossible_difficulty" offset="0xdc"/>
+    <float32 info="delay time between bursts scale factors for enemies, on easy difficulty" name="ranged_fire_easy_burst_separation" offset="0xe0"/>
+    <float32 info="delay time between bursts scale factors for enemies, on normal difficulty" name="ranged_fire_normal_burst_separation" offset="0xe4"/>
+    <float32 info="delay time between bursts scale factors for enemies, on hard difficulty" name="ranged_fire_hard_burst_separation" offset="0xe8"/>
+    <float32 info="delay time between bursts scale factors for enemies, on impossible difficulty" name="ranged_fire_impossible_burst_separation" offset="0xec"/>
+    <float32 info="additional target tracking fraction for enemies, on easy difficulty" name="ranged_fire_easy_target_tracking" offset="0xf0"/>
+    <float32 info="additional target tracking fraction for enemies, on normal difficulty" name="ranged_fire_normal_target_tracking" offset="0xf4"/>
+    <float32 info="additional target tracking fraction for enemies, on hard difficulty" name="ranged_fire_hard_target_tracking" offset="0xf8"/>
+    <float32 info="additional target tracking fraction for enemies, on impossible difficulty" name="ranged_fire_impossible_target_tracking" offset="0xfc"/>
+    <float32 info="additional target leading fraction for enemies, on easy difficulty" name="ranged_fire_easy_target_leading" offset="0x100"/>
+    <float32 info="additional target leading fraction for enemies, on normal difficulty" name="ranged_fire_normal_target_leading" offset="0x104"/>
+    <float32 info="additional target leading fraction for enemies, on hard difficulty" name="ranged_fire_hard_target_leading" offset="0x108"/>
+    <float32 info="additional target leading fraction for enemies, on impossible difficulty" name="ranged_fire_impossible_target_leading" offset="0x10c"/>
+    <float32 info="overcharge chance scale fraction for enemies, on easy difficulty" name="ranged_fire_easy_overcharge_chance" offset="0x110"/>
+    <float32 info="overcharge chance scale fraction for enemies, on normal difficulty" name="ranged_fire_normal_overcharge_chance" offset="0x114"/>
+    <float32 info="overcharge chance scale fraction for enemies, on hard difficulty" name="ranged_fire_hard_overcharge_chance" offset="0x118"/>
+    <float32 info="overcharge chance scale fraction for enemies, on impossible difficulty" name="ranged_fire_impossible_overcharge_chance" offset="0x11c"/>
+    <float32 info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on easy difficulty" name="ranged_fire_easy_special_fire_delay" offset="0x120"/>
+    <float32 info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on normal difficulty" name="ranged_fire_normal_special_fire_delay" offset="0x124"/>
+    <float32 info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on hard difficulty" name="ranged_fire_hard_special_fire_delay" offset="0x128"/>
+    <float32 info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on impossible difficulty" name="ranged_fire_impossible_special_fire_delay" offset="0x12c"/>
+    <float32 info="guidance velocity scale factor for all projectiles targeted on a player, on easy difficulty" name="ranged_fire_easy_guidance_vs_player" offset="0x130"/>
+    <float32 info="guidance velocity scale factor for all projectiles targeted on a player, on normal difficulty" name="ranged_fire_normal_guidance_vs_player" offset="0x134"/>
+    <float32 info="guidance velocity scale factor for all projectiles targeted on a player, on hard difficulty" name="ranged_fire_hard_guidance_vs_player" offset="0x138"/>
+    <float32 info="guidance velocity scale factor for all projectiles targeted on a player, on impossible difficulty" name="ranged_fire_impossible_guidance_vs_player" offset="0x13c"/>
+    <float32 info="delay period added to all melee attacks, even when berserk, on easy difficulty" name="ranged_fire_easy_melee_delay_base" offset="0x140"/>
+    <float32 info="delay period added to all melee attacks, even when berserk, on normal difficulty" name="ranged_fire_normal_melee_delay_base" offset="0x144"/>
+    <float32 info="delay period added to all melee attacks, even when berserk, on hard difficulty" name="ranged_fire_hard_melee_delay_base" offset="0x148"/>
+    <float32 info="delay period added to all melee attacks, even when berserk, on impossible difficulty" name="ranged_fire_impossible_melee_delay_base" offset="0x14c"/>
+    <float32 info="multiplier for all existing, non-berserk, melee delay times, on easy difficulty" name="ranged_fire_easy_melee_delay_scale" offset="0x150"/>
+    <float32 info="multiplier for all existing, non-berserk, melee delay times, on normal difficulty" name="ranged_fire_normal_melee_delay_scale" offset="0x154"/>
+    <float32 info="multiplier for all existing, non-berserk, melee delay times, on hard difficulty" name="ranged_fire_hard_melee_delay_scale" offset="0x158"/>
+    <float32 info="multiplier for all existing, non-berserk, melee delay times, on impossible difficulty" name="ranged_fire_impossible_melee_delay_scale" offset="0x15c"/>
+    <float32 name="grenades_easy_grenade_chance_scale_scale_factor_affecting_decisions_to_throw_a_grenade_on_easy_difficulty" offset="0x170"/>
+    <float32 name="grenades_normal_grenade_chance_scale_scale_factor_affecting_decisions_to_throw_a_grenade_on_normal_difficulty" offset="0x174"/>
+    <float32 name="grenades_hard_grenade_chance_scale_scale_factor_affecting_decisions_to_throw_a_grenade_on_hard_difficulty" offset="0x178"/>
+    <float32 name="grenades_impossible_grenade_chance_scale_scale_factor_affecting_decisions_to_throw_a_grenade_on_impossible_difficulty" offset="0x17c"/>
+    <float32 name="grenades_easy_grenade_timer_scale_scale_factor_affecting_the_delay_period_between_grenades_thrown_from_the_same_encounter_lower_is_more_often_on_easy_difficulty" offset="0x180"/>
+    <float32 name="grenades_normal_grenade_timer_scale_scale_factor_affecting_the_delay_period_between_grenades_thrown_from_the_same_encounter_lower_is_more_often_on_normal_difficulty" offset="0x184"/>
+    <float32 name="grenades_hard_grenade_timer_scale_scale_factor_affecting_the_delay_period_between_grenades_thrown_from_the_same_encounter_lower_is_more_often_on_hard_difficulty" offset="0x188"/>
+    <float32 name="grenades_impossible_grenade_timer_scale_scale_factor_affecting_the_delay_period_between_grenades_thrown_from_the_same_encounter_lower_is_more_often_on_impossible_difficulty" offset="0x18c"/>
+    <float32 info="fraction of actors upgraded to their major variant on easy difficulty" name="placement_easy_major_upgrade_normal" offset="0x1c0"/>
+    <float32 info="fraction of actors upgraded to their major variant on normal difficulty" name="placement_normal_major_upgrade_normal" offset="0x1c4"/>
+    <float32 info="fraction of actors upgraded to their major variant on hard difficulty" name="placement_hard_major_upgrade_normal" offset="0x1c8"/>
+    <float32 info="fraction of actors upgraded to their major variant on impossible difficulty" name="placement_impossible_major_upgrade_normal" offset="0x1cc"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = normal, on easy difficulty" name="placement_easy_major_upgrade_few" offset="0x1d0"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = normal, on normal difficulty" name="placement_normal_major_upgrade_few" offset="0x1d4"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = normal, on hard difficulty" name="placement_hard_major_upgrade_few" offset="0x1d8"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = normal, on impossible difficulty" name="placement_impossible_major_upgrade_few" offset="0x1dc"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = many, on easy difficulty" name="placement_easy_major_upgrade_many" offset="0x1e0"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = many, on normal difficulty" name="placement_normal_major_upgrade_many" offset="0x1e4"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = many, on hard difficulty" name="placement_hard_major_upgrade_many" offset="0x1e8"/>
+    <float32 info="fraction of actors upgraded to their major variant when mix = many, on impossible difficulty" name="placement_impossible_major_upgrade_many" offset="0x1ec"/>
+  </struct_array>
+  <struct_array name="grenades" offset="0x128" size="68">
+    <int16 name="maximum_count" offset="0x0"/>
+    <int16 name="multiplayer_spawn_default" offset="0x2"/>
+    <reference name="throwing_effect" offset="0x4"/>
+    <reference name="hud_interface" offset="0x14"/>
+    <reference name="equipment" offset="0x24"/>
+    <reference name="projectile" offset="0x34"/>
+  </struct_array>
+  <struct_array name="rasterizer_data" offset="0x134" size="428">
+    <reference name="function_textures_distance_attenuation" offset="0x0"/>
+    <reference name="function_textures_vector_normalization" offset="0x10"/>
+    <reference name="function_textures_atmospheric_fog_density" offset="0x20"/>
+    <reference name="function_textures_planar_fog_density" offset="0x30"/>
+    <reference info="used for shadows" name="function_textures_linear_corner_fade" offset="0x40"/>
+    <reference name="function_textures_active_camouflage_distortion" offset="0x50"/>
+    <reference name="function_textures_glow" offset="0x60"/>
+    <reference name="default_textures_default_2d" offset="0xac"/>
+    <reference name="default_textures_default_3d" offset="0xbc"/>
+    <reference name="default_textures_default_cube_map" offset="0xcc"/>
+    <reference name="experimental_textures_test_0" offset="0xdc"/>
+    <reference name="experimental_textures_test_1" offset="0xec"/>
+    <reference name="experimental_textures_test_2" offset="0xfc"/>
+    <reference name="experimental_textures_test_3" offset="0x10c"/>
+    <reference name="video_effect_textures_video_scanline_map" offset="0x11c"/>
+    <reference name="video_effect_textures_video_noise_map" offset="0x12c"/>
+    <flag bit="7" name="tint_edge_density" offset="0x170"/>
+    <float32 info="pixels" name="active_camouflage_refraction_amount" offset="0x174"/>
+    <float32 name="active_camouflage_distance_falloff" offset="0x178"/>
+    <colorRGB name="active_camouflage_tint_color" offset="0x17c"/>
+    <float32 info="pixels" name="active_camouflage_hyper_stealth_refraction" offset="0x188"/>
+    <float32 name="active_camouflage_hyper_stealth_distance_falloff" offset="0x18c"/>
+    <colorRGB name="active_camouflage_hyper_stealth_tint_color" offset="0x190"/>
+    <reference name="pc_textures_distance_attenuation_2d" offset="0x19c"/>
+  </struct_array>
+  <struct_array name="interface_bitmaps" offset="0x140" size="304">
+    <reference name="font_system" offset="0x0"/>
+    <reference name="font_terminal" offset="0x10"/>
+    <reference name="screen_color_table" offset="0x20"/>
+    <reference name="hud_color_table" offset="0x30"/>
+    <reference name="editor_color_table" offset="0x40"/>
+    <reference name="dialog_color_table" offset="0x50"/>
+    <reference name="hud_globals" offset="0x60"/>
+    <reference name="motion_sensor_sweep_bitmap" offset="0x70"/>
+    <reference name="motion_sensor_sweep_bitmap_mask" offset="0x80"/>
+    <reference name="multiplayer_hud_bitmap" offset="0x90"/>
+    <reference name="localization" offset="0xa0"/>
+    <reference name="hud_digits_definition" offset="0xb0"/>
+    <reference name="motion_sensor_blip_bitmap" offset="0xc0"/>
+    <reference name="interface_goo_map_1" offset="0xd0"/>
+    <reference name="interface_goo_map_2" offset="0xe0"/>
+    <reference name="interface_goo_map_3" offset="0xf0"/>
+  </struct_array>
+  <struct_array info="update _weapon_list enum in game_globals.h" name="weapon_list" offset="0x14c" size="16">
+    <reference name="weapon" offset="0x0"/>
+  </struct_array>
+  <struct_array name="cheat_powerups" offset="0x158" size="16">
+    <reference name="powerup" offset="0x0"/>
+  </struct_array>
+  <struct_array name="multiplayer_information" offset="0x164" size="160">
+    <reference name="flag" offset="0x0"/>
+    <reference name="unit" offset="0x10"/>
+    <struct_array name="vehicles" offset="0x20" size="16">
+      <reference name="vehicle" offset="0x0"/>
+    </struct_array>
+    <reference name="hill_shader" offset="0x2c"/>
+    <reference name="flag_shader" offset="0x3c"/>
+    <reference name="ball" offset="0x4c"/>
+    <struct_array name="sounds" offset="0x5c" size="16">
+      <reference name="sound" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="player_information" offset="0x170" size="244">
+    <reference name="unit" offset="0x0"/>
+    <float32 info="world units per second" name="walking_speed" offset="0x2c"/>
+    <float32 info="1 - infinity" name="double_speed_multiplier" offset="0x30"/>
+    <float32 info="world units per second" name="run_forward" offset="0x34"/>
+    <float32 info="world units per second" name="run_backward" offset="0x38"/>
+    <float32 info="world units per second" name="run_sideways" offset="0x3c"/>
+    <float32 info="world units per second squared" name="run_acceleration" offset="0x40"/>
+    <float32 info="world units per second" name="sneak_forward" offset="0x44"/>
+    <float32 info="world units per second" name="sneak_backward" offset="0x48"/>
+    <float32 info="world units per second" name="sneak_sideways" offset="0x4c"/>
+    <float32 info="world units per second squared" name="sneak_acceleration" offset="0x50"/>
+    <float32 info="world units per second squared" name="airborne_acceleration" offset="0x54"/>
+    <float32 info="multiplayer only" name="speed_multiplier" offset="0x58"/>
+    <float32 name="grenade_origin_x" offset="0x68"/>
+    <float32 name="grenade_origin_y" offset="0x6c"/>
+    <float32 name="grenade_origin_z" offset="0x70"/>
+    <float32 info="0 - 1 only; 1.0 prevents movement while stunned" name="stun_movement_penalty" offset="0x80"/>
+    <float32 info="0 - 1 only; 1.0 prevents turning while stunned" name="stun_turning_penalty" offset="0x84"/>
+    <float32 info="0 - 1 only; 1.0 prevents jumping while stunned" name="stun_jumping_penalty" offset="0x88"/>
+    <float32 info="seconds; all stunning damage will last at least this long" name="minimum_stun_time" offset="0x8c"/>
+    <float32 info="seconds; all stunning damage will last at most this long" name="maximum_stun_time" offset="0x90"/>
+    <float32 info="seconds" name="first_person_idle_time_from" offset="0x9c"/>
+    <float32 info="seconds" name="first_person_idle_time_to" offset="0xa0"/>
+    <float32 info="0 - 1 only" name="first_person_skip_fraction" offset="0xa4"/>
+    <reference name="coop_respawn_effect" offset="0xb8"/>
+  </struct_array>
+  <struct_array name="first_person_interface" offset="0x17c" size="192">
+    <reference name="first_person_hands" offset="0x0"/>
+    <reference name="base_bitmap" offset="0x10"/>
+    <reference name="shield_meter" offset="0x20"/>
+    <int16 name="shield_meter_origin_x" offset="0x30"/>
+    <int16 name="shield_meter_origin_y" offset="0x32"/>
+    <reference name="body_meter" offset="0x34"/>
+    <int16 name="body_meter_origin_x" offset="0x44"/>
+    <int16 name="body_meter_origin_y" offset="0x46"/>
+    <reference name="night_vision_off_to_on_effect" offset="0x48"/>
+    <reference name="night_vision_on_to_off_effect" offset="0x58"/>
+  </struct_array>
+  <struct_array name="falling_damage" offset="0x188" size="152">
+    <float32 info="world units" name="harmful_falling_distance_from" offset="0x8"/>
+    <float32 info="world units" name="harmful_falling_distance_to" offset="0xc"/>
+    <reference name="falling_damage" offset="0x10"/>
+    <float32 info="world units" name="maximum_falling_distance" offset="0x28"/>
+    <reference name="distance_damage" offset="0x2c"/>
+    <reference name="vehicle_environment_collision_damage_effect" offset="0x3c"/>
+    <reference name="vehicle_killed_unit_damage_effect" offset="0x4c"/>
+    <reference name="vehicle_collision_damage" offset="0x5c"/>
+    <reference name="flaming_death_damage" offset="0x6c"/>
+    <float32 info="0 - 1 only; tested by 002. 0 = Death from TOUCHING the ground, 1 = No impact fall damage" name="falling_damage_sensitivity" offset="0x90"/>
+    <float32 info="0 - 1 only; tested by 002. 0 or less = Almost no falling impact damage, 0.21 = Normal, 0.5 = 2/3 shields lost from large falls, 1 = Twice as much damage as 0" name="falling_distance_damage_modifier" offset="0x94"/>
+  </struct_array>
+  <struct_array name="materials" offset="0x194" size="884">
+    <float32 info="fraction of original velocity parallel to the ground after one tick" name="vehicle_terrain_parameters_ground_friction_scale" offset="0x94"/>
+    <float32 info="cosine of angle at which friction falls off" name="vehicle_terrain_parameters_ground_friction_normal_k1_scale" offset="0x98"/>
+    <float32 info="cosine of angle at which friction is zero" name="vehicle_terrain_parameters_ground_friction_normal_k0_scale" offset="0x9c"/>
+    <float32 info="depth in the ground at which a point mass rests" name="vehicle_terrain_parameters_ground_depth_scale" offset="0xa0"/>
+    <float32 info="fraction of original velocity perpendicular to the ground after one tick" name="vehicle_terrain_parameters_ground_damp_fraction_scale" offset="0xa4"/>
+    <float32 name="breakable_surface_parameters_maximum_vitality" offset="0x2d4"/>
+    <reference name="breakable_surface_parameters_effect" offset="0x2e4"/>
+    <reference name="breakable_surface_parameters_sound" offset="0x2f4"/>
+    <struct_array name="particle_effects" offset="0x31c" size="128">
+      <reference name="particle_type" offset="0x0"/>
+      <flag bit="7" name="interpolate_color_in_hsv" offset="0x10"/>
+      <flag bit="6" name="more_colors" offset="0x10"/>
+      <float32 info="world units" name="density" offset="0x14"/>
+      <float32 info="scales initial velocity" name="velocity_scale_from" offset="0x18"/>
+      <float32 info="scales initial velocity" name="velocity_scale_to" offset="0x1c"/>
+      <float32 info="radians per second" name="angular_velocity_from" offset="0x24"/>
+      <float32 info="radians per second" name="angular_velocity_to" offset="0x28"/>
+      <float32 info="world units; particle radius" name="radius_from" offset="0x34"/>
+      <float32 info="world units; particle radius" name="radius_to" offset="0x38"/>
+      <colorARGB name="tint_lower_bound" offset="0x44"/>
+      <colorARGB name="tint_upper_bound" offset="0x54"/>
+    </struct_array>
+    <reference name="melee_hit_sound" offset="0x364"/>
+  </struct_array>
+  <struct_array name="playlist_members" offset="0x1a0" size="148">
+    <asciiz maxlength="32" name="map_name" offset="0x0"/>
+    <asciiz maxlength="32" name="game_variant" offset="0x20"/>
+    <int32 name="minimum_experience" offset="0x40"/>
+    <int32 name="maximum_experience" offset="0x44"/>
+    <int32 name="minimum_player_count" offset="0x48"/>
+    <int32 name="maximum_player_count" offset="0x4c"/>
+    <int32 name="rating" offset="0x50"/>
+  </struct_array>
+</struct>

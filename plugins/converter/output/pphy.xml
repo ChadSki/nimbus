@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<struct name="pphy" size="52">
+  <flag bit="7" name="flamethrower_particle_collision" offset="0x0"/>
+  <flag bit="6" name="collides_with_structures" offset="0x0"/>
+  <flag bit="5" name="collides_with_water_surface" offset="0x0"/>
+  <flag bit="4" name="uses_simple_wind" offset="0x0"/>
+  <flag bit="3" name="uses_dampened_wind" offset="0x0"/>
+  <flag bit="2" name="no_gravity" offset="0x0"/>
+  <float32 info="tested by 002. Higher or lower than 0 means a straighter line for the particles to travel" name="particle_translation_wind_coefficient" offset="0x4"/>
+  <float32 info="tested by 002. Higher or lower than 0 means particles will not spread out as much" name="particle_translation_wind_sine_modifier" offset="0x8"/>
+  <float32 info="world units per second; tested by 002. Modifies the speed and distance at which particles travel in a vertical line; positive = upward motion, negative = downward motion" name="particle_translation_rate_z" offset="0xc"/>
+  <float32 info="grams per milliliter" name="density" offset="0x20"/>
+  <float32 name="air_friction" offset="0x24"/>
+  <float32 name="water_friction" offset="0x28"/>
+  <float32 info="when hitting the ground or interior, percentage of velocity lost in one collision" name="surface_friction" offset="0x2c"/>
+  <float32 info="0.0 is inelastic collisions (no bounce); 1.0 is perfectly elastic (reflected velocity equals incoming velocity)" name="elasticity" offset="0x30"/>
+</struct>

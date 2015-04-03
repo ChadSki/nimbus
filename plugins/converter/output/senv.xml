@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+<struct name="senv" size="820">
+  <flag bit="7" name="simple_parameterization" offset="0x0"/>
+  <flag bit="6" name="ignore_normals" offset="0x0"/>
+  <flag bit="5" name="transparent_lit" offset="0x0"/>
+  <enum16 info="affects the density of tessellation (high means slow)" name="radiosity_properties_detail_level" offset="0x2">
+    <option name="high" value="0"/>
+    <option name="medium" value="1"/>
+    <option name="low" value="2"/>
+    <option name="turd" value="3"/>
+  </enum16>
+  <float32 info="0 - infinity; power of emitted light" name="radiosity_properties_power" offset="0x4"/>
+  <colorRGB name="radiosity_properties_color_of_emitted_light" offset="0x8"/>
+  <colorRGB info="light passing through this surface, if it's transparent, will be tinted this color" name="radiosity_properties_tint_color" offset="0x14"/>
+  <enum16 name="physics_properties_material_type" offset="0x22">
+    <option name="dirt" value="0"/>
+    <option name="sand" value="1"/>
+    <option name="stone" value="2"/>
+    <option name="snow" value="3"/>
+    <option name="wood" value="4"/>
+    <option name="metal_hollow" value="5"/>
+    <option name="metal_thin" value="6"/>
+    <option name="metal_thick" value="7"/>
+    <option name="rubber" value="8"/>
+    <option name="glass" value="9"/>
+    <option name="force_field" value="10"/>
+    <option name="grunt" value="11"/>
+    <option name="hunter_armor" value="12"/>
+    <option name="hunter_skin" value="13"/>
+    <option name="elite" value="14"/>
+    <option name="jackal" value="15"/>
+    <option name="jackal_energy_shield" value="16"/>
+    <option name="engineer_skin" value="17"/>
+    <option name="engineer_force_field" value="18"/>
+    <option name="flood_combat_form" value="19"/>
+    <option name="flood_carrier_form" value="20"/>
+    <option name="cyborg_armor" value="21"/>
+    <option name="cyborg_energy_shield" value="22"/>
+    <option name="human_armor" value="23"/>
+    <option name="human_skin" value="24"/>
+    <option name="sentinel" value="25"/>
+    <option name="monitor" value="26"/>
+    <option name="plastic" value="27"/>
+    <option name="water" value="28"/>
+    <option name="leaves" value="29"/>
+    <option name="elite_energy_shield" value="30"/>
+    <option name="ice" value="31"/>
+    <option name="hunter_shield" value="32"/>
+  </enum16>
+  <flag bit="7" name="alpha_tested" offset="0x28"/>
+  <flag bit="6" name="bump_map_is_specular_mask" offset="0x28"/>
+  <flag bit="5" name="true_atmospheric_fog" offset="0x28"/>
+  <enum16 name="environment_shader_type_type" offset="0x2a">
+    <option name="normal" value="0"/>
+    <option name="blended" value="1"/>
+    <option name="blended_base_specular" value="2"/>
+  </enum16>
+  <float32 info="world units; 0 = place a single lens flare" name="lens_flares_lens_flare_spacing" offset="0x2c"/>
+  <reference name="lens_flares_lens_flare" offset="0x30"/>
+  <flag bit="7" name="rescale_detail_maps" offset="0x6c"/>
+  <flag bit="6" name="rescale_bump_maps" offset="0x6c"/>
+  <reference name="diffuse_properties_base_map" offset="0x88"/>
+  <enum16 info="affects primary and secondary detail maps" name="diffuse_properties_detail_map_function" offset="0xb0">
+    <option name="doublebiased_multiply" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="doublebiased_add" value="2"/>
+  </enum16>
+  <float32 info="0 defaults to 1" name="diffuse_properties_primary_detail_map_scale" offset="0xb4"/>
+  <reference name="diffuse_properties_primary_detail_map" offset="0xb8"/>
+  <float32 info="0 defaults to 1" name="diffuse_properties_secondary_detail_map_scale" offset="0xc8"/>
+  <reference name="diffuse_properties_secondary_detail_map" offset="0xcc"/>
+  <enum16 name="diffuse_properties_micro_detail_map_function" offset="0xf4">
+    <option name="doublebiased_multiply" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="doublebiased_add" value="2"/>
+  </enum16>
+  <float32 info="0 defaults to 1" name="diffuse_properties_micro_detail_map_scale" offset="0xf8"/>
+  <reference name="diffuse_properties_micro_detail_map" offset="0xfc"/>
+  <colorRGB info="modulates incoming diffuse light, including lightmaps, but excluding self-illumination and specular effects" name="diffuse_properties_material_color" offset="0x10c"/>
+  <float32 name="bump_properties_bump_map_scale" offset="0x124"/>
+  <reference name="bump_properties_bump_map" offset="0x128"/>
+  <enum16 name="texture_scrolling_animation_u_animation_function" offset="0x150">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds" name="texture_scrolling_animation_u_animation_period" offset="0x154"/>
+  <float32 info="base map repeats" name="texture_scrolling_animation_u_animation_scale" offset="0x158"/>
+  <enum16 name="texture_scrolling_animation_v_animation_function" offset="0x15c">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds" name="texture_scrolling_animation_v_animation_period" offset="0x160"/>
+  <float32 info="base map repeats; 0 defaults to 1" name="texture_scrolling_animation_v_animation_scale" offset="0x164"/>
+  <flag bit="7" name="unfiltered" offset="0x180"/>
+  <colorRGB name="self_illumination_properties_primary_on_color" offset="0x19c"/>
+  <colorRGB name="self_illumination_properties_primary_off_color" offset="0x1a8"/>
+  <enum16 name="self_illumination_properties_primary_animation_function" offset="0x1b4">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="self_illumination_properties_primary_animation_period" offset="0x1b8"/>
+  <float32 info="seconds" name="self_illumination_properties_primary_animation_phase" offset="0x1bc"/>
+  <colorRGB name="self_illumination_properties_secondary_on_color" offset="0x1d8"/>
+  <colorRGB name="self_illumination_properties_secondary_off_color" offset="0x1e4"/>
+  <enum16 name="self_illumination_properties_secondary_animation_function" offset="0x1f0">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="self_illumination_properties_secondary_animation_period" offset="0x1f4"/>
+  <float32 info="seconds" name="self_illumination_properties_secondary_animation_phase" offset="0x1f8"/>
+  <colorRGB name="self_illumination_properties_plasma_on_color" offset="0x214"/>
+  <colorRGB name="self_illumination_properties_plasma_off_color" offset="0x220"/>
+  <enum16 name="self_illumination_properties_plasma_animation_function" offset="0x22c">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="self_illumination_properties_plasma_animation_period" offset="0x230"/>
+  <float32 info="seconds" name="self_illumination_properties_plasma_animation_phase" offset="0x234"/>
+  <float32 info="0 defaults to 1" name="self_illumination_properties_map_scale" offset="0x250"/>
+  <reference name="self_illumination_properties_map" offset="0x254"/>
+  <flag bit="7" name="overbright" offset="0x27c"/>
+  <flag bit="6" name="extra_shiny" offset="0x27c"/>
+  <flag bit="5" name="lightmap_is_specular" offset="0x27c"/>
+  <float32 info="0 - 1 only; 0 = no specular highlights" name="specular_properties_brightness" offset="0x290"/>
+  <colorRGB info="highlight color when viewed perpendicularly" name="specular_properties_perpendicular_color" offset="0x2a8"/>
+  <colorRGB info="highlight color when viewed at a glancing angle" name="specular_properties_parallel_color" offset="0x2b4"/>
+  <flag bit="7" name="dynamic_mirror" offset="0x2d0"/>
+  <enum16 name="reflection_properties_type" offset="0x2d2">
+    <option name="bumped_cube_map" value="0"/>
+    <option name="flat_cube_map" value="1"/>
+    <option name="bumped_radiosity" value="2"/>
+  </enum16>
+  <float32 info="0 - 1 only; reflection brightness when lightmap brightness is 1" name="reflection_properties_lightmap_brightness_scale" offset="0x2d4"/>
+  <float32 info="0 - 1 only; brightness when viewed perpendicularly" name="reflection_properties_perpendicular_brightness" offset="0x2f4"/>
+  <float32 info="0 - 1 only; brightness when viewed at a glancing angle" name="reflection_properties_parallel_brightness" offset="0x2f8"/>
+  <reference name="reflection_properties_reflection_cube_map" offset="0x324"/>
+</struct>

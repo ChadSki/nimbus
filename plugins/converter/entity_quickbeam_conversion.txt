@@ -1,3 +1,8 @@
+QuickbeamName: WhatItReallyIs
+	EntityName -- how it's built
+
+===============================================================================
+
 bitflag: bool
 	bitmask8 -- 1-8 individual bitflags, bits offset from 8
 	bitmask16 -- 1-16 individual bitflags, bits offset from 16

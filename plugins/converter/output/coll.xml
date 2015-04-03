@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<struct name="coll" size="664">
+  <flag bit="7" name="takes_shield_damage_for_children" offset="0x0"/>
+  <flag bit="6" name="takes_body_damage_for_children" offset="0x0"/>
+  <flag bit="5" name="always_shields_friendly_damage" offset="0x0"/>
+  <flag bit="4" name="passes_area_damage_to_children" offset="0x0"/>
+  <flag bit="3" name="parent_never_takes_body_damage_for_us" offset="0x0"/>
+  <flag bit="2" name="only_damaged_by_explosives" offset="0x0"/>
+  <flag bit="1" name="only_damaged_while_occupied" offset="0x0"/>
+  <index info="the material we use when shielding child objects or getting hit by area of effect damage" name="indirect_damage_material" offset="0x4" struct_array="materials"/>
+  <float32 info="the default initial and maximum body vitality of this object" name="body_maximum_body_vitality" offset="0x8"/>
+  <float32 info="anything that kills us (body depleted) doing more than this amount of damage also destroys us" name="body_body_system_shock" offset="0xc"/>
+  <float32 info="0 - 1 only; 0 = full damage; the fraction of damage caused by friendly units ignored by this object" name="body_friendly_damage_resistance" offset="0x44"/>
+  <reference name="body_localized_damage_effect" offset="0x70"/>
+  <float32 info="0 - 1 only" name="body_area_damage_effect_threshold" offset="0x80"/>
+  <reference name="body_area_damage_effect" offset="0x84"/>
+  <float32 info="when passing this vitality, the 'body damaged effect' is created" name="body_body_damaged_threshold" offset="0x94"/>
+  <reference name="body_body_damaged_effect" offset="0x98"/>
+  <reference name="body_body_depleted_effect" offset="0xa8"/>
+  <float32 info="when passing this vitality (usually negative), the object is deleted" name="body_body_destroyed_threshold" offset="0xb8"/>
+  <reference name="body_body_destroyed_effect" offset="0xbc"/>
+  <float32 info="the default initial and maximum shield vitality of this object" name="shield_maximum_shield_vitality" offset="0xcc"/>
+  <enum16 info="material type used when projectiles impact the shield instead of the body" name="shield_shield_material_type" offset="0xd2">
+    <option name="dirt" value="0"/>
+    <option name="sand" value="1"/>
+    <option name="stone" value="2"/>
+    <option name="snow" value="3"/>
+    <option name="wood" value="4"/>
+    <option name="metal_hollow" value="5"/>
+    <option name="metal_thin" value="6"/>
+    <option name="metal_thick" value="7"/>
+    <option name="rubber" value="8"/>
+    <option name="glass" value="9"/>
+    <option name="force_field" value="10"/>
+    <option name="grunt" value="11"/>
+    <option name="hunter_armor" value="12"/>
+    <option name="hunter_skin" value="13"/>
+    <option name="elite" value="14"/>
+    <option name="jackal" value="15"/>
+    <option name="jackal_energy_shield" value="16"/>
+    <option name="engineer_skin" value="17"/>
+    <option name="engineer_force_field" value="18"/>
+    <option name="flood_combat_form" value="19"/>
+    <option name="flood_carrier_form" value="20"/>
+    <option name="cyborg_armor" value="21"/>
+    <option name="cyborg_energy_shield" value="22"/>
+    <option name="human_armor" value="23"/>
+    <option name="human_skin" value="24"/>
+    <option name="sentinel" value="25"/>
+    <option name="monitor" value="26"/>
+    <option name="plastic" value="27"/>
+    <option name="water" value="28"/>
+    <option name="leaves" value="29"/>
+    <option name="elite_energy_shield" value="30"/>
+    <option name="ice" value="31"/>
+    <option name="hunter_shield" value="32"/>
+  </enum16>
+  <enum16 info="how fast the shield begins to leak" name="shield_shield_failure_function" offset="0xec">
+    <option name="linear" value="0"/>
+    <option name="early" value="1"/>
+    <option name="very_early" value="2"/>
+    <option name="late" value="3"/>
+    <option name="very_late" value="4"/>
+    <option name="cosine" value="5"/>
+  </enum16>
+  <float32 info="0 - 1 only; 0.5 = begin to fail after taking half damage; when the shield begins to leak" name="shield_shield_failure_threshold" offset="0xf0"/>
+  <float32 info="0 - 1 only; the maximum percent of damage a failing shield will leak through to the body" name="shield_failing_shield_leak_fraction" offset="0xf4"/>
+  <float32 info="the minimum damage required to stun this object's shields" name="shield_minimum_stun_damage" offset="0x108"/>
+  <float32 info="seconds; the length of time the shields stay stunned (don't recharge) after taking damage" name="shield_stun_time" offset="0x10c"/>
+  <float32 info="seconds; how long it takes the shields to fully recharge after being completely depleted" name="shield_recharge_time" offset="0x110"/>
+  <float32 info="0 - 1 only; tested by 002. 0 = normal; 1 = instant. Default for Cyborg = 0.0083333; Elite = 0.0033333; all else = 1" name="shield_recharge_rate_modifier" offset="0x1c0"/>
+  <float32 name="shield_shield_damage_threshold" offset="0x184"/>
+  <reference name="shield_shield_damaged_effect" offset="0x188"/>
+  <reference name="shield_shield_depleted_effect" offset="0x198"/>
+  <reference name="shield_shield_recharging_effect" offset="0x1a8"/>
+  <struct_array name="materials" offset="0x234" size="72">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="head" offset="0x20"/>
+    <enum16 name="material_type" offset="0x24">
+      <option name="dirt" value="0"/>
+      <option name="sand" value="1"/>
+      <option name="stone" value="2"/>
+      <option name="snow" value="3"/>
+      <option name="wood" value="4"/>
+      <option name="metal_hollow" value="5"/>
+      <option name="metal_thin" value="6"/>
+      <option name="metal_thick" value="7"/>
+      <option name="rubber" value="8"/>
+      <option name="glass" value="9"/>
+      <option name="force_field" value="10"/>
+      <option name="grunt" value="11"/>
+      <option name="hunter_armor" value="12"/>
+      <option name="hunter_skin" value="13"/>
+      <option name="elite" value="14"/>
+      <option name="jackal" value="15"/>
+      <option name="jackal_energy_shield" value="16"/>
+      <option name="engineer_skin" value="17"/>
+      <option name="engineer_force_field" value="18"/>
+      <option name="flood_combat_form" value="19"/>
+      <option name="flood_carrier_form" value="20"/>
+      <option name="cyborg_armor" value="21"/>
+      <option name="cyborg_energy_shield" value="22"/>
+      <option name="human_armor" value="23"/>
+      <option name="human_skin" value="24"/>
+      <option name="sentinel" value="25"/>
+      <option name="monitor" value="26"/>
+      <option name="plastic" value="27"/>
+      <option name="water" value="28"/>
+      <option name="leaves" value="29"/>
+      <option name="elite_energy_shield" value="30"/>
+      <option name="ice" value="31"/>
+      <option name="hunter_shield" value="32"/>
+    </enum16>
+    <float32 info="0 - 1 only; amount of damage the shield always leaks through to this body material" name="shield_leak_percentage" offset="0x28"/>
+    <float32 name="shield_damage_multiplier" offset="0x2c"/>
+    <float32 info="1.0 = normal; multiplier to body damage against this material" name="body_damage_multiplier" offset="0x3c"/>
+  </struct_array>
+  <struct_array name="regions" offset="0x240" size="84">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="lives_until_object_dies" offset="0x20"/>
+    <flag bit="6" name="forces_object_to_die" offset="0x20"/>
+    <flag bit="5" name="dies_when_object_dies" offset="0x20"/>
+    <flag bit="4" name="dies_when_object_is_damaged" offset="0x20"/>
+    <flag bit="3" name="disappears_when_shield_is_off" offset="0x20"/>
+    <flag bit="2" name="inhibits_melee_attack" offset="0x20"/>
+    <flag bit="1" name="inhibits_weapon_attack" offset="0x20"/>
+    <flag bit="0" name="inhibits_walking" offset="0x20"/>
+    <flag bit="7" name="forces_drop_weapon" offset="0x21"/>
+    <flag bit="6" name="causes_head_maimed_scream" offset="0x21"/>
+    <float32 info="if this region takes this amount of damage, it will be destroyed" name="damage_threshold" offset="0x28"/>
+    <reference name="destroyed_effect" offset="0x38"/>
+    <struct_array name="permutations" offset="0x48" size="32">
+      <asciiz maxlength="32" name="name" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="modifiers" offset="0x24c" size="32"/>
+  <float32 name="pathfinding_box_x_from" offset="0x268"/>
+  <float32 name="pathfinding_box_x_to" offset="0x26c"/>
+  <float32 name="pathfinding_box_y_from" offset="0x270"/>
+  <float32 name="pathfinding_box_y_to" offset="0x274"/>
+  <float32 name="pathfinding_box_z_from" offset="0x278"/>
+  <float32 name="pathfinding_box_z_to" offset="0x27c"/>
+  <struct_array name="pathfinding_spheres" offset="0x280" size="32">
+    <index name="node" offset="0x0" struct_array="nodes"/>
+    <float32 name="center_x" offset="0x10"/>
+    <float32 name="center_y" offset="0x14"/>
+    <float32 name="center_z" offset="0x18"/>
+    <float32 name="radius" offset="0x1c"/>
+  </struct_array>
+  <struct_array name="nodes" offset="0x28c" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <index name="region" offset="0x20" struct_array="regions"/>
+    <index name="parent_node" offset="0x22" struct_array="nodes"/>
+    <index name="next_sibling_node" offset="0x24" struct_array="nodes"/>
+    <index name="first_child_node" offset="0x26" struct_array="nodes"/>
+    <struct_array name="bsps" offset="0x34" size="96">
+      <struct_array name="bsp3d_nodes" offset="0x0" size="12">
+        <int32 name="plane" offset="0x0"/>
+        <int32 name="back_child" offset="0x4"/>
+        <int32 name="front_child" offset="0x8"/>
+      </struct_array>
+      <struct_array name="planes" offset="0xc" size="16">
+        <float32 name="plane_i_1" offset="0x0"/>
+        <float32 name="plane_i_2" offset="0x4"/>
+        <float32 name="plane_k" offset="0x8"/>
+        <float32 name="plane_d" offset="0xc"/>
+      </struct_array>
+      <struct_array name="leaves" offset="0x18" size="8">
+        <flag bit="7" name="contains_double_sided_surfaces" offset="0x0"/>
+        <int16 name="bsp2d_reference_count" offset="0x2"/>
+        <int32 name="first_bsp2d_reference" offset="0x4"/>
+      </struct_array>
+      <struct_array name="bsp2d_references" offset="0x24" size="8">
+        <int32 name="plane" offset="0x0"/>
+        <int32 name="bsp2d_node" offset="0x4"/>
+      </struct_array>
+      <struct_array name="bsp2d_nodes" offset="0x30" size="20">
+        <float32 name="plane_i_1" offset="0x0"/>
+        <float32 name="plane_i_2" offset="0x4"/>
+        <float32 name="plane_d" offset="0x8"/>
+        <int32 name="left_child" offset="0xc"/>
+        <int32 name="right_child" offset="0x10"/>
+      </struct_array>
+      <struct_array name="surfaces" offset="0x3c" size="12">
+        <int32 name="plane" offset="0x0"/>
+        <int32 name="first_edge" offset="0x4"/>
+        <flag bit="7" name="two_sided" offset="0x8"/>
+        <flag bit="6" name="invisible" offset="0x8"/>
+        <flag bit="5" name="climbable" offset="0x8"/>
+        <flag bit="4" name="breakable" offset="0x8"/>
+        <int8 name="breakable_surface" offset="0x9"/>
+        <int16 name="material" offset="0xa"/>
+      </struct_array>
+      <struct_array name="edges" offset="0x48" size="24">
+        <int32 name="start_vertex" offset="0x0"/>
+        <int32 name="end_vertex" offset="0x4"/>
+        <int32 name="forward_edge" offset="0x8"/>
+        <int32 name="reverse_edge" offset="0xc"/>
+        <int32 name="left_surface" offset="0x10"/>
+        <int32 name="right_surface" offset="0x14"/>
+      </struct_array>
+      <struct_array name="vertices" offset="0x54" size="16">
+        <float32 name="point_x" offset="0x0"/>
+        <float32 name="point_y" offset="0x4"/>
+        <float32 name="point_z" offset="0x8"/>
+        <int32 name="first_edge" offset="0xc"/>
+      </struct_array>
+    </struct_array>
+  </struct_array>
+</struct>

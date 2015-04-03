@@ -1,0 +1,342 @@
+<?xml version="1.0" ?>
+<struct name="sbsp" size="636">
+  <int32 name="test_sbsp_size_checksum" offset="0x0"/>
+  <ascii length="4" name="test_signature" offset="0x14" reverse="True"/>
+  <reference name="lightmaps" offset="0x18"/>
+  <float32 info="world units; height below which vehicles get pushed up by an unstoppable force" name="vehicle_floor" offset="0x28"/>
+  <float32 info="world units; height above which vehicles get pushed down by an unstoppable force" name="vehicle_ceiling" offset="0x2c"/>
+  <colorRGB name="default_ambient_color" offset="0x44"/>
+  <colorRGB name="default_distant_light_0_color" offset="0x54"/>
+  <float32 name="default_distant_light_0_direction_i_1" offset="0x60"/>
+  <float32 name="default_distant_light_0_direction_i_2" offset="0x64"/>
+  <float32 name="default_distant_light_0_direction_k" offset="0x68"/>
+  <colorRGB name="default_distant_light_1_color" offset="0x6c"/>
+  <float32 name="default_distant_light_1_direction_i_1" offset="0x78"/>
+  <float32 name="default_distant_light_1_direction_i_2" offset="0x7c"/>
+  <float32 name="default_distant_light_1_direction_k" offset="0x80"/>
+  <colorARGB name="default_reflection_tint" offset="0x90"/>
+  <float32 name="default_shadow_vector_i_1" offset="0xa0"/>
+  <float32 name="default_shadow_vector_i_2" offset="0xa4"/>
+  <float32 name="default_shadow_vector_k" offset="0xa8"/>
+  <colorRGB name="default_shadow_color" offset="0xac"/>
+  <struct_array name="collision_materials" offset="0xbc" size="20">
+    <reference name="shader" offset="0x0"/>
+    <enum16 info="if this doesn't work, use the material type in the Shader instead" name="material_type" offset="0x12">
+      <option name="dirt" value="0"/>
+      <option name="sand" value="1"/>
+      <option name="stone" value="2"/>
+      <option name="snow" value="3"/>
+      <option name="wood" value="4"/>
+      <option name="metal_hollow" value="5"/>
+      <option name="metal_thin" value="6"/>
+      <option name="metal_thick" value="7"/>
+      <option name="rubber" value="8"/>
+      <option name="glass" value="9"/>
+      <option name="force_field" value="10"/>
+      <option name="grunt" value="11"/>
+      <option name="hunter_armor" value="12"/>
+      <option name="hunter_skin" value="13"/>
+      <option name="elite" value="14"/>
+      <option name="jackal" value="15"/>
+      <option name="jackal_energy_shield" value="16"/>
+      <option name="engineer_skin" value="17"/>
+      <option name="engineer_force_field" value="18"/>
+      <option name="flood_combat_form" value="19"/>
+      <option name="flood_carrier_form" value="20"/>
+      <option name="cyborg_armor" value="21"/>
+      <option name="cyborg_energy_shield" value="22"/>
+      <option name="human_armor" value="23"/>
+      <option name="human_skin" value="24"/>
+      <option name="sentinel" value="25"/>
+      <option name="monitor" value="26"/>
+      <option name="plastic" value="27"/>
+      <option name="water" value="28"/>
+      <option name="leaves" value="29"/>
+      <option name="elite_energy_shield" value="30"/>
+      <option name="ice" value="31"/>
+      <option name="hunter_shield" value="32"/>
+    </enum16>
+  </struct_array>
+  <struct_array info="maximum of 1" name="collision_bsp" offset="0xc8" size="96">
+    <struct_array name="bsp3d_nodes" offset="0x0" size="12">
+      <int16 name="plane" offset="0x0"/>
+      <int16 name="back_child" offset="0x4"/>
+      <int16 name="front_child" offset="0x8"/>
+    </struct_array>
+    <int32 info="0 = sbsp is nulled; step 2 of 3 in nulling the sbsp" name="planes_reflexive_count" offset="0xc"/>
+    <struct_array name="planes" offset="0xc" size="16">
+      <float32 name="plane_i_1" offset="0x0"/>
+      <float32 name="plane_i_2" offset="0x4"/>
+      <float32 name="plane_k" offset="0x8"/>
+      <float32 name="plane_d" offset="0xc"/>
+    </struct_array>
+    <struct_array name="leaves" offset="0x18" size="8">
+      <flag bit="7" name="contains_double_sided_surfaces" offset="0x0"/>
+      <int8 name="bsp2d_reference_count" offset="0x2"/>
+      <int32 name="first_bsp2d_reference" offset="0x4"/>
+    </struct_array>
+    <int32 info="4294967295 or -1 = sbsp is nulled; step 3 of 3 in nulling the sbsp" name="bsp2d_references_reflexive_count" offset="0x24"/>
+    <struct_array name="bsp2d_references" offset="0x24" size="8">
+      <int32 name="plane" offset="0x0"/>
+      <int32 name="bsp2d_node" offset="0x4"/>
+    </struct_array>
+    <struct_array name="bsp2d_nodes" offset="0x30" size="20">
+      <float32 name="plane_i_1" offset="0x0"/>
+      <float32 name="plane_i_2" offset="0x4"/>
+      <float32 name="plane_d" offset="0x8"/>
+      <int32 name="left_child" offset="0xc"/>
+      <int32 name="right_child" offset="0x10"/>
+    </struct_array>
+    <struct_array name="surfaces" offset="0x3c" size="12">
+      <int32 name="plane" offset="0x0"/>
+      <int32 name="first_edge" offset="0x4"/>
+      <flag bit="7" name="two_sided" offset="0x8"/>
+      <flag bit="6" name="invisible" offset="0x8"/>
+      <flag bit="5" name="climbable" offset="0x8"/>
+      <flag bit="4" name="breakable" offset="0x8"/>
+      <int8 name="breakable_surface" offset="0x9"/>
+      <int16 name="material" offset="0xa"/>
+    </struct_array>
+    <struct_array name="edges" offset="0x48" size="24">
+      <int32 name="start_vertex" offset="0x0"/>
+      <int32 name="end_vertex" offset="0x4"/>
+      <int32 name="forward_edge" offset="0x8"/>
+      <int32 name="reverse_edge" offset="0xc"/>
+      <int32 name="left_surface" offset="0x10"/>
+      <int32 name="right_surface" offset="0x14"/>
+    </struct_array>
+    <struct_array name="vertices" offset="0x54" size="16">
+      <float32 name="point_x" offset="0x0"/>
+      <float32 name="point_y" offset="0x4"/>
+      <float32 name="point_z" offset="0x8"/>
+      <int32 name="first_edge" offset="0xc"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="nodes" offset="0xd4" size="6">
+    <int16 name="compressed_vertices_node0_index_x3" offset="0x0"/>
+    <int16 name="compressed_vertices_node1_index_x3" offset="0x2"/>
+    <int16 name="compressed_vertices_node0_weight_16_bit" offset="0x4"/>
+  </struct_array>
+  <float32 name="world_bounds_x_from" offset="0xe0"/>
+  <float32 name="world_bounds_x_to" offset="0xe4"/>
+  <float32 name="world_bounds_y_from" offset="0xe8"/>
+  <float32 name="world_bounds_y_to" offset="0xec"/>
+  <float32 name="world_bounds_z_from" offset="0xf0"/>
+  <float32 name="world_bounds_z_to" offset="0xf4"/>
+  <struct_array name="leaves" offset="0xf8" size="16">
+    <int16 name="vertex_0" offset="0x0"/>
+    <int16 name="vertex_1" offset="0x2"/>
+    <int16 name="vertex_2" offset="0x4"/>
+    <int16 name="cluster" offset="0x8"/>
+    <int16 name="surface_reference_count" offset="0xa"/>
+    <index name="surface_references" offset="0xc" struct_array="leaf_surfaces"/>
+  </struct_array>
+  <struct_array name="leaf_surfaces" offset="0x104" size="8">
+    <index name="surface" offset="0x0" struct_array="surfaces"/>
+    <index name="node" offset="0x4" struct_array="nodes"/>
+  </struct_array>
+  <int32 info="0 = sbsp is nulled; step 1 of 3 in nulling the sbsp" name="surfaces_reflexive_count" offset="0x110"/>
+  <struct_array name="surfaces" offset="0x110" size="6">
+    <int16 name="a_1" offset="0x0"/>
+    <int16 name="a_2" offset="0x2"/>
+    <int16 name="a_3" offset="0x4"/>
+  </struct_array>
+  <struct_array name="lightmaps" offset="0x11c" size="32">
+    <int16 name="bitmap" offset="0x0"/>
+    <struct_array name="materials" offset="0x14" size="256">
+      <reference name="shader" offset="0x0"/>
+      <int16 name="shader_permutation" offset="0x10"/>
+      <flag bit="7" name="coplanar" offset="0x12"/>
+      <flag bit="6" name="fog_plane" offset="0x12"/>
+      <index name="surfaces" offset="0x14" struct_array="surfaces"/>
+      <int32 name="surface_count" offset="0x18"/>
+      <float32 name="centroid_x" offset="0x1c"/>
+      <float32 name="centroid_y" offset="0x20"/>
+      <float32 name="centroid_z" offset="0x24"/>
+      <colorRGB name="ambient_color" offset="0x28"/>
+      <int16 name="distant_light_count" offset="0x34"/>
+      <colorRGB name="distant_light_0_color" offset="0x38"/>
+      <float32 name="distant_light_0_direction_i_1" offset="0x44"/>
+      <float32 name="distant_light_0_direction_i_2" offset="0x48"/>
+      <float32 name="distant_light_0_direction_k" offset="0x4c"/>
+      <colorRGB name="distant_light_1_color" offset="0x50"/>
+      <float32 name="distant_light_1_direction_i_1" offset="0x5c"/>
+      <float32 name="distant_light_1_direction_i_2" offset="0x60"/>
+      <float32 name="distant_light_1_direction_k" offset="0x64"/>
+      <colorRGB name="unknown" offset="0x68"/>
+      <colorARGB name="reflection_tint" offset="0x74"/>
+      <float32 name="shadow_vector_i_1" offset="0x84"/>
+      <float32 name="shadow_vector_i_2" offset="0x88"/>
+      <float32 name="shadow_vector_k" offset="0x8c"/>
+      <colorRGB name="shadow_color" offset="0x90"/>
+      <float32 name="plane_i_1" offset="0x9c"/>
+      <float32 name="plane_i_2" offset="0xa0"/>
+      <float32 name="plane_k" offset="0xa4"/>
+      <float32 name="plane_d" offset="0xa8"/>
+      <int16 name="breakable_surface" offset="0xac"/>
+      <int32 name="count_1" offset="0xb4"/>
+      <int32 name="offset_1" offset="0xb8"/>
+      <int32 name="count_2" offset="0xc8"/>
+      <int32 name="offset_2" offset="0xcc"/>
+      <int32 info="bytes" name="uncompressed_vertices" offset="0xd8"/>
+      <int32 info="bytes; sorry, this is wrong, it's an index offset instead!" name="compressed_vertices" offset="0xe4"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="lens_flares" offset="0x134" size="16">
+    <reference name="lens_flare" offset="0x0"/>
+  </struct_array>
+  <struct_array name="lens_flare_markers" offset="0x140" size="16">
+    <float32 name="position_x" offset="0x0"/>
+    <float32 name="position_y" offset="0x4"/>
+    <float32 name="position_z" offset="0x8"/>
+    <int8 name="direction_i_component" offset="0xc"/>
+    <int8 name="direction_j_component" offset="0xd"/>
+    <int8 name="direction_k_component" offset="0xe"/>
+    <int8 name="lens_flare_index" offset="0xf"/>
+  </struct_array>
+  <struct_array name="clusters" offset="0x14c" size="104">
+    <int16 name="sky" offset="0x0"/>
+    <int16 name="fog" offset="0x2"/>
+    <index name="background_sound" offset="0x4" struct_array="background_sound_palette"/>
+    <index name="sound_environment" offset="0x6" struct_array="sound_environment_palette"/>
+    <index name="weather" offset="0x8" struct_array="weather_palette"/>
+    <int16 name="transition_structure_bsp" offset="0xa"/>
+    <struct_array info="not built into map file" name="predicted_resources" offset="0xc" size="6">
+      <enum16 name="type" offset="0x0">
+        <option name="bitmap" value="0"/>
+        <option name="sound" value="1"/>
+      </enum16>
+      <int16 name="resource_index" offset="0x2"/>
+      <int16 name="tag_index" offset="0x4"/>
+    </struct_array>
+    <struct_array name="lightmaps_shaders_palette" offset="0x28" size="8">
+      <int16 name="bitmap_sequence_index" offset="0x2"/>
+      <reference loneID="True" name="bitmap" offset="0x4"/>
+    </struct_array>
+    <struct_array name="subclusters" offset="0x34" size="36">
+      <float32 name="world_bounds_x_from" offset="0x0"/>
+      <float32 name="world_bounds_x_to" offset="0x4"/>
+      <float32 name="world_bounds_y_from" offset="0x8"/>
+      <float32 name="world_bounds_y_to" offset="0xc"/>
+      <float32 name="world_bounds_z_from" offset="0x10"/>
+      <float32 name="world_bounds_z_to" offset="0x14"/>
+      <struct_array name="surface_indices" offset="0x18" size="4">
+        <int16 name="index" offset="0x0"/>
+      </struct_array>
+    </struct_array>
+    <int16 name="first_lens_flare_marker_index" offset="0x40"/>
+    <int16 name="lens_flare_marker_count" offset="0x42"/>
+    <struct_array name="surface_indices" offset="0x44" size="4">
+      <int32 name="index" offset="0x0"/>
+    </struct_array>
+    <struct_array name="mirrors" offset="0x50" size="64">
+      <float32 name="plane_i_1" offset="0x0"/>
+      <float32 name="plane_i_2" offset="0x4"/>
+      <float32 name="plane_k" offset="0x8"/>
+      <float32 name="plane_d" offset="0xc"/>
+      <reference name="shader" offset="0x24"/>
+      <struct_array name="vertices" offset="0x34" size="12">
+        <float32 name="point_x" offset="0x0"/>
+        <float32 name="point_y" offset="0x4"/>
+        <float32 name="point_z" offset="0x8"/>
+      </struct_array>
+    </struct_array>
+    <struct_array name="portals" offset="0x5c" size="2">
+      <int16 name="portal" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+  <int32 info="bytes; the cluster data immediately follows the Clusters reflexive chunks" name="cluster_data" offset="0x158"/>
+  <struct_array name="cluster_portals" offset="0x16c" size="64">
+    <int16 name="front_cluster" offset="0x0"/>
+    <int16 name="back_cluster" offset="0x2"/>
+    <int32 name="plane_index" offset="0x4"/>
+    <float32 name="centroid_x" offset="0x8"/>
+    <float32 name="centroid_y" offset="0xc"/>
+    <float32 name="centroid_z" offset="0x10"/>
+    <float32 name="bounding_radius" offset="0x14"/>
+    <flag bit="7" name="ai_cant_hear_through_this" offset="0x18"/>
+    <struct_array name="vertices" offset="0x34" size="12">
+      <float32 name="point_x" offset="0x0"/>
+      <float32 name="point_y" offset="0x4"/>
+      <float32 name="point_z" offset="0x8"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="breakable_surfaces" offset="0x184" size="48">
+    <float32 name="centroid_x" offset="0x0"/>
+    <float32 name="centroid_y" offset="0x4"/>
+    <float32 name="centroid_z" offset="0x8"/>
+    <float32 name="radius" offset="0xc"/>
+    <int32 name="collision_surface_index" offset="0x10"/>
+  </struct_array>
+  <struct_array name="fog_planes" offset="0x190" size="32">
+    <index name="front_region" offset="0x0" struct_array="fog_regions"/>
+    <float32 name="plane_i_1" offset="0x4"/>
+    <float32 name="plane_i_2" offset="0x8"/>
+    <float32 name="plane_k" offset="0xc"/>
+    <float32 name="plane_d" offset="0x10"/>
+    <struct_array name="vertices" offset="0x14" size="12">
+      <float32 name="point_x" offset="0x0"/>
+      <float32 name="point_y" offset="0x4"/>
+      <float32 name="point_z" offset="0x8"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="fog_regions" offset="0x19c" size="40">
+    <index name="fog_palette" offset="0x24" struct_array="fog_palette"/>
+    <index name="weather_palette" offset="0x26" struct_array="weather_palette"/>
+  </struct_array>
+  <struct_array name="fog_palette" offset="0x1a8" size="136">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <reference name="fog" offset="0x20"/>
+    <asciiz maxlength="32" name="fog_scale_function" offset="0x34"/>
+  </struct_array>
+  <struct_array name="weather_palette" offset="0x1cc" size="240">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <reference name="particle_system" offset="0x20"/>
+    <asciiz maxlength="32" name="particle_system_function" offset="0x34"/>
+    <reference name="wind" offset="0x80"/>
+    <float32 name="wind_direction_i_1" offset="0x90"/>
+    <float32 name="wind_direction_i_2" offset="0x94"/>
+    <float32 name="wind_direction_k" offset="0x98"/>
+    <float32 name="wind_magnitude" offset="0x9c"/>
+    <asciiz maxlength="32" name="wind_scale_function" offset="0xa4"/>
+  </struct_array>
+  <struct_array name="weather_polyhedra" offset="0x1d8" size="32">
+    <float32 name="bounding_sphere_center_x" offset="0x0"/>
+    <float32 name="bounding_sphere_center_y" offset="0x4"/>
+    <float32 name="bounding_sphere_center_z" offset="0x8"/>
+    <float32 name="bounding_sphere_radius" offset="0xc"/>
+    <struct_array name="planes" offset="0x14" size="16">
+      <float32 name="plane_i_1" offset="0x0"/>
+      <float32 name="plane_i_2" offset="0x4"/>
+      <float32 name="plane_k" offset="0x8"/>
+      <float32 name="plane_d" offset="0xc"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="pathfinding_surfaces" offset="0x1fc" size="1">
+    <int8 name="data" offset="0x0"/>
+  </struct_array>
+  <struct_array name="pathfinding_edges" offset="0x208" size="1">
+    <int8 name="midpoint" offset="0x0"/>
+  </struct_array>
+  <struct_array name="background_sound_palette" offset="0x214" size="116">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <reference name="background_sound" offset="0x20"/>
+    <asciiz maxlength="32" name="scale_function" offset="0x34"/>
+  </struct_array>
+  <struct_array name="sound_environment_palette" offset="0x220" size="80">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <reference name="sound_environment" offset="0x20"/>
+  </struct_array>
+  <int32 info="bytes; this data follows the Sound Environment Palette reflexives" name="sound_pas_data" offset="0x22c"/>
+  <struct_array name="markers" offset="0x258" size="60">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <float32 name="rotation_i_1" offset="0x20"/>
+    <float32 name="rotation_i_2" offset="0x24"/>
+    <float32 name="rotation_k" offset="0x28"/>
+    <float32 name="rotation_w" offset="0x2c"/>
+    <float32 name="position_x" offset="0x30"/>
+    <float32 name="position_y" offset="0x34"/>
+    <float32 name="position_z" offset="0x38"/>
+  </struct_array>
+  <struct_array info="decals referenced in the scnr tag" name="runtime_decals" offset="0x270" size="32"/>
+</struct>

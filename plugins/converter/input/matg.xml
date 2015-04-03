@@ -1,0 +1,367 @@
+<plugin class="matg" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Sounds" offset="0xF8" size="16">
+	<dependency name="Sound" offset="0x00"/>
+</struct>
+
+<struct name="Camera" offset="0x104" size="16">
+	<dependency name="Default Unit Camera Track" offset="0x00"/>
+</struct>
+
+<struct name="Player Control" offset="0x110" size="128">
+	<float name="Magnetism Friction" info="how much the crosshair slows over enemies" offset="0x00"/>
+	<float name="Magnetism Adhesion" info="how much the crosshair sticks over enemies" offset="0x04"/>
+	<float name="Inconsequential Target Scale" info="scales magnetism level for inconsequential targets like infection forms" offset="0x08"/>
+	<float name="Look Acceleration Time" note="seconds" info="time for a pegged look to reach maximum effect" offset="0x40"/>
+	<float name="Look Acceleration Scale" info="maximum effect of a pegged look (scales last value in the look function below)" offset="0x44"/>
+	<float name="Look Peg Threshold" note="0 - 1 only" info="magnitude of yaw for pegged acceleration to kick in" offset="0x48"/>
+	<float name="Look Default Pitch Rate" note="degrees" offset="0x4C"/>
+	<float name="Look Default Yaw Rate" note="degrees" offset="0x50"/>
+	<float name="Look Auto-Leveling Scale" info="1 is fast, 0 is none, over 1 is probably really fast" offset="0x54"/>
+
+	<short name="Minimum Weapon Swap Ticks" info="amount of time player needs to hold ACTION to pick up a weapon" offset="0x6C"/>
+	<short name="Minimum Auto-Leveling Ticks" info="amount of time player needs to move without looking up/down before autoleveling kicks in" offset="0x6E"/>
+
+	<float name="Minimum Angle for Vehicle Flipping" note="radians" info="0 means vehicle's up vector is along the ground, 90 means it's straight up" offset="0x70"/>
+	
+	<struct name="Look Function" offset="0x74" size="4">
+		<float name="Scale" info="the end bounds of a chunk; beginning bounds of each is 1.0 ÷ total chunk count, times the chunk's number, starting with 0 and ending with 1" offset="0x00"/>
+	</struct>
+</struct>
+	
+<struct name="Difficulty" offset="0x11C" size="644">
+	<float name="Health.Easy Enemy Damage" info="enemy damage multiplier on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x00"/>
+	<float name="Health.Normal Enemy Damage" info="enemy damage multiplier on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x04"/>
+	<float name="Health.Hard Enemy Damage" info="enemy damage multiplier on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x08"/>
+	<float name="Health.Impossible Enemy Damage" info="enemy damage multiplier on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x0C"/>
+	
+	<float name="Health.Easy Enemy Vitality" info="enemy maximum body vitality scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x10"/>
+	<float name="Health.Normal Enemy Vitality" info="enemy maximum body vitality scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x14"/>
+	<float name="Health.Hard Enemy Vitality" info="enemy maximum body vitality scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x18"/>
+	<float name="Health.Impossible Enemy Vitality" info="enemy maximum body vitality scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x1C"/>
+	
+	<float name="Health.Easy Enemy Shield" info="enemy maximum shield vitality scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x20"/>
+	<float name="Health.Normal Enemy Shield" info="enemy maximum shield vitality scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x24"/>
+	<float name="Health.Hard Enemy Shield" info="enemy maximum shield vitality scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x28"/>
+	<float name="Health.Impossible Enemy Shield" info="enemy maximum shield vitality scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x2C"/>
+	
+	<float name="Health.Easy Enemy Recharge" info="enemy shield recharge scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x30"/>
+	<float name="Health.Normal Enemy Recharge" info="enemy shield recharge scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x34"/>
+	<float name="Health.Hard Enemy Recharge" info="enemy shield recharge scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x38"/>
+	<float name="Health.Impossible Enemy Recharge" info="enemy shield recharge scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x3C"/>
+	
+	<float name="Health.Easy Friend Damage" info="friend damage multiplier on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x40"/>
+	<float name="Health.Normal Friend Damage" info="friend damage multiplier on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x44"/>
+	<float name="Health.Hard Friend Damage" info="friend damage multiplier on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x48"/>
+	<float name="Health.Impossible Friend Damage" info="friend damage multiplier on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x4C"/>
+	
+	<float name="Health.Easy Friend Vitality" info="friend maximum body vitality scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x50"/>
+	<float name="Health.Normal Friend Vitality" info="friend maximum body vitality scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x54"/>
+	<float name="Health.Hard Friend Vitality" info="friend maximum body vitality scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x58"/>
+	<float name="Health.Impossible Friend Vitality" info="friend maximum body vitality scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x5C"/>
+	
+	<float name="Health.Easy Friend Shield" info="friend maximum shield vitality scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x60"/>
+	<float name="Health.Normal Friend Shield" info="friend maximum shield vitality scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x64"/>
+	<float name="Health.Hard Friend Shield" info="friend maximum shield vitality scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x68"/>
+	<float name="Health.Impossible Friend Shield" info="friend maximum shield vitality scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x6C"/>
+	
+	<float name="Health.Easy Friend Recharge" info="friend shield recharge scale on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x70"/>
+	<float name="Health.Normal Friend Recharge" info="friend shield recharge scale on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x74"/>
+	<float name="Health.Hard Friend Recharge" info="friend shield recharge scale on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x78"/>
+	<float name="Health.Impossible Friend Recharge" info="friend shield recharge scale on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x7C"/>
+	
+	<float name="Health.Easy Infection Forms" info="toughness of infection forms (may be negative) on easy difficulty" info_img="matg Difficulty.Health.png" offset="0x80"/>
+	<float name="Health.Normal Infection Forms" info="toughness of infection forms (may be negative) on normal difficulty" info_img="matg Difficulty.Health.png" offset="0x84"/>
+	<float name="Health.Hard Infection Forms" info="toughness of infection forms (may be negative) on hard difficulty" info_img="matg Difficulty.Health.png" offset="0x88"/>
+	<float name="Health.Impossible Infection Forms" info="toughness of infection forms (may be negative) on impossible difficulty" info_img="matg Difficulty.Health.png" offset="0x8C"/>
+	
+	<float name="Ranged Fire.Easy Rate of Fire" info="enemy rate of fire scale on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xA0"/>
+	<float name="Ranged Fire.Normal Rate of Fire" info="enemy rate of fire scale on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xA4"/>
+	<float name="Ranged Fire.Hard Rate of Fire" info="enemy rate of fire scale on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xA8"/>
+	<float name="Ranged Fire.Impossible Rate of Fire" info="enemy rate of fire scale on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xAC"/>
+	
+	<float name="Ranged Fire.Easy Projectile Error" info="enemy projectile error scale, as a fraction of their base firing error, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xB0"/>
+	<float name="Ranged Fire.Normal Projectile Error" info="enemy projectile error scale, as a fraction of their base firing error, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xB4"/>
+	<float name="Ranged Fire.Hard Projectile Error" info="enemy projectile error scale, as a fraction of their base firing error, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xB8"/>
+	<float name="Ranged Fire.Impossible Projectile Error" info="enemy projectile error scale, as a fraction of their base firing error, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xBC"/>
+	
+	<float name="Ranged Fire.Easy Burst Error" info="enemy burst error scale; reduces intra-shot distance; on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xC0"/>
+	<float name="Ranged Fire.Normal Burst Error" info="enemy burst error scale; reduces intra-shot distance; on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xC4"/>
+	<float name="Ranged Fire.Hard Burst Error" info="enemy burst error scale; reduces intra-shot distance; on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xC8"/>
+	<float name="Ranged Fire.Impossible Burst Error" info="enemy burst error scale; reduces intra-shot distance; on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xCC"/>
+	
+	<float name="Ranged Fire.Easy New Target Delay" info="enemy new-target delay scale factor on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xD0"/>
+	<float name="Ranged Fire.Normal New Target Delay" info="enemy new-target delay scale factor on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xD4"/>
+	<float name="Ranged Fire.Hard New Target Delay" info="enemy new-target delay scale factor on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xD8"/>
+	<float name="Ranged Fire.Impossible New Target Delay (enemy new-target delay scale factor on impossible difficulty)" info_img="matg Difficulty.Ranged Fire.png" offset="0xDC"/>
+	
+	<float name="Ranged Fire.Easy Burst Separation" info="delay time between bursts scale factors for enemies, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xE0"/>
+	<float name="Ranged Fire.Normal Burst Separation" info="delay time between bursts scale factors for enemies, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xE4"/>
+	<float name="Ranged Fire.Hard Burst Separation" info="delay time between bursts scale factors for enemies, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xE8"/>
+	<float name="Ranged Fire.Impossible Burst Separation" info="delay time between bursts scale factors for enemies, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xEC"/>
+	
+	<float name="Ranged Fire.Easy Target Tracking" info="additional target tracking fraction for enemies, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xF0"/>
+	<float name="Ranged Fire.Normal Target Tracking" info="additional target tracking fraction for enemies, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xF4"/>
+	<float name="Ranged Fire.Hard Target Tracking" info="additional target tracking fraction for enemies, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xF8"/>
+	<float name="Ranged Fire.Impossible Target Tracking" info="additional target tracking fraction for enemies, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0xFC"/>
+	
+	<float name="Ranged Fire.Easy Target Leading" info="additional target leading fraction for enemies, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x100"/>
+	<float name="Ranged Fire.Normal Target Leading" info="additional target leading fraction for enemies, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x104"/>
+	<float name="Ranged Fire.Hard Target Leading" info="additional target leading fraction for enemies, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x108"/>
+	<float name="Ranged Fire.Impossible Target Leading" info="additional target leading fraction for enemies, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x10C"/>
+	
+	<float name="Ranged Fire.Easy Overcharge Chance" info="overcharge chance scale fraction for enemies, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x110"/>
+	<float name="Ranged Fire.Normal Overcharge Chance" info="overcharge chance scale fraction for enemies, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x114"/>
+	<float name="Ranged Fire.Hard Overcharge Chance" info="overcharge chance scale fraction for enemies, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x118"/>
+	<float name="Ranged Fire.Impossible Overcharge Chance" info="overcharge chance scale fraction for enemies, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x11C"/>
+	
+	<float name="Ranged Fire.Easy Special Fire Delay" info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x120"/>
+	<float name="Ranged Fire.Normal Special Fire Delay" info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x124"/>
+	<float name="Ranged Fire.Hard Special Fire Delay" info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x128"/>
+	<float name="Ranged Fire.Impossible Special Fire Delay" info="delay between special-fire shots, like overcharge and banshee bombs, scale factor for enemies on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x12C"/>
+	
+	<float name="Ranged Fire.Easy Guidance vs. Player" info="guidance velocity scale factor for all projectiles targeted on a player, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x130"/>
+	<float name="Ranged Fire.Normal Guidance vs. Player" info="guidance velocity scale factor for all projectiles targeted on a player, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x134"/>
+	<float name="Ranged Fire.Hard Guidance vs. Player" info="guidance velocity scale factor for all projectiles targeted on a player, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x138"/>
+	<float name="Ranged Fire.Impossible Guidance vs. Player" info="guidance velocity scale factor for all projectiles targeted on a player, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x13C"/>
+	
+	<float name="Ranged Fire.Easy Melee Delay Base" info="delay period added to all melee attacks, even when berserk, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x140"/>
+	<float name="Ranged Fire.Normal Melee Delay Base" info="delay period added to all melee attacks, even when berserk, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x144"/>
+	<float name="Ranged Fire.Hard Melee Delay Base" info="delay period added to all melee attacks, even when berserk, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x148"/>
+	<float name="Ranged Fire.Impossible Melee Delay Base" info="delay period added to all melee attacks, even when berserk, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x14C"/>
+	
+	<float name="Ranged Fire.Easy Melee Delay Scale" info="multiplier for all existing, non-berserk, melee delay times, on easy difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x150"/>
+	<float name="Ranged Fire.Normal Melee Delay Scale" info="multiplier for all existing, non-berserk, melee delay times, on normal difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x154"/>
+	<float name="Ranged Fire.Hard Melee Delay Scale" info="multiplier for all existing, non-berserk, melee delay times, on hard difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x158"/>
+	<float name="Ranged Fire.Impossible Melee Delay Scale" info="multiplier for all existing, non-berserk, melee delay times, on impossible difficulty" info_img="matg Difficulty.Ranged Fire.png" offset="0x15C"/>
+	
+	<float name="Grenades.Easy Grenade Chance Scale (scale factor affecting decisions to throw a grenade on easy difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x170"/>
+	<float name="Grenades.Normal Grenade Chance Scale (scale factor affecting decisions to throw a grenade on normal difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x174"/>
+	<float name="Grenades.Hard Grenade Chance Scale (scale factor affecting decisions to throw a grenade on hard difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x178"/>
+	<float name="Grenades.Impossible Grenade Chance Scale (scale factor affecting decisions to throw a grenade on impossible difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x17C"/>
+	
+	<float name="Grenades.Easy Grenade Timer Scale (scale factor affecting the delay period between grenades thrown from the same encounter (lower is more often) on easy difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x180"/>
+	<float name="Grenades.Normal Grenade Timer Scale (scale factor affecting the delay period between grenades thrown from the same encounter (lower is more often) on normal difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x184"/>
+	<float name="Grenades.Hard Grenade Timer Scale (scale factor affecting the delay period between grenades thrown from the same encounter (lower is more often) on hard difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x188"/>
+	<float name="Grenades.Impossible Grenade Timer Scale (scale factor affecting the delay period between grenades thrown from the same encounter (lower is more often) on impossible difficulty)" info_img="matg Difficulty.Grenades.png" offset="0x18C"/>
+	
+	<float name="Placement.Easy Major Upgrade (Normal)" info="fraction of actors upgraded to their major variant on easy difficulty" info_img="matg Difficulty.Placement.png" offset="0x1C0"/>
+	<float name="Placement.Normal Major Upgrade (Normal)" info="fraction of actors upgraded to their major variant on normal difficulty" info_img="matg Difficulty.Placement.png" offset="0x1C4"/>
+	<float name="Placement.Hard Major Upgrade (Normal)" info="fraction of actors upgraded to their major variant on hard difficulty" info_img="matg Difficulty.Placement.png" offset="0x1C8"/>
+	<float name="Placement.Impossible Major Upgrade (Normal)" info="fraction of actors upgraded to their major variant on impossible difficulty" info_img="matg Difficulty.Placement.png" offset="0x1CC"/>
+	
+	<float name="Placement.Easy Major Upgrade (Few)" info="fraction of actors upgraded to their major variant when mix = normal, on easy difficulty" info_img="matg Difficulty.Placement.png" offset="0x1D0"/>
+	<float name="Placement.Normal Major Upgrade (Few)" info="fraction of actors upgraded to their major variant when mix = normal, on normal difficulty" info_img="matg Difficulty.Placement.png" offset="0x1D4"/>
+	<float name="Placement.Hard Major Upgrade (Few)" info="fraction of actors upgraded to their major variant when mix = normal, on hard difficulty" info_img="matg Difficulty.Placement.png" offset="0x1D8"/>
+	<float name="Placement.Impossible Major Upgrade (Few)" info="fraction of actors upgraded to their major variant when mix = normal, on impossible difficulty" info_img="matg Difficulty.Placement.png" offset="0x1DC"/>
+	
+	<float name="Placement.Easy Major Upgrade (Many)" info="fraction of actors upgraded to their major variant when mix = many, on easy difficulty" info_img="matg Difficulty.Placement.png" offset="0x1E0"/>
+	<float name="Placement.Normal Major Upgrade (Many)" info="fraction of actors upgraded to their major variant when mix = many, on normal difficulty" info_img="matg Difficulty.Placement.png" offset="0x1E4"/>
+	<float name="Placement.Hard Major Upgrade (Many)" info="fraction of actors upgraded to their major variant when mix = many, on hard difficulty" info_img="matg Difficulty.Placement.png" offset="0x1E8"/>
+	<float name="Placement.Impossible Major Upgrade (Many)" info="fraction of actors upgraded to their major variant when mix = many, on impossible difficulty" info_img="matg Difficulty.Placement.png" offset="0x1EC"/>
+</struct>
+
+<struct name="Grenades" offset="0x128" size="68">
+	<short name="Maximum Count" offset="0x00"/>
+	<short name="Multiplayer Spawn Default" offset="0x02"/>
+	<dependency name="Throwing Effect" offset="0x04"/>
+	<dependency name="HUD Interface" offset="0x14"/>
+	<dependency name="Equipment" offset="0x24"/>
+	<dependency name="Projectile" offset="0x34"/>
+</struct>
+
+<struct name="Rasterizer Data" offset="0x134" size="428">
+	<dependency name="Function Textures.Distance Attenuation" info_img="matg Rasterizer Data.Function Textures.png" offset="0x00"/>
+	<dependency name="Function Textures.Vector Normalization" info_img="matg Rasterizer Data.Function Textures.png" offset="0x10"/>
+	<dependency name="Function Textures.Atmospheric Fog Density" info_img="matg Rasterizer Data.Function Textures.png" offset="0x20"/>
+	<dependency name="Function Textures.Planar Fog Density" info_img="matg Rasterizer Data.Function Textures.png" offset="0x30"/>
+	<dependency name="Function Textures.Linear Corner Fade" info="used for shadows" info_img="matg Rasterizer Data.Function Textures.png" offset="0x40"/>
+	<dependency name="Function Textures.Active Camouflage Distortion" info_img="matg Rasterizer Data.Function Textures.png" offset="0x50"/>
+	<dependency name="Function Textures.Glow" info_img="matg Rasterizer Data.Function Textures.png" offset="0x60"/>
+	
+	<dependency name="Default Textures.Default 2D" info_img="matg Rasterizer Data.Default Textures.png" offset="0xAC"/>
+	<dependency name="Default Textures.Default 3D" info_img="matg Rasterizer Data.Default Textures.png" offset="0xBC"/>
+	<dependency name="Default Textures.Default Cube Map" info_img="matg Rasterizer Data.Default Textures.png" offset="0xCC"/>
+	
+	<dependency name="Experimental Textures.Test 0" info_img="matg Rasterizer Data.Experimental Textures.png" offset="0xDC"/>
+	<dependency name="Experimental Textures.Test 1" info_img="matg Rasterizer Data.Experimental Textures.png" offset="0xEC"/>
+	<dependency name="Experimental Textures.Test 2" info_img="matg Rasterizer Data.Experimental Textures.png" offset="0xFC"/>
+	<dependency name="Experimental Textures.Test 3" info_img="matg Rasterizer Data.Experimental Textures.png" offset="0x10C"/>
+	
+	<dependency name="Video Effect Textures.Video Scanline Map" info_img="matg Rasterizer Data.Video Effect Textures.png" offset="0x11C"/>
+	<dependency name="Video Effect Textures.Video Noise Map" info_img="matg Rasterizer Data.Video Effect Textures.png" offset="0x12C"/>
+	
+	<bitmask8 name="Active Camouflage.Flags" offset="0x170">
+		<option name="Tint Edge Density" value="07"/>
+	</bitmask8>
+	<float name="Active Camouflage.Refraction Amount" note="pixels" offset="0x174"/>
+	<float name="Active Camouflage.Distance Falloff" offset="0x178"/>
+	<colorRGB name="Active Camouflage.Tint Color" offset="0x17C"/>
+	<float name="Active Camouflage.Hyper-Stealth Refraction" note="pixels" offset="0x188"/>
+	<float name="Active Camouflage.Hyper-Stealth Distance Falloff" offset="0x18C"/>
+	<colorRGB name="Active Camouflage.Hyper-Stealth Tint Color" offset="0x190"/>
+	
+	<dependency name="PC Textures.Distance Attenuation 2D" info_img="matg Rasterizer Data.PC Textures.png" offset="0x19C"/>
+</struct>
+
+<struct name="Interface Bitmaps" offset="0x140" size="304">
+	<dependency name="Font System" offset="0x00"/>
+	<dependency name="Font Terminal" offset="0x10"/>
+	<dependency name="Screen Color Table" offset="0x20"/>
+	<dependency name="HUD Color Table" offset="0x30"/>
+	<dependency name="Editor Color Table" offset="0x40"/>
+	<dependency name="Dialog Color Table" offset="0x50"/>
+	<dependency name="HUD Globals" offset="0x60"/>
+	<dependency name="Motion Sensor Sweep Bitmap" offset="0x70"/>
+	<dependency name="Motion Sensor Sweep Bitmap Mask" offset="0x80"/>
+	<dependency name="Multiplayer HUD Bitmap" offset="0x90"/>
+	<dependency name="Localization" offset="0xA0"/>
+	<dependency name="HUD Digits Definition" offset="0xB0"/>
+	<dependency name="Motion Sensor Blip Bitmap" offset="0xC0"/>
+	<dependency name="Interface Goo Map 1" offset="0xD0"/>
+	<dependency name="Interface Goo Map 2" offset="0xE0"/>
+	<dependency name="Interface Goo Map 3" offset="0xF0"/>
+</struct>
+
+<struct name="Weapon List" info="update _weapon_list enum in game_globals.h" offset="0x14C" size="16">
+	<dependency name="Weapon" offset="0x00"/>
+</struct>
+
+<struct name="Cheat Powerups" offset="0x158" size="16">
+	<dependency name="Powerup" offset="0x00"/>
+</struct>
+
+<struct name="Multiplayer Information" offset="0x164" size="160">
+	<dependency name="Flag" offset="0x00"/>
+	<dependency name="Unit" offset="0x10"/>
+	
+	<struct name="Vehicles" offset="0x20" size="16">
+		<dependency name="Vehicle" offset="0x00"/>
+	</struct>
+	
+	<dependency name="Hill Shader" offset="0x2C"/>
+	<dependency name="Flag Shader" offset="0x3C"/>
+	<dependency name="Ball" offset="0x4C"/>
+	
+	<struct name="Sounds" offset="0x5C" size="16">
+		<dependency name="Sound" offset="0x00"/>
+	</struct>
+</struct>
+
+<struct name="Player Information" offset="0x170" size="244">
+	<dependency name="Unit" offset="0x00"/>
+	
+	<float name="Walking Speed" note="world units per second" offset="0x2C"/>
+	<float name="'Double Speed' Multiplier" note="1 - infinity" offset="0x30"/>
+	<float name="Run Forward" note="world units per second" offset="0x34"/>
+	<float name="Run Backward" note="world units per second" offset="0x38"/>
+	<float name="Run Sideways" note="world units per second" offset="0x3C"/>
+	<float name="Run Acceleration" note="world units per second squared" offset="0x40"/>
+	<float name="Sneak Forward" note="world units per second" offset="0x44"/>
+	<float name="Sneak Backward" note="world units per second" offset="0x48"/>
+	<float name="Sneak Sideways" note="world units per second" offset="0x4C"/>
+	<float name="Sneak Acceleration" note="world units per second squared" offset="0x50"/>
+	<float name="Airborne Acceleration" note="world units per second squared" offset="0x54"/>
+	<float name="Speed Multiplier" info="multiplayer only" offset="0x58"/>
+	
+	<float name="Grenade Origin: x" offset="0x68"/>
+	<float name="Grenade Origin: y" offset="0x6C"/>
+	<float name="Grenade Origin: z" offset="0x70"/>
+	
+	<float name="Stun Movement Penalty" note="0 - 1 only" info="1.0 prevents movement while stunned" offset="0x80"/>
+	<float name="Stun Turning Penalty" note="0 - 1 only" info="1.0 prevents turning while stunned" offset="0x84"/>
+	<float name="Stun Jumping Penalty" note="0 - 1 only" info="1.0 prevents jumping while stunned" offset="0x88"/>
+	<float name="Minimum Stun Time" note="seconds" info="all stunning damage will last at least this long" offset="0x8C"/>
+	<float name="Maximum Stun Time" note="seconds" info="all stunning damage will last at most this long" offset="0x90"/>
+	
+	<float name="First Person Idle Time: from" note="seconds" offset="0x9C"/>
+	<float name="First Person Idle Time: to" note="seconds" offset="0xA0"/>
+	<float name="First Person Skip Fraction" note="0 - 1 only" offset="0xA4"/>
+	
+	<dependency name="Coop Respawn Effect" offset="0xB8"/>
+	
+</struct>
+
+<struct name="First Person Interface" offset="0x17C" size="192">
+	<dependency name="First Person Hands" offset="0x00"/>
+	<dependency name="Base Bitmap" offset="0x10"/>
+	<dependency name="Shield Meter" offset="0x20"/>
+	
+	<short name="Shield Meter Origin: x" offset="0x30"/>
+	<short name="Shield Meter Origin: y" offset="0x32"/>
+	
+	<dependency name="Body Meter" offset="0x34"/>
+	
+	<short name="Body Meter Origin: x" offset="0x44"/>
+	<short name="Body Meter Origin: y" offset="0x46"/>
+	
+	<dependency name="Night-Vision OFF to ON Effect" offset="0x48"/>
+	<dependency name="Night-Vision ON to OFF Effect" offset="0x58"/>
+</struct>
+
+<struct name="Falling Damage" offset="0x188" size="152">
+	<float name="Harmful Falling Distance: from" note="world units" offset="0x08"/>
+	<float name="Harmful Falling Distance: to" note="world units" offset="0x0C"/>
+
+	<dependency name="Falling Damage" offset="0x10"/>
+
+	<float name="Maximum Falling Distance" note="world units" offset="0x28"/>
+
+	<dependency name="Distance Damage" offset="0x2C"/>
+	<dependency name="Vehicle Environment Collision Damage Effect" offset="0x3C"/>
+	<dependency name="Vehicle Killed Unit Damage Effect" offset="0x4C"/>
+	<dependency name="Vehicle Collision Damage" offset="0x5C"/>
+	<dependency name="Flaming Death Damage" offset="0x6C"/>
+	
+	<float name="Falling Damage Sensitivity" note="0 - 1 only" info="tested by 002. 0 = Death from TOUCHING the ground, 1 = No impact fall damage" offset="0x90"/>
+	<float name="Falling Distance Damage Modifier" note="0 - 1 only" info="tested by 002. 0 or less = Almost no falling impact damage, 0.21 = Normal, 0.5 = 2/3 shields lost from large falls, 1 = Twice as much damage as 0" offset="0x94"/>
+</struct>
+
+<struct name="Materials" offset="0x194" size="884">	
+	<float name="Vehicle Terrain Parameters.Ground Friction Scale" info="fraction of original velocity parallel to the ground after one tick" info_img="matg Materials.Vehicle Terrain Parameters.png" offset="0x94"/>
+	<float name="Vehicle Terrain Parameters.Ground Friction Normal k1 Scale" info="cosine of angle at which friction falls off" info_img="matg Materials.Vehicle Terrain Parameters.png" offset="0x98"/>
+	<float name="Vehicle Terrain Parameters.Ground Friction Normal k0 Scale" info="cosine of angle at which friction is zero" info_img="matg Materials.Vehicle Terrain Parameters.png" offset="0x9C"/>
+	<float name="Vehicle Terrain Parameters.Ground Depth Scale" info="depth in the ground at which a point mass rests" info_img="matg Materials.Vehicle Terrain Parameters.png" offset="0xA0"/>
+	<float name="Vehicle Terrain Parameters.Ground Damp Fraction Scale" info="fraction of original velocity perpendicular to the ground after one tick" info_img="matg Materials.Vehicle Terrain Parameters.png" offset="0xA4"/>
+
+	<float name="Breakable Surface Parameters.Maximum Vitality" offset="0x2D4"/>
+	
+	<dependency name="Breakable Surface Parameters.Effect" offset="0x2E4"/>
+	<dependency name="Breakable Surface Parameters.Sound" offset="0x2F4"/>
+	
+	<struct name="Particle Effects" offset="0x31C" size="128">
+		<dependency name="Particle Type" offset="0x00"/>
+		
+		<bitmask16 name="Flags" offset="0x10">
+			<option name="Interpolate Color in HSV" value="15"/>
+			<option name="...More Colors" value="14"/>
+		</bitmask16>
+		
+		<float name="Density" note="world units" offset="0x14"/>
+		<float name="Velocity Scale: from" info="scales initial velocity" offset="0x18"/>
+		<float name="Velocity Scale: to" info="scales initial velocity" offset="0x1C"/>
+
+		<float name="Angular Velocity: from" note="radians per second" offset="0x24"/>
+		<float name="Angular Velocity: to" note="radians per second" offset="0x28"/>
+				
+		<float name="Radius: from" note="world units" info="particle radius" offset="0x34"/>
+		<float name="Radius: to" note="world units" info="particle radius" offset="0x38"/>
+
+		<colorARGB name="Tint Lower Bound" offset="0x44"/>
+		<colorARGB name="Tint Upper Bound" offset="0x54"/>
+	</struct>
+
+	<dependency name="Melee Hit Sound" offset="0x364"/>
+</struct>
+
+<struct name="Playlist Members" offset="0x1A0" size="148">
+	<string32 name="Map Name" offset="0x00"/>
+	<string32 name="Game Variant" offset="0x20"/>
+	<long name="Minimum Experience" offset="0x40"/>
+	<long name="Maximum Experience" offset="0x44"/>
+	<long name="Minimum Player Count" offset="0x48"/>
+	<long name="Maximum Player Count" offset="0x4C"/>
+	<long name="Rating" offset="0x50"/>
+</struct>
+
+</plugin>

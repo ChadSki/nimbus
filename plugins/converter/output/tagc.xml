@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<struct name="tagc" size="12">
+  <struct_array name="tag_references" offset="0x0" size="16">
+    <reference name="tag" offset="0x0"/>
+  </struct_array>
+</struct>

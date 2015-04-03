@@ -1,0 +1,449 @@
+<plugin class="DeLa" author="sparky" version="4.0" headersize="Main">
+
+<enum16 name="Widget Type" offset="0x00">
+	<option name="Container" value="00"/>
+	<option name="Text Box" value="01"/>
+	<option name="Spinner List" value="02"/>
+	<option name="Column List" value="03"/>
+	<option name="Game Model (not implemented)" value="04"/>
+	<option name="Movie (not implemented)" value="05"/>
+	<option name="Custom (not implemented)" value="06"/>
+</enum16>
+
+<enum16 name="Controller Index" offset="0x02">
+	<option name="Player 1" value="00"/>
+	<option name="Player 2" value="01"/>
+	<option name="Player 3" value="02"/>
+	<option name="Player 4" value="03"/>
+	<option name="Any Player" value="04"/>
+</enum16>
+
+<string32 name="Name" offset="0x04"/>
+
+<short name="Bounds: top" offset="0x24"/>
+<short name="Bounds: left" offset="0x26"/>
+<short name="Bounds: bottom" offset="0x28"/>
+<short name="Bounds: right" offset="0x2A"/>
+
+<bitmask32 name="Flags" offset="0x2C">
+	<option name="Pass Unhandled Events to Focused Child" value="31"/>
+	<option name="Pause Game Time" value="30"/>
+	<option name="Flash Background Bitmap" value="29"/>
+	<option name="D Pad up/down Tabs Through Children" value="28"/>
+	<option name="D Pad left/right Tabs Through Children" value="27"/>
+	<option name="D Pad up/down Tabs Through List Items" value="26"/>
+	<option name="D Pad left/right Tabs Through List Items" value="25"/>
+	<option name="Don't Focus a Specific Child Widget" value="24"/>
+	<option name="Pass Unhandled Events to All Children" value="23"/>
+	<option name="Render Regardless of Controller Index" value="22"/>
+	<option name="Pass Handled Events to All Children" value="21"/>
+	<option name="Return to Main Menu If No History" value="20"/>
+	<option name="Always Use Tag Controller Index" value="19"/>
+	<option name="Always Use Nifty Render Effects" value="18"/>
+	<option name="Don't Push History" value="17"/>
+	<option name="Force Handle Mouse" value="16"/>
+</bitmask32>
+
+<long name="Milliseconds to Auto Close" note="0 or less = never autoclose" offset="0x30"/>
+<long name="Milliseconds Auto Close Fade Time" note="0 or less = immediate close" offset="0x34"/>
+
+<dependency name="Background Bitmap" offset="0x38"/>
+
+<struct name="Game Data Input Functions.Game Data Inputs" info_img="DeLa Game Data Input Functions.png" offset="0x48" size="36">
+	<enum16 name="Function" info_img="DeLa Game Data Input Functions.png" offset="0x00">
+		<option name="NULL" value="00"/>
+		<option name="Player Settings Menu Update Description" value="01"/>
+		<option name="Unused" value="02"/>
+		<option name="Playlist Settings Menu Update Description" value="03"/>
+		<option name="Gametype Select Menu Update Description" value="04"/>
+		<option name="Multiplayer Type Menu Update Description" value="05"/>
+		<option name="Solo Level Select Update" value="06"/>
+		<option name="Difficulty Menu Update Description" value="07"/>
+		<option name="Build Number (Text Box Only)" value="08"/>
+		<option name="Server List Update" value="09"/>
+		<option name="Network Pre-Game Status Update" value="10"/>
+		<option name="Split-Screen Pre-Game Status Update" value="11"/>
+		<option name="Network / Split-Screen Pre-Join Players" value="12"/>
+		<option name="Multiplayer Profile List Update" value="13"/>
+		<option name="Wide 3 Player Profile List Update" value="14"/>
+		<option name="Player Profile Edit-Select Menu Update" value="15"/>
+		<option name="Player Profile Small Menu Update" value="16"/>
+		<option name="Game Settings Lists Text Update" value="17"/>
+		<option name="Solo Game Objective Text" value="18"/>
+		<option name="Color Picker Update" value="19"/>
+		<option name="Game Settings Lists Picture Update" value="20"/>
+		<option name="Main Menu Fake Animate" value="21"/>
+		<option name="Multiplayer Level Select Update" value="22"/>
+		<option name="Get Active Player Profile Name" value="23"/>
+		<option name="Get Edit Player Profile Name" value="24"/>
+		<option name="Get Edit Game Settings Name" value="25"/>
+		<option name="Get Active Player Profile Color" value="26"/>
+		<option name="Multiplayer Set Textbox Map Name" value="27"/>
+		<option name="Multiplayer Set Textbox Game Ruleset" value="28"/>
+		<option name="Multiplayer Set Textbox Teams No Teams" value="29"/>
+		<option name="Multiplayer Set Textbox Score Limit" value="30"/>
+		<option name="Multiplayer Set Textbox Score Limit Type" value="31"/>
+		<option name="Multiplayer Set Bitmap for Map" value="32"/>
+		<option name="Multiplayer Set Bitmap for Ruleset" value="33"/>
+		<option name="Multiplayer Set Textbox Number of Players" value="34"/>
+		<option name="Multiplayer Edit Profile Set Rule Text" value="35"/>
+		<option name="System Link Status Check" value="36"/>
+		<option name="Multiplayer Game Directions" value="37"/>
+		<option name="Teams / No Teams Bitmap Update" value="38"/>
+		<option name="Warn if Different Will Nuke Saved Game" value="39"/>
+		<option name="Dim if No Network Cable" value="40"/>
+		<option name="Pause Game Set Textbox Inverted" value="41"/>
+		<option name="Dim Unless Two Controllers" value="42"/>
+		<option name="Controls Update Menu" value="43"/>
+		<option name="Video Menu Update" value="44"/>
+		<option name="Gamespy Screen Update" value="45"/>
+		<option name="Common Button Bar Update" value="46"/>
+		<option name="Gamepad Update Menu" value="47"/>
+		<option name="Server Settings Update" value="48"/>
+		<option name="Audio_Menu_Update" value="49"/>
+		<option name="Multiplayer Profile Vehicles Update" value="50"/>
+		<option name="Solo Map List Update" value="51"/>
+		<option name="Multiplayer Map List Update" value="52"/>
+		<option name="Gametype Select List Update" value="53"/>
+		<option name="Gametype Edit List Update" value="54"/>
+		<option name="Load Game List Update" value="55"/>
+		<option name="Checking for Updates" value="56"/>
+		<option name="Direct IP Connect Update" value="57"/>
+		<option name="Network Settings Update" value="58"/>
+	</enum16>
+</struct>
+
+<struct name="Event Handlers" info_img="DeLa Event Handlers.png" offset="0x54" size="72">
+	<bitmask32 name="Flags" info_img="DeLa Event Handlers.png" offset="0x00">
+		<option name="Close Current Widget" value="31"/>
+		<option name="Close Other Widget" value="30"/>
+		<option name="Close All Widgets" value="29"/>
+		<option name="Open Widget" value="28"/>
+		<option name="Reload Self" value="27"/>
+		<option name="Reload Other Widget" value="26"/>
+		<option name="Give Focus to Widget" value="25"/>
+		<option name="Run Function" value="24"/>
+		<option name="Replace Self with Widget" value="23"/>
+		<option name="Go Back to Previous Widget" value="22"/>
+		<option name="Unknown" value="21"/>
+		<option name="Try to Branch on Failure" value="20"/>
+	</bitmask32>
+
+	<enum16 name="Event Type" info_img="DeLa Event Handlers.png" offset="0x04">
+		<option name="A button" value="00"/>
+		<option name="B button" value="01"/>
+		<option name="X button" value="02"/>
+		<option name="Y button" value="03"/>
+		<option name="Black button" value="04"/>
+		<option name="White button" value="05"/>
+		<option name="Left trigger" value="06"/>
+		<option name="Right trigger" value="07"/>
+		<option name="D Pad UP" value="08"/>
+		<option name="D Pad DOWN" value="09"/>
+		<option name="D Pad LEFT" value="10"/>
+		<option name="D Pad RIGHT" value="11"/>
+		<option name="Start button" value="12"/>
+		<option name="Back button" value="13"/>
+		<option name="Left thumb" value="14"/>
+		<option name="Right thumb" value="15"/>
+		<option name="Left Analog Stick UP" value="16"/>
+		<option name="Left Analog Stick DOWN" value="17"/>
+		<option name="Left Analog Stick LEFT" value="18"/>
+		<option name="Left Analog Stick RIGHT" value="19"/>
+		<option name="Right Analog Stick UP" value="20"/>
+		<option name="Right Analog Stick DOWN" value="21"/>
+		<option name="Right Analog Stick LEFT" value="22"/>
+		<option name="Right Analog Stick RIGHT" value="23"/>
+		<option name="Created" value="24"/>
+		<option name="Deleted" value="25"/>
+		<option name="Get Focus" value="26"/>
+		<option name="Lose Focus" value="27"/>
+		<option name="Left Mouse" value="28"/>
+		<option name="Middle Mouse" value="29"/>
+		<option name="Right Mouse" value="30"/>
+		<option name="Double Click" value="31"/>
+		<option name="Custom Activation" value="32"/>
+		<option name="Post-Render" value="33"/>
+	</enum16>
+	
+	<enum16 name="Function" info_img="DeLa Event Handlers.png" offset="0x06">
+		<option name="NULL" value="00"/> 189
+		<option name="List GoTo Next Item" value="01"/>
+		<option name="List GoTo Previous Item" value="02"/>
+		<option name="Unused" value="03"/>
+		<option name="Unused" value="04"/>
+		<option name="Initialize Single Player Level List Solo" value="05"/>
+		<option name="Initialize Single Player Level List Cooperative" value="06"/>
+		<option name="Dispose Single Player Level List" value="07"/>
+		<option name="Solo Level Set Map" value="08"/>
+		<option name="Set Difficulty" value="09"/>
+		<option name="Start New Game" value="10"/>
+		<option name="Pause Game Restart at Checkpoint" value="11"/>
+		<option name="Pause Game Restart Level" value="12"/>
+		<option name="Pause Game Return to Main Menu" value="13"/>
+		<option name="Clear Multiplayer Player Joins" value="14"/>
+		<option name="Join Controller to Multiplayer Game" value="15"/>
+		<option name="Initialize Network Game Server List" value="16"/>
+		<option name="Start Network Game Server" value="17"/>
+		<option name="Dispose Network Game Server List" value="18"/>
+		<option name="Shutdown Network Game" value="19"/>
+		<option name="Network Game Join from Server List" value="20"/>
+		<option name="Split Game Screen Initialize" value="21"/>
+		<option name="Cooperative Game Initialize" value="22"/>
+		<option name="Main Menu Initialize" value="23"/>
+		<option name="Multiplayer Type Menu Initialize" value="24"/>
+		<option name="Pick Play Stage for Quick Start" value="25"/>
+		<option name="Multiplayer Level List Initialize" value="26"/>
+		<option name="Multiplayer Level List Dispose" value="27"/>
+		<option name="Multiplayer Level Select" value="28"/>
+		<option name="Multiplayer Profiles List Initialize" value="29"/>
+		<option name="Multiplayer Profiles List Dispose" value="30"/>
+		<option name="Multiplayer Profile Set for Game" value="31"/>
+		<option name="Swap Player Team" value="32"/>
+		<option name="Network Game Join Player" value="33"/>
+		<option name="Player Profile List Initialize" value="34"/>
+		<option name="Player Profile List Dispose" value="35"/>
+		<option name="Wide 3 Player Profile Set for Game" value="36"/>
+		<option name="Wide 1 Player Profile Set for Game" value="37"/>
+		<option name="Multiplayer Profile Begin Editing" value="38"/>
+		<option name="Multiplayer Profile End Editing" value="39"/>
+		<option name="Multiplayer Profile Set Game Engine" value="40"/>
+		<option name="Multiplayer Profile Change Name" value="41"/>
+		<option name="Multiplayer Profile Set Capture the Flag Rules" value="42"/>
+		<option name="Multiplayer Profile Set King of the Hill Rules" value="43"/>
+		<option name="Multiplayer Profile Set Slayer Rules" value="44"/>
+		<option name="Multiplayer Profile Set Oddball Rules" value="45"/>
+		<option name="Multiplayer Profile Set Racing Rules" value="46"/>
+		<option name="Multiplayer Profile Set Player Options" value="47"/>
+		<option name="Multiplayer Profile Set Item Options" value="48"/>
+		<option name="Multiplayer Profile Set Indicator Options" value="49"/>
+		<option name="Multiplayer Profile Initialize Game Engine" value="50"/>
+		<option name="Multiplayer Profile Initialize Name" value="51"/>
+		<option name="Multiplayer Profile Initialize Capture the Flag Rules" value="52"/>
+		<option name="Multiplayer Profile Initialize King of the Hill Rules" value="53"/>
+		<option name="Multiplayer Profile Initialize Slayer Rules" value="54"/>
+		<option name="Multiplayer Profile Initialize Oddball Rules" value="55"/>
+		<option name="Multiplayer Profile Initialize Racing Rules" value="56"/>
+		<option name="Multiplayer Profile Initialize Player Options" value="57"/>
+		<option name="Multiplayer Profile Initialize Item Options" value="58"/>
+		<option name="Multiplayer Profile Initialize Indicator Options" value="59"/>
+		<option name="Multiplayer Profile Save Changes" value="60"/>
+		<option name="Color Picker Menu Initialize" value="61"/>
+		<option name="Color Picker Menu Dispose" value="62"/>
+		<option name="Color Picker Select Color" value="63"/>
+		<option name="Player Profile Begin Editing" value="64"/>
+		<option name="Player Profile End Editing" value="65"/>
+		<option name="Player Profile Change Name" value="66"/>
+		<option name="Player Profile Save Changes" value="67"/>
+		<option name="Player Profile Initialize Control Settings" value="68"/>
+		<option name="Player Profile Initialize Advanced Control Settings" value="69"/>
+		<option name="Player Profile Save Control Settings" value="70"/>
+		<option name="Player Profile Save Advanced Control Settings" value="71"/>
+		<option name="Multiplayer Game Player Quit" value="72"/>
+		<option name="Main Menu Switch to Solo Game" value="73"/>
+		<option name="Request Delete Player Profile" value="74"/>
+		<option name="Request Delete Playlist Profile" value="75"/>
+		<option name="Final Delete Player Profile" value="76"/>
+		<option name="Final Delete Playlist Profile" value="77"/>
+		<option name="Cancel Profile Delete" value="78"/>
+		<option name="Create and Edit Playlist Profile" value="79"/>
+		<option name="Create and Edit Player Profile" value="80"/>
+		<option name="Network Game Speed Start" value="81"/>
+		<option name="Network Game Delay Start" value="82"/>
+		<option name="Network Server Accept Connection" value="83"/>
+		<option name="Network Server Defer Start" value="84"/>
+		<option name="Network Server Allow Start" value="85"/>
+		<option name="Disable if No xDemos" value="86"/>
+		<option name="Run xDemos" value="87"/>
+		<option name="Single Player Reset Controller Choices" value="88"/>
+		<option name="Single Player Set Player 1 Controller Choice" value="89"/>
+		<option name="Single Player Set Player 2 Controller Choice" value="90"/>
+		<option name="Error if No Network Connection" value="91"/>
+		<option name="Start Server if None Advertised" value="92"/>
+		<option name="Network Game Un-join Player" value="93"/>
+		<option name="Close if Not Editing Profile" value="94"/>
+		<option name="Exit to Xbox Dashboard" value="95"/>
+		<option name="New Campaign Chosen" value="96"/>
+		<option name="New Campaign Decision" value="97"/>
+		<option name="Pop History Stack Once" value="98"/>
+		<option name="Difficulty Menu Initialize" value="99"/>
+		<option name="Begin Music Fade Out" value="100"/>
+		<option name="New Game if No Player Profiles" value="101"/>
+		<option name="Exit Gracefully to Xbox Dashboard" value="102"/>
+		<option name="Pause Game Invert Pitch" value="103"/>
+		<option name="Start New Cooperative Game" value="104"/>
+		<option name="Pause Game Invert Spinner Get" value="105"/>
+		<option name="Pause Game Invert Spinner Set" value="106"/>
+		<option name="Main Menu Quit Game" value="107"/>
+		<option name="Mouse - Emit ACCEPT Event" value="108"/>
+		<option name="Mouse - Emit BACK Event" value="109"/>
+		<option name="Mouse - Emit D Pad LEFT Event" value="110"/>
+		<option name="Mouse - Emit D Pad RIGHT Event" value="111"/>
+		<option name="Mouse Spinner 3wide Click" value="112"/>
+		<option name="Controls Screen Initialize" value="113"/>
+		<option name="Video Screen Initialize" value="114"/>
+		<option name="Controls Begin Binding" value="115"/>
+		<option name="Gamespy Screen Initialize" value="116"/>
+		<option name="Gamespy Screen Dispose" value="117"/>
+		<option name="Gamespy Select Header" value="118"/>
+		<option name="Gamespy Select Iem" value="119"/>
+		<option name="Gamespy Select Button" value="120"/>
+		<option name="Player Profile Initialize Mouse Settings" value="121"/>
+		<option name="Player Profile Change Mouse Settings" value="122"/>
+		<option name="Player Profile Initialize Audio Settings" value="123"/>
+		<option name="Player Profile Change Audio Settings" value="124"/>
+		<option name="Player Profile Change Video Settings" value="125"/>
+		<option name="Controls Screen Dispose" value="126"/>
+		<option name="Controls Screen Change Settings" value="127"/>
+		<option name="Mouse - Emit X Event" value="128"/>
+		<option name="Gamepad Screen Initialize" value="129"/>
+		<option name="Gamepad Screen Dispose" value="130"/>
+		<option name="Gamepad Screen Change Gamepads" value="131"/>
+		<option name="Gamepad Screen Select Item" value="132"/>
+		<option name="Mouse Screen Defaults" value="133"/>
+		<option name="Audio Screen Defaults" value="134"/>
+		<option name="Video Screen Defaults" value="135"/>
+		<option name="Controls Screen Defaults" value="136"/>
+		<option name="Profile Set Edit Begin" value="137"/>
+		<option name="Profile Manager Delete" value="138"/>
+		<option name="Profile Manager Select" value="139"/>
+		<option name="Gamespy Dismiss Error" value="140"/>
+		<option name="Server Settings Initialize" value="141"/>
+		<option name="Server Settings Edit Server Name" value="142"/>
+		<option name="Server Settings Edit Server Password" value="143"/>
+		<option name="Server Settings Start Game" value="144"/>
+		<option name="Video Test Dialog Initialize" value="145"/>
+		<option name="Video Test Dialog Dispose" value="146"/>
+		<option name="Video Test Dialog Accept" value="147"/>
+		<option name="Gamespy Dismiss Filters" value="148"/>
+		<option name="Gamespy Update Filter Settings" value="149"/>
+		<option name="Gamespy Back Handler" value="150"/>
+		<option name="Mouse Spinner 1wide Click" value="151"/>
+		<option name="Controls Back Handler" value="152"/>
+		<option name="Controls Advanced Launch" value="153"/>
+		<option name="Controls Advanced OK" value="154"/>
+		<option name="Multiplayer Pause Menu Open" value="155"/>
+		<option name="Multiplayer Game Options Open" value="156"/>
+		<option name="Multiplayer Choose Team" value="157"/>
+		<option name="Multiplayer Profile Initialize Vehicle Options" value="158"/>
+		<option name="Multiplayer Profile Save Vehicle Options" value="159"/>
+		<option name="Single Previous Cl (clicked? closed? cleared? class?) Item Activated" value="160"/>
+		<option name="Multiplayer Profile Initialize Teamplay Options" value="161"/>
+		<option name="Multiplayer Profile Save Teamplay Options" value="162"/>
+		<option name="Multiplayer Game Options Choose" value="163"/>
+		<option name="Emit Custom Activation Event" value="164"/>
+		<option name="Player Profile Cancel Audio Set" value="165"/>
+		<option name="Player Profile Initialize Network Options" value="166"/>
+		<option name="Player Profile Save Network Options" value="167"/>
+		<option name="Credits Post Render" value="168"/>
+		<option name="Difficulty Item Select" value="169"/>
+		<option name="Credits Initialize" value="170"/>
+		<option name="Credits Dispose" value="171"/>
+		<option name="Gamespy Get Patch" value="172"/>
+		<option name="Video Screen Dispose" value="173"/>
+		<option name="Campaign Menu Initialize" value="174"/>
+		<option name="Campaign Menu Continue" value="175"/>
+		<option name="Load Game Menu Initialize" value="176"/>
+		<option name="Load Game Menu Dispose" value="177"/>
+		<option name="Load Game Menu Activated" value="178"/>
+		<option name="Solo Menu Save Checkpoint" value="179"/>
+		<option name="Multiplayer Type Set Mode" value="180"/>
+		<option name="Checking for Updates OK" value="181"/>
+		<option name="Checking for Updates Dismiss" value="182"/>
+		<option name="Direct IP Connection Initialize" value="183"/>
+		<option name="Direct IP Connection Go" value="184"/>
+		<option name="Direct IP Edit Field" value="185"/>
+		<option name="Network Settings Edit a Port" value="186"/>
+		<option name="Network Settings Defaults" value="187"/>
+		<option name="Load Game Menu Delete Request" value="188"/>
+		<option name="Load Game Menu Delete Finish" value="189"/>
+	</enum16>
+	
+	<dependency name="Widget Tag" info_img="DeLa Event Handlers.png" offset="0x08"/>
+	<dependency name="Sound Effect" info_img="DeLa Event Handlers.png" offset="0x18"/>
+	
+	<string32 name="Script" info_img="DeLa Event Handlers.png" offset="0x28"/>
+</struct>
+
+<struct name="Search and Replace Functions" info_img="DeLa Search-And-Replace.png" offset="0x60" size="34">
+	<string32 name="Search String" info_img="DeLa Search-And-Replace.png" offset="0x00"/>
+
+	<enum16 name="Replace Function" info_img="DeLa Search-And-Replace.png" offset="0x20">
+		<option name="NULL" value="00"/>
+		<option name="Widget's Controller" value="01"/>
+		<option name="Build Number" value="02"/>
+		<option name="Process ID (PID)" value="03"/>
+	</enum16>
+</struct>
+
+<dependency name="Text Box.Text Label Unicode Strings List" info_img="DeLa Text Box.png" offset="0xEC"/>
+<dependency name="Text Box.Text Font" info_img="DeLa Text Box.png" offset="0xFC"/>
+
+<colorARGB name="Text Box.Text Color" info_img="DeLa Text Box.png" offset="0x10C"/>
+
+<enum16 name="Text Box.Justification" info_img="DeLa Text Box.png" offset="0x11C">
+	<option name="Left Justify" value="00"/>
+	<option name="Right Justify" value="01"/>
+	<option name="Center Justify" value="02"/>
+</enum16>
+
+<bitmask16 name="Text Box.Flags" info_img="DeLa Text Box.png" offset="0x11E">
+	<option name="Editable" value="15"/>
+	<option name="Password" value="14"/>
+	<option name="Flashing" value="13"/>
+	<option name="Don't Do That Weird Focus Test" value="12"/>
+</bitmask16>
+
+<short name="More Text Box Parameters.String List Index" note="0 = default" info_img="DeLa More Text Box Parameters.png" offset="0x12E"/>
+<short name="More Text Box Parameters.Horizontal Offset" info="offsets text position in its bounding area" info_img="DeLa More Text Box Parameters.png" offset="0x130"/>
+<short name="More Text Box Parameters.Vertical Offset" info="offsets text position in its bounding area" info_img="DeLa More Text Box Parameters.png" offset="0x132"/>
+
+<bitmask16 name="List Items.Flags" info_img="DeLa List Items.png" offset="0x150">
+	<option name="List Items Generated in Code" value="15"/>
+	<option name="List Items From String List Tag" value="14"/>
+	<option name="List Items Only One Tooltip" value="13"/>
+	<option name="List Single Preview No Scroll" value="12"/>
+</bitmask16>
+
+<dependency name="Spinner List.List Header Bitmap" info_img="DeLa Spinner List.png" offset="0x154"/>
+<dependency name="Spinner List.List Footer Bitmap" info_img="DeLa Spinner List.png" offset="0x164"/>
+
+<short name="Spinner List.Header Bounds: top" info_img="DeLa Spinner List.png" offset="0x174"/>
+<short name="Spinner List.Header Bounds: left" info_img="DeLa Spinner List.png" offset="0x176"/>
+<short name="Spinner List.Header Bounds: bottom" info_img="DeLa Spinner List.png" offset="0x178"/>
+<short name="Spinner List.Header Bounds: right" info_img="DeLa Spinner List.png" offset="0x17A"/>
+
+<short name="Spinner List.Footer Bounds: top" info_img="DeLa Spinner List.png" offset="0x17C"/>
+<short name="Spinner List.Footer Bounds: left" info_img="DeLa Spinner List.png" offset="0x17E"/>
+<short name="Spinner List.Footer Bounds: bottom" info_img="DeLa Spinner List.png" offset="0x180"/>
+<short name="Spinner List.Footer Bounds: right" info_img="DeLa Spinner List.png" offset="0x182"/>
+
+<dependency name="Column List.Extended Description Widget" info_img="DeLa Column List.png" offset="0x1A4"/>
+
+<struct name="Conditional Widgets" info_img="DeLa Conditional Widgets.png" offset="0x2D4" size="80">
+	<dependency name="Widget Tag" info_img="DeLa Conditional Widgets.png" offset="0x00"/>
+	
+	<string32 name="Name" info="unused" info_img="DeLa Conditional Widgets.png" offset="0x10"/>
+	
+	<bitmask8 name="Flags" info_img="DeLa Conditional Widgets.png" offset="0x30">
+		<option name="Load If Event Handler Function Fails" value="07"/>
+	</bitmask8>
+	
+	<short name="Custom Controller Index" info="unused" info_img="DeLa Conditional Widgets.png" offset="0x34"/>
+</struct>
+
+<struct name="Child Widgets" info_img="DeLa Child Widgets.png" offset="0x3E0" size="80">
+	<dependency name="Widget Tag" info_img="DeLa Child Widgets.png" offset="0x00"/>
+	
+	<string32 name="Name" info="unused" info_img="DeLa Child Widgets.png" offset="0x10"/>
+	
+	<bitmask8 name="Flags" info_img="DeLa Child Widgets.png" offset="0x30">
+		<option name="Use Custom Controller Index" value="07"/>
+	</bitmask8>
+	
+	<short name="Custom Controller Index" info_img="DeLa Child Widgets.png" offset="0x34"/>
+	<short name="Vertical Offset" info_img="DeLa Child Widgets.png" offset="0x36"/>
+	<short name="Horizontal Offset" info_img="DeLa Child Widgets.png" offset="0x38"/>
+</struct>
+
+</plugin>

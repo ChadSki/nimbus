@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<struct name="vcky" size="60">
+  <reference name="display_font" offset="0x0"/>
+  <reference name="background_bitmap" offset="0x10"/>
+  <reference name="special_key_labels_string_list" offset="0x20"/>
+  <struct_array info="must have 44 keys/chunks" name="virtual_keys" offset="0x30" size="80">
+    <enum16 name="keyboard_key" offset="0x0">
+      <option name="_1" value="0"/>
+      <option name="_2" value="1"/>
+      <option name="_3" value="2"/>
+      <option name="_4" value="3"/>
+      <option name="_5" value="4"/>
+      <option name="_6" value="5"/>
+      <option name="_7" value="6"/>
+      <option name="_8" value="7"/>
+      <option name="_9" value="8"/>
+      <option name="_0" value="9"/>
+      <option name="_a" value="10"/>
+      <option name="_b" value="11"/>
+      <option name="_c" value="12"/>
+      <option name="_d" value="13"/>
+      <option name="_e" value="14"/>
+      <option name="_f" value="15"/>
+      <option name="_g" value="16"/>
+      <option name="_h" value="17"/>
+      <option name="_i" value="18"/>
+      <option name="_j" value="19"/>
+      <option name="_k" value="20"/>
+      <option name="_l" value="21"/>
+      <option name="_m" value="22"/>
+      <option name="_n" value="23"/>
+      <option name="_o" value="24"/>
+      <option name="_p" value="25"/>
+      <option name="_q" value="26"/>
+      <option name="_r" value="27"/>
+      <option name="_s" value="28"/>
+      <option name="_t" value="29"/>
+      <option name="_u" value="30"/>
+      <option name="_v" value="31"/>
+      <option name="_w" value="32"/>
+      <option name="_x" value="33"/>
+      <option name="_y" value="34"/>
+      <option name="_z" value="35"/>
+      <option name="done" value="36"/>
+      <option name="shift" value="37"/>
+      <option name="caps_lock" value="38"/>
+      <option name="symbols" value="39"/>
+      <option name="backspace" value="40"/>
+      <option name="left" value="41"/>
+      <option name="right" value="42"/>
+      <option name="space" value="43"/>
+    </enum16>
+    <int16 name="key_codes_lowercase_character" offset="0x2"/>
+    <int16 name="key_codes_shift_character" offset="0x4"/>
+    <int16 name="key_codes_caps_character" offset="0x6"/>
+    <int16 name="key_codes_symbols_character" offset="0x8"/>
+    <int16 name="key_codes_shiftcaps_character" offset="0xa"/>
+    <int16 name="key_codes_shiftsymbols_character" offset="0xc"/>
+    <int16 name="key_codes_capssymbols_character" offset="0xe"/>
+    <reference name="key_codes_unselected_background_bitmap" offset="0x10"/>
+    <reference name="key_codes_selected_background_bitmap" offset="0x20"/>
+    <reference name="key_codes_active_background_bitmap" offset="0x30"/>
+    <reference name="key_codes_sticky_background_bitmap" offset="0x40"/>
+  </struct_array>
+</struct>

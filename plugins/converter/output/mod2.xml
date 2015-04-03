@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<struct name="mod2" size="232">
+  <flag bit="7" name="blend_shared_normals" offset="0x0"/>
+  <flag bit="6" name="parts_have_local_nodes" offset="0x0"/>
+  <flag bit="5" name="ignore_skinning" offset="0x0"/>
+  <int32 name="node_list_checksumo_wrestling" offset="0x4"/>
+  <float32 info="switch to less detail when fewer than these pixels are visible" name="super_high_detail_cutoff" offset="0x18"/>
+  <float32 info="switch to less detail when fewer than these pixels are visible" name="high_detail_cutoff" offset="0x14"/>
+  <float32 info="switch to less detail when fewer than these pixels are visible" name="medium_detail_cutoff" offset="0x10"/>
+  <float32 info="switch to less detail when fewer than these pixels are visible" name="low_detail_cutoff" offset="0xc"/>
+  <float32 info="switch to less detail (clip disappear?) when fewer than these pixels are visible" name="super_low_detail_cutoff" offset="0x8"/>
+  <int16 info="nodes" name="super_high_detail_node_count" offset="0x1c"/>
+  <int16 info="nodes" name="high_detail_node_count" offset="0x1e"/>
+  <int16 info="nodes" name="medium_detail_node_count" offset="0x20"/>
+  <int16 info="nodes" name="low_detail_node_count" offset="0x22"/>
+  <int16 info="nodes" name="super_low_detail_node_count" offset="0x24"/>
+  <float32 info="UVW mapping (scale/position of overlaying bitmap image); W is unused" name="base_map_u_scale" offset="0x30"/>
+  <float32 info="UVW mapping (scale/position of overlaying bitmap image); W is unused" name="base_map_v_scale" offset="0x34"/>
+  <struct_array name="markers" offset="0xac" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <int16 name="magic_identifier" offset="0x20"/>
+    <struct_array name="instances" offset="0x34" size="32">
+      <int8 name="region_index" offset="0x0"/>
+      <int8 name="permutation_index" offset="0x1"/>
+      <int8 name="node_index" offset="0x2"/>
+      <float32 name="translation_x" offset="0x4"/>
+      <float32 name="translation_y" offset="0x8"/>
+      <float32 name="translation_z" offset="0xc"/>
+      <float32 name="rotation_i_1" offset="0x10"/>
+      <float32 name="rotation_i_2" offset="0x14"/>
+      <float32 name="rotation_k" offset="0x18"/>
+      <float32 name="rotation_w" offset="0x1c"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="nodes" offset="0xb8" size="156">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <index name="next_sibling_node_index" offset="0x20" struct_array="nodes"/>
+    <index name="first_child_node_index" offset="0x22" struct_array="nodes"/>
+    <index name="parent_node_index" offset="0x24" struct_array="nodes"/>
+    <float32 name="default_translation_x" offset="0x28"/>
+    <float32 name="default_translation_y" offset="0x2c"/>
+    <float32 name="default_translation_z" offset="0x30"/>
+    <float32 name="default_rotation_i_1" offset="0x34"/>
+    <float32 name="default_rotation_i_2" offset="0x38"/>
+    <float32 name="default_rotation_k" offset="0x3c"/>
+    <float32 name="default_rotation_w" offset="0x40"/>
+    <float32 name="node_distance_from_parent" offset="0x44"/>
+  </struct_array>
+  <struct_array name="regions" offset="0xc4" size="76">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <struct_array name="permutations" offset="0x40" size="88">
+      <asciiz maxlength="32" name="name" offset="0x0"/>
+      <flag bit="7" name="cannot_be_chosen_randomly" offset="0x20"/>
+      <index name="super_low" offset="0x40" struct_array="geometries"/>
+      <index name="low" offset="0x42" struct_array="geometries"/>
+      <index name="medium" offset="0x44" struct_array="geometries"/>
+      <index name="high" offset="0x46" struct_array="geometries"/>
+      <index name="super_high" offset="0x48" struct_array="geometries"/>
+      <struct_array name="markers" offset="0x4c" size="80">
+        <asciiz maxlength="32" name="name" offset="0x0"/>
+        <index name="node_index" offset="0x20" struct_array="nodes"/>
+        <float32 name="rotation_i_1" offset="0x24"/>
+        <float32 name="rotation_i_2" offset="0x28"/>
+        <float32 name="rotation_k" offset="0x2c"/>
+        <float32 name="rotation_w" offset="0x30"/>
+        <float32 name="translation_x" offset="0x34"/>
+        <float32 name="translation_y" offset="0x38"/>
+        <float32 name="translation_z" offset="0x3c"/>
+      </struct_array>
+    </struct_array>
+  </struct_array>
+  <struct_array name="geometries" offset="0xd0" size="48">
+    <struct_array name="parts" offset="0x24" size="132">
+      <flag bit="7" name="stripped_internal" offset="0x0"/>
+      <flag bit="6" name="zoner" offset="0x0"/>
+      <index name="shader_index" offset="0x4" struct_array="shaders"/>
+      <int8 name="previous_filthy_part_index" offset="0x6"/>
+      <int8 name="next_filthy_part_index" offset="0x7"/>
+      <int16 name="centroid_primary_node" offset="0x8"/>
+      <int16 name="centroid_secondary_node" offset="0xa"/>
+      <float32 info="0 - 1 only" name="centroid_primary_weight" offset="0xc"/>
+      <float32 info="0 - 1 only" name="centroid_secondary_weight" offset="0x10"/>
+      <float32 name="centroid_x" offset="0x14"/>
+      <float32 name="centroid_y" offset="0x18"/>
+      <float32 name="centroid_z" offset="0x1c"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="shaders" offset="0xdc" size="32">
+    <reference name="shader" offset="0x0"/>
+    <int16 name="permutation" offset="0x10"/>
+  </struct_array>
+</struct>

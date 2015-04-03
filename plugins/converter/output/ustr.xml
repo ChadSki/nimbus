@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<struct name="ustr" size="12">
+  <struct_array name="string_references" offset="0x0" size="20">
+    <int32 info="bytes; Sparky warns: 'Be careful with this!'" name="string_length" offset="0x0"/>
+    <struct_array name="string" offset="0x8" size="26">
+      <asciiz info="Sparky warns: 'Be careful with this!'" maxlength="128" name="string" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+</struct>

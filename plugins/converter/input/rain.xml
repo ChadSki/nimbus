@@ -1,0 +1,178 @@
+<plugin class="rain" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Particle Types" offset="0x24" size="604">
+	<string32 name="Name" offset="0x00"/>
+	
+	<bitmask16 name="Flags" offset="0x20">
+		<option name="Interplate Colors in HSV" value="15"/>
+		<option name="... Along Long Hue Path" value="14"/>
+		<option name="Random Rotation" value="13"/>
+	</bitmask16>
+	
+	<float name="Fade-in Start Distance" note="world units" info="particles begin to fade into visibility beyond this distance" offset="0x24"/>
+	<float name="Fade-in End Distance" note="world units" info="particles become fully visible beyond this distance" offset="0x28"/>
+	<float name="Fade-out Start Distance" note="world units" info="particles begin to fade out of visibility beyond this distance" offset="0x2C"/>
+	<float name="Fade-out End Distance" note="world units" info="particles become fully invisible beyond this distance" offset="0x30"/>
+	<float name="Fade-in Start Height" note="world units" info="particles begin to fade into visibility above this height" offset="0x34"/>
+	<float name="Fade-in End Height" note="world units" info="particles become fully visible above this height" offset="0x38"/>
+	<float name="Fade-out Start Height" note="world units" info="particles begin to fade out of visibility above this height" offset="0x3C"/>
+	<float name="Fade-out End Height" note="world units" info="particles become fully invisible above this height" offset="0x40"/>
+	
+	<float name="Particle Count: from" info="particles per cubic world unit" offset="0xA4"/>
+	<float name="Particle Count: to" info="particles per cubic world unit" offset="0xA8"/>
+	
+	<dependency name="Physics" offset="0xAC"/>
+	
+	<float name="Acceleration Magnitude: from" offset="0xCC"/>
+	<float name="Acceleration Magnitude: to" offset="0xD0"/>
+	
+	<float name="Acceleration Turning Rate" note="0 - 1 only" offset="0xD4"/>
+	<float name="Acceleration Change Rate" offset="0xD8"/>
+	
+	<float name="Particle Radius: from" note="world units" offset="0xFC"/>
+	<float name="Particle Radius: to" note="world units" offset="0x100"/>
+	<float name="Animation Rate: from" note="frames per second" offset="0x104"/>
+	<float name="Animation Rate: to" note="frames per second" offset="0x108"/>
+	<float name="Rotation Rate: from" note="radians per second" offset="0x10C"/>
+	<float name="Rotation Rate: to" note="radians per second" offset="0x110"/>
+	
+	<colorARGB name="Color Lower Bound" offset="0x134"/>
+	<colorARGB name="Color Upper Bound" offset="0x144"/>
+	
+	<dependency name="Shader.Sprite Bitmap" offset="0x194"/>
+	<enum16 name="Shader.Render Mode" offset="0x1A4">
+		<option name="Screen Facing" value="00"/>
+		<option name="Parallel to Direction" value="01"/>
+		<option name="Perpendicular to Direction" value="02"/>
+	</enum16>
+	<enum16 name="Shader.Render Direction Source" info="render modes that depend upon a direction will use this vector" offset="0x1A6">
+		<option name="From Velocity" value="00"/>
+		<option name="From Acceleration" value="01"/>
+	</enum16>
+	
+	<bitmask16 name="Shader.Shader Flags" offset="0x1D0">
+		<option name="Sort Bias" value="15"/>
+		<option name="Nonlinear Tint" value="14"/>
+		<option name="Don't Overdraw First-person Weapon" value="13"/>
+	</bitmask16>
+	
+	<enum16 name="Shader.Framebuffer Blend Function" offset="0x1D2">
+		<option name="Alpha Blend" value="00"/>
+		<option name="Multiply" value="01"/>
+		<option name="Double Multiply" value="02"/>
+		<option name="Add" value="03"/>
+		<option name="Subtract" value="04"/>
+		<option name="Component Minimum" value="05"/>
+		<option name="Component Maximum" value="06"/>
+		<option name="Alpha-Multiply Add" value="07"/>
+	</enum16>
+	
+	<enum16 name="Shader.Framebuffer Fade Mode" offset="0x1D4">
+		<option name="None" value="00"/>
+		<option name="Fade When Perpendicular" value="01"/>
+		<option name="Fade When Parallel" value="02"/>
+	</enum16>
+	
+	<bitmask8 name="Shader.Map Flags" offset="0x1D6">
+		<option name="Unfiltered" value="07"/>
+	</bitmask8>
+	
+	<dependency name="Secondary Map.Bitmap" info_img="rain Particle Types.Secondary Map.png" offset="0x1F4"/>
+	
+	<enum16 name="Secondary Map.Anchor" info_img="rain Particle Types.Secondary Map.png" offset="0x204">
+		<option name="With Primary" value="00"/>
+		<option name="With Screen Space" value="01"/>
+		<option name="Z Sprite" value="02"/>
+	</enum16>
+	
+	<bitmask32 name="Secondary Map.Flags" info_img="rain Particle Types.Secondary Map.png" offset="0x206">
+		<option name="Unfiltered" value="31"/>
+	</bitmask32>
+	
+	<enum16 name="Secondary Map.U-Animation Source" info_img="rain Particle Types.Secondary Map.png" offset="0x208">
+		<option name="None" value="00"/>
+		<option name="A out" value="01"/>
+		<option name="B out" value="02"/>
+		<option name="C out" value="03"/>
+		<option name="D out" value="04"/>
+	</enum16>
+	
+	<enum16 name="Secondary Map.U-Animation Function" info_img="rain Particle Types.Secondary Map.png" offset="0x20A">
+		<option name="One" value="00"/>
+		<option name="Zero" value="01"/>
+		<option name="Cosine" value="02"/>
+		<option name="Cosine (variable period)" value="03"/>
+		<option name="Diagonal Wave" value="04"/>
+		<option name="Diagonal Wave (variable period)" value="05"/>
+		<option name="Slide" value="06"/>
+		<option name="Slide (variable period)" value="07"/>
+		<option name="Noise" value="08"/>
+		<option name="Jitter" value="09"/>
+		<option name="Wander" value="10"/>
+		<option name="Spark" value="11"/>
+	</enum16>
+	
+	<float name="Secondary Map.U-Animation Period" note="seconds; 0 defaults to 1" info_img="rain Particle Types.Secondary Map.png" offset="0x20C"/>
+	<float name="Secondary Map.U-Animation Phase" info_img="rain Particle Types.Secondary Map.png" offset="0x210"/>
+	<float name="Secondary Map.U-Animation Scale" note="repeats; 0 defaults to 1" info_img="rain Particle Types.Secondary Map.png" offset="0x214"/>
+	
+	<enum16 name="Secondary Map.V-Animation Source" info_img="rain Particle Types.Secondary Map.png" offset="0x218">
+		<option name="None" value="00"/>
+		<option name="A out" value="01"/>
+		<option name="B out" value="02"/>
+		<option name="C out" value="03"/>
+		<option name="D out" value="04"/>
+	</enum16>
+	
+	<enum16 name="Secondary Map.V-Animation Function" info_img="rain Particle Types.Secondary Map.png" offset="0x21A">
+		<option name="One" value="00"/>
+		<option name="Zero" value="01"/>
+		<option name="Cosine" value="02"/>
+		<option name="Cosine (variable period)" value="03"/>
+		<option name="Diagonal Wave" value="04"/>
+		<option name="Diagonal Wave (variable period)" value="05"/>
+		<option name="Slide" value="06"/>
+		<option name="Slide (variable period)" value="07"/>
+		<option name="Noise" value="08"/>
+		<option name="Jitter" value="09"/>
+		<option name="Wander" value="10"/>
+		<option name="Spark" value="11"/>
+	</enum16>
+	
+	<float name="Secondary Map.V-Animation Period" note="seconds; 0 defaults to 1" info_img="rain Particle Types.Secondary Map.png" offset="0x21C"/>
+	<float name="Secondary Map.V-Animation Phase" info_img="rain Particle Types.Secondary Map.png" offset="0x220"/>
+	<float name="Secondary Map.V-Animation Scale" note="repeats; 0 defaults to 1" info_img="rain Particle Types.Secondary Map.png" offset="0x224"/>
+	
+	<enum16 name="Secondary Map.Rotation-Animation Source" info_img="rain Particle Types.Secondary Map.png" offset="0x228">
+		<option name="None" value="00"/>
+		<option name="A out" value="01"/>
+		<option name="B out" value="02"/>
+		<option name="C out" value="03"/>
+		<option name="D out" value="04"/>
+	</enum16>
+	
+	<enum16 name="Secondary Map.Rotation-Animation Function" info_img="rain Particle Types.Secondary Map.png" offset="0x22A">
+		<option name="One" value="00"/>
+		<option name="Zero" value="01"/>
+		<option name="Cosine" value="02"/>
+		<option name="Cosine (variable period)" value="03"/>
+		<option name="Diagonal Wave" value="04"/>
+		<option name="Diagonal Wave (variable period)" value="05"/>
+		<option name="Slide" value="06"/>
+		<option name="Slide (variable period)" value="07"/>
+		<option name="Noise" value="08"/>
+		<option name="Jitter" value="09"/>
+		<option name="Wander" value="10"/>
+		<option name="Spark" value="11"/>
+	</enum16>
+	
+	<float name="Secondary Map.Rotation-Animation Period" note="seconds; 0 defaults to 1" info_img="rain Particle Types.Secondary Map.png" offset="0x22C"/>
+	<float name="Secondary Map.Rotation-Animation Phase" info_img="rain Particle Types.Secondary Map.png" offset="0x230"/>
+	<float name="Secondary Map.Rotation-Animation Scale" note="degrees; 0 defaults to 360" info_img="rain Particle Types.Secondary Map.png" offset="0x234"/>
+	<float name="Secondary Map.Rotation-Animation Center: x" info_img="rain Particle Types.Secondary Map.png" offset="0x238"/>
+	<float name="Secondary Map.Rotation-Animation Center: y" info_img="rain Particle Types.Secondary Map.png" offset="0x23C"/>
+	
+	<float name="Secondary Map.Zsprite Radius Scale" info_img="rain Particle Types.Secondary Map.png" offset="0x244"/>
+</struct>
+
+</plugin>

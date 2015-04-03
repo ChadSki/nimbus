@@ -1,0 +1,115 @@
+<plugin class="cdmg" author="sparky" version="4.0" headersize="Main">
+
+<float name="Radius: from" note="world units" offset="0x00"/>
+<float name="Radius: to" note="world units" offset="0x04"/>
+<float name="Cutoff Scale" note="0 - 1 only" offset="0x08"/>
+
+<float name="Vibrate Parameters.Low Frequency" offset="0x24"/>
+<float name="Vibrate Parameters.High Frequency" offset="0x28"/>
+
+<float name="Camera Shaking.Random Translation" note="world units" info="in all directions" offset="0x44"/>
+<float name="Camera Shaking.Random Rotation" note="radians" info="in all directions" offset="0x48"/>
+
+<enum16 name="Camera Shaking.Wobble Function" info="perturbs the effect's behavior over time" offset="0x58">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Camera Shaking.Wobble Function Period" note="ticks; '30' = 1 second" offset="0x5C"/>
+<float name="Camera Shaking.Wobble Weight" info="0.0 = wobble function has no effect; 1.0 = effect will not be felt when the wobble function's value is zero" offset="0x60"/>
+
+<enum16 name="Damage.Side Effect" offset="0x124">
+	<option name="None" value="00"/>
+	<option name="Harmless" value="01"/>
+	<option name="Lethal to the Unsuspecting" value="02"/>
+	<option name="EMP" value="03"/>
+</enum16>
+
+<enum16 name="Damage.Category" offset="0x126">
+	<option name="None" value="00"/>
+	<option name="Falling" value="01"/>
+	<option name="Bullet" value="02"/>
+	<option name="Grenade" value="03"/>
+	<option name="High Explosive" value="04"/>
+	<option name="Sniper" value="05"/>
+	<option name="Melee" value="06"/>
+	<option name="Flame" value="07"/>
+	<option name="Mounted Weapon" value="08"/>
+	<option name="Vehicle" value="09"/>
+	<option name="Plasma" value="10"/>
+	<option name="Needle" value="11"/>
+	<option name="Shotgun" value="12"/>
+</enum16>
+
+<bitmask16 name="Damage.Flags" offset="0x128">
+	<option name="Does Not Hurt Owner" value="15"/>
+	<option name="Can Cause Headshots" value="14"/>
+	<option name="Pings Resistant Units" value="13"/>
+	<option name="Does Not Hurt Friends" value="12"/>
+	<option name="Does Not Ping Units" value="11"/>
+	<option name="Detonates Explosives" value="10"/>
+	<option name="Only Hurts Shields" value="9"/>
+	<option name="Causes Flaming Death" value="8"/>
+	<option name="Damage Indicators Always Point Down" value="7"/>
+	<option name="Skips Shields" value="6"/>
+	<option name="Only Hurts One Infection Form" value="5"/>
+	<option name="Can Cause Multiplayer Headshots" value="4"/>
+	<option name="Infection Form Pop" value="3"/>
+</bitmask16>
+
+<float name="Damage.Damage Lower Bound" offset="0x130"/>
+<float name="Damage.Damage Upper Bound: from" offset="0x134"/>
+<float name="Damage.Damage Upper Bound: to" offset="0x138"/>
+
+<float name="Damage.Vehicle Passthrough Penalty" note="0 - 1 only" info="0 damages passengers in vehicles; 1 does not" offset="0x13C"/>
+<float name="Damage.Stun" note="0 - 1 only" info="amount of stun added to damaged unit" offset="0x144"/>
+<float name="Damage.Maximum Stun" note="0 - 1 only" info="damaged unit's stun will never exceed this amount; also check the matg Globals tag value!" offset="0x148"/>
+<float name="Damage.Stun Time" note="seconds" info="duration of stun due to this damage" offset="0x14C"/>
+
+<float name="Damage.Instantaneous Acceleration / Force" note="0 - infinity" offset="0x154"/>
+
+<float name="Damage Modifiers.1 Dirt" note="0 - infinity" info="Note: 1.0 = 100% normal damage taken" offset="0x160"/>
+<float name="Damage Modifiers.2 Sand" note="0 - infinity" offset="0x164"/>
+<float name="Damage Modifiers.3 Stone" note="0 - infinity" offset="0x168"/>
+<float name="Damage Modifiers.4 Snow" note="0 - infinity" offset="0x16C"/>
+<float name="Damage Modifiers.5 Wood" note="0 - infinity" offset="0x170"/>
+<float name="Damage Modifiers.6 Metal (Hollow)" note="0 - infinity" offset="0x174"/>
+<float name="Damage Modifiers.7 Metal (Thin)" note="0 - infinity" offset="0x178"/>
+<float name="Damage Modifiers.8 Metal (Thick)" note="0 - infinity" offset="0x17C"/>
+<float name="Damage Modifiers.9 Rubber" note="0 - infinity" offset="0x180"/>
+<float name="Damage Modifiers.10 Glass" note="0 - infinity" offset="0x184"/>
+<float name="Damage Modifiers.11 Forcefield" note="0 - infinity" offset="0x188"/>
+<float name="Damage Modifiers.12 Grunt" note="0 - infinity" offset="0x18C"/>
+<float name="Damage Modifiers.13 Hunter Armor" note="0 - infinity" offset="0x190"/>
+<float name="Damage Modifiers.14 Hunter Skin" note="0 - infinity" offset="0x194"/>
+<float name="Damage Modifiers.15 Elite" note="0 - infinity" offset="0x198"/>
+<float name="Damage Modifiers.16 Jackal" note="0 - infinity" offset="0x19C"/>
+<float name="Damage Modifiers.17 Jackal Energy Shield" note="0 - infinity" offset="0x1A0"/>
+<float name="Damage Modifiers.18 Engineer" note="0 - infinity" offset="0x1A4"/>
+<float name="Damage Modifiers.19 Engineer Force Field" note="0 - infinity" offset="0x1A8"/>
+<float name="Damage Modifiers.20 Flood Combat Form" note="0 - infinity" offset="0x1AC"/>
+<float name="Damage Modifiers.21 Flood Carrier Form" note="0 - infinity" offset="0x1B0"/>
+<float name="Damage Modifiers.22 Cyborg" note="0 - infinity" offset="0x1B4"/>
+<float name="Damage Modifiers.23 Cyborg Energy Shield" note="0 - infinity" offset="0x1B8"/>
+<float name="Damage Modifiers.24 Armored Human" note="0 - infinity" offset="0x1BC"/>
+<float name="Damage Modifiers.25 Human" note="0 - infinity" offset="0x1C0"/>
+<float name="Damage Modifiers.26 Sentinel" note="0 - infinity" offset="0x1C4"/>
+<float name="Damage Modifiers.27 Monitor" note="0 - infinity" offset="0x1C8"/>
+<float name="Damage Modifiers.28 Plastic" note="0 - infinity" offset="0x1CC"/>
+<float name="Damage Modifiers.29 Water" note="0 - infinity" offset="0x1D0"/>
+<float name="Damage Modifiers.30 Leaves" note="0 - infinity" offset="0x1D4"/>
+<float name="Damage Modifiers.31 Elite Energy Shield" note="0 - infinity" offset="0x1D8"/>
+<float name="Damage Modifiers.32 Ice" note="0 - infinity" offset="0x1DC"/>
+<float name="Damage Modifiers.33 Hunter Shield" note="0 - infinity" offset="0x1E0"/>
+
+</plugin>

@@ -1,0 +1,37 @@
+<plugin class="flag" author="sparky" version="4.0" headersize="Main">
+
+<enum16 name="Trailing Edge Shape" offset="0x04">
+	<option name="Flat" value="00"/>
+	<option name="Concave Triangular" value="01"/>
+	<option name="Convex Triangular" value="02"/>
+	<option name="Trapezoid, Short Top" value="03"/>
+	<option name="Trapezoid, Short Bottom" value="04"/>
+</enum16>
+
+<short name="Trailing Edge Shape Offset" note="vertices" info="zero places the shape exactly on the trailing edge, positive numbers push it off the edge" offset="0x06"/>
+
+<enum16 name="Attached Edge Shape" offset="0x08">
+	<option name="Flat" value="00"/>
+	<option name="Concave Triangular" value="01"/>
+</enum16>
+
+<short name="Width" note="vertices" info="flag size from attached to trailing edge" offset="0x0C"/>
+<short name="Height" note="vertices" info="flag size along the direction of attachment (should be odd)" offset="0x0E"/>
+
+<float name="Cell Width" note="world units" info="width of the cell between each pair of vertices" offset="0x10"/>
+<float name="Cell Height" note="world units" info="height of the cell between each pair of vertices" offset="0x14"/>
+
+<dependency name="Red Flag Shader" offset="0x18"/>
+<dependency name="Physics" offset="0x28"/>
+
+<float name="Wind Noise" note="world units per second" offset="0x38"/>
+
+<dependency name="Blue Flag Shader" offset="0x44"/>
+
+<struct name="Attachment Points" offset="0x54" size="52">
+	<short name="Height to Next Attachment" note="vertices" info="flag vertices between this attachment point and the next" offset="0x00"/>
+	
+	<string32 name="Marker Name" offset="0x14"/>
+</struct>
+
+</plugin>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<struct name="foot" size="12">
+  <struct_array name="effects" offset="0x0" size="28">
+    <struct_array name="materials" offset="0x0" size="48">
+      <reference name="effect" offset="0x0"/>
+      <reference name="sound" offset="0x10"/>
+    </struct_array>
+  </struct_array>
+</struct>

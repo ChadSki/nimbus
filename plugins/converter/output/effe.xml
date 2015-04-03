@@ -1,0 +1,128 @@
+<?xml version="1.0" ?>
+<struct name="effe" size="64">
+  <flag bit="7" name="deleted_when_attachment_deactivates" offset="0x0"/>
+  <flag bit="6" name="required_for_gameplay" offset="0x0"/>
+  <index name="loop_start_event" offset="0x4" struct_array="events"/>
+  <index name="loop_end_event" offset="0x6" struct_array="events"/>
+  <struct_array name="locations" offset="0x28" size="32">
+    <asciiz maxlength="32" name="marker_name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="events" offset="0x34" size="68">
+    <float32 info="0 - 1 only; chance that this event will be skipped entirely" name="skip_fraction" offset="0x4"/>
+    <float32 info="seconds; delay before this event takes place" name="delay_bounds_from" offset="0x8"/>
+    <float32 info="seconds; delay before this event takes place" name="delay_bounds_to" offset="0xc"/>
+    <float32 info="seconds; duration of this event" name="duration_bounds_from" offset="0x10"/>
+    <float32 info="seconds; duration of this event" name="duration_bounds_to" offset="0x14"/>
+    <struct_array name="parts" offset="0x2c" size="104">
+      <enum16 name="create_in_1" offset="0x0">
+        <option name="any_environment" value="0"/>
+        <option name="air_only" value="1"/>
+        <option name="water_only" value="2"/>
+        <option name="space_only" value="3"/>
+      </enum16>
+      <enum16 name="create_in_2" offset="0x2">
+        <option name="either_mode" value="0"/>
+        <option name="violent_mode_only" value="1"/>
+        <option name="nonviolent_mode_only" value="2"/>
+      </enum16>
+      <index name="location" offset="0x4" struct_array="locations"/>
+      <flag bit="7" name="face_down_regardless_of_location" offset="0x6"/>
+      <reference info="bipd, deca, devc, devi, eqip, garb, item, jpt!, lifi, ligh, mach, obje, part, plac, proj, scen, snd!, ssce, unit, vehi, weap" name="type" offset="0x18"/>
+      <float32 info="world units per second; initial velocity along the location's forward" name="velocity_bounds_from" offset="0x40"/>
+      <float32 info="world units per second; initial velocity along the location's forward" name="velocity_bounds_to" offset="0x44"/>
+      <float32 info="radians; initial velocity will be inside the cone defined by this angle" name="velocity_cone_angle" offset="0x48"/>
+      <float32 info="radians per second" name="angular_velocity_bounds_from" offset="0x4c"/>
+      <float32 info="radians per second" name="angular_velocity_bounds_to" offset="0x50"/>
+      <float32 name="radius_modifier_bounds_from" offset="0x54"/>
+      <float32 name="radius_modifier_bounds_to" offset="0x58"/>
+      <flag bit="7" name="velocity" offset="0x60"/>
+      <flag bit="6" name="velocity_delta" offset="0x60"/>
+      <flag bit="5" name="velocity_cone_angle" offset="0x60"/>
+      <flag bit="4" name="angular_velocity" offset="0x60"/>
+      <flag bit="3" name="angular_velocity_delta" offset="0x60"/>
+      <flag bit="2" name="type_specific_scale" offset="0x60"/>
+      <flag bit="7" name="velocity" offset="0x64"/>
+      <flag bit="6" name="velocity_delta" offset="0x64"/>
+      <flag bit="5" name="velocity_cone_angle" offset="0x64"/>
+      <flag bit="4" name="angular_velocity" offset="0x64"/>
+      <flag bit="3" name="angular_velocity_delta" offset="0x64"/>
+      <flag bit="2" name="type_specific_scale" offset="0x64"/>
+    </struct_array>
+    <struct_array name="particles" offset="0x38" size="232">
+      <enum16 name="create_in_1" offset="0x0">
+        <option name="any_environment" value="0"/>
+        <option name="air_only" value="1"/>
+        <option name="water_only" value="2"/>
+        <option name="space_only" value="3"/>
+      </enum16>
+      <enum16 name="create_in_2" offset="0x2">
+        <option name="either_mode" value="0"/>
+        <option name="violent_mode_only" value="1"/>
+        <option name="nonviolent_mode_only" value="2"/>
+      </enum16>
+      <enum16 name="create" offset="0x4">
+        <option name="independent_of_camera_mode" value="0"/>
+        <option name="only_in_first_person" value="1"/>
+        <option name="only_in_third_person" value="2"/>
+        <option name="in_first_person_if_possible" value="3"/>
+      </enum16>
+      <index name="location" offset="0x8" struct_array="locations"/>
+      <float32 info="radians; particle initial velocity direction relative to the location's forward" name="relative_direction_y" offset="0xc"/>
+      <float32 info="radians; particle initial velocity direction relative to the location's forward" name="relative_direction_p" offset="0x10"/>
+      <float32 info="particle initial position offset relative to the location's forward" name="relative_offset_i_1" offset="0x14"/>
+      <float32 info="particle initial position offset relative to the location's forward" name="relative_offset_i_2" offset="0x18"/>
+      <float32 info="particle initial position offset relative to the location's forward" name="relative_offset_k" offset="0x1c"/>
+      <reference name="particle_type" offset="0x54"/>
+      <flag bit="7" name="stay_attached_to_marker" offset="0x64"/>
+      <flag bit="6" name="random_initial_angle" offset="0x64"/>
+      <flag bit="5" name="tint_from_object_color" offset="0x64"/>
+      <flag bit="4" name="interpolate_tint_as_hsv" offset="0x64"/>
+      <flag bit="3" name="across_the_long_hue_path" offset="0x64"/>
+      <enum16 info="describes how the part creations are distributed over the event duration" name="distribution_function" offset="0x68">
+        <option name="start" value="0"/>
+        <option name="end" value="1"/>
+        <option name="constant" value="2"/>
+        <option name="buildup" value="3"/>
+        <option name="falloff" value="4"/>
+        <option name="buildup_and_falloff" value="5"/>
+      </enum16>
+      <int16 info="number of particles created" name="count_from" offset="0x6c"/>
+      <int16 info="number of particles created" name="count_to" offset="0x6e"/>
+      <float32 info="world units; initial distance from the location's origin" name="distribution_radius_from" offset="0x70"/>
+      <float32 info="world units; initial distance from the location's origin" name="distribution_radius_to" offset="0x74"/>
+      <float32 info="world units per second; initial velocity along the specified direction" name="velocity_from" offset="0x84"/>
+      <float32 info="world units per second; initial velocity along the specified direction" name="velocity_to" offset="0x88"/>
+      <float32 info="radians; particle initial velocities will be inside the cone defined by this angle and the specified direction" name="velocity_cone_angle" offset="0x8c"/>
+      <float32 info="radians per second" name="angular_velocity_from" offset="0x90"/>
+      <float32 info="radians per second" name="angular_velocity_to" offset="0x94"/>
+      <float32 info="world units; particle radius" name="radius_from" offset="0xa0"/>
+      <float32 info="world units; particle radius" name="radius_to" offset="0xa4"/>
+      <colorARGB name="tint_lower_bound" offset="0xb0"/>
+      <colorARGB name="tint_upper_bound" offset="0xc0"/>
+      <flag bit="7" name="velocity" offset="0xe0"/>
+      <flag bit="6" name="velocity_delta" offset="0xe0"/>
+      <flag bit="5" name="velocity_cone_angle" offset="0xe0"/>
+      <flag bit="4" name="angular_velocity" offset="0xe0"/>
+      <flag bit="3" name="angular_velocity_delta" offset="0xe0"/>
+      <flag bit="2" name="count" offset="0xe0"/>
+      <flag bit="1" name="count_delta" offset="0xe0"/>
+      <flag bit="0" name="distribution_radius" offset="0xe0"/>
+      <flag bit="7" name="distribution_radius_delta" offset="0xe1"/>
+      <flag bit="6" name="particle_radius" offset="0xe1"/>
+      <flag bit="5" name="particle_radius_delta" offset="0xe1"/>
+      <flag bit="4" name="tint" offset="0xe1"/>
+      <flag bit="7" name="velocity" offset="0xe4"/>
+      <flag bit="6" name="velocity_delta" offset="0xe4"/>
+      <flag bit="5" name="velocity_cone_angle" offset="0xe4"/>
+      <flag bit="4" name="angular_velocity" offset="0xe4"/>
+      <flag bit="3" name="angular_velocity_delta" offset="0xe4"/>
+      <flag bit="2" name="count" offset="0xe4"/>
+      <flag bit="1" name="count_delta" offset="0xe4"/>
+      <flag bit="0" name="distribution_radius" offset="0xe4"/>
+      <flag bit="7" name="distribution_radius_delta" offset="0xe5"/>
+      <flag bit="6" name="particle_radius" offset="0xe5"/>
+      <flag bit="5" name="particle_radius_delta" offset="0xe5"/>
+      <flag bit="4" name="tint" offset="0xe5"/>
+    </struct_array>
+  </struct_array>
+</struct>

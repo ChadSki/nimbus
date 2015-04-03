@@ -1,0 +1,98 @@
+<plugin class="lens" author="sparky" version="4.0" headersize="Main">
+
+<float name="Lens Flare.Falloff Angle" note="radians" offset="0x00"/>
+<float name="Lens Flare.Cutoff Angle" note="radians" offset="0x04"/>
+<float name="Lens Flare.Occlusion Modifier" info="tested by 002. 1 = normal; any other value will prevent the camera from whiting out when aimed at the light source" offset="0x08"/>
+
+<float name="Occlusion.Occlusion Radius" note="world units" info="radius of the square used to test occlusion" info_img="lens Occlusion.png" offset="0x10"/>
+<enum16 name="Occlusion.Occlusion Offset Direction" info_img="lens Occlusion.png" offset="0x14">
+	<option name="Toward Viewer" value="00"/>
+	<option name="Marker Forward" value="01"/>
+	<option name="None" value="02"/>
+</enum16>
+
+<float name="Occlusion.Near Fade Distance" note="world units" info="distance at which the lens flare brightness is maximum" info_img="lens Occlusion.png" offset="0x18"/>
+<float name="Occlusion.Far Fade Distance" note="world units; 0 = distance fading disabled" info="distance at which the lens flare brightness is minimum" info_img="lens Occlusion.png" offset="0x1C"/>
+
+<dependency name="Bitmaps.Bitmap" info="used by reflections" offset="0x20"/>
+
+<bitmask8 name="Bitmaps.Flags" offset="0x30">
+	<option name="Sun" value="07"/>
+</bitmask8>
+
+<enum16 name="Corona Rotation.Rotation Function" info_img="lens Corona Rotation.png" offset="0x80">
+	<option name="None" value="00"/>
+	<option name="Rotation A" value="01"/>
+	<option name="Rotation B" value="02"/>
+	<option name="Rotation-Translation" value="03"/>
+	<option name="Translation" value="04"/>
+</enum16>
+
+<float name="Corona Rotation.Rotation Function Scale" note="radians" info_img="lens Corona Rotation.png" offset="0x84"/>
+
+<float name="Corona Radius Scale.Horizontal Scale" note="0 defaults to 1" info="amount to stretch the corona along the horizontal axis" offset="0xA0"/>
+<float name="Corona Radius Scale.Vertical Scale" note="0 defaults to 1" info="amount to stretch the corona along the vertical axis" offset="0xA4"/>
+
+<struct name="Reflections" offset="0xC4" size="128">
+	<bitmask16 name="Flags" offset="0x00">
+		<option name="Align Rotation with Screen Center" value="15"/>
+		<option name="Radius NOT Scaled by Distance" value="14"/>
+		<option name="Radius Scaled by Occlusion Factor" value="13"/>
+		<option name="Occluded by Solid Objects" value="12"/>
+	</bitmask16>
+
+	<short name="Bitmap Index" offset="0x04"/>
+
+	<float name="Position (along flare axis)" info="0 = on top of light; 1 = opposite the light; 0.5 = center of the screen" offset="0x1C"/>
+	<float name="Rotation Offset" note="degrees" offset="0x20"/>
+	
+	<float name="Radius: from" note="world units" info="interpolated by light scale" offset="0x28"/>
+	<float name="Radius: to" note="world units" info="interpolated by light scale" offset="0x2C"/>
+
+	<enum16 name="Radius Scaled by" offset="0x30">
+		<option name="None" value="00"/>
+		<option name="Rotation" value="01"/>
+		<option name="Rotation and Strafing" value="02"/>
+		<option name="Distance From Center" value="03"/>
+	</enum16>
+	
+	<float name="Brightness: from" note="0 - 1 only" info="interpolated by light scale" offset="0x34"/>
+	<float name="Brightness: to" note="0 - 1 only" info="interpolated by light scale" offset="0x38"/>
+
+	<enum16 name="Brightness Scaled by" offset="0x3C">
+		<option name="None" value="00"/>
+		<option name="Rotation" value="01"/>
+		<option name="Rotation and Strafing" value="02"/>
+		<option name="Distance From Center" value="03"/>
+	</enum16>
+	
+	<colorARGB name="Tint Color" info="if all values = 0, use light color instead; alpha blends between modulation and tinting" info_img="lens Reflections.Tint Color.png" offset="0x40"/>
+	
+	<colorARGB name="Animation.Color Lower Bound" info="all 0's defaults to all 1's" info_img="lens Reflections.Animation.png" offset="0x50"/>
+	<colorARGB name="Animation.Color Upper Bound" info="all 0's defaults to all 1's" info_img="lens Reflections.Animation.png" offset="0x60"/>
+	
+	<bitmask16 name="Animation.Flags" info_img="lens Reflections.Animation.png" offset="0x70">
+		<option name="Interpolate Color in HSV" value="15"/>
+		<option name="...More Colors" value="14"/>
+	</bitmask16>
+	
+	<enum16 name="Animation.Animation Function" info_img="lens Reflections.Animation.png" offset="0x72">
+		<option name="One" value="00"/>
+		<option name="Zero" value="01"/>
+		<option name="Cosine" value="02"/>
+		<option name="Cosine (variable period)" value="03"/>
+		<option name="Diagonal Wave" value="04"/>
+		<option name="Diagonal Wave (variable period)" value="05"/>
+		<option name="Slide" value="06"/>
+		<option name="Slide (variable period)" value="07"/>
+		<option name="Noise" value="08"/>
+		<option name="Jitter" value="09"/>
+		<option name="Wander" value="10"/>
+		<option name="Spark" value="11"/>
+	</enum16>
+	
+	<float name="Animation.Animation Period" note="seconds; 0 defaults to 1" info_img="lens Reflections.Animation.png" offset="0x74"/>
+	<float name="Animation.Animation Phase" note="seconds" info_img="lens Reflections.Animation.png" offset="0x78"/>
+</struct>
+
+</plugin>

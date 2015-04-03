@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<struct name="deca" size="256">
+  <flag bit="7" name="geometry_inherited_by_next_decal_in_chain" offset="0x0"/>
+  <flag bit="6" name="interpolate_color_in_hsv" offset="0x0"/>
+  <flag bit="5" name="more_colors" offset="0x0"/>
+  <flag bit="4" name="no_random_rotation" offset="0x0"/>
+  <flag bit="3" name="water_effect" offset="0x0"/>
+  <flag bit="2" name="sapien_snap_to_axis" offset="0x0"/>
+  <flag bit="1" name="sapien_incremental_counter" offset="0x0"/>
+  <flag bit="0" name="animation_loop" offset="0x0"/>
+  <flag bit="7" name="preserve_aspect" offset="0x1"/>
+  <enum16 info="controls how the decal wraps onto surface geometry" name="type" offset="0x2">
+    <option name="scratch" value="0"/>
+    <option name="splatter" value="1"/>
+    <option name="burn" value="2"/>
+    <option name="painted_sign" value="3"/>
+  </enum16>
+  <enum16 name="layer" offset="0x4">
+    <option name="primary" value="0"/>
+    <option name="secondary" value="1"/>
+    <option name="light" value="2"/>
+    <option name="alpha_tested" value="3"/>
+    <option name="water" value="4"/>
+  </enum16>
+  <reference name="next_decal_in_chain" offset="0x8"/>
+  <float32 info="world units; 0 defaults to 0.125" name="radius_and_color_radius_from" offset="0x18"/>
+  <float32 info="world units; 0 defaults to 0.125" name="radius_and_color_radius_to" offset="0x1c"/>
+  <float32 info="0 - 1 only; 1 = fully visible; 0 = invisible" name="radius_and_color_intensity_from" offset="0x2c"/>
+  <float32 info="0 - 1 only; 1 = fully visible; 0 = invisible" name="radius_and_color_intensity_to" offset="0x30"/>
+  <colorRGB name="radius_and_color_color_lower_bound" offset="0x34"/>
+  <colorRGB name="radius_and_color_color_upper_bound" offset="0x40"/>
+  <int16 name="animation_animation_loop_frame" offset="0x58"/>
+  <int16 info="ticks per frame; 1 - 120 only" name="animation_animation_speed" offset="0x5a"/>
+  <float32 info="seconds" name="animation_lifetime_from" offset="0x78"/>
+  <float32 info="seconds" name="animation_lifetime_to" offset="0x7c"/>
+  <float32 info="seconds" name="animation_decay_time_from" offset="0x80"/>
+  <float32 info="seconds" name="animation_decay_time_to" offset="0x84"/>
+  <enum16 name="shader_framebuffer_blend_function" offset="0xc0">
+    <option name="alpha_blend" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="double_multiply" value="2"/>
+    <option name="add" value="3"/>
+    <option name="subtract" value="4"/>
+    <option name="component_minimum" value="5"/>
+    <option name="component_maximum" value="6"/>
+    <option name="alpha_multiply_add" value="7"/>
+  </enum16>
+  <reference name="shader_map" offset="0xd8"/>
+  <float32 info="pixels" name="sprite_info_maximum_sprite_extent" offset="0xfc"/>
+</struct>

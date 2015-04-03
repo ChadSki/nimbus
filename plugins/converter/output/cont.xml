@@ -1,0 +1,158 @@
+<?xml version="1.0" ?>
+<struct name="cont" size="324">
+  <flag bit="7" name="first_point_unfaded" offset="0x0"/>
+  <flag bit="6" name="last_point_unfaded" offset="0x0"/>
+  <flag bit="5" name="points_start_pinned_to_media" offset="0x0"/>
+  <flag bit="4" name="points_start_pinned_to_ground" offset="0x0"/>
+  <flag bit="3" name="points_always_pinned_to_media" offset="0x0"/>
+  <flag bit="2" name="points_always_pinned_to_ground" offset="0x0"/>
+  <flag bit="1" name="edge_effect_fades_slowly" offset="0x0"/>
+  <flag bit="7" name="point_generation_rate" offset="0x2"/>
+  <flag bit="6" name="point_velocity" offset="0x2"/>
+  <flag bit="5" name="point_velocity_delta" offset="0x2"/>
+  <flag bit="4" name="point_velocity_cone_angle" offset="0x2"/>
+  <flag bit="3" name="inherited_velocity_fraction" offset="0x2"/>
+  <flag bit="2" name="sequence_animation_rate" offset="0x2"/>
+  <flag bit="1" name="texture_scale_u" offset="0x2"/>
+  <flag bit="0" name="texture_scale_v" offset="0x2"/>
+  <flag bit="7" name="texture_animation_u" offset="0x3"/>
+  <flag bit="6" name="texture_animation_v" offset="0x3"/>
+  <float32 info="points generated per second" name="point_creation_point_generation_rate" offset="0x4"/>
+  <float32 info="world units per second; velocity added to each point's initial velocity" name="point_creation_point_velocity_from" offset="0x8"/>
+  <float32 info="world units per second; velocity added to each point's initial velocity" name="point_creation_point_velocity_to" offset="0xc"/>
+  <float32 info="radians; initial velocity is inside the cone defined by the marker's forward vector and this angle" name="point_creation_point_velocity_cone_angle" offset="0x10"/>
+  <float32 info="0 - 1 only; fraction of parent object's velocity that is inherited by contrail points" name="point_creation_inherited_velocity_fraction" offset="0x14"/>
+  <enum16 info="this specifies how the contrail is oriented in space" name="rendering_render_type" offset="0x18">
+    <option name="vertical_orientation" value="0"/>
+    <option name="horizontal_orientation" value="1"/>
+    <option name="media_mapped" value="2"/>
+    <option name="ground_mapped" value="3"/>
+    <option name="viewer_facing" value="4"/>
+    <option name="double_marker_linked" value="5"/>
+  </enum16>
+  <float32 info="texture repeats per contrail segment" name="rendering_texture_repeats_u" offset="0x1c"/>
+  <float32 info="texture repeats across contrail width" name="rendering_texture_repeats_v" offset="0x20"/>
+  <float32 info="repeats per second; the texture along the contrail is animated by this value" name="rendering_texture_animation_u" offset="0x24"/>
+  <float32 info="repeats per second; the texture across the contrail is animated by this value" name="rendering_texture_animation_v" offset="0x28"/>
+  <float32 info="frames per second" name="rendering_animation_rate" offset="0x2c"/>
+  <reference name="rendering_bitmap" offset="0x30"/>
+  <int16 name="rendering_first_sequence_index" offset="0x40"/>
+  <int16 name="rendering_sequence_count" offset="0x42"/>
+  <flag bit="7" name="sort_bias" offset="0xac"/>
+  <flag bit="6" name="nonlinear_tint" offset="0xac"/>
+  <flag bit="5" name="dont_overdraw_fp_weapon" offset="0xac"/>
+  <enum16 name="rendering_framebuffer_blend_function" offset="0xae">
+    <option name="alpha_blend" value="0"/>
+    <option name="multiply" value="1"/>
+    <option name="double_multiply" value="2"/>
+    <option name="add" value="3"/>
+    <option name="subtract" value="4"/>
+    <option name="component_min" value="5"/>
+    <option name="component_max" value="6"/>
+    <option name="alpha_multiply_add" value="7"/>
+  </enum16>
+  <enum16 name="rendering_framebuffer_fade_mode" offset="0xb0">
+    <option name="none" value="0"/>
+    <option name="fade_when_perpendicular" value="1"/>
+    <option name="fade_when_parallel" value="2"/>
+  </enum16>
+  <flag bit="7" name="unfiltered" offset="0xb2"/>
+  <reference name="secondary_map_bitmap" offset="0xd0"/>
+  <enum16 name="secondary_map_anchor" offset="0xe0">
+    <option name="with_primary" value="0"/>
+    <option name="with_screen_space" value="1"/>
+    <option name="z_sprite" value="2"/>
+  </enum16>
+  <flag bit="7" name="unfiltered" offset="0xe2"/>
+  <enum16 name="secondary_map_u_animation_source" offset="0xe4">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_u_animation_function" offset="0xe6">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_u_animation_period" offset="0xe8"/>
+  <float32 name="secondary_map_u_animation_phase" offset="0xec"/>
+  <float32 info="repeats; 0 defaults to 1" name="secondary_map_u_animation_scale" offset="0xf0"/>
+  <enum16 name="secondary_map_v_animation_source" offset="0xf4">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_v_animation_function" offset="0xf6">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_v_animation_period" offset="0xf8"/>
+  <float32 name="secondary_map_v_animation_phase" offset="0xfc"/>
+  <float32 info="repeats; 0 defaults to 1" name="secondary_map_v_animation_scale" offset="0x100"/>
+  <enum16 name="secondary_map_rotation_animation_source" offset="0x104">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <enum16 name="secondary_map_rotation_animation_function" offset="0x106">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; 0 defaults to 1" name="secondary_map_rotation_animation_period" offset="0x108"/>
+  <float32 name="secondary_map_rotation_animation_phase" offset="0x10c"/>
+  <float32 info="degrees; 0 defaults to 360" name="secondary_map_rotation_animation_scale" offset="0x110"/>
+  <float32 name="secondary_map_rotation_animation_center_x" offset="0x114"/>
+  <float32 name="secondary_map_rotation_animation_center_y" offset="0x118"/>
+  <float32 name="secondary_map_zsprite_radius_scale" offset="0x120"/>
+  <struct_array name="point_states" offset="0x138" size="104">
+    <float32 info="seconds; the time a point spends in this state (use transition durations instead, for smoother effects)" name="state_timing_duration_from" offset="0x0"/>
+    <float32 info="seconds; the time a point spends in this state (use transition durations instead, for smoother effects)" name="state_timing_duration_to" offset="0x4"/>
+    <float32 info="seconds; the time a point takes to transition to the next state" name="state_timing_transition_duration_from" offset="0x8"/>
+    <float32 info="seconds; the time a point takes to transition to the next state" name="state_timing_transition_duration_to" offset="0xc"/>
+    <reference name="point_variables_physics" offset="0x10"/>
+    <float32 info="world units; contrail width at this point" name="point_variables_width" offset="0x40"/>
+    <colorARGB info="contrail color at this point" name="point_variables_color_lower_bound" offset="0x44"/>
+    <colorARGB info="contrail color at this point" name="point_variables_color_upper_bound" offset="0x54"/>
+    <flag bit="7" name="duration" offset="0x64"/>
+    <flag bit="6" name="duration_delta" offset="0x64"/>
+    <flag bit="5" name="transition_duration" offset="0x64"/>
+    <flag bit="4" name="transition_duration_delta" offset="0x64"/>
+    <flag bit="3" name="width" offset="0x64"/>
+    <flag bit="2" name="color" offset="0x64"/>
+  </struct_array>
+</struct>

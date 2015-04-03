@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<struct name="sky" size="208">
+  <reference name="model" offset="0x0"/>
+  <reference name="animation_graph" offset="0x10"/>
+  <colorRGB info="the indoor ambient light color" name="indoor_ambient_radiosity_color" offset="0x38"/>
+  <float32 info="0 - infinity; the indoor ambient light power" name="indoor_ambient_radiosity_power" offset="0x44"/>
+  <colorRGB info="the outdoor ambient light color" name="outdoor_ambient_radiosity_color" offset="0x48"/>
+  <float32 info="0 - infinity; the outdoor ambient light power" name="outdoor_ambient_radiosity_power" offset="0x54"/>
+  <colorRGB name="outdoor_fog_color" offset="0x58"/>
+  <float32 info="0 - 1 only; 0 defaults to 1; density at opaque distance" name="outdoor_fog_maximum_density" offset="0x6c"/>
+  <float32 info="world units; below this distance there is no fog" name="outdoor_fog_start_distance" offset="0x70"/>
+  <float32 info="world units; beyond this distance, surfaces are completely fogged" name="outdoor_fog_opaque_distance" offset="0x74"/>
+  <colorRGB name="indoor_fog_color" offset="0x78"/>
+  <float32 info="0 - 1 only; 0 defaults to 1; density at opaque distance" name="indoor_fog_maximum_density" offset="0x8c"/>
+  <float32 info="world units; below this distance there is no fog" name="indoor_fog_start_distance" offset="0x90"/>
+  <float32 info="world units; beyond this distance, surfaces are completely fogged" name="indoor_fog_opaque_distance" offset="0x94"/>
+  <reference info="used for FOG SCREEN only; not for planar fog - make sure the fog screen flag is checked in fog tag" name="indoor_fog_screen" offset="0x98"/>
+  <struct_array name="shader_functions" offset="0xac" size="36">
+    <asciiz info="the global function that controls this shader value" maxlength="32" name="global_function_name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="animations" offset="0xb8" size="36">
+    <int16 info="the index of the animation in the antr animation graph" name="animation_index" offset="0x0"/>
+    <float32 info="seconds" name="period" offset="0x4"/>
+  </struct_array>
+  <struct_array name="lights" offset="0xc4" size="116">
+    <reference name="lens_flare_lens_flare" offset="0x0"/>
+    <asciiz info="the lens flare for this light will be attached to the specified marker in the model" maxlength="32" name="lens_flare_lens_flare_marker_name" offset="0x10"/>
+    <flag bit="7" name="affects_exteriors" offset="0x4c"/>
+    <flag bit="6" name="affects_interiors" offset="0x4c"/>
+    <colorRGB info="light color" name="radiosity_color" offset="0x50"/>
+    <float32 info="0 - infinity; light power" name="radiosity_power" offset="0x5c"/>
+    <float32 info="world units?; the length of the ray for shadow testing" name="radiosity_test_distance" offset="0x60"/>
+    <float32 info="radians; position of the light source in the sky" name="radiosity_direction_y_leftright" offset="0x68"/>
+    <float32 info="radians; position of the light source in the sky" name="radiosity_direction_p_downup" offset="0x6c"/>
+    <float32 info="radians; angular diameter of the light source in the sky" name="radiosity_diameter" offset="0x70"/>
+  </struct_array>
+</struct>

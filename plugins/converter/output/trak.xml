@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<struct name="trak" size="16">
+  <struct_array name="control_points" offset="0x4" size="60">
+    <float32 name="position_i_1" offset="0x0"/>
+    <float32 name="position_i_2" offset="0x4"/>
+    <float32 name="position_k" offset="0x8"/>
+    <float32 name="orientation_i_1" offset="0xc"/>
+    <float32 name="orientation_i_2" offset="0x10"/>
+    <float32 name="orientation_k" offset="0x14"/>
+    <float32 name="orientation_w" offset="0x18"/>
+  </struct_array>
+</struct>

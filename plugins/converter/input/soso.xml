@@ -1,0 +1,232 @@
+<plugin class="soso" author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Radiosity Properties.Flags" offset="0x00">
+	<option name="Simple Parametrization" info="lightmap texture parameterization should correspond to diffuse texture parameterization" value="15"/>
+	<option name="Ignore Normals" info="light independent of normals (trees)" value="14"/>
+	<option name="Transparent Lit" value="13"/>
+</bitmask16>
+
+<enum16 name="Radiosity Properties.Detail Level" info="affects the density of tessellation (high means slow)" offset="0x02">
+	<option name="High" value="00"/>
+	<option name="Medium" value="01"/>
+	<option name="Low" value="02"/>
+	<option name="Turd" value="03"/>
+</enum16>
+
+<float name="Radiosity Properties.Power" note="0 - infinity" info="power of emitted light" offset="0x04"/>
+
+<colorRGB name="Radiosity Properties.Color of Emitted Light" offset="0x08"/>
+<colorRGB name="Radiosity Properties.Tint Color" info="light passing through this surface, if it's transparent, will be tinted this color" offset="0x14"/>
+
+<enum16 name="Physics Properties.Material Type" offset="0x22">
+	<option name="Dirt" value="00"/>
+	<option name="Sand" value="01"/>
+	<option name="Stone" value="02"/>
+	<option name="Snow" value="03"/>
+	<option name="Wood" value="04"/>
+	<option name="Metal (hollow)" value="05"/>
+	<option name="Metal (thin)" value="06"/>
+	<option name="Metal (thick)" value="07"/>
+	<option name="Rubber" value="08"/>
+	<option name="Glass" value="09"/>
+	<option name="Force Field" value="10"/>
+	<option name="Grunt" value="11"/>
+	<option name="Hunter Armor" value="12"/>
+	<option name="Hunter Skin" value="13"/>
+	<option name="Elite" value="14"/>
+	<option name="Jackal" value="15"/>
+	<option name="Jackal Energy Shield" value="16"/>
+	<option name="Engineer Skin" value="17"/>
+	<option name="Engineer Force Field" value="18"/>
+	<option name="Flood Combat Form" value="19"/>
+	<option name="Flood Carrier Form" value="20"/>
+	<option name="Cyborg Armor" value="21"/>
+	<option name="Cyborg Energy Shield" value="22"/>
+	<option name="Human Armor" value="23"/>
+	<option name="Human Skin" value="24"/>
+	<option name="Sentinel" value="25"/>
+	<option name="Monitor" value="26"/>
+	<option name="Plastic" value="27"/>
+	<option name="Water" value="28"/>
+	<option name="Leaves" value="29"/>
+	<option name="Elite Energy Shield" value="30"/>
+	<option name="Ice" value="31"/>
+	<option name="Hunter Shield" value="32"/>
+</enum16>
+
+<bitmask16 name="Model Shader.Flags" info_img="soso Model Shader.png" offset="0x28">
+	<option name="Detail After Reflection" value="15"/>
+	<option name="Two-Sided" value="14"/>
+	<option name="Not Alpha-Tested" value="13"/>
+	<option name="Alpha-Blended Decal" value="12"/>
+	<option name="True Atmospheric Fog" value="11"/>
+	<option name="Disable Two-Sided Culling" value="10"/>
+</bitmask16>
+
+<float name="Model Shader.Translucency" note="0 - 1 only" info="amount of light that can illuminate the shader from behind" info_img="soso Model Shader.png" offset="0x38"/>
+
+<enum16 name="Change Color.Change Color Source" info_img="soso Change Color.png" offset="0x4C">
+	<option name="None" value="00"/>
+	<option name="A" value="01"/>
+	<option name="B" value="02"/>
+	<option name="C" value="03"/>
+	<option name="D" value="04"/>
+</enum16>
+
+<bitmask8 name="Self-Illumination.Flags" info_img="soso Self-Illumination.png" offset="0x6C">
+	<option name="No Random Phase" value="07"/>
+</bitmask8>
+
+<enum16 name="Self-Illumination.Color Source" info_img="soso Self-Illumination.png" offset="0x70">
+	<option name="None" value="00"/>
+	<option name="A" value="01"/>
+	<option name="B" value="02"/>
+	<option name="C" value="03"/>
+	<option name="D" value="04"/>
+</enum16>
+
+<enum16 name="Self-Illumination.Animation Function" info_img="soso Self-Illumination.png" offset="0x72">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Self-Illumination.Animation Period" note="seconds" info_img="soso Self-Illumination.png" offset="0x74"/>
+
+<colorRGB name="Self-Illumination.Animation Color Lower Bound" info_img="soso Self-Illumination.png" offset="0x78"/>
+<colorRGB name="Self-Illumination.Animation Color Upper Bound" info_img="soso Self-Illumination.png" offset="0x84"/>
+
+<float name="Maps.Map U-Scale" info="0 defaults to 1; scales all 2-D maps simultaneously" info_img="soso Maps.png" offset="0x9C"/>
+<float name="Maps.Map V-Scale" info="0 defaults to 1; scales all 2-D maps simultaneously" info_img="soso Maps.png" offset="0xA0"/>
+
+<dependency name="Maps.Base Map" info_img="soso Maps.png" offset="0xA4"/>
+<dependency name="Maps.Multipurpose Map" info_img="soso Maps.png" offset="0xBC"/>
+
+<enum16 name="Maps.Detail Function" info="controls how detail map is applied to diffuse map" info_img="soso Maps.png" offset="0xD4">
+	<option name="Double/Biased Multiply" value="00"/>
+	<option name="Multiply" value="01"/>
+	<option name="Double/Biased Add" value="02"/>
+</enum16>
+
+<enum16 name="Maps.Detail Mask" info="controls how detail map is masked" info_img="soso Maps.png" offset="0xD6">
+	<option name="None" value="00"/>
+	<option name="Reflection Mask Inverse" value="01"/>
+	<option name="Reflection Mask" value="02"/>
+	<option name="Self-Illumination Mask Inverse" value="03"/>
+	<option name="Self-Illumination Mask" value="04"/>
+	<option name="Change-Color Mask Inverse" value="05"/>
+	<option name="Change-Color Mask" value="06"/>
+	<option name="Multipurpose Map Alpha Inverse" value="07"/>
+	<option name="Multipurpose Map Alpha" value="08"/>
+</enum16>
+
+<float name="Maps.Detail Map Scale" note="0 defaults to 1" info_img="soso Maps.png" offset="0xD8"/>
+
+<dependency name="Maps.Detail Map" info_img="soso Maps.png" offset="0xDC"/>
+
+<float name="Maps.Detail Map V-Scale" info="0 defaults to 1; applied on top of 'Detail Map Scale' above" info_img="soso Maps.png" offset="0xEC"/>
+
+<enum16 name="Texture Scrolling Animation.U-Animation Source" info_img="soso Texture Scrolling Animation.png" offset="0xFC">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Texture Scrolling Animation.U-Animation Function" info_img="soso Texture Scrolling Animation.png" offset="0xFE">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Texture Scrolling Animation.U-Animation Period" note="seconds; 0 defaults to 1" info_img="soso Texture Scrolling Animation.png" offset="0x100"/>
+<float name="Texture Scrolling Animation.U-Animation Phase" info_img="soso Texture Scrolling Animation.png" offset="0x104"/>
+<float name="Texture Scrolling Animation.U-Animation Scale" note="repeats; 0 defaults to 1" info_img="soso Texture Scrolling Animation.png" offset="0x108"/>
+
+<enum16 name="Texture Scrolling Animation.V-Animation Source" info_img="soso Texture Scrolling Animation.png" offset="0x10C">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Texture Scrolling Animation.V-Animation Function" info_img="soso Texture Scrolling Animation.png" offset="0x10E">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Texture Scrolling Animation.V-Animation Period" note="seconds; 0 defaults to 1" info_img="soso Texture Scrolling Animation.png" offset="0x110"/>
+<float name="Texture Scrolling Animation.V-Animation Phase" info_img="soso Texture Scrolling Animation.png" offset="0x114"/>
+<float name="Texture Scrolling Animation.V-Animation Scale" note="repeats; 0 defaults to 1" info_img="soso Texture Scrolling Animation.png" offset="0x118"/>
+
+<enum16 name="Texture Scrolling Animation.Rotation-Animation Source" info_img="soso Texture Scrolling Animation.png" offset="0x11C">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Texture Scrolling Animation.Rotation-Animation Function" info_img="soso Texture Scrolling Animation.png" offset="0x11E">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Texture Scrolling Animation.Rotation-Animation Period" note="seconds; 0 defaults to 1" info_img="soso Texture Scrolling Animation.png" offset="0x120"/>
+<float name="Texture Scrolling Animation.Rotation-Animation Phase" info_img="soso Texture Scrolling Animation.png" offset="0x124"/>
+<float name="Texture Scrolling Animation.Rotation-Animation Scale" note="degrees; 0 defaults to 360" info_img="soso Texture Scrolling Animation.png" offset="0x128"/>
+<float name="Texture Scrolling Animation.Rotation-Animation Center: x" info_img="soso Texture Scrolling Animation.png" offset="0x12C"/>
+<float name="Texture Scrolling Animation.Rotation-Animation Center: y" info_img="soso Texture Scrolling Animation.png" offset="0x130"/>
+
+<float name="Reflection Properties.Reflection Falloff Distance" note="world units" info="distance at which the reflection begins to fade out" offset="0x13C"/>
+<float name="Reflection Properties.Reflection Cutoff Distance" note="world units" info="distance at which the reflection fades out entirely; 0 = no cutoff" offset="0x140"/>
+
+<float name="Reflection Properties.Perpendicular Brightness" note="0 - 1 only" info="reflection brightness when viewed perpendicularly" offset="0x144"/>
+<colorRGB name="Reflection Properties.Perpendicular Tint Color" info="reflection tint color when viewed perpendicularly" offset="0x148"/>
+
+<float name="Reflection Properties.Parallel Brightness" note="0 - 1 only" info="reflection brightness when viewed at a glancing angle" offset="0x154"/>
+<colorRGB name="Reflection Properties.Parallel Tint Color" info="reflection tint color when viewed at a glancing angle" offset="0x158"/>
+
+<dependency name="Reflection Properties.Reflection Cube Map" offset="0x164"/>
+
+</plugin>

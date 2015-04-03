@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<struct name="mgs2" size="300">
+  <asciiz info="the marker name that the light volume should be attached to" maxlength="32" name="light_volume_attachment_marker" offset="0x0"/>
+  <flag bit="7" name="interpolate_color_in_hsv" offset="0x22"/>
+  <flag bit="6" name="more_colors" offset="0x22"/>
+  <float32 info="world units; distance at which light volume is full brightness" name="brightness_scale_near_fade_distance" offset="0x34"/>
+  <float32 info="world units; distance at which light volume is zero brightness" name="brightness_scale_far_fade_distance" offset="0x38"/>
+  <float32 info="0 - 1 only; brightness scale when viewed at a 90-degree angle" name="brightness_scale_perpendicular_brightness_scale" offset="0x3c"/>
+  <float32 info="0 - 1 only; brightness scale when viewed directly" name="brightness_scale_parallel_brightness_scale" offset="0x40"/>
+  <enum16 info="scale brightness based upon external value" name="brightness_scale_brightness_scale_source" offset="0x44">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <reference info="not a sprite plate!" name="bitmaps_map" offset="0x5c"/>
+  <int16 name="bitmaps_sequence_index" offset="0x6c"/>
+  <int16 info="number of bitmaps to draw; 0 = don't render light volume" name="bitmaps_count" offset="0x6e"/>
+  <enum16 info="interpolates between frames based upon external value" name="frame_animation_source" offset="0xb8">
+    <option name="none" value="0"/>
+    <option name="a_out" value="1"/>
+    <option name="b_out" value="2"/>
+    <option name="c_out" value="3"/>
+    <option name="d_out" value="4"/>
+  </enum16>
+  <struct_array name="frames" offset="0x120" size="176">
+    <float32 info="world units" name="offset_from_marker" offset="0x10"/>
+    <float32 info="0 defaults to 1; above 1 compresses light near marker; below 1 compresses light near far end" name="offset_exponent" offset="0x14"/>
+    <float32 info="world units; 0 = don't render light volume" name="length" offset="0x18"/>
+    <float32 info="world units; radius near the marker" name="radius_hither" offset="0x3c"/>
+    <float32 info="world units; radius at far end of light volume" name="radius_yon" offset="0x40"/>
+    <float32 info="0 defaults to 1; above 1 is more teardrop-shaped volume; below 1 is more pill-shaped volume" name="radius_exponent" offset="0x44"/>
+    <colorARGB info="tint color near marker (alpha is brightness)" name="tint_color_hither" offset="0x68"/>
+    <colorARGB info="tint color at far end of light volume (alpha is brightness)" name="tint_color_yon" offset="0x78"/>
+    <float32 info="0 defaults to 1; affects tint color only, not brightness" name="tint_color_exponent" offset="0x88"/>
+    <float32 info="0 defaults to 1" name="brightness_exponent" offset="0x8c"/>
+  </struct_array>
+</struct>

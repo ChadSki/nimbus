@@ -1,0 +1,1388 @@
+<?xml version="1.0" ?>
+<struct name="scnr" size="1456">
+  <reference name="dont_use" offset="0x0"/>
+  <reference name="wont_use" offset="0x10"/>
+  <reference name="cant_use" offset="0x20"/>
+  <struct_array name="skies" offset="0x30" size="16">
+    <reference name="sky" offset="0x0"/>
+  </struct_array>
+  <enum16 name="type" offset="0x3c">
+    <option name="solo" value="0"/>
+    <option name="multiplayer" value="1"/>
+    <option name="main_menu" value="2"/>
+  </enum16>
+  <flag bit="7" name="cortana_hack" offset="0x3e"/>
+  <flag bit="6" name="use_demo_ui" offset="0x3e"/>
+  <struct_array name="child_scenarios" offset="0x40" size="32">
+    <reference name="child_scenario" offset="0x0"/>
+  </struct_array>
+  <float32 info="radians" name="local_north" offset="0x4c"/>
+  <struct_array name="predicted_resources" offset="0xec" size="8">
+    <enum16 name="type" offset="0x0">
+      <option name="bitmap" value="0"/>
+      <option name="sound" value="1"/>
+    </enum16>
+    <int16 name="resource_index" offset="0x2"/>
+    <int16 name="tag_index" offset="0x4"/>
+  </struct_array>
+  <struct_array name="functions" offset="0xf8" size="120">
+    <flag bit="7" name="scripted" offset="0x0"/>
+    <flag bit="6" name="invert" offset="0x0"/>
+    <flag bit="5" name="additive" offset="0x0"/>
+    <flag bit="4" name="always_active" offset="0x0"/>
+    <asciiz maxlength="32" name="name" offset="0x4"/>
+    <float32 info="seconds" name="period" offset="0x24"/>
+    <index name="scale_period_by" offset="0x28" struct_array="functions"/>
+    <enum16 name="function" offset="0x2a">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <index name="scale_function_by" offset="0x2c" struct_array="functions"/>
+    <enum16 name="wobble_function" offset="0x2e">
+      <option name="one" value="0"/>
+      <option name="zero" value="1"/>
+      <option name="cosine" value="2"/>
+      <option name="cosine_variable_period" value="3"/>
+      <option name="diagonal_wave" value="4"/>
+      <option name="diagonal_wave_variable_period" value="5"/>
+      <option name="slide" value="6"/>
+      <option name="slide_variable_period" value="7"/>
+      <option name="noise" value="8"/>
+      <option name="jitter" value="9"/>
+      <option name="wander" value="10"/>
+      <option name="spark" value="11"/>
+    </enum16>
+    <float32 info="seconds" name="wobble_period" offset="0x30"/>
+    <float32 info="percent" name="wobble_magnitude" offset="0x34"/>
+    <float32 info="0 - 1 only" name="square_wave_threshold" offset="0x38"/>
+    <int16 name="step_count" offset="0x3c"/>
+    <enum16 name="map_to" offset="0x3e">
+      <option name="linear" value="0"/>
+      <option name="early" value="1"/>
+      <option name="very_early" value="2"/>
+      <option name="late" value="3"/>
+      <option name="very_late" value="4"/>
+      <option name="cosine" value="5"/>
+    </enum16>
+    <int16 name="sawtooth_count" offset="0x40"/>
+    <index name="scale_result_by" offset="0x44" struct_array="functions"/>
+    <enum16 name="bounds_mode" offset="0x46">
+      <option name="clip" value="0"/>
+      <option name="clip_and_normalize" value="1"/>
+      <option name="scale_to_fit" value="2"/>
+    </enum16>
+    <float32 info="0 - 1 only" name="bounds_from" offset="0x48"/>
+    <float32 info="0 - 1 only" name="bounds_to" offset="0x4c"/>
+    <index name="turn_off_with" offset="0x56" struct_array="functions"/>
+  </struct_array>
+  <int32 info="bytes" name="editor_scenario_data" offset="0x104"/>
+  <struct_array name="comments" offset="0x118" size="48">
+    <float32 name="position_x" offset="0x0"/>
+    <float32 name="position_y" offset="0x4"/>
+    <float32 name="position_z" offset="0x8"/>
+    <int32 info="bytes" name="comment" offset="0x1c"/>
+    <struct_array info="only use the first, 0001" name="comment" offset="0x24" size="32">
+      <asciiz info="sorry, this doesn't parse correctly in Eschaton 0.8.1 :(" maxlength="128" name="comment" offset="0x0"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="object_names" offset="0x204" size="36">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="scenery" offset="0x210" size="72">
+    <index name="type" offset="0x0" struct_array="scenery_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+  </struct_array>
+  <struct_array name="scenery_palette" offset="0x21c" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="bipeds" offset="0x228" size="120">
+    <index name="type" offset="0x0" struct_array="biped_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <float32 info="0 - 1 only" name="body_vitality" offset="0x48"/>
+    <flag bit="7" name="dead" offset="0x4c"/>
+  </struct_array>
+  <struct_array name="biped_palette" offset="0x234" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="vehicle" offset="0x240" size="120">
+    <index name="type" offset="0x0" struct_array="vehicle_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <float32 info="0 - 1 only" name="body_vitality" offset="0x48"/>
+    <flag bit="7" name="dead" offset="0x4c"/>
+    <int8 info="0 = red; 1 = blue" name="multiplayer_team_index" offset="0x58"/>
+    <flag bit="7" name="slayer_default" offset="0x5a"/>
+    <flag bit="6" name="ctf_default" offset="0x5a"/>
+    <flag bit="5" name="king_default" offset="0x5a"/>
+    <flag bit="4" name="oddball_default" offset="0x5a"/>
+    <flag bit="3" name="unused" offset="0x5a"/>
+    <flag bit="2" name="unused" offset="0x5a"/>
+    <flag bit="1" name="unused" offset="0x5a"/>
+    <flag bit="0" name="unused" offset="0x5a"/>
+    <flag bit="7" name="slayer_allowed" offset="0x5b"/>
+    <flag bit="6" name="ctf_allowed" offset="0x5b"/>
+    <flag bit="5" name="king_allowed" offset="0x5b"/>
+    <flag bit="4" name="oddball_allowed" offset="0x5b"/>
+    <flag bit="3" name="unused" offset="0x5b"/>
+    <flag bit="2" name="unused" offset="0x5b"/>
+    <flag bit="1" name="unused" offset="0x5b"/>
+    <flag bit="0" name="unused" offset="0x5b"/>
+  </struct_array>
+  <struct_array name="vehicle_palette" offset="0x24c" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="equipment" offset="0x258" size="40">
+    <index name="type" offset="0x0" struct_array="equipment_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <flag bit="7" name="initially_at_rest" offset="0x22"/>
+    <flag bit="6" name="obsolete" offset="0x22"/>
+    <flag bit="5" name="does_accelerate" offset="0x22"/>
+  </struct_array>
+  <struct_array name="equipment_palette" offset="0x264" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="weapons" offset="0x270" size="92">
+    <index name="type" offset="0x0" struct_array="weapon_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <int16 name="rounds_left" offset="0x48"/>
+    <int16 name="rounds_loaded" offset="0x4a"/>
+    <flag bit="7" name="initially_at_rest" offset="0x4c"/>
+    <flag bit="6" name="obsolete" offset="0x4c"/>
+    <flag bit="5" name="does_accelerate" offset="0x4c"/>
+  </struct_array>
+  <struct_array name="weapon_palette" offset="0x27c" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="device_groups" offset="0x288" size="52">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <float32 info="0 or 1; 1 = active/on/open/up" name="initial_value" offset="0x20"/>
+    <flag bit="7" name="can_change_only_once" offset="0x24"/>
+  </struct_array>
+  <struct_array name="machines" offset="0x294" size="64">
+    <index name="type" offset="0x0" struct_array="machine_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <index info="sets enabled/disabled" name="power_group" offset="0x28" struct_array="device_groups"/>
+    <index info="triggers activation" name="position_group" offset="0x2a" struct_array="device_groups"/>
+    <flag bit="7" name="initially_open_1_0" offset="0x2c"/>
+    <flag bit="6" name="initially_off_0_0" offset="0x2c"/>
+    <flag bit="5" name="can_change_only_once" offset="0x2c"/>
+    <flag bit="4" name="position_reversed" offset="0x2c"/>
+    <flag bit="3" name="not_usable_from_any_side" offset="0x2c"/>
+    <flag bit="7" name="does_not_operate_automatically" offset="0x30"/>
+    <flag bit="6" name="one_sided" offset="0x30"/>
+    <flag bit="5" name="never_appears_locked" offset="0x30"/>
+    <flag bit="4" name="opened_by_melee_attack" offset="0x30"/>
+  </struct_array>
+  <struct_array name="machine_palette" offset="0x2a0" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="controls" offset="0x2ac" size="64">
+    <index name="type" offset="0x0" struct_array="control_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <index info="sets enabled/disabled" name="power_group" offset="0x28" struct_array="device_groups"/>
+    <index info="triggers activation" name="position_group" offset="0x2a" struct_array="device_groups"/>
+    <flag bit="7" name="initially_open_1_0" offset="0x2c"/>
+    <flag bit="6" name="initially_off_0_0" offset="0x2c"/>
+    <flag bit="5" name="can_change_only_once" offset="0x2c"/>
+    <flag bit="4" name="position_reversed" offset="0x2c"/>
+    <flag bit="3" name="not_usable_from_any_side" offset="0x2c"/>
+    <flag bit="7" name="usable_from_both_sides" offset="0x30"/>
+    <int16 info="Poppycock! Sparky says, 'Experiment, Ye!'" name="dont_touch_this" offset="0x34"/>
+  </struct_array>
+  <struct_array name="control_palette" offset="0x2b8" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="light_fixtures" offset="0x2c4" size="88">
+    <index name="type" offset="0x0" struct_array="light_fixtures_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+    <index info="sets enabled/disabled" name="power_group" offset="0x28" struct_array="device_groups"/>
+    <index info="triggers activation" name="position_group" offset="0x2a" struct_array="device_groups"/>
+    <flag bit="7" name="initially_open_1_0" offset="0x2c"/>
+    <flag bit="6" name="initially_off_0_0" offset="0x2c"/>
+    <flag bit="5" name="can_change_only_once" offset="0x2c"/>
+    <flag bit="4" name="position_reversed" offset="0x2c"/>
+    <flag bit="3" name="not_usable_from_any_side" offset="0x2c"/>
+    <colorRGB name="color" offset="0x30"/>
+    <float32 name="intensity" offset="0x3c"/>
+    <float32 info="radians" name="falloff_angle" offset="0x40"/>
+    <float32 info="radians" name="cutoff_angle" offset="0x44"/>
+  </struct_array>
+  <struct_array name="light_fixtures_palette" offset="0x2d0" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="sound_scenery" offset="0x2dc" size="40">
+    <index name="type" offset="0x0" struct_array="sound_scenery_palette"/>
+    <index name="name" offset="0x2" struct_array="object_names"/>
+    <flag bit="7" name="automatically" offset="0x4"/>
+    <flag bit="6" name="on_easy" offset="0x4"/>
+    <flag bit="5" name="on_normal" offset="0x4"/>
+    <flag bit="4" name="on_hard" offset="0x4"/>
+    <int16 info="if non-zero, will try to use model permutations which end in this number, eg. '7' would pick 'body-7' and 'head-7'" name="desired_permutation" offset="0x6"/>
+    <float32 name="position_x" offset="0x8"/>
+    <float32 name="position_y" offset="0xc"/>
+    <float32 name="position_z" offset="0x10"/>
+    <float32 info="yaw; radians" name="rotation_y" offset="0x14"/>
+    <float32 info="pitch; radians" name="rotation_p" offset="0x18"/>
+    <float32 info="roll; radians" name="rotation_r" offset="0x1c"/>
+  </struct_array>
+  <struct_array name="sound_scenery_palette" offset="0x2e8" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="player_starting_profile" offset="0x348" size="104">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <float32 info="0 - 1 only" name="starting_health_modifier" offset="0x20"/>
+    <float32 info="0 - 1 only" name="starting_shield_modifier" offset="0x24"/>
+    <reference name="primary_weapon" offset="0x28"/>
+    <int16 name="primary_weapon_rounds_loaded" offset="0x38"/>
+    <int16 name="primary_weapon_rounds_left" offset="0x3a"/>
+    <reference name="secondary_weapon" offset="0x3c"/>
+    <int16 name="secondary_weapon_rounds_loaded" offset="0x4c"/>
+    <int16 name="secondary_weapon_rounds_left" offset="0x4e"/>
+    <int8 name="starting_fragmentation_grenade_count" offset="0x50"/>
+    <int8 name="starting_plasma_grenade_count" offset="0x51"/>
+    <int8 info="not normally used" name="starting_unknown_1_grenade_count" offset="0x52"/>
+    <int8 info="not normally used" name="starting_unknown_2_grenade_count" offset="0x53"/>
+  </struct_array>
+  <struct_array name="player_starting_locations" offset="0x354" size="52">
+    <float32 name="position_x" offset="0x0"/>
+    <float32 name="position_y" offset="0x4"/>
+    <float32 name="position_z" offset="0x8"/>
+    <float32 info="radians" name="facing" offset="0xc"/>
+    <int16 name="team_index" offset="0x10"/>
+    <int16 name="bsp_index" offset="0x12"/>
+    <enum16 name="type_0" offset="0x14">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_1" offset="0x16">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_2" offset="0x18">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_3" offset="0x1a">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+  </struct_array>
+  <struct_array name="trigger_volumes" offset="0x360" size="96">
+    <asciiz maxlength="32" name="name" offset="0x4"/>
+  </struct_array>
+  <struct_array name="recorded_animations" offset="0x36c" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <int8 name="version" offset="0x20"/>
+    <int8 name="raw_animation_data" offset="0x21"/>
+    <int16 name="unit_control_data_version" offset="0x22"/>
+    <int16 name="length_of_animation" offset="0x24"/>
+    <int32 info="bytes" name="recorded_animation_event_stream" offset="0x2c"/>
+  </struct_array>
+  <struct_array name="netgame_flags" offset="0x378" size="148">
+    <float32 name="position_x" offset="0x0"/>
+    <float32 name="position_y" offset="0x4"/>
+    <float32 name="position_z" offset="0x8"/>
+    <float32 name="facing" offset="0xc"/>
+    <enum16 name="type" offset="0x10">
+      <option name="ctf_flag" value="0"/>
+      <option name="ctf_vehicle" value="1"/>
+      <option name="oddball_ball_spawn" value="2"/>
+      <option name="race_track" value="3"/>
+      <option name="race_vehicle" value="4"/>
+      <option name="vegas_bank_not_used" value="5"/>
+      <option name="teleport_from" value="6"/>
+      <option name="teleport_to" value="7"/>
+      <option name="hill_flag" value="8"/>
+    </enum16>
+    <int16 name="team_index" offset="0x12"/>
+    <reference name="weapon_group" offset="0x14"/>
+  </struct_array>
+  <struct_array name="netgame_equipment" offset="0x384" size="144">
+    <flag bit="7" name="levitate" offset="0x0"/>
+    <enum16 name="type_0" offset="0x4">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_1" offset="0x6">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_2" offset="0x8">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_3" offset="0xa">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <int16 name="team_index" offset="0xc"/>
+    <int16 info="seconds; 0 = default" name="spawn_time" offset="0xe"/>
+    <float32 name="position_x" offset="0x40"/>
+    <float32 name="position_y" offset="0x44"/>
+    <float32 name="position_z" offset="0x48"/>
+    <float32 name="facing" offset="0x4c"/>
+    <reference name="item_collection" offset="0x50"/>
+  </struct_array>
+  <struct_array name="starting_equipment" offset="0x390" size="204">
+    <flag bit="7" name="no_grenades" offset="0x0"/>
+    <flag bit="6" name="plasma_grenades" offset="0x0"/>
+    <enum16 name="type_0" offset="0x4">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_1" offset="0x6">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_2" offset="0x8">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <enum16 name="type_3" offset="0xa">
+      <option name="none" value="0"/>
+      <option name="ctf" value="1"/>
+      <option name="slayer" value="2"/>
+      <option name="oddball" value="3"/>
+      <option name="king_of_the_hill" value="4"/>
+      <option name="race" value="5"/>
+      <option name="terminator" value="6"/>
+      <option name="stub" value="7"/>
+      <option name="ignored1" value="8"/>
+      <option name="ignored2" value="9"/>
+      <option name="ignored3" value="10"/>
+      <option name="ignored4" value="11"/>
+      <option name="all_games" value="12"/>
+      <option name="all_except_ctf" value="13"/>
+      <option name="all_except_race_and_ctf" value="14"/>
+    </enum16>
+    <reference name="item_collection_1" offset="0x3c"/>
+    <reference name="item_collection_2" offset="0x4c"/>
+    <reference name="item_collection_3" offset="0x5c"/>
+    <reference name="item_collection_4" offset="0x6c"/>
+    <reference name="item_collection_5" offset="0x7c"/>
+    <reference name="item_collection_6" offset="0x8c"/>
+  </struct_array>
+  <struct_array name="bsp_switch_trigger_volumes" offset="0x39c" size="8">
+    <index name="trigger_volume" offset="0x0" struct_array="trigger_volumes"/>
+    <int16 name="source" offset="0x2"/>
+    <int16 name="destination" offset="0x4"/>
+  </struct_array>
+  <struct_array info="note: these chunks may not be in their expected order" name="decals" offset="0x3a8" size="16">
+    <index name="decal_type" offset="0x0" struct_array="decal_palette"/>
+    <int8 info="-127 to 127 only" name="yaw" offset="0x2"/>
+    <int8 info="-127 to 127 only" name="pitch" offset="0x3"/>
+    <float32 name="position_x" offset="0x4"/>
+    <float32 name="position_y" offset="0x8"/>
+    <float32 name="position_z" offset="0xc"/>
+  </struct_array>
+  <struct_array name="decal_palette" offset="0x3b4" size="16">
+    <reference name="reference" offset="0x0"/>
+  </struct_array>
+  <struct_array name="detail_object_collection_palette" offset="0x3c0" size="48">
+    <reference name="name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="actor_palette" offset="0x420" size="16">
+    <reference info="actv" name="reference" offset="0x0"/>
+  </struct_array>
+  <struct_array name="encounters" offset="0x42c" size="176">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="not_initially_created" offset="0x20"/>
+    <flag bit="6" name="respawn_enabled" offset="0x20"/>
+    <flag bit="5" name="initially_blind" offset="0x20"/>
+    <flag bit="4" name="initially_deaf" offset="0x20"/>
+    <flag bit="3" name="initially_braindead" offset="0x20"/>
+    <flag bit="2" name="firing_3d_positions" offset="0x20"/>
+    <flag bit="1" name="manual_bsp_index_specified" offset="0x20"/>
+    <enum16 name="team_index" offset="0x24">
+      <option name="default_by_unit" value="0"/>
+      <option name="player" value="1"/>
+      <option name="human" value="2"/>
+      <option name="covenant" value="3"/>
+      <option name="flood" value="4"/>
+      <option name="sentinel" value="5"/>
+      <option name="unused6" value="6"/>
+      <option name="unused7" value="7"/>
+      <option name="unused8" value="8"/>
+      <option name="unused9" value="9"/>
+    </enum16>
+    <enum16 name="search_behavior" offset="0x28">
+      <option name="normal" value="0"/>
+      <option name="never" value="1"/>
+      <option name="tenacious" value="2"/>
+    </enum16>
+    <int16 info="Structure BSP Index that this encounter belongs to; ignored unless 'manual bsp index specified' flag is checked; if not checked, will try to find this automatically, but may fail in areas of overlapping geometry." name="manual_bsp_index" offset="0x2a"/>
+    <float32 info="seconds; delay between respawning actors in this encounter" name="respawn_delay_from" offset="0x2c"/>
+    <float32 info="seconds; delay between respawning actors in this encounter" name="respawn_delay_to" offset="0x30"/>
+    <struct_array name="squads" offset="0x80" size="232">
+      <asciiz maxlength="32" name="name" offset="0x0"/>
+      <index name="actor_type" offset="0x20" struct_array="actor_palette"/>
+      <enum16 info="state that this actor starts in" name="initial_state" offset="0x24">
+        <option name="none" value="0"/>
+        <option name="sleeping" value="1"/>
+        <option name="alert" value="2"/>
+        <option name="moving_repeating_same_position" value="3"/>
+        <option name="moving_loop" value="4"/>
+        <option name="moving_loop_back_and_forth" value="5"/>
+        <option name="moving_loop_randomly" value="6"/>
+        <option name="moving_randomly" value="7"/>
+        <option name="guarding" value="8"/>
+        <option name="guarding_at_guard_position" value="9"/>
+        <option name="searching" value="10"/>
+        <option name="fleeing" value="11"/>
+      </enum16>
+      <enum16 info="state that this actor will return to when it has nothing to do" name="return_state" offset="0x26">
+        <option name="none" value="0"/>
+        <option name="sleeping" value="1"/>
+        <option name="alert" value="2"/>
+        <option name="moving_repeating_same_position" value="3"/>
+        <option name="moving_loop" value="4"/>
+        <option name="moving_loop_back_and_forth" value="5"/>
+        <option name="moving_loop_randomly" value="6"/>
+        <option name="moving_randomly" value="7"/>
+        <option name="guarding" value="8"/>
+        <option name="guarding_at_guard_position" value="9"/>
+        <option name="searching" value="10"/>
+        <option name="fleeing" value="11"/>
+      </enum16>
+      <flag bit="7" name="unused" offset="0x28"/>
+      <flag bit="6" name="never_search" offset="0x28"/>
+      <flag bit="5" name="start_timer_immediately" offset="0x28"/>
+      <flag bit="4" name="no_timer_delay_forever" offset="0x28"/>
+      <flag bit="3" name="magic_sight_after_timer" offset="0x28"/>
+      <flag bit="2" name="automatic_migration" offset="0x28"/>
+      <enum16 info="what kind of leader this squad has; Normal = based upon squad size; Random will always choose one" name="unique_leader_type" offset="0x2c">
+        <option name="normal" value="0"/>
+        <option name="none" value="1"/>
+        <option name="random" value="2"/>
+        <option name="sgt_johnson" value="3"/>
+        <option name="sgt_lehto" value="4"/>
+      </enum16>
+      <float32 info="seconds" name="squad_delay_time" offset="0x50"/>
+      <flag bit="7" name="_a" offset="0x54"/>
+      <flag bit="6" name="_b" offset="0x54"/>
+      <flag bit="5" name="_c" offset="0x54"/>
+      <flag bit="4" name="_d" offset="0x54"/>
+      <flag bit="3" name="_e" offset="0x54"/>
+      <flag bit="2" name="_f" offset="0x54"/>
+      <flag bit="1" name="_g" offset="0x54"/>
+      <flag bit="0" name="_h" offset="0x54"/>
+      <flag bit="7" name="_i" offset="0x55"/>
+      <flag bit="6" name="_j" offset="0x55"/>
+      <flag bit="5" name="_k" offset="0x55"/>
+      <flag bit="4" name="_l" offset="0x55"/>
+      <flag bit="3" name="_m" offset="0x55"/>
+      <flag bit="2" name="_n" offset="0x55"/>
+      <flag bit="1" name="_o" offset="0x55"/>
+      <flag bit="0" name="_p" offset="0x55"/>
+      <flag bit="7" name="_q" offset="0x56"/>
+      <flag bit="6" name="_r" offset="0x56"/>
+      <flag bit="5" name="_s" offset="0x56"/>
+      <flag bit="4" name="_t" offset="0x56"/>
+      <flag bit="3" name="_u" offset="0x56"/>
+      <flag bit="2" name="_v" offset="0x56"/>
+      <flag bit="1" name="_w" offset="0x56"/>
+      <flag bit="0" name="_x" offset="0x56"/>
+      <flag bit="7" name="_y" offset="0x57"/>
+      <flag bit="6" name="_z" offset="0x57"/>
+      <flag bit="7" name="_a" offset="0x58"/>
+      <flag bit="6" name="_b" offset="0x58"/>
+      <flag bit="5" name="_c" offset="0x58"/>
+      <flag bit="4" name="_d" offset="0x58"/>
+      <flag bit="3" name="_e" offset="0x58"/>
+      <flag bit="2" name="_f" offset="0x58"/>
+      <flag bit="1" name="_g" offset="0x58"/>
+      <flag bit="0" name="_h" offset="0x58"/>
+      <flag bit="7" name="_i" offset="0x59"/>
+      <flag bit="6" name="_j" offset="0x59"/>
+      <flag bit="5" name="_k" offset="0x59"/>
+      <flag bit="4" name="_l" offset="0x59"/>
+      <flag bit="3" name="_m" offset="0x59"/>
+      <flag bit="2" name="_n" offset="0x59"/>
+      <flag bit="1" name="_o" offset="0x59"/>
+      <flag bit="0" name="_p" offset="0x59"/>
+      <flag bit="7" name="_q" offset="0x5a"/>
+      <flag bit="6" name="_r" offset="0x5a"/>
+      <flag bit="5" name="_s" offset="0x5a"/>
+      <flag bit="4" name="_t" offset="0x5a"/>
+      <flag bit="3" name="_u" offset="0x5a"/>
+      <flag bit="2" name="_v" offset="0x5a"/>
+      <flag bit="1" name="_w" offset="0x5a"/>
+      <flag bit="0" name="_x" offset="0x5a"/>
+      <flag bit="7" name="_y" offset="0x5b"/>
+      <flag bit="6" info="careful: unreliable" name="_z" offset="0x5b"/>
+      <flag bit="7" name="_a" offset="0x5c"/>
+      <flag bit="6" name="_b" offset="0x5c"/>
+      <flag bit="5" name="_c" offset="0x5c"/>
+      <flag bit="4" name="_d" offset="0x5c"/>
+      <flag bit="3" name="_e" offset="0x5c"/>
+      <flag bit="2" name="_f" offset="0x5c"/>
+      <flag bit="1" name="_g" offset="0x5c"/>
+      <flag bit="0" name="_h" offset="0x5c"/>
+      <flag bit="7" name="_i" offset="0x5d"/>
+      <flag bit="6" name="_j" offset="0x5d"/>
+      <flag bit="5" name="_k" offset="0x5d"/>
+      <flag bit="4" name="_l" offset="0x5d"/>
+      <flag bit="3" name="_m" offset="0x5d"/>
+      <flag bit="2" name="_n" offset="0x5d"/>
+      <flag bit="1" name="_o" offset="0x5d"/>
+      <flag bit="0" name="_p" offset="0x5d"/>
+      <flag bit="7" name="_q" offset="0x5e"/>
+      <flag bit="6" name="_r" offset="0x5e"/>
+      <flag bit="5" name="_s" offset="0x5e"/>
+      <flag bit="4" name="_t" offset="0x5e"/>
+      <flag bit="3" name="_u" offset="0x5e"/>
+      <flag bit="2" name="_v" offset="0x5e"/>
+      <flag bit="1" name="_w" offset="0x5e"/>
+      <flag bit="0" name="_x" offset="0x5e"/>
+      <flag bit="7" name="_y" offset="0x5f"/>
+      <flag bit="6" name="_z" offset="0x5f"/>
+      <flag bit="7" name="_a" offset="0x60"/>
+      <flag bit="6" name="_b" offset="0x60"/>
+      <flag bit="5" name="_c" offset="0x60"/>
+      <flag bit="4" name="_d" offset="0x60"/>
+      <flag bit="3" name="_e" offset="0x60"/>
+      <flag bit="2" name="_f" offset="0x60"/>
+      <flag bit="1" name="_g" offset="0x60"/>
+      <flag bit="0" name="_h" offset="0x60"/>
+      <flag bit="7" name="_i" offset="0x61"/>
+      <flag bit="6" name="_j" offset="0x61"/>
+      <flag bit="5" name="_k" offset="0x61"/>
+      <flag bit="4" name="_l" offset="0x61"/>
+      <flag bit="3" name="_m" offset="0x61"/>
+      <flag bit="2" name="_n" offset="0x61"/>
+      <flag bit="1" name="_o" offset="0x61"/>
+      <flag bit="0" name="_p" offset="0x61"/>
+      <flag bit="7" name="_q" offset="0x62"/>
+      <flag bit="6" name="_r" offset="0x62"/>
+      <flag bit="5" name="_s" offset="0x62"/>
+      <flag bit="4" name="_t" offset="0x62"/>
+      <flag bit="3" name="_u" offset="0x62"/>
+      <flag bit="2" name="_v" offset="0x62"/>
+      <flag bit="1" name="_w" offset="0x62"/>
+      <flag bit="0" name="_x" offset="0x62"/>
+      <flag bit="7" name="_y" offset="0x63"/>
+      <flag bit="6" name="_z" offset="0x63"/>
+      <flag bit="7" name="_a" offset="0x64"/>
+      <flag bit="6" name="_b" offset="0x64"/>
+      <flag bit="5" name="_c" offset="0x64"/>
+      <flag bit="4" name="_d" offset="0x64"/>
+      <flag bit="3" name="_e" offset="0x64"/>
+      <flag bit="2" name="_f" offset="0x64"/>
+      <flag bit="1" name="_g" offset="0x64"/>
+      <flag bit="0" name="_h" offset="0x64"/>
+      <flag bit="7" name="_i" offset="0x65"/>
+      <flag bit="6" name="_j" offset="0x65"/>
+      <flag bit="5" name="_k" offset="0x65"/>
+      <flag bit="4" name="_l" offset="0x65"/>
+      <flag bit="3" name="_m" offset="0x65"/>
+      <flag bit="2" name="_n" offset="0x65"/>
+      <flag bit="1" name="_o" offset="0x65"/>
+      <flag bit="0" name="_p" offset="0x65"/>
+      <flag bit="7" name="_q" offset="0x66"/>
+      <flag bit="6" name="_r" offset="0x66"/>
+      <flag bit="5" name="_s" offset="0x66"/>
+      <flag bit="4" name="_t" offset="0x66"/>
+      <flag bit="3" name="_u" offset="0x66"/>
+      <flag bit="2" name="_v" offset="0x66"/>
+      <flag bit="1" name="_w" offset="0x66"/>
+      <flag bit="0" name="_x" offset="0x66"/>
+      <flag bit="7" name="_y" offset="0x67"/>
+      <flag bit="6" name="_z" offset="0x67"/>
+      <flag bit="7" name="_a" offset="0x68"/>
+      <flag bit="6" name="_b" offset="0x68"/>
+      <flag bit="5" name="_c" offset="0x68"/>
+      <flag bit="4" name="_d" offset="0x68"/>
+      <flag bit="3" name="_e" offset="0x68"/>
+      <flag bit="2" name="_f" offset="0x68"/>
+      <flag bit="1" name="_g" offset="0x68"/>
+      <flag bit="0" name="_h" offset="0x68"/>
+      <flag bit="7" name="_i" offset="0x69"/>
+      <flag bit="6" name="_j" offset="0x69"/>
+      <flag bit="5" name="_k" offset="0x69"/>
+      <flag bit="4" name="_l" offset="0x69"/>
+      <flag bit="3" name="_m" offset="0x69"/>
+      <flag bit="2" name="_n" offset="0x69"/>
+      <flag bit="1" name="_o" offset="0x69"/>
+      <flag bit="0" name="_p" offset="0x69"/>
+      <flag bit="7" name="_q" offset="0x6a"/>
+      <flag bit="6" name="_r" offset="0x6a"/>
+      <flag bit="5" name="_s" offset="0x6a"/>
+      <flag bit="4" name="_t" offset="0x6a"/>
+      <flag bit="3" name="_u" offset="0x6a"/>
+      <flag bit="2" name="_v" offset="0x6a"/>
+      <flag bit="1" name="_w" offset="0x6a"/>
+      <flag bit="0" name="_x" offset="0x6a"/>
+      <flag bit="7" name="_y" offset="0x6b"/>
+      <flag bit="6" name="_z" offset="0x6b"/>
+      <flag bit="7" name="_a" offset="0x6c"/>
+      <flag bit="6" name="_b" offset="0x6c"/>
+      <flag bit="5" name="_c" offset="0x6c"/>
+      <flag bit="4" name="_d" offset="0x6c"/>
+      <flag bit="3" name="_e" offset="0x6c"/>
+      <flag bit="2" name="_f" offset="0x6c"/>
+      <flag bit="1" name="_g" offset="0x6c"/>
+      <flag bit="0" name="_h" offset="0x6c"/>
+      <flag bit="7" name="_i" offset="0x6d"/>
+      <flag bit="6" name="_j" offset="0x6d"/>
+      <flag bit="5" name="_k" offset="0x6d"/>
+      <flag bit="4" name="_l" offset="0x6d"/>
+      <flag bit="3" name="_m" offset="0x6d"/>
+      <flag bit="2" name="_n" offset="0x6d"/>
+      <flag bit="1" name="_o" offset="0x6d"/>
+      <flag bit="0" name="_p" offset="0x6d"/>
+      <flag bit="7" name="_q" offset="0x6e"/>
+      <flag bit="6" name="_r" offset="0x6e"/>
+      <flag bit="5" name="_s" offset="0x6e"/>
+      <flag bit="4" name="_t" offset="0x6e"/>
+      <flag bit="3" name="_u" offset="0x6e"/>
+      <flag bit="2" name="_v" offset="0x6e"/>
+      <flag bit="1" name="_w" offset="0x6e"/>
+      <flag bit="0" name="_x" offset="0x6e"/>
+      <flag bit="7" name="_y" offset="0x6f"/>
+      <flag bit="6" name="_z" offset="0x6f"/>
+      <int16 info="initial number of actors on normal difficulty" name="normal_difficulty_count" offset="0x7c"/>
+      <int16 info="initial number of actors on insane difficulty; hard is midway between normal and insane" name="insane_difficulty_count" offset="0x7e"/>
+      <enum16 name="major_upgrade" offset="0x80">
+        <option name="normal" value="0"/>
+        <option name="few" value="1"/>
+        <option name="many" value="2"/>
+        <option name="none" value="3"/>
+        <option name="all" value="4"/>
+      </enum16>
+      <int16 info="must be at least this many actors alive at once, else will instantly respawn more" name="respawn_minimum_actors" offset="0x84"/>
+      <int16 info="there will never be more than this many actors alive at once" name="respawn_maximum_actors" offset="0x86"/>
+      <int16 info="0 = infinite; total number to respawn" name="respawn_total" offset="0x88"/>
+      <float32 info="seconds; delay between respawning actors in this squad" name="respawn_delay_from" offset="0x8c"/>
+      <float32 info="seconds; delay between respawning actors in this squad" name="respawn_delay_to" offset="0x90"/>
+      <struct_array name="move_positions" offset="0xc4" size="80">
+        <float32 name="position_x" offset="0x0"/>
+        <float32 name="position_y" offset="0x4"/>
+        <float32 name="position_z" offset="0x8"/>
+        <float32 info="radians" name="facing" offset="0xc"/>
+        <float32 name="weight" offset="0x10"/>
+        <float32 info="seconds" name="time_from" offset="0x14"/>
+        <float32 info="seconds" name="time_to" offset="0x18"/>
+        <index name="animations" offset="0x1c" struct_array="ai_animation_references"/>
+        <int8 info="0 = no sequence; identifies this move position as belonging to a sequence; only actors whose starting locations match this sequence can use it" name="sequence_id" offset="0x1e"/>
+        <int32 name="surface_index" offset="0x4c"/>
+      </struct_array>
+      <struct_array name="starting_locations" offset="0xd0" size="28">
+        <float32 name="position_x" offset="0x0"/>
+        <float32 name="position_y" offset="0x4"/>
+        <float32 name="position_z" offset="0x8"/>
+        <float32 info="radians" name="facing" offset="0xc"/>
+        <int8 info="0 = no specific sequences; which move position sequence we can use" name="sequence_id" offset="0x12"/>
+        <flag bit="7" name="required" offset="0x13"/>
+        <enum16 name="return_state" offset="0x14">
+          <option name="none" value="0"/>
+          <option name="sleeping" value="1"/>
+          <option name="alert" value="2"/>
+          <option name="moving_repeating_same_position" value="3"/>
+          <option name="moving_loop" value="4"/>
+          <option name="moving_loop_back_and_forth" value="5"/>
+          <option name="moving_loop_randomly" value="6"/>
+          <option name="moving_randomly" value="7"/>
+          <option name="guarding" value="8"/>
+          <option name="guarding_at_guard_position" value="9"/>
+          <option name="searching" value="10"/>
+          <option name="fleeing" value="11"/>
+        </enum16>
+        <enum16 name="initial_state" offset="0x16">
+          <option name="none" value="0"/>
+          <option name="sleeping" value="1"/>
+          <option name="alert" value="2"/>
+          <option name="moving_repeating_same_position" value="3"/>
+          <option name="moving_loop" value="4"/>
+          <option name="moving_loop_back_and_forth" value="5"/>
+          <option name="moving_loop_randomly" value="6"/>
+          <option name="moving_randomly" value="7"/>
+          <option name="guarding" value="8"/>
+          <option name="guarding_at_guard_position" value="9"/>
+          <option name="searching" value="10"/>
+          <option name="fleeing" value="11"/>
+        </enum16>
+        <index name="actor_type" offset="0x18" struct_array="actor_palette"/>
+        <index name="command_list" offset="0x1a" struct_array="command_lists"/>
+      </struct_array>
+    </struct_array>
+    <struct_array name="platoons" offset="0x8c" size="172">
+      <asciiz maxlength="32" name="name" offset="0x0"/>
+      <flag bit="7" name="flee_when_maneuvering" offset="0x20"/>
+      <flag bit="6" name="say_advancing_when_maneuvering" offset="0x20"/>
+      <flag bit="5" name="start_in_defending_state" offset="0x20"/>
+      <enum16 name="change_attacking_or_defending_status_when" offset="0x30">
+        <option name="never" value="0"/>
+        <option name="less_than_three_quarters_strength" value="1"/>
+        <option name="less_than_half_strength" value="2"/>
+        <option name="less_than_one_quarter_strength" value="3"/>
+        <option name="anybody_is_dead" value="4"/>
+        <option name="one_quarter_are_dead" value="5"/>
+        <option name="half_are_dead" value="6"/>
+        <option name="three_quarters_are_dead" value="7"/>
+        <option name="all_but_one_is_dead" value="8"/>
+        <option name="all_are_dead" value="9"/>
+      </enum16>
+      <enum16 name="maneuver_when" offset="0x3c">
+        <option name="never" value="0"/>
+        <option name="less_than_three_quarters_strength" value="1"/>
+        <option name="less_than_half_strength" value="2"/>
+        <option name="less_than_one_quarter_strength" value="3"/>
+        <option name="anybody_is_dead" value="4"/>
+        <option name="one_quarter_are_dead" value="5"/>
+        <option name="half_are_dead" value="6"/>
+        <option name="three_quarters_are_dead" value="7"/>
+        <option name="all_but_one_is_dead" value="8"/>
+        <option name="all_are_dead" value="9"/>
+      </enum16>
+    </struct_array>
+    <struct_array name="firing_positions" offset="0x98" size="24">
+      <float32 name="position_x" offset="0x0"/>
+      <float32 name="position_y" offset="0x4"/>
+      <float32 name="position_z" offset="0x8"/>
+      <enum16 name="group_index" offset="0xc">
+        <option name="_a" value="0"/>
+        <option name="_b" value="1"/>
+        <option name="_c" value="2"/>
+        <option name="_d" value="3"/>
+        <option name="_e" value="4"/>
+        <option name="_f" value="5"/>
+        <option name="_g" value="6"/>
+        <option name="_h" value="7"/>
+        <option name="_i" value="8"/>
+        <option name="_j" value="9"/>
+        <option name="_k" value="10"/>
+        <option name="_l" value="11"/>
+        <option name="_m" value="12"/>
+        <option name="_n" value="13"/>
+        <option name="_o" value="14"/>
+        <option name="_p" value="15"/>
+        <option name="_q" value="16"/>
+        <option name="_r" value="17"/>
+        <option name="_s" value="18"/>
+        <option name="_t" value="19"/>
+        <option name="_u" value="20"/>
+        <option name="_v" value="21"/>
+        <option name="_w" value="22"/>
+        <option name="_x" value="23"/>
+        <option name="_y" value="24"/>
+        <option name="_z" value="25"/>
+      </enum16>
+    </struct_array>
+    <struct_array name="player_starting_locations" offset="0xa4" size="52">
+      <float32 name="position_x" offset="0x0"/>
+      <float32 name="position_y" offset="0x4"/>
+      <float32 name="position_z" offset="0x8"/>
+      <float32 info="radians" name="facing" offset="0xc"/>
+      <int16 name="team_index" offset="0x10"/>
+      <int16 name="bsp_index" offset="0x12"/>
+      <enum16 name="type_0" offset="0x14">
+        <option name="none" value="0"/>
+        <option name="ctf" value="1"/>
+        <option name="slayer" value="2"/>
+        <option name="oddball" value="3"/>
+        <option name="king_of_the_hill" value="4"/>
+        <option name="race" value="5"/>
+        <option name="terminator" value="6"/>
+        <option name="stub" value="7"/>
+        <option name="ignored1" value="8"/>
+        <option name="ignored2" value="9"/>
+        <option name="ignored3" value="10"/>
+        <option name="ignored4" value="11"/>
+        <option name="all_games" value="12"/>
+        <option name="all_except_ctf" value="13"/>
+        <option name="all_except_race_and_ctf" value="14"/>
+      </enum16>
+      <enum16 name="type_1" offset="0x16">
+        <option name="none" value="0"/>
+        <option name="ctf" value="1"/>
+        <option name="slayer" value="2"/>
+        <option name="oddball" value="3"/>
+        <option name="king_of_the_hill" value="4"/>
+        <option name="race" value="5"/>
+        <option name="terminator" value="6"/>
+        <option name="stub" value="7"/>
+        <option name="ignored1" value="8"/>
+        <option name="ignored2" value="9"/>
+        <option name="ignored3" value="10"/>
+        <option name="ignored4" value="11"/>
+        <option name="all_games" value="12"/>
+        <option name="all_except_ctf" value="13"/>
+        <option name="all_except_race_and_ctf" value="14"/>
+      </enum16>
+      <enum16 name="type_2" offset="0x18">
+        <option name="none" value="0"/>
+        <option name="ctf" value="1"/>
+        <option name="slayer" value="2"/>
+        <option name="oddball" value="3"/>
+        <option name="king_of_the_hill" value="4"/>
+        <option name="race" value="5"/>
+        <option name="terminator" value="6"/>
+        <option name="stub" value="7"/>
+        <option name="ignored1" value="8"/>
+        <option name="ignored2" value="9"/>
+        <option name="ignored3" value="10"/>
+        <option name="ignored4" value="11"/>
+        <option name="all_games" value="12"/>
+        <option name="all_except_ctf" value="13"/>
+        <option name="all_except_race_and_ctf" value="14"/>
+      </enum16>
+      <enum16 name="type_3" offset="0x1a">
+        <option name="none" value="0"/>
+        <option name="ctf" value="1"/>
+        <option name="slayer" value="2"/>
+        <option name="oddball" value="3"/>
+        <option name="king_of_the_hill" value="4"/>
+        <option name="race" value="5"/>
+        <option name="terminator" value="6"/>
+        <option name="stub" value="7"/>
+        <option name="ignored1" value="8"/>
+        <option name="ignored2" value="9"/>
+        <option name="ignored3" value="10"/>
+        <option name="ignored4" value="11"/>
+        <option name="all_games" value="12"/>
+        <option name="all_except_ctf" value="13"/>
+        <option name="all_except_race_and_ctf" value="14"/>
+      </enum16>
+    </struct_array>
+  </struct_array>
+  <struct_array name="command_lists" offset="0x438" size="96">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="allow_initiative" offset="0x20"/>
+    <flag bit="6" name="allow_targeting" offset="0x20"/>
+    <flag bit="5" name="disable_looking" offset="0x20"/>
+    <flag bit="4" name="disable_communication" offset="0x20"/>
+    <flag bit="3" name="disable_falling_damage" offset="0x20"/>
+    <flag bit="2" name="manual_bsp_index" offset="0x20"/>
+    <int16 info="Structure BSP Index that this encounter belongs to; ignored unless 'manual bsp index specified' flag is checked; if not checked, will try to find this automatically, but may fail in areas of overlapping geometry." name="manual_bsp_index" offset="0x2c"/>
+    <struct_array name="commands" offset="0x30" size="32">
+      <enum16 name="atom_type" offset="0x0">
+        <option name="pause" value="0"/>
+        <option name="go_to" value="1"/>
+        <option name="go_to_and_face" value="2"/>
+        <option name="move_in_direction" value="3"/>
+        <option name="look" value="4"/>
+        <option name="animation_mode" value="5"/>
+        <option name="crouch" value="6"/>
+        <option name="shoot" value="7"/>
+        <option name="grenade" value="8"/>
+        <option name="vehicle" value="9"/>
+        <option name="running_jump" value="10"/>
+        <option name="targeted_jump" value="11"/>
+        <option name="script" value="12"/>
+        <option name="animate" value="13"/>
+        <option name="recording" value="14"/>
+        <option name="action" value="15"/>
+        <option name="vocalize" value="16"/>
+        <option name="targeting" value="17"/>
+        <option name="initiatave" value="18"/>
+        <option name="wait" value="19"/>
+        <option name="loop" value="20"/>
+        <option name="die" value="21"/>
+        <option name="move_immediate" value="22"/>
+        <option name="look_random" value="23"/>
+        <option name="look_player" value="24"/>
+        <option name="look_object" value="25"/>
+        <option name="set_radius" value="26"/>
+        <option name="teleport" value="27"/>
+      </enum16>
+      <int16 name="atom_modifier" offset="0x2"/>
+      <float32 name="parameter_1" offset="0x4"/>
+      <float32 name="parameter_2" offset="0x8"/>
+      <index name="animation" offset="0x10" struct_array="ai_animation_references"/>
+      <index name="script" offset="0x12" struct_array="scripts"/>
+      <index name="recording" offset="0x14" struct_array="ai_recording_references"/>
+      <index name="object_name" offset="0x18" struct_array="object_names"/>
+    </struct_array>
+    <struct_array name="points" offset="0x3c" size="20">
+      <float32 name="position_x" offset="0x0"/>
+      <float32 name="position_y" offset="0x4"/>
+      <float32 name="position_z" offset="0x8"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="ai_animation_references" offset="0x444" size="60">
+    <asciiz maxlength="32" name="animation_name" offset="0x0"/>
+    <reference name="animation_graph" offset="0x20"/>
+  </struct_array>
+  <struct_array name="ai_script_references" offset="0x450" size="40">
+    <asciiz maxlength="32" name="script_name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="ai_recording_references" offset="0x45c" size="40">
+    <asciiz maxlength="32" name="recording_name" offset="0x0"/>
+  </struct_array>
+  <struct_array name="ai_conversations" offset="0x468" size="116">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <flag bit="7" name="stop_if_death" offset="0x20"/>
+    <flag bit="6" name="stop_if_damaged" offset="0x20"/>
+    <flag bit="5" name="stop_if_visible_enemy" offset="0x20"/>
+    <flag bit="4" name="stop_if_alerted_to_enemy" offset="0x20"/>
+    <flag bit="3" name="player_must_be_visible" offset="0x20"/>
+    <flag bit="2" name="stop_other_actions" offset="0x20"/>
+    <flag bit="1" name="keep_trying_to_play" offset="0x20"/>
+    <flag bit="0" name="player_must_be_looking" offset="0x20"/>
+    <float32 info="world units; player must be this far away before conversation can trigger" name="trigger_distance" offset="0x24"/>
+    <float32 info="world units; if 'involves player' flag is set, conversation participants will run this close to the player before speaking" name="run_to_player_distance" offset="0x28"/>
+    <struct_array name="participants" offset="0x50" size="84">
+      <flag bit="7" name="optional" offset="0x2"/>
+      <flag bit="6" name="has_alternate" offset="0x2"/>
+      <flag bit="5" name="is_alternate" offset="0x2"/>
+      <enum16 name="selection_type" offset="0x4">
+        <option name="friendly_actor" value="0"/>
+        <option name="disembodied" value="1"/>
+        <option name="in_players_vehicle" value="2"/>
+        <option name="not_in_a_vehicle" value="3"/>
+        <option name="prefer_sergeant" value="4"/>
+        <option name="any_actor" value="5"/>
+        <option name="radio_unit" value="6"/>
+        <option name="radio_sergeant" value="7"/>
+      </enum16>
+      <enum16 name="actor_type" offset="0x6">
+        <option name="elite" value="0"/>
+        <option name="jackal" value="1"/>
+        <option name="grunt" value="2"/>
+        <option name="hunter" value="3"/>
+        <option name="engineer" value="4"/>
+        <option name="assassin" value="5"/>
+        <option name="player" value="6"/>
+        <option name="marine" value="7"/>
+        <option name="crew" value="8"/>
+        <option name="combat_form" value="9"/>
+        <option name="infection_form" value="10"/>
+        <option name="carrier_form" value="11"/>
+        <option name="monitor" value="12"/>
+        <option name="sentinel" value="13"/>
+        <option name="none" value="14"/>
+        <option name="mounted_weapon" value="15"/>
+      </enum16>
+      <index info="if a unit with this name exists, we try to pick them to start the conversation" name="use_this_object" offset="0x8" struct_array="object_names"/>
+      <index info="once we pick a unit, we name it this" name="set_new_name" offset="0xa" struct_array="object_names"/>
+      <asciiz maxlength="32" name="encounter_name" offset="0x24"/>
+    </struct_array>
+    <struct_array name="lines" offset="0x5c" size="124">
+      <flag bit="7" name="addressee_look_at_speaker" offset="0x0"/>
+      <flag bit="6" name="everyone_look_at_speaker" offset="0x0"/>
+      <flag bit="5" name="everyone_look_at_addressee" offset="0x0"/>
+      <flag bit="4" name="wait_until_told_to_advance" offset="0x0"/>
+      <flag bit="3" name="wait_until_speaker_nearby" offset="0x0"/>
+      <flag bit="2" name="wait_until_everyone_nearby" offset="0x0"/>
+      <enum16 name="addressee" offset="0x4">
+        <option name="none" value="0"/>
+        <option name="player" value="1"/>
+        <option name="participant" value="2"/>
+      </enum16>
+      <float32 name="line_delay_time" offset="0xc"/>
+      <reference name="variant_1" offset="0x1c"/>
+      <reference name="variant_2" offset="0x2c"/>
+      <reference name="variant_3" offset="0x3c"/>
+      <reference name="variant_4" offset="0x4c"/>
+      <reference name="variant_5" offset="0x5c"/>
+      <reference name="variant_6" offset="0x6c"/>
+    </struct_array>
+  </struct_array>
+  <int32 info="bytes" name="script_syntax_data" offset="0x474"/>
+  <int32 info="bytes" name="script_string_data" offset="0x488"/>
+  <struct_array name="scripts" offset="0x49c" size="92">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <enum16 name="script_type" offset="0x20">
+      <option name="startup" value="0"/>
+      <option name="dormant" value="1"/>
+      <option name="continuous" value="2"/>
+      <option name="static" value="3"/>
+      <option name="stub" value="4"/>
+    </enum16>
+    <enum16 name="return_type" offset="0x22">
+      <option name="unparsed" value="0"/>
+      <option name="special_form" value="1"/>
+      <option name="function_name" value="2"/>
+      <option name="passthrough" value="3"/>
+      <option name="void" value="4"/>
+      <option name="boolean" value="5"/>
+      <option name="real" value="6"/>
+      <option name="short" value="7"/>
+      <option name="long" value="8"/>
+      <option name="string" value="9"/>
+      <option name="script" value="10"/>
+      <option name="trigger_volume" value="11"/>
+      <option name="cutscene_flag" value="12"/>
+      <option name="cutscene_camera_point" value="13"/>
+      <option name="cutscene_title" value="14"/>
+      <option name="cutscene_recording" value="15"/>
+      <option name="device_group" value="16"/>
+      <option name="ai" value="17"/>
+      <option name="ai_command_list" value="18"/>
+      <option name="starting_profile" value="19"/>
+      <option name="conversation" value="20"/>
+      <option name="navpoint" value="21"/>
+      <option name="hud_message" value="22"/>
+      <option name="object_list" value="23"/>
+      <option name="sound" value="24"/>
+      <option name="effect" value="25"/>
+      <option name="damage" value="26"/>
+      <option name="looping_sound" value="27"/>
+      <option name="animation_graph" value="28"/>
+      <option name="actor_variant" value="29"/>
+      <option name="damage_effect" value="30"/>
+      <option name="object_definition" value="31"/>
+      <option name="game_difficulty" value="32"/>
+      <option name="team" value="33"/>
+      <option name="ai_default_state" value="34"/>
+      <option name="actor_type" value="35"/>
+      <option name="hud_corner" value="36"/>
+      <option name="object" value="37"/>
+      <option name="unit" value="38"/>
+      <option name="vehicle" value="39"/>
+      <option name="weapon" value="40"/>
+      <option name="device" value="41"/>
+      <option name="scenery" value="42"/>
+      <option name="object_name" value="43"/>
+      <option name="unit_name" value="44"/>
+      <option name="vehicle_name" value="45"/>
+      <option name="weapon_name" value="46"/>
+      <option name="device_name" value="47"/>
+      <option name="scenery_name" value="48"/>
+    </enum16>
+    <int32 name="root_expression_index" offset="0x24"/>
+  </struct_array>
+  <struct_array name="globals" offset="0x4a8" size="92">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <enum16 name="type" offset="0x20">
+      <option name="unparsed" value="0"/>
+      <option name="special_form" value="1"/>
+      <option name="function_name" value="2"/>
+      <option name="passthrough" value="3"/>
+      <option name="void" value="4"/>
+      <option name="boolean" value="5"/>
+      <option name="real" value="6"/>
+      <option name="short" value="7"/>
+      <option name="long" value="8"/>
+      <option name="string" value="9"/>
+      <option name="script" value="10"/>
+      <option name="trigger_volume" value="11"/>
+      <option name="cutscene_flag" value="12"/>
+      <option name="cutscene_camera_point" value="13"/>
+      <option name="cutscene_title" value="14"/>
+      <option name="cutscene_recording" value="15"/>
+      <option name="device_group" value="16"/>
+      <option name="ai" value="17"/>
+      <option name="ai_command_list" value="18"/>
+      <option name="starting_profile" value="19"/>
+      <option name="conversation" value="20"/>
+      <option name="navpoint" value="21"/>
+      <option name="hud_message" value="22"/>
+      <option name="object_list" value="23"/>
+      <option name="sound" value="24"/>
+      <option name="effect" value="25"/>
+      <option name="damage" value="26"/>
+      <option name="looping_sound" value="27"/>
+      <option name="animation_graph" value="28"/>
+      <option name="actor_variant" value="29"/>
+      <option name="damage_effect" value="30"/>
+      <option name="object_definition" value="31"/>
+      <option name="game_difficulty" value="32"/>
+      <option name="team" value="33"/>
+      <option name="ai_default_state" value="34"/>
+      <option name="actor_type" value="35"/>
+      <option name="hud_corner" value="36"/>
+      <option name="object" value="37"/>
+      <option name="unit" value="38"/>
+      <option name="vehicle" value="39"/>
+      <option name="weapon" value="40"/>
+      <option name="device" value="41"/>
+      <option name="scenery" value="42"/>
+      <option name="object_name" value="43"/>
+      <option name="unit_name" value="44"/>
+      <option name="vehicle_name" value="45"/>
+      <option name="weapon_name" value="46"/>
+      <option name="device_name" value="47"/>
+      <option name="scenery_name" value="48"/>
+    </enum16>
+    <int32 name="initialization_expression_index" offset="0x28"/>
+  </struct_array>
+  <struct_array name="references" offset="0x4b4" size="40">
+    <reference info="custom object names" name="reference" offset="0x18"/>
+  </struct_array>
+  <struct_array name="cutscene_flags" offset="0x4e4" size="92">
+    <asciiz maxlength="32" name="name" offset="0x4"/>
+    <float32 name="position_x" offset="0x24"/>
+    <float32 name="position_y" offset="0x28"/>
+    <float32 name="position_z" offset="0x2c"/>
+    <float32 info="yaw" name="facing_y" offset="0x30"/>
+    <float32 info="pitch" name="facing_p" offset="0x34"/>
+  </struct_array>
+  <struct_array name="cutscene_camera_points" offset="0x4f0" size="104">
+    <asciiz maxlength="32" name="name" offset="0x4"/>
+    <float32 name="position_x" offset="0x28"/>
+    <float32 name="position_y" offset="0x2c"/>
+    <float32 name="position_z" offset="0x30"/>
+    <float32 info="yaw" name="orientation_y" offset="0x34"/>
+    <float32 info="pitch" name="orientation_p" offset="0x38"/>
+    <float32 info="roll" name="orientation_r" offset="0x3c"/>
+    <float32 info="radians" name="field_of_view" offset="0x40"/>
+  </struct_array>
+  <struct_array name="cutscene_titles" offset="0x4fc" size="96">
+    <asciiz maxlength="32" name="name" offset="0x4"/>
+    <int16 info="top" name="text_bounds_on_screen_t" offset="0x28"/>
+    <int16 info="left" name="text_bounds_on_screen_l" offset="0x2a"/>
+    <int16 info="bottom" name="text_bounds_on_screen_b" offset="0x2c"/>
+    <int16 info="right" name="text_bounds_on_screen_r" offset="0x2e"/>
+    <int16 name="string_index" offset="0x30"/>
+    <enum16 name="justification" offset="0x34">
+      <option name="left" value="0"/>
+      <option name="right" value="1"/>
+      <option name="center" value="2"/>
+    </enum16>
+    <colorbyte name="text_color" offset="0x3c"/>
+    <colorbyte name="shadow_color" offset="0x40"/>
+    <float32 info="entered number / 30 = count in seconds" name="fade_in_time" offset="0x44"/>
+    <float32 info="entered number / about 57 = count in seconds" name="up_time" offset="0x48"/>
+    <float32 info="entered number / 30 = count in seconds" name="fade_out_time" offset="0x4c"/>
+  </struct_array>
+  <reference name="custom_object_names" offset="0x574"/>
+  <reference name="ingame_help_text" offset="0x584"/>
+  <reference name="hud_messages" offset="0x594"/>
+  <struct_array name="structure_bsps" offset="0x5a4" size="32">
+    <int32 name="bsp_start" offset="0x0"/>
+    <int32 name="bsp_size" offset="0x4"/>
+    <int32 name="bsp_magic" offset="0x8"/>
+    <reference name="structure_bsp" offset="0x10"/>
+  </struct_array>
+</struct>

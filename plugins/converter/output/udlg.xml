@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<struct name="udlg" size="3296">
+  <reference info="played randomly and intermittently whenever we aren't in combat" name="idle_idle_noncombat" offset="0x10"/>
+  <reference info="played randomly and intermittently whenever we're in combat" name="idle_idle_combat" offset="0x20"/>
+  <reference info="played continuously while we are fleeing" name="idle_idle_flee" offset="0x30"/>
+  <reference info="took body damage" name="involuntary_pain_body_minor" offset="0x70"/>
+  <reference info="took a significant amount of body damage" name="involuntary_pain_body_major" offset="0x80"/>
+  <reference info="took shield damage" name="involuntary_pain_shield" offset="0x90"/>
+  <reference info="took damage from falling" name="involuntary_pain_falling" offset="0xa0"/>
+  <reference info="screaming in fear (falling to your death, explosive stuck to you)" name="involuntary_scream_fear" offset="0xb0"/>
+  <reference info="screaming in pain (being flamed)" name="involuntary_scream_pain" offset="0xc0"/>
+  <reference info="limb body part (arm or leg) was destroyed" name="involuntary_maimed_limb" offset="0xd0"/>
+  <reference info="head body part was destroyed" name="involuntary_maimed_head" offset="0xe0"/>
+  <reference info="died from minor damage, or was unprepared" name="involuntary_death_quiet" offset="0xf0"/>
+  <reference info="died from violent trauma" name="involuntary_death_violent" offset="0x100"/>
+  <reference info="died from falling" name="involuntary_death_falling" offset="0x110"/>
+  <reference info="died in a horribly painful fashion (burnt to death)" name="involuntary_death_agonizing" offset="0x120"/>
+  <reference info="died instantly" name="involuntary_death_instant" offset="0x130"/>
+  <reference info="died and was blown up into the airdeath instant" name="involuntary_death_flying" offset="0x140"/>
+  <reference info="hurt a friendly AI" name="hurting_people_damaged_friend" offset="0x160"/>
+  <reference info="hurt a friendly player" name="hurting_people_damaged_friend_player" offset="0x170"/>
+  <reference info="hurt an enemy" name="hurting_people_damaged_enemy" offset="0x180"/>
+  <reference info="hurt an enemy: comment to friend" name="hurting_people_damaged_enemy_comment" offset="0x190"/>
+  <reference info="hurt by a friendly AI" name="being_hurt_hurt_friend" offset="0x1e0"/>
+  <reference info="hurt by a friendly AI: response from that friend" name="being_hurt_hurt_friend_response" offset="0x1f0"/>
+  <reference info="hurt by a friendly player" name="being_hurt_hurt_friend_player" offset="0x200"/>
+  <reference info="hurt by an enemy" name="being_hurt_hurt_enemy" offset="0x210"/>
+  <reference info="hurt by an enemy: response from the enemy that hurt us ('you like that?')" name="being_hurt_hurt_enemy_response" offset="0x220"/>
+  <reference info="hurt by an enemy: comment from a friend of ours" name="being_hurt_hurt_enemy_comment" offset="0x230"/>
+  <reference info="hurt by an enemy with bullets" name="being_hurt_hurt_enemy_bullet" offset="0x240"/>
+  <reference info="hurt by an enemy with needles" name="being_hurt_hurt_enemy_needler" offset="0x250"/>
+  <reference info="hurt by an enemy with a plasma bolt" name="being_hurt_hurt_enemy_plasma" offset="0x260"/>
+  <reference info="hurt by an enemy with a sniper weapon" name="being_hurt_hurt_enemy_sniper" offset="0x270"/>
+  <reference info="a grenade is stuck to us" name="being_hurt_hurt_enemy_grenade" offset="0x280"/>
+  <reference info="hurt by an enemy with an explosive weapon" name="being_hurt_hurt_enemy_explosion" offset="0x290"/>
+  <reference info="hurt by an enemy with a melee weapon" name="being_hurt_hurt_enemy_melee" offset="0x2a0"/>
+  <reference info="hurt by an enemy with flamethrower" name="being_hurt_hurt_enemy_flame" offset="0x2b0"/>
+  <reference info="hurt by an enemy with a shotgun" name="being_hurt_hurt_enemy_shotgun" offset="0x2c0"/>
+  <reference info="hurt by an enemy with a vehicle" name="being_hurt_hurt_enemy_vehicle" offset="0x2d0"/>
+  <reference info="hurt by an enemy with a fixed weapon" name="being_hurt_hurt_enemy_mounted_weapon" offset="0x2e0"/>
+  <reference info="killed a friendly AI" name="killing_people_killed_friend" offset="0x320"/>
+  <reference info="killed a friendly AI: comment from a friend" name="killing_people_killed_friend_comment" offset="0x330"/>
+  <reference info="killed a friendly player" name="killing_people_killed_friend_player" offset="0x340"/>
+  <reference info="killed a friendly player: comment from a friend" name="killing_people_killed_friend_player_comment" offset="0x350"/>
+  <reference info="killed an enemy" name="killing_people_killed_enemy" offset="0x360"/>
+  <reference info="killed an enemy: comment from a friend" name="killing_people_killed_enemy_comment" offset="0x370"/>
+  <reference info="killed an enemy player" name="killing_people_killed_enemy_player" offset="0x380"/>
+  <reference info="killed an enemy player: comment from a friend" name="killing_people_killed_enemy_player_comment" offset="0x390"/>
+  <reference info="killed an enemy covenant" name="killing_people_killed_enemy_covenant" offset="0x3a0"/>
+  <reference info="killed an enemy covenant: comment from a friend" name="killing_people_killed_enemy_covenant_comment" offset="0x3b0"/>
+  <reference info="killed an enemy flood combat form" name="killing_people_killed_enemy_floodcombat" offset="0x3c0"/>
+  <reference info="killed an enemy flood combat form: comment from a friend" name="killing_people_killed_enemy_floodcombat_comment" offset="0x3d0"/>
+  <reference info="killed an enemy flood carrier form" name="killing_people_killed_enemy_floodcarrier" offset="0x3e0"/>
+  <reference info="killed an enemy flood carrier form: comment from a friend" name="killing_people_killed_enemy_floodcarrier_comment" offset="0x3f0"/>
+  <reference info="killed an enemy sentinel" name="killing_people_killed_enemy_sentinel" offset="0x400"/>
+  <reference info="killed an enemy sentinel: comment from a friend" name="killing_people_killed_enemy_sentinel_comment" offset="0x410"/>
+  <reference info="killed an enemy with bullets" name="killing_people_killed_enemy_bullet" offset="0x420"/>
+  <reference info="killed an enemy with needles" name="killing_people_killed_enemy_needler" offset="0x430"/>
+  <reference info="killed an enemy with a plasma bolt" name="killing_people_killed_enemy_plasma" offset="0x440"/>
+  <reference info="killed an enemy with a sniper weapon" name="killing_people_killed_enemy_sniper" offset="0x450"/>
+  <reference info="killed an enemy with a grenade" name="killing_people_killed_enemy_grenade" offset="0x460"/>
+  <reference info="killed an enemy with an explosive weapon" name="killing_people_killed_enemy_explosion" offset="0x470"/>
+  <reference info="killed an enemy with a melee weapon" name="killing_people_killed_enemy_melee" offset="0x480"/>
+  <reference info="killed an enemy with flamethrower" name="killing_people_killed_enemy_flame" offset="0x490"/>
+  <reference info="killed an enemy with a shotgun" name="killing_people_killed_enemy_shotgun" offset="0x4a0"/>
+  <reference info="killed an enemy by hitting them with a vehicle" name="killing_people_killed_enemy_vehicle" offset="0x4b0"/>
+  <reference info="killed an enemy with a fixed weapon" name="killing_people_killed_enemy_mounted_weapon" offset="0x4c0"/>
+  <reference info="we are on a killing spree" name="killing_people_killing_spree" offset="0x4d0"/>
+  <reference info="response to the player killing an enemy" name="player_kill_responses_player_kill_comment" offset="0x510"/>
+  <reference info="response to the player killing an enemy with bullets" name="player_kill_responses_player_kill_bullet_comment" offset="0x520"/>
+  <reference info="response to the player killing an enemy with needles" name="player_kill_responses_player_kill_needler_comment" offset="0x530"/>
+  <reference info="response to the player killing an enemy with a plasma bolt" name="player_kill_responses_player_kill_plasma_comment" offset="0x540"/>
+  <reference info="response to the player killing an enemy with a sniper weapon" name="player_kill_responses_player_kill_sniper_comment" offset="0x550"/>
+  <reference info="response to _anyone_ killing an enemy with a grenade" name="player_kill_responses_anyone_kill_grenade_comment" offset="0x560"/>
+  <reference info="response to the player killing an enemy with an explosive weapon" name="player_kill_responses_player_kill_explosion_comment" offset="0x570"/>
+  <reference info="response to the player killing an enemy with a melee weapon" name="player_kill_responses_player_kill_melee_comment" offset="0x580"/>
+  <reference info="response to the player killing an enemy with flamethrower" name="player_kill_responses_player_kill_flame_comment" offset="0x590"/>
+  <reference info="response to the player killing an enemy with a shotgun" name="player_kill_responses_player_kill_shotgun_comment" offset="0x5a0"/>
+  <reference info="response to the player killing an enemy by hitting them with a vehicle" name="player_kill_responses_player_kill_vehicle_comment" offset="0x5b0"/>
+  <reference info="response to the player killing an enemy with a fixed weapon" name="player_kill_responses_player_kill_mounted_weapon_comment" offset="0x5c0"/>
+  <reference info="response to the player going on a killing spree" name="player_kill_responses_player_killing_spree_comment" offset="0x5d0"/>
+  <reference info="a friendly AI died" name="friends_dying_friend_died" offset="0x610"/>
+  <reference info="a friendly player died" name="friends_dying_friend_player_died" offset="0x620"/>
+  <reference info="a friend died from friendly fire" name="friends_dying_friend_killed_by_friend" offset="0x630"/>
+  <reference info="friend died from player's friendly fire" name="friends_dying_friend_killed_by_friendly_player" offset="0x640"/>
+  <reference info="a friend died from enemy fire" name="friends_dying_friend_killed_by_enemy" offset="0x650"/>
+  <reference info="friend died from an enemy player" name="friends_dying_friend_killed_by_enemy_player" offset="0x660"/>
+  <reference info="a friend died from covenant fire" name="friends_dying_friend_killed_by_covenant" offset="0x670"/>
+  <reference info="a friend died from the flood" name="friends_dying_friend_killed_by_flood" offset="0x680"/>
+  <reference info="a friend died from sentinel fire" name="friends_dying_friend_killed_by_sentinel" offset="0x690"/>
+  <reference info="a friend was deliberately killed by an ally that we don't trust (e.g. player killed a marine)" name="friends_dying_friend_betrayed" offset="0x6a0"/>
+  <reference info="see an enemy and we have not previously been in combat" name="shouting_new_combat_alone" offset="0x6d0"/>
+  <reference info="see a new enemy and we have recently been in combat" name="shouting_new_enemy_recent_combat" offset="0x6e0"/>
+  <reference info="see an enemy that we are currently looking for" name="shouting_old_enemy_sighted" offset="0x6f0"/>
+  <reference info="unexpectedly encounters enemy (behind or to the side)" name="shouting_unexpected_enemy" offset="0x700"/>
+  <reference info="unexpectedly finds a dead body of a friend" name="shouting_dead_friend_found" offset="0x710"/>
+  <reference info="we decide that a former ally is now a traitor" name="shouting_alliance_broken" offset="0x720"/>
+  <reference info="we forgive a traitor and make him our friend again" name="shouting_alliance_reformed" offset="0x730"/>
+  <reference info="throwing a grenade" name="shouting_grenade_throwing" offset="0x740"/>
+  <reference info="see an enemy grenade" name="shouting_grenade_sighted" offset="0x750"/>
+  <reference info="alerted by a grenade bouncing near us" name="shouting_grenade_startle" offset="0x760"/>
+  <reference info="in danger from an enemy grenade" name="shouting_grenade_danger_enemy" offset="0x770"/>
+  <reference info="in danger from your own grenade" name="shouting_grenade_danger_self" offset="0x780"/>
+  <reference info="in danger from a friendly grenade (not our own)" name="shouting_grenade_danger_friend" offset="0x790"/>
+  <reference info="reply to a nearby friend who alerted us to an enemy" name="group_communication_new_combat_group_response" offset="0x7c0"/>
+  <reference info="reply to a distant friend who alerted us to an enemy" name="group_communication_new_combat_nearby_response" offset="0x7d0"/>
+  <reference info="alert a friend who is in a noncombat state" name="group_communication_alert_friend" offset="0x7e0"/>
+  <reference info="alerted by a friend when in a noncombat state" name="group_communication_alert_friend_response" offset="0x7f0"/>
+  <reference info="alert friends that target was not at expected location" name="group_communication_alert_lost_contact" offset="0x800"/>
+  <reference info="alert friends that target was not at expected location: response" name="group_communication_alert_lost_contact_response" offset="0x810"/>
+  <reference info="friend is blocking us from moving or firing" name="group_communication_blocked" offset="0x820"/>
+  <reference info="friend is blocking us from moving or firing: response" name="group_communication_blocked_response" offset="0x830"/>
+  <reference info="starting to search" name="group_communication_search_start" offset="0x840"/>
+  <reference info="asking searchers whether they have found anything" name="group_communication_search_query" offset="0x850"/>
+  <reference info="asking searchers whether they have found anything: response" name="group_communication_search_query_response" offset="0x860"/>
+  <reference info="searcher reporting that an area is clear" name="group_communication_search_report" offset="0x870"/>
+  <reference info="searcher giving up on search" name="group_communication_search_abandon" offset="0x880"/>
+  <reference info="search coordinator giving up on search" name="group_communication_search_group_abandon" offset="0x890"/>
+  <reference info="starting to uncover target with friend" name="group_communication_group_uncover" offset="0x8a0"/>
+  <reference info="starting to uncover target: response" name="group_communication_group_uncover_response" offset="0x8b0"/>
+  <reference info="our platoon starts to attack or advance" name="group_communication_advance" offset="0x8c0"/>
+  <reference info="our platoon starts to attack or advance: response" name="group_communication_advance_response" offset="0x8d0"/>
+  <reference info="our platoon starts to defend or retreat" name="group_communication_retreat" offset="0x8e0"/>
+  <reference info="our platoon starts to defend or retreat: response" name="group_communication_retreat_response" offset="0x8f0"/>
+  <reference info="telling friends to seek cover" name="group_communication_cover" offset="0x900"/>
+  <reference info="sighted a new friendly player" name="actions_sighted_friend_player" offset="0x950"/>
+  <reference info="shooting at an enemy" name="actions_shooting" offset="0x960"/>
+  <reference info="shooting from a vehicle at an enemy" name="actions_shooting_vehicle" offset="0x970"/>
+  <reference info="shooting at an enemy while berserk" name="actions_shooting_berserk" offset="0x980"/>
+  <reference info="shooting at a group of enemies" name="actions_shooting_group" offset="0x990"/>
+  <reference info="shooting at a traitorous player" name="actions_shooting_traitor" offset="0x9a0"/>
+  <reference info="taunting the enemy" name="actions_taunt" offset="0x9b0"/>
+  <reference info="taunted by an enemy: response" name="actions_taunt_response" offset="0x9c0"/>
+  <reference info="fleeing in panic" name="actions_flee" offset="0x9d0"/>
+  <reference info="fleeing in panic: response" name="actions_flee_response" offset="0x9e0"/>
+  <reference info="fleeing in panic because our leaders are all dead" name="actions_flee_leader_died" offset="0x9f0"/>
+  <reference info="unable to flee because a leader is nearby" name="actions_attempted_flee" offset="0xa00"/>
+  <reference info="unable to flee because a leader is nearby: response" name="actions_attempted_flee_response" offset="0xa10"/>
+  <reference info="target was not at expected location" name="actions_lost_contact" offset="0xa20"/>
+  <reference info="stops hiding and pursues target" name="actions_hiding_finished" offset="0xa30"/>
+  <reference info="enters vehicle" name="actions_vehicle_entry" offset="0xa40"/>
+  <reference info="exits vehicle" name="actions_vehicle_exit" offset="0xa50"/>
+  <reference info="excited while in vehicle (big air, etc)" name="actions_vehicle_woohoo" offset="0xa60"/>
+  <reference info="scared while in vehicle (imminent crash)" name="actions_vehicle_scared" offset="0xa70"/>
+  <reference info="riding in a vehicle and the driver collides with something" name="actions_vehicle_collision" offset="0xa80"/>
+  <reference info="saw something suspicious but not sure it was an enemy" name="actions_partially_sighted" offset="0xa90"/>
+  <reference info="decided that a suspicious sighting was nothing after all" name="actions_nothing_there" offset="0xaa0"/>
+  <reference info="pleading for the player to spare our pitiable lives" name="actions_pleading" offset="0xab0"/>
+  <reference info="surprised by an enemy, noise, body or weapon impact" name="exclamations_surprise" offset="0xb20"/>
+  <reference info="went berserk" name="exclamations_berserk" offset="0xb30"/>
+  <reference info="attacked an enemy in melee" name="exclamations_melee_attack" offset="0xb40"/>
+  <reference info="dove away from danger or into cover" name="exclamations_dive" offset="0xb50"/>
+  <reference info="leapt out of corner to uncover a suspected target" name="exclamations_uncover_exclamation" offset="0xb60"/>
+  <reference info="begin a leap attack" name="exclamations_leap_attack" offset="0xb70"/>
+  <reference info="arise and return to life" name="exclamations_resurrection" offset="0xb80"/>
+  <reference info="all enemies defeated" name="post_combat_actions_celebration" offset="0xbd0"/>
+  <reference info="post-combat checking an enemy's dead body" name="post_combat_actions_check_body_enemy" offset="0xbe0"/>
+  <reference info="post-combat checking a friend's dead body" name="post_combat_actions_check_body_friend" offset="0xbf0"/>
+  <reference info="post-combat shooting an enemy's dead body" name="post_combat_actions_shooting_dead_enemy" offset="0xc00"/>
+  <reference info="post-combat shooting an enemy player's dead body" name="post_combat_actions_shooting_dead_enemy_player" offset="0xc10"/>
+  <reference info="post-combat all friends killed" name="post_combat_chatter_alone" offset="0xc60"/>
+  <reference info="post-combat we were not hurt" name="post_combat_chatter_unscathed" offset="0xc70"/>
+  <reference info="post-combat we were badly hurt" name="post_combat_chatter_seriously_wounded" offset="0xc80"/>
+  <reference info="post-combat replying to a friend who was badly hurt" name="post_combat_chatter_seriously_wounded_response" offset="0xc90"/>
+  <reference info="post-combat our friends took heavy casualties" name="post_combat_chatter_massacre" offset="0xca0"/>
+  <reference info="post-combat reply: our friends took heavy casualties" name="post_combat_chatter_massacre_response" offset="0xcb0"/>
+  <reference info="post-combat our friends kicked alien ass" name="post_combat_chatter_rout" offset="0xcc0"/>
+  <reference info="post-combat reply: our friends kicked alien ass" name="post_combat_chatter_rout_response" offset="0xcd0"/>
+</struct>

@@ -1,0 +1,28 @@
+<plugin class="ant!" author="sparky" version="4.0" headersize="Main">
+
+<string32 name="Attachment Marker Name" offset="0x0"/>
+
+<dependency name="Bitmaps" offset="0x20"/>
+<dependency name="Physics" offset="0x30"/>
+
+<float name="Spring Strength Coefficient" info="larger values make the spring stronger" offset="0x90"/>
+<float name="Falloff Pixels" offset="0x94"/>
+<float name="Cutoff Pixels" offset="0x98"/>
+
+<struct name="Vertices" offset="0xC4" size="128">
+	<float name="Spring Strength Coefficient" info="larger values make the spring stronger" offset="0x00"/>
+	<float name="Angles: y" note="radians" info="direction toward next vertex" offset="0x1C"/>
+	<float name="Angles: p" note="radians" info="direction toward next vertex" offset="0x20"/>
+	<float name="Length" note="world units" info="distance between this vertex and the next" offset="0x24"/>
+	
+	<short name="Sequence Index" info="bitmap group sequence index for this vertex's texture" offset="0x28"/>
+	
+	<colorARGB name="Color" info="color at this vertex" offset="0x2C"/>
+	<colorARGB name="LOD Color" info="color at this vertex for the low level of detail line primitives" offset="0x3C"/>
+	
+	<float name="Origin Offset: x" info="tested by 002" offset="0x74"/>
+	<float name="Origin Offset: y" info="tested by 002" offset="0x78"/>
+	<float name="Origin Offset: z" info="tested by 002" offset="0x7C"/>
+</struct>
+
+</plugin>

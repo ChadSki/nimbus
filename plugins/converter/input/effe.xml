@@ -1,0 +1,170 @@
+<plugin class="effe" author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Flags" offset="0x00">
+	<option name="Deleted When Attachment Deactivates" value="15"/>
+	<option name="Required For Gameplay" info="cannot optimize out" value="14"/>
+</bitmask16>
+
+<index name="Loop Start Event" offset="0x04" reflexive="main:Events"/>
+<index name="Loop End Event" offset="0x06" reflexive="main:Events"/>
+
+<struct name="Locations" offset="0x28" size="32">
+	<string32 name="Marker Name" offset="0x00"/>
+</struct>
+
+<struct name="Events" offset="0x34" size="68">
+	<float name="Skip Fraction" note="0 - 1 only" info="chance that this event will be skipped entirely" offset="0x04"/>
+	<float name="Delay Bounds: from" note="seconds" info="delay before this event takes place" offset="0x08"/>
+	<float name="Delay Bounds: to" note="seconds" info="delay before this event takes place" offset="0x0C"/>
+	<float name="Duration Bounds: from" note="seconds" info="duration of this event" offset="0x10"/>
+	<float name="Duration Bounds: to" note="seconds" info="duration of this event" offset="0x14"/>
+	
+	<struct name="Parts" offset="0x2C" size="104">
+	
+		<enum16 name="Create In (1)" offset="0x00">
+			<option name="Any Environment" value="0"/>
+			<option name="Air Only" value="1"/>
+			<option name="Water Only" value="2"/>
+			<option name="Space Only" value="3"/>
+		</enum16>
+		
+		<enum16 name="Create In (2)" offset="0x02">
+			<option name="Either Mode" value="0"/>
+			<option name="Violent Mode Only" value="1"/>
+			<option name="Nonviolent Mode Only" value="2"/>
+		</enum16>
+		
+		<index name="Location" offset="0x04" reflexive="main:Locations"/>
+		
+		<bitmask16 name="Flags" offset="0x06">
+			<option name="Face Down Regardless of Location" info="decals; Sparky says, 'test me!'" value="15"/>
+		</bitmask16>
+		
+		<dependency name="Type" info="bipd, deca, devc, devi, eqip, garb, item, jpt!, lifi, ligh, mach, obje, part, plac, proj, scen, snd!, ssce, unit, vehi, weap" offset="0x18"/>
+
+		<float name="Velocity Bounds: from" note="world units per second" info="initial velocity along the location's forward" offset="0x40"/>
+		<float name="Velocity Bounds: to" note="world units per second" info="initial velocity along the location's forward" offset="0x44"/>
+		<float name="Velocity Cone Angle" note="radians" info="initial velocity will be inside the cone defined by this angle" offset="0x48"/>
+		<float name="Angular Velocity Bounds: from" note="radians per second" offset="0x4C"/>
+		<float name="Angular Velocity Bounds: to" note="radians per second" offset="0x50"/>
+		<float name="Radius Modifier Bounds: from" offset="0x54"/>
+		<float name="Radius Modifier Bounds: to" offset="0x58"/>
+		
+		<bitmask32 name="Scale Modifiers.A Scales Values" offset="0x60">
+			<option name="Velocity" value="31"/>
+			<option name="Velocity Delta" value="30"/>
+			<option name="Velocity Cone Angle" value="29"/>
+			<option name="Angular Velocity" value="28"/>
+			<option name="Angular Velocity Delta" value="27"/>
+			<option name="Type-Specific Scale" value="26"/>
+		</bitmask32>
+		
+		<bitmask32 name="Scale Modifiers.B Scales Values" offset="0x64">
+			<option name="Velocity" value="31"/>
+			<option name="Velocity Delta" value="30"/>
+			<option name="Velocity Cone Angle" value="29"/>
+			<option name="Angular Velocity" value="28"/>
+			<option name="Angular Velocity Delta" value="27"/>
+			<option name="Type-Specific Scale" value="26"/>
+		</bitmask32>
+	</struct>
+	
+	<struct name="Particles" offset="0x38" size="232">
+	
+		<enum16 name="Create In (1)" offset="0x00">
+			<option name="Any Environment" value="0"/>
+			<option name="Air Only" value="1"/>
+			<option name="Water Only" value="2"/>
+			<option name="Space Only" value="3"/>
+		</enum16>
+		
+		<enum16 name="Create In (2)" offset="0x02">
+			<option name="Either Mode" value="0"/>
+			<option name="Violent Mode Only" value="1"/>
+			<option name="Nonviolent Mode Only" value="2"/>
+		</enum16>
+		
+		<enum16 name="Create" offset="0x04">
+			<option name="Independent of Camera Mode" value="0"/>
+			<option name="Only in First Person" value="1"/>
+			<option name="Only in Third Person" value="2"/>
+			<option name="In First Person If Possible" value="3"/>
+		</enum16>
+		
+		<index name="Location" offset="0x08" reflexive="main:Locations"/>
+		
+		<float name="Relative Direction: y" note="radians" info="particle initial velocity direction relative to the location's forward" offset="0x0C"/>
+		<float name="Relative Direction: p" note="radians" info="particle initial velocity direction relative to the location's forward" offset="0x10"/>
+		<float name="Relative Offset: i (1)" info="particle initial position offset relative to the location's forward" offset="0x14"/>
+		<float name="Relative Offset: i (2)" info="particle initial position offset relative to the location's forward" offset="0x18"/>
+		<float name="Relative Offset: k" info="particle initial position offset relative to the location's forward" offset="0x1C"/>
+		
+		<dependency name="Particle Type" offset="0x54"/>
+		
+		<bitmask16 name="Flags" offset="0x64">
+			<option name="Stay Attached to Marker" value="15"/>
+			<option name="Random Initial Angle" value="14"/>
+			<option name="Tint From Object Color" value="13"/>
+			<option name="Interpolate Tint as HSV" value="12"/>
+			<option name="Across the Long Hue Path" value="11"/>
+		</bitmask16>
+		
+		<enum16 name="Distribution Function" info="describes how the part creations are distributed over the event duration" offset="0x68">
+			<option name="Start" value="0"/>
+			<option name="End" value="1"/>
+			<option name="Constant" value="2"/>
+			<option name="Buildup" value="3"/>
+			<option name="Falloff" value="4"/>
+			<option name="Buildup and Falloff" value="5"/>
+		</enum16>
+		
+		<short name="Count: from" note="number of particles created" offset="0x6C"/>
+		<short name="Count: to" note="number of particles created" offset="0x6E"/>
+		
+		<float name="Distribution Radius: from" note="world units" info="initial distance from the location's origin" offset="0x70"/>
+		<float name="Distribution Radius: to" note="world units" info="initial distance from the location's origin" offset="0x74"/>
+
+		<float name="Velocity: from" note="world units per second" info="initial velocity along the specified direction" offset="0x84"/>
+		<float name="Velocity: to" note="world units per second" info="initial velocity along the specified direction" offset="0x88"/>
+		<float name="Velocity Cone Angle" note="radians" info="particle initial velocities will be inside the cone defined by this angle and the specified direction" offset="0x8C"/>
+		<float name="Angular Velocity: from" note="radians per second" offset="0x90"/>
+		<float name="Angular Velocity: to" note="radians per second" offset="0x94"/>
+		<float name="Radius: from" note="world units" info="particle radius" offset="0xA0"/>
+		<float name="Radius: to" note="world units" info="particle radius" offset="0xA4"/>
+		
+		<colorARGB name="Tint Lower Bound" offset="0xB0"/>
+		<colorARGB name="Tint Upper Bound" offset="0xC0"/>
+		
+		<bitmask32 name="Scale Modifiers.A Scales Values" offset="0xE0">
+			<option name="Velocity" value="31"/>
+			<option name="Velocity Delta" value="30"/>
+			<option name="Velocity Cone Angle" value="29"/>
+			<option name="Angular Velocity" value="28"/>
+			<option name="Angular Velocity Delta" value="27"/>
+			<option name="Count" value="26"/>
+			<option name="Count Delta" value="25"/>
+			<option name="Distribution Radius" value="24"/>
+			<option name="Distribution Radius Delta" value="23"/>
+			<option name="Particle Radius" value="22"/>
+			<option name="Particle Radius Delta" value="21"/>
+			<option name="Tint" value="20"/>
+		</bitmask32>
+		
+		<bitmask32 name="Scale Modifiers.B Scales Values" offset="0xE4">
+			<option name="Velocity" value="31"/>
+			<option name="Velocity Delta" value="30"/>
+			<option name="Velocity Cone Angle" value="29"/>
+			<option name="Angular Velocity" value="28"/>
+			<option name="Angular Velocity Delta" value="27"/>
+			<option name="Count" value="26"/>
+			<option name="Count Delta" value="25"/>
+			<option name="Distribution Radius" value="24"/>
+			<option name="Distribution Radius Delta" value="23"/>
+			<option name="Particle Radius" value="22"/>
+			<option name="Particle Radius Delta" value="21"/>
+			<option name="Tint" value="20"/>
+		</bitmask32>
+	</struct>
+</struct>
+
+</plugin>

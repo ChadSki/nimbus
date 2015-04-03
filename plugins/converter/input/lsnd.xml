@@ -1,0 +1,52 @@
+<plugin class="lsnd" author="sparky" version="4.0" headersize="Main">
+
+<bitmask16 name="Flags" offset="0x00">
+	<option name="Deafening to AIs" info="when used as a background stereo track, causes nearby AIs to be unable to hear (Sparky says, 'Turn the subwoofers down, I'm on patrol here!!!')" value="15"/>
+	<option name="Not a Loop" info="this is a collection of permutations strung together that should play once then stop" value="14"/>
+	<option name="Stops Music" info="all other music loops will stop when this one starts" value="13"/>
+</bitmask16>
+
+<float name="When Scale is Zero.Detail Sound Period" info_img="lsnd When Scale is Zero.png" offset="0x04"/>
+<float name="When Scale is One.Detail Sound Period" info_img="lsnd When Scale is One.png" offset="0x10"/>
+
+<dependency name="When Scale is One.Continuous Damage Effect" info_img="lsnd When Scale is One.png" offset="0x2C"/>
+
+<struct name="Tracks" info="play in parallel; loop continuously for duration" offset="0x3C" size="160">
+	<bitmask16 name="Flags" offset="0x00">
+		<option name="Fade In At Start" info="the loop sound should fade in while the start sound is playing" value="15"/>
+		<option name="Fade Out At Stop" info="the loop sound should fade out while the stop sound is playing" value="14"/>
+		<option name="Fade In Alternate" info="when the sound changes to the alternate version, fade it in" value="13"/>
+	</bitmask16>
+	
+	<float name="Gain" note="0 - 1 only" offset="0x04"/>
+	<float name="Fade In Duration" note="seconds" offset="0x08"/>
+	<float name="Fade Out Duration" note="seconds" offset="0x0C"/>
+	
+	<dependency name="Start" offset="0x30"/>
+	<dependency name="Loop" offset="0x40"/>
+	<dependency name="End" offset="0x50"/>
+	<dependency name="Alternate Loop" offset="0x80"/>
+	<dependency name="Alternate End" offset="0x90"/>
+</struct>
+
+<struct name="Detail Sounds" info="play at random during the looping sound" offset="0x48" size="104">
+	<dependency name="Sound" offset="0x0"/>
+	
+	<float name="Frequency of Play.Random Period Bounds: from" note="seconds" info="the time between successive playings of this sound will be chosen at random between these bounds" offset="0x10"/>
+	<float name="Frequency of Play.Random Period Bounds: to" note="seconds" info="the time between successive playings of this sound will be chosen at random between these bounds" offset="0x14"/>
+	<float name="Frequency of Play.Gain" note="0 - 1 only" offset="0x18"/>
+	
+	<bitmask8 name="Frequency of Play.Flags" offset="0x1C">
+		<option name="Don't Play With Alternate" value="7"/>
+		<option name="Don't Play Without Alternate" value="6"/>
+	</bitmask8>
+	
+	<float name="Random Spatialization.Yaw Bounds: from" note="radians" info="the sound's position along the horizon will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x50"/>
+	<float name="Random Spatialization.Yaw Bounds: to" note="radians" info="the sound's position along the horizon will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x54"/>
+	<float name="Random Spatialization.Pitch Bounds: from" note="radians" info="the sound's position above (positive values) or below (negative values) the horizon will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x58"/>
+	<float name="Random Spatialization.Pitch Bounds: to" note="radians" info="the sound's position above (positive values) or below (negative values) the horizon will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x5C"/>
+	<float name="Random Spatialization.Distance Bounds: from" note="world units" info="the sound's distance (from its spatialized looping sound or from the listener's position if the looping sound is stereo) will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x60"/>
+	<float name="Random Spatialization.Distance Bounds: to" note="world units" info="the sound's distance (from its spatialized looping sound or from the listener's position if the looping sound is stereo) will be chosen at random between these bounds" info_img="lsnd Detail Sounds.Random Spatialization.png" offset="0x64"/>
+</struct>
+
+</plugin>

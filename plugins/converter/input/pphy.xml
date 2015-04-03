@@ -1,0 +1,22 @@
+<plugin class="pphy" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00">
+	<option name="Flamethrower Particle Collision" value="31"/>
+	<option name="Collides with Structures" value="30"/>
+	<option name="Collides with Water Surface" value="29"/>
+	<option name="Uses Simple Wind" info="the wind on this point won't have high-frequency variations" value="28"/>
+	<option name="Uses Dampened Wind" info="the wind on this point will be artificially slow" value="27"/>
+	<option name="No Gravity" info="the point is not affected by gravity" value="26"/>
+</bitmask32>
+
+<float name="Particle Translation Wind Coefficient" info="tested by 002. Higher or lower than 0 means a straighter line for the particles to travel" offset="0x04"/>
+<float name="Particle Translation Wind Sine Modifier" info="tested by 002. Higher or lower than 0 means particles will not spread out as much" offset="0x08"/>
+<float name="Particle Translation Rate: z" note="world units per second" info="tested by 002. Modifies the speed and distance at which particles travel in a vertical line; positive = upward motion, negative = downward motion" offset="0x0C"/>
+
+<float name="Density" note="grams per milliliter" info_img="pphy Densities (grams per milliliter).png" offset="0x20"/>
+<float name="Air Friction" offset="0x24"/>
+<float name="Water Friction" offset="0x28"/>
+<float name="Surface Friction" info="when hitting the ground or interior, percentage of velocity lost in one collision" offset="0x2C"/>
+<float name="Elasticity" info="0.0 is inelastic collisions (no bounce); 1.0 is perfectly elastic (reflected velocity equals incoming velocity)" offset="0x30"/>
+
+</plugin>

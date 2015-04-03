@@ -1,0 +1,458 @@
+<plugin class="sbsp" author="sparky" version="4.0" headersize="Main">
+
+<long name="TEST: SBSP size / checksum" offset="0x00"/>
+
+<string4 name="TEST: Signature" offset="0x14"/>
+
+<dependency name="Lightmaps" offset="0x18"/>
+<float name="Vehicle Floor" note="world units" info="height below which vehicles get pushed up by an unstoppable force" offset="0x28"/>
+<float name="Vehicle Ceiling" note="world units" info="height above which vehicles get pushed down by an unstoppable force" offset="0x2C"/>
+
+<colorRGB name="Default Ambient Color" offset="0x44"/>
+<colorRGB name="Default Distant Light 0 Color" offset="0x54"/>
+
+<float name="Default Distant Light 0 Direction: i (1)" offset="0x60"/>
+<float name="Default Distant Light 0 Direction: i (2)" offset="0x64"/>
+<float name="Default Distant Light 0 Direction: k" offset="0x68"/>
+
+<colorRGB name="Default Distant Light 1 Color" offset="0x6C"/>
+
+<float name="Default Distant Light 1 Direction: i (1)" offset="0x78"/>
+<float name="Default Distant Light 1 Direction: i (2)" offset="0x7C"/>
+<float name="Default Distant Light 1 Direction: k" offset="0x80"/>
+
+<colorARGB name="Default Reflection Tint" offset="0x90"/>
+
+<float name="Default Shadow Vector: i (1)" offset="0xA0"/>
+<float name="Default Shadow Vector: i (2)" offset="0xA4"/>
+<float name="Default Shadow Vector: k" offset="0xA8"/>
+
+<colorRGB name="Default Shadow Color" offset="0xAC"/>
+
+<struct name="Collision Materials" offset="0xBC" size="20">
+	<dependency name="Shader" offset="0x00"/>
+	
+	<enum16 name="Material Type" info="if this doesn't work, use the material type in the Shader instead" offset="0x12">
+		<option name="Dirt" value="00"/>
+		<option name="Sand" value="01"/>
+		<option name="Stone" value="02"/>
+		<option name="Snow" value="03"/>
+		<option name="Wood" value="04"/>
+		<option name="Metal (hollow)" value="05"/>
+		<option name="Metal (thin)" value="06"/>
+		<option name="Metal (thick)" value="07"/>
+		<option name="Rubber" value="08"/>
+		<option name="Glass" value="09"/>
+		<option name="Force Field" value="10"/>
+		<option name="Grunt" value="11"/>
+		<option name="Hunter Armor" value="12"/>
+		<option name="Hunter Skin" value="13"/>
+		<option name="Elite" value="14"/>
+		<option name="Jackal" value="15"/>
+		<option name="Jackal Energy Shield" value="16"/>
+		<option name="Engineer Skin" value="17"/>
+		<option name="Engineer Force Field" value="18"/>
+		<option name="Flood Combat Form" value="19"/>
+		<option name="Flood Carrier Form" value="20"/>
+		<option name="Cyborg Armor" value="21"/>
+		<option name="Cyborg Energy Shield" value="22"/>
+		<option name="Human Armor" value="23"/>
+		<option name="Human Skin" value="24"/>
+		<option name="Sentinel" value="25"/>
+		<option name="Monitor" value="26"/>
+		<option name="Plastic" value="27"/>
+		<option name="Water" value="28"/>
+		<option name="Leaves" value="29"/>
+		<option name="Elite Energy Shield" value="30"/>
+		<option name="Ice" value="31"/>
+		<option name="Hunter Shield" value="32"/>
+	</enum16>
+</struct>
+
+<struct name="Collision BSP" info="maximum of 1" offset="0xC8" size="96">
+	<struct name="BSP3D Nodes" offset="0x00" size="12">
+		<short name="Plane" offset="0x00"/>
+		<short name="Back Child" offset="0x04"/>
+		<short name="Front Child" offset="0x08"/>
+	</struct>
+	
+	<long name="Planes: Reflexive Count" note="0 = sbsp is nulled" info="step 2 of 3 in nulling the sbsp" offset="0x0C"/>
+	<struct name="Planes" offset="0x0C" size="16">
+		<float name="Plane: i (1)" offset="0x00"/>
+		<float name="Plane: i (2)" offset="0x04"/>
+		<float name="Plane: k" offset="0x08"/>
+		<float name="Plane: d" offset="0x0C"/>
+	</struct>
+	
+	<struct name="Leaves" offset="0x18" size="8">
+		<bitmask8 name="Flags" offset="0x00">
+			<option name="Contains Double-Sided Surfaces" value="07"/>
+		</bitmask8>
+		
+		<char name="BSP2D Reference Count" offset="0x02"/>
+		<long name="First BSP2D Reference" offset="0x04"/>
+	</struct>
+	
+	<long name="BSP2D References: Reflexive Count" note="4294967295 or -1 = sbsp is nulled" info="step 3 of 3 in nulling the sbsp" offset="0x24"/>
+	<struct name="BSP2D References" offset="0x24" size="8">
+		<long name="Plane" offset="0x00"/>
+		<long name="BSP2D Node" offset="0x04"/>
+	</struct>
+	
+	<struct name="BSP2D Nodes" offset="0x30" size="20">
+		<float name="Plane: i (1)" offset="0x00"/>
+		<float name="Plane: i (2)" offset="0x04"/>
+		<float name="Plane: d" offset="0x08"/>
+		
+		<long name="Left Child" offset="0x0C"/>
+		<long name="Right Child" offset="0x10"/>
+	</struct>
+	
+	<struct name="Surfaces" offset="0x3C" size="12">
+		<long name="Plane" offset="0x00"/>
+		<long name="First Edge" offset="0x04"/>
+		
+		<bitmask16 name="Flags" offset="0x08">
+			<option name="Two Sided" value="15"/>
+			<option name="Invisible" value="14"/>
+			<option name="Climbable" value="13"/>
+			<option name="Breakable" value="12"/>
+		</bitmask16>
+		
+		<char name="Breakable Surface" offset="0x09"/>
+		<short name="Material" offset="0x0A"/>
+	</struct>
+	
+	<struct name="Edges" offset="0x48" size="24">
+		<long name="Start Vertex" offset="0x00"/>
+		<long name="End Vertex" offset="0x04"/>
+		<long name="Forward Edge" offset="0x08"/>
+		<long name="Reverse Edge" offset="0x0C"/>
+		<long name="Left Surface" offset="0x10"/>
+		<long name="Right Surface" offset="0x14"/>
+	</struct>
+	
+	<struct name="Vertices" offset="0x54" size="16">
+		<float name="Point: x" offset="0x00"/>
+		<float name="Point: y" offset="0x04"/>
+		<float name="Point: z" offset="0x08"/>
+		
+		<long name="First Edge" offset="0x0C"/>
+	</struct>
+</struct>
+
+<struct name="Nodes" offset="0xD4" size="6">
+	<short name="Compressed Vertices.Node0 Index (x3)" offset="0x00"/>
+	<short name="Compressed Vertices.Node1 Index (x3)" offset="0x02"/>
+	<short name="Compressed Vertices.Node0 Weight (16-bit)" offset="0x04"/>
+</struct>
+
+<float name="World Bounds X: from" offset="0xE0"/>
+<float name="World Bounds X: to" offset="0xE4"/>
+<float name="World Bounds Y: from" offset="0xE8"/>
+<float name="World Bounds Y: to" offset="0xEC"/>
+<float name="World Bounds Z: from" offset="0xF0"/>
+<float name="World Bounds Z: to" offset="0xF4"/>
+
+<struct name="Leaves" offset="0xF8" size="16">
+	<short name="Vertex 0" offset="0x00"/>
+	<short name="Vertex 1" offset="0x02"/>
+	<short name="Vertex 2" offset="0x04"/>
+	<short name="Cluster" offset="0x08"/>
+	<short name="Surface Reference Count" offset="0x0A"/>
+	<index name="Surface References" offset="0x0C" reflexive="main:Leaf Surfaces"/>
+</struct>
+
+<struct name="Leaf Surfaces" offset="0x104" size="8">
+	<index name="Surface" offset="0x00" reflexive="main:Surfaces"/>
+	<index name="Node" offset="0x04" reflexive="main:Nodes"/>
+</struct>
+
+<long name="Surfaces: Reflexive Count" note="0 = sbsp is nulled" info="step 1 of 3 in nulling the sbsp" offset="0x110"/>
+<struct name="Surfaces" offset="0x110" size="6">
+	<short name="a (1)" offset="0x00"/>
+	<short name="a (2)" offset="0x02"/>
+	<short name="a (3)" offset="0x04"/>
+</struct>
+
+<struct name="Lightmaps" offset="0x11C" size="32">
+	<short name="Bitmap" offset="0x00"/>
+	
+	<struct name="Materials" offset="0x14" size="256">
+		<dependency name="Shader" offset="0x00"/>
+		
+		<short name="Shader Permutation" offset="0x10"/>
+		
+		<bitmask16 name="Flags" offset="0x12">
+			<option name="Coplanar" value="15"/>
+			<option name="Fog Plane" value="14"/>
+		</bitmask16>
+		
+		<index name="Surfaces" offset="0x14" reflexive="main:Surfaces"/>
+		
+		<long name="Surface Count" offset="0x18"/>
+		
+		<float name="Centroid: x" offset="0x1C"/>
+		<float name="Centroid: y" offset="0x20"/>
+		<float name="Centroid: z" offset="0x24"/>
+		
+		<colorRGB name="Ambient Color" offset="0x28"/>
+		
+		<short name="Distant Light Count" offset="0x34"/>
+		
+		<colorRGB name="Distant Light 0 Color" offset="0x38"/>
+		
+		<float name="Distant Light 0 Direction: i (1)" offset="0x44"/>
+		<float name="Distant Light 0 Direction: i (2)" offset="0x48"/>
+		<float name="Distant Light 0 Direction: k" offset="0x4C"/>
+		
+		<colorRGB name="Distant Light 1 Color" offset="0x50"/>
+		
+		<float name="Distant Light 1 Direction: i (1)" offset="0x5C"/>
+		<float name="Distant Light 1 Direction: i (2)" offset="0x60"/>
+		<float name="Distant Light 1 Direction: k" offset="0x64"/>
+		
+		<colorRGB name="Unknown" offset="0x68"/>
+		<colorARGB name="Reflection Tint" offset="0x74"/>
+		
+		<float name="Shadow Vector: i (1)" offset="0x84"/>
+		<float name="Shadow Vector: i (2)" offset="0x88"/>
+		<float name="Shadow Vector: k" offset="0x8C"/>
+		
+		<colorRGB name="Shadow Color" offset="0x90"/>
+		
+		<float name="Plane: i (1)" offset="0x9C"/>
+		<float name="Plane: i (2)" offset="0xA0"/>
+		<float name="Plane: k" offset="0xA4"/>
+		<float name="Plane: d" offset="0xA8"/>
+		
+		<short name="Breakable Surface" offset="0xAC"/>
+		
+		<long name="Count (1)" offset="0xB4"/>
+		<long name="Offset (1)" offset="0xB8"/>
+		
+		<long name="Count (2)" offset="0xC8"/>
+		<long name="Offset (2)" offset="0xCC"/>
+		
+		<long name="Uncompressed Vertices" note="bytes" offset="0xD8"/>
+		<long name="Compressed Vertices" note="bytes" info="sorry, this is wrong, it's an index offset instead!" offset="0xE4"/>
+	</struct>
+</struct>
+
+<struct name="Lens Flares" offset="0x134" size="16">
+	<dependency name="Lens Flare" offset="0x00"/>
+</struct>
+
+<struct name="Lens Flare Markers" offset="0x140" size="16">
+	<float name="Position: x" offset="0x00"/>
+	<float name="Position: y" offset="0x04"/>
+	<float name="Position: z" offset="0x08"/>
+	
+	<char name="Direction i-component" offset="0x0C"/>
+	<char name="Direction j-component" offset="0x0D"/>
+	<char name="Direction k-component" offset="0x0E"/>
+	<char name="Lens Flare Index" offset="0x0F"/>
+</struct>
+
+<struct name="Clusters" offset="0x14C" size="104">
+	<short name="Sky" offset="0x00"/>
+	<short name="Fog" offset="0x02"/>
+	
+	<index name="Background Sound" offset="0x04" reflexive="main:Background Sound Palette"/>
+	<index name="Sound Environment" offset="0x06" reflexive="main:Sound Environment Palette"/>
+	<index name="Weather" offset="0x08" reflexive="main:Weather Palette"/>
+	
+	<short name="Transition Structure BSP" offset="0x0A"/>
+	
+	<struct name="Predicted Resources" info="not built into map file" offset="0x0C" size="6">
+		<enum16 name="Type" offset="0x00">
+			<option name="Bitmap" value="00"/>
+			<option name="Sound" value="01"/>
+		</enum16>
+		
+		<short name="Resource Index" offset="0x02"/>
+		<short name="Tag Index" offset="0x04"/>
+	</struct>
+	
+	<struct name="Lightmaps / Shaders Palette" offset="0x28" size="8">
+		<short name="Bitmap Sequence Index" offset="0x02"/>
+		<loneID name="Bitmap" offset="0x04"/>
+	</struct>
+	
+	<struct name="Subclusters" offset="0x34" size="36">
+		<float name="World Bounds X: from" offset="0x00"/>
+		<float name="World Bounds X: to" offset="0x04"/>
+		<float name="World Bounds Y: from" offset="0x08"/>
+		<float name="World Bounds Y: to" offset="0x0C"/>
+		<float name="World Bounds Z: from" offset="0x10"/>
+		<float name="World Bounds Z: to" offset="0x14"/>
+		
+		<struct name="Surface Indices" offset="0x18" size="4">
+			<short name="Index" offset="0x00"/>
+		</struct>
+	</struct>
+	
+	<short name="First Lens Flare Marker Index" offset="0x40"/>
+	<short name="Lens Flare Marker Count" offset="0x42"/>
+	
+	<struct name="Surface Indices" offset="0x44" size="4">
+		<long name="Index" offset="0x00"/>
+	</struct>
+	
+	<struct name="Mirrors" offset="0x50" size="64">
+		<float name="Plane: i (1)" offset="0x00"/>
+		<float name="Plane: i (2)" offset="0x04"/>
+		<float name="Plane: k" offset="0x08"/>
+		<float name="Plane: d" offset="0x0C"/>
+		
+		<dependency name="Shader" offset="0x24"/>
+		
+		<struct name="Vertices" offset="0x34" size="12">
+			<float name="Point: x" offset="0x00"/>
+			<float name="Point: y" offset="0x04"/>
+			<float name="Point: z" offset="0x08"/>
+		</struct>
+	</struct>
+	
+	<struct name="Portals" offset="0x5C" size="2">
+		<short name="Portal" offset="0x00"/>
+	</struct>
+</struct>
+
+<long name="Cluster Data" note="bytes" info="the cluster data immediately follows the Clusters reflexive chunks" offset="0x158"/>
+
+<struct name="Cluster Portals" offset="0x16C" size="64">
+	<short name="Front Cluster" offset="0x00"/>
+	<short name="Back Cluster" offset="0x02"/>
+	
+	<long name="Plane Index" offset="0x04"/>
+	
+	<float name="Centroid: x" offset="0x08"/>
+	<float name="Centroid: y" offset="0x0C"/>
+	<float name="Centroid: z" offset="0x10"/>
+	
+	<float name="Bounding Radius" offset="0x14"/>
+	
+	<bitmask8 name="Flags" offset="0x18">
+		<option name="AI Can't Hear Through This" value="07"/>
+	</bitmask8>
+	
+	<struct name="Vertices" offset="0x34" size="12">
+		<float name="Point: x" offset="0x00"/>
+		<float name="Point: y" offset="0x04"/>
+		<float name="Point: z" offset="0x08"/>
+	</struct>
+</struct>
+
+<struct name="Breakable Surfaces" offset="0x184" size="48">
+	<float name="Centroid: x" offset="0x00"/>
+	<float name="Centroid: y" offset="0x04"/>
+	<float name="Centroid: z" offset="0x08"/>
+	
+	<float name="Radius" offset="0x0C"/>
+	
+	<long name="Collision Surface Index" offset="0x10"/>
+</struct>
+
+<struct name="Fog Planes" offset="0x190" size="32">
+	<index name="Front Region" offset="0x00" reflexive="main:Fog Regions"/>
+		
+	<float name="Plane: i (1)" offset="0x04"/>
+	<float name="Plane: i (2)" offset="0x08"/>
+	<float name="Plane: k" offset="0x0C"/>
+	<float name="Plane: d" offset="0x10"/>
+	
+	<struct name="Vertices" offset="0x14" size="12">
+		<float name="Point: x" offset="0x00"/>
+		<float name="Point: y" offset="0x04"/>
+		<float name="Point: z" offset="0x08"/>
+	</struct>
+</struct>
+
+<struct name="Fog Regions" offset="0x19C" size="40">
+	<index name="Fog Palette" offset="0x24" reflexive="main:Fog Palette"/>
+	<index name="Weather Palette" offset="0x26" reflexive="main:Weather Palette"/>
+</struct>
+
+<struct name="Fog Palette" offset="0x1A8" size="136">
+	<string32 name="Name" offset="0x00"/>
+
+	<dependency name="Fog" offset="0x20"/>
+	
+	<string32 name="Fog Scale Function" offset="0x34"/>
+</struct>
+
+<struct name="Weather Palette" offset="0x1CC" size="240">
+	<string32 name="Name" offset="0x00"/>
+	
+	<dependency name="Particle System" offset="0x20"/>
+	
+	<string32 name="Particle System Function" offset="0x34"/>
+	
+	<dependency name="Wind" offset="0x80"/>
+	
+	<float name="Wind Direction: i (1)" offset="0x90"/>
+	<float name="Wind Direction: i (2)" offset="0x94"/>
+	<float name="Wind Direction: k" offset="0x98"/>
+	
+	<float name="Wind Magnitude" offset="0x9C"/>
+	
+	<string32 name="Wind Scale Function" offset="0xA4"/>
+</struct>
+
+<struct name="Weather Polyhedra" offset="0x1D8" size="32">
+	<float name="Bounding Sphere Center: x" offset="0x00"/>
+	<float name="Bounding Sphere Center: y" offset="0x04"/>
+	<float name="Bounding Sphere Center: z" offset="0x08"/>
+	
+	<float name="Bounding Sphere Radius" offset="0x0C"/>
+	
+	<struct name="Planes" offset="0x14" size="16">
+		<float name="Plane: i (1)" offset="0x00"/>
+		<float name="Plane: i (2)" offset="0x04"/>
+		<float name="Plane: k" offset="0x08"/>
+		<float name="Plane: d" offset="0x0C"/>
+	</struct>
+</struct>
+
+<struct name="Pathfinding Surfaces" offset="0x1FC" size="1">
+	<char name="Data" offset="0x00"/>
+</struct>
+
+<struct name="Pathfinding Edges" offset="0x208" size="1">
+	<char name="Midpoint" offset="0x00"/>
+</struct>
+
+<struct name="Background Sound Palette" offset="0x214" size="116">
+	<string32 name="Name" offset="0x00"/>
+	
+	<dependency name="Background Sound" offset="0x20"/>
+	
+	<string32 name="Scale Function" offset="0x34"/>
+</struct>
+
+<struct name="Sound Environment Palette" offset="0x220" size="80">
+	<string32 name="Name" offset="0x00"/>
+	
+	<dependency name="Sound Environment" offset="0x20"/>
+</struct>
+
+<long name="Sound PAS Data" note="bytes" info="this data follows the Sound Environment Palette reflexives" offset="0x22C"/>
+
+<struct name="Markers" offset="0x258" size="60">
+	<string32 name="Name" offset="0x00"/>
+	
+	<float name="Rotation: i (1)" offset="0x20"/>
+	<float name="Rotation: i (2)" offset="0x24"/>
+	<float name="Rotation: k" offset="0x28"/>
+	<float name="Rotation: w" offset="0x2C"/>
+	
+	<float name="Position: x" offset="0x30"/>
+	<float name="Position: y" offset="0x34"/>
+	<float name="Position: z" offset="0x38"/>
+</struct>
+
+<struct name="Runtime Decals" info="decals referenced in the scnr tag" offset="0x270" size="32">
+</struct>
+
+</plugin>

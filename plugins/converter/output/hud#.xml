@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<struct name="hud" size="22">
+  <reference name="digits_bitmap" offset="0x0"/>
+  <int8 name="bitmap_digit_width" offset="0x10"/>
+  <int8 name="screen_digit_width" offset="0x11"/>
+  <int8 name="x_offset" offset="0x12"/>
+  <int8 name="y_offset" offset="0x13"/>
+  <int8 name="decimal_point_width" offset="0x14"/>
+  <int8 name="colon_width" offset="0x15"/>
+</struct>

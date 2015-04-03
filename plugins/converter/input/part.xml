@@ -1,0 +1,181 @@
+<plugin class="part" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00">
+	<option name="Can Animate Backwards" value="31"/>
+	<option name="Animation Stops at Rest" value="30"/>
+	<option name="Animation Starts on Random Frame" value="29"/>
+	<option name="Animate Once per Frame" value="28"/>
+	<option name="Dies at Rest" value="27"/>
+	<option name="Dies on Contact with Structure" value="26"/>
+	<option name="Tint From Diffuse Texture" value="25"/>
+	<option name="Dies on Contact with Water" value="24"/>
+	<option name="Dies on Contact with Air" value="23"/>
+	<option name="*Self-Illuminated" info="don't cast world lights onto this particle" value="22"/>
+	<option name="Random Horizontal Mirroring" value="21"/>
+	<option name="Random Vertical Mirroring" value="20"/>
+</bitmask32>
+
+<dependency name="Bitmap" offset="0x04"/>
+<dependency name="Physics" offset="0x14"/>
+<dependency name="Marty Traded His Kids for This" info="Sparky is trading his health for these plugins" offset="0x24"/>
+
+<float name="Lifespan: from" note="seconds" offset="0x38"/>
+<float name="Lifespan: to" note="seconds" offset="0x3C"/>
+
+<float name="Fade In Time" offset="0x40"/>
+<float name="Fade Out Time" offset="0x44"/>
+
+<dependency name="Collision Effect" offset="0x48"/>
+<dependency name="Death Effect" offset="0x58"/>
+
+<float name="Minimum Size" note="pixels" info="in the distance, don't get any smaller than this size on the screen" offset="0x68"/>
+
+<float name="Radius Animation: from" info="when created, the radius is multiplied by the first number; at the end of the lifetime, the radius is multiplied by the second number" offset="0x74"/>
+<float name="Radius Animation: to" info="when created, the radius is multiplied by the first number; at the end of the lifetime, the radius is multiplied by the second number" offset="0x78"/>
+
+<float name="Animation Rate: from" note="frames per second" info="rate at which the particle animates" offset="0x80"/>
+<float name="Animation Rate: to" note="frames per second" info="rate at which the particle animates" offset="0x84"/>
+
+<float name="Contact Deterioration" info="the decrease in the frame rate caused by a collision" offset="0x88"/>
+<float name="Fade Start Size" note="pixels" info="begin fading out the particle when it is smaller than this size on the screen" offset="0x8C"/>
+<float name="Fade End Size" note="pixels" info="remove particle when it is smaller than this size on the screen" offset="0x90"/>
+
+<short name="First Sequence Index" info="the index of the first sequence in the bitmap group used by this particle" offset="0x98"/>
+<short name="Initial Sequence Count" offset="0x9A"/>
+<short name="Looping Sequence Count" offset="0x9C"/>
+<short name="Final Sequence Count" offset="0x9E"/>
+
+<float name="Unknown Usage (1)" note="0 - 1 only? multiplier?" info="density? scale?" offset="0xA8"/>
+<long name="Unknown Usage (2)" note="multiplier?" info="sequence layer count?" offset="0xD4"/>
+
+<enum16 name="Orientation" offset="0xAC">
+	<option name="Screen Facing" value="00"/>
+	<option name="Parallel to Direction" value="01"/>
+	<option name="Perpendicular to Direction" value="02"/>
+</enum16>
+
+<bitmask16 name="Shader Flags" offset="0xD8">
+	<option name="Sort Bias" value="15"/>
+	<option name="Nonlinear Tint" value="14"/>
+	<option name="Don't Overdraw First-person Weapon" value="13"/>
+</bitmask16>
+
+<enum16 name="Framebuffer Blend Function" offset="0xDA">
+	<option name="Alpha Blend" value="00"/>
+	<option name="Multiply" value="01"/>
+	<option name="Double Multiply" value="02"/>
+	<option name="Add" value="03"/>
+	<option name="Subtract" value="04"/>
+	<option name="Component Minimum" value="05"/>
+	<option name="Component Maximum" value="06"/>
+	<option name="Alpha-Multiply Add" value="07"/>
+</enum16>
+
+<enum16 name="Framebuffer Fade Mode" offset="0xDC">
+	<option name="None" value="00"/>
+	<option name="Fade When Perpendicular" value="01"/>
+	<option name="Fade When Parallel" value="02"/>
+</enum16>
+
+<bitmask8 name="Map Flags" offset="0xDE">
+	<option name="Unfiltered" value="07"/>
+</bitmask8>
+
+<dependency name="Secondary Map.Bitmap" info_img="part Secondary Map.png" offset="0xFC"/>
+
+<enum16 name="Secondary Map.Anchor" info_img="part Secondary Map.png" offset="0x10C">
+	<option name="With Primary" value="00"/>
+	<option name="With Screen Space" value="01"/>
+	<option name="Z Sprite" value="02"/>
+</enum16>
+
+<bitmask32 name="Secondary Map.Flags" info_img="part Secondary Map.png" offset="0x10E">
+	<option name="Unfiltered" value="31"/>
+</bitmask32>
+
+<enum16 name="Secondary Map.U-Animation Source" info_img="part Secondary Map.png" offset="0x110">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.U-Animation Function" info_img="part Secondary Map.png" offset="0x112">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.U-Animation Period" note="seconds; 0 defaults to 1" info_img="part Secondary Map.png" offset="0x114"/>
+<float name="Secondary Map.U-Animation Phase" info_img="part Secondary Map.png" offset="0x118"/>
+<float name="Secondary Map.U-Animation Scale" note="repeats; 0 defaults to 1" info_img="part Secondary Map.png" offset="0x11C"/>
+
+<enum16 name="Secondary Map.V-Animation Source" info_img="part Secondary Map.png" offset="0x120">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.V-Animation Function" info_img="part Secondary Map.png" offset="0x122">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.V-Animation Period" note="seconds; 0 defaults to 1" info_img="part Secondary Map.png" offset="0x124"/>
+<float name="Secondary Map.V-Animation Phase" info_img="part Secondary Map.png" offset="0x128"/>
+<float name="Secondary Map.V-Animation Scale" note="repeats; 0 defaults to 1" info_img="part Secondary Map.png" offset="0x12C"/>
+
+<enum16 name="Secondary Map.Rotation-Animation Source" info_img="part Secondary Map.png" offset="0x130">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.Rotation-Animation Function" info_img="part Secondary Map.png" offset="0x132">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.Rotation-Animation Period" note="seconds; 0 defaults to 1" info_img="part Secondary Map.png" offset="0x134"/>
+<float name="Secondary Map.Rotation-Animation Phase" info_img="part Secondary Map.png" offset="0x138"/>
+<float name="Secondary Map.Rotation-Animation Scale" note="degrees; 0 defaults to 360" info_img="part Secondary Map.png" offset="0x13C"/>
+<float name="Secondary Map.Rotation-Animation Center: x" info_img="part Secondary Map.png" offset="0x140"/>
+<float name="Secondary Map.Rotation-Animation Center: y" info_img="part Secondary Map.png" offset="0x144"/>
+
+<float name="Secondary Map.Zsprite Radius Scale" info_img="part Secondary Map.png" offset="0x14C"/>
+
+</plugin>

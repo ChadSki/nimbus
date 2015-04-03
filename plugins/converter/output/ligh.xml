@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<struct name="ligh" size="252">
+  <flag bit="7" name="dynamic" offset="0x0"/>
+  <flag bit="6" name="no_specular" offset="0x0"/>
+  <flag bit="5" name="dont_light_own_object" offset="0x0"/>
+  <flag bit="4" name="supersize_in_first_person" offset="0x0"/>
+  <flag bit="3" name="first_person_flashlight" offset="0x0"/>
+  <flag bit="2" name="dont_fade_active_camouflage" offset="0x0"/>
+  <float32 info="0 = lens flare only; the radius where illumination is zero" name="shape_radius" offset="0x4"/>
+  <float32 info="how the radius changes with external scale" name="shape_radius_modifier_from" offset="0x8"/>
+  <float32 info="how the radius changes with external scale" name="shape_radius_modifier_to" offset="0xc"/>
+  <float32 info="radians; the angle at which the light begins to fade" name="shape_falloff_angle" offset="0x10"/>
+  <float32 info="radians; the angle at which illumination is zero" name="shape_cutoff_angle" offset="0x14"/>
+  <float32 name="shape_lens_flare_only_radius" offset="0x18"/>
+  <flag bit="7" name="blend_in_hsv" offset="0x34"/>
+  <flag bit="6" name="more_colors" offset="0x34"/>
+  <colorARGB name="color_color_lower_bound" offset="0x38"/>
+  <colorARGB name="color_color_upper_bound" offset="0x48"/>
+  <reference info="diffuse and specular light" name="gel_primary_cube_map" offset="0x64"/>
+  <enum16 name="gel_texture_animation_function" offset="0x76">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; time between repeats" name="gel_texture_animation_period" offset="0x78"/>
+  <reference info="specular light" name="gel_secondary_cube_map" offset="0x7c"/>
+  <enum16 info="controls rotation of gel in yaw" name="gel_yaw_function" offset="0x8e">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; time between repeats" name="gel_yaw_period" offset="0x90"/>
+  <enum16 info="controls rotation of gel in roll" name="gel_roll_function" offset="0x96">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; time between repeats" name="gel_roll_period" offset="0x98"/>
+  <enum16 info="controls rotation of gel in pitch" name="gel_pitch_function" offset="0x9e">
+    <option name="one" value="0"/>
+    <option name="zero" value="1"/>
+    <option name="cosine" value="2"/>
+    <option name="cosine_variable_period" value="3"/>
+    <option name="diagonal_wave" value="4"/>
+    <option name="diagonal_wave_variable_period" value="5"/>
+    <option name="slide" value="6"/>
+    <option name="slide_variable_period" value="7"/>
+    <option name="noise" value="8"/>
+    <option name="jitter" value="9"/>
+    <option name="wander" value="10"/>
+    <option name="spark" value="11"/>
+  </enum16>
+  <float32 info="seconds; time between repeats" name="gel_pitch_period" offset="0xa0"/>
+  <reference name="lens_flare" offset="0xac"/>
+  <float32 name="radiosity_intensity" offset="0xd4"/>
+  <colorRGB name="radiosity_color" offset="0xd8"/>
+  <float32 info="ticks; 30 = 1 second; if created by an effect, light will last this long" name="effect_parameters_duration" offset="0xf4"/>
+  <enum16 info="scale of light will diminish over time according to this function" name="effect_parameters_falloff_function" offset="0xfa">
+    <option name="linear" value="0"/>
+    <option name="early" value="1"/>
+    <option name="very_early" value="2"/>
+    <option name="late" value="3"/>
+    <option name="very_late" value="4"/>
+    <option name="cosine" value="5"/>
+  </enum16>
+</struct>

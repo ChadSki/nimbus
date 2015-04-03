@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<struct name="glw" size="340">
+  <asciiz info="the marker name that the glow should be attached to" maxlength="32" name="attachment_marker" offset="0x0"/>
+  <int16 info="these comprise the glow system" name="number_of_particles" offset="0x20"/>
+  <enum16 info="particle's behavior upon reaching the end of an object" name="boundary_effect" offset="0x22">
+    <option name="bounce" value="0"/>
+    <option name="wrap" value="1"/>
+  </enum16>
+  <enum16 info="about the object" name="normal_particle_distribution" offset="0x24">
+    <option name="distributed_randomly" value="0"/>
+    <option name="distributed_uniformly" value="1"/>
+  </enum16>
+  <enum16 info="about the object" name="trailing_particle_distribution" offset="0x26">
+    <option name="emit_vertically" value="0"/>
+    <option name="emit_normal_up" value="1"/>
+    <option name="emit_randomly" value="2"/>
+  </enum16>
+  <flag bit="7" name="modify_particle_color_in_range" offset="0x28"/>
+  <flag bit="6" name="particles_move_backwards" offset="0x28"/>
+  <flag bit="5" name="particles_move_in_both_directions" offset="0x28"/>
+  <flag bit="4" name="trailing_particles_fade_over_time" offset="0x28"/>
+  <flag bit="3" name="trailing_particles_shrink_over_time" offset="0x28"/>
+  <flag bit="2" name="trailing_particles_slow_over_time" offset="0x28"/>
+  <enum16 info="particle rotation" name="attachment" offset="0x50">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <float32 info="radians per second" name="particle_rotational_velocity" offset="0x54"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="particle_rotational_velocity_multiple_low" offset="0x58"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="particle_rotational_velocity_multiple_high" offset="0x5c"/>
+  <enum16 info="effect rotation" name="attachment" offset="0x60">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <float32 info="radians per second" name="effect_rotational_velocity" offset="0x64"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="effect_rotational_velocity_multiple_low" offset="0x68"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="effect_rotational_velocity_multiple_high" offset="0x6c"/>
+  <enum16 info="effect translation" name="attachment" offset="0x70">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <float32 info="world units per second" name="effect_translational_velocity" offset="0x74"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="effect_translational_velocity_multiple_low" offset="0x78"/>
+  <float32 info="multiplied by overall velocity; only used if controlled by attachment" name="effect_translational_velocity_multiple_high" offset="0x7c"/>
+  <enum16 info="distance to object" name="attachment" offset="0x80">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <float32 info="world units" name="minimum_distance_particle_to_object" offset="0x84"/>
+  <float32 info="world units" name="maximum_distance_particle_to_object" offset="0x88"/>
+  <float32 info="multiplied by particle distance; only used if controlled by attachment" name="distance_to_object_multiple_low" offset="0x8c"/>
+  <float32 info="multiplied by particle distance; only used if controlled by attachment" name="distance_to_object_multiple_high" offset="0x90"/>
+  <enum16 info="size" name="attachment" offset="0x9c">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <float32 info="world units; size of particles" name="particle_size_bounds_from" offset="0xa0"/>
+  <float32 info="world units; size of particles" name="particle_size_bounds_to" offset="0xa4"/>
+  <float32 info="multiplied by particle size; only used if controlled by attachment" name="size_attachment_multiplier_from" offset="0xa8"/>
+  <float32 info="multiplied by particle size; only used if controlled by attachment" name="size_attachment_multiplier_to" offset="0xac"/>
+  <enum16 info="color" name="attachment" offset="0xb0">
+    <option name="a_out" value="0"/>
+    <option name="b_out" value="1"/>
+    <option name="c_out" value="2"/>
+    <option name="d_out" value="3"/>
+    <option name="none" value="65535"/>
+  </enum16>
+  <colorARGB info="the color of all particles will vary between Color_Bound_0 and Color_Bound_1" name="color_bound_0" offset="0xb4"/>
+  <colorARGB info="the color of all particles will vary between Color_Bound_0 and Color_Bound_1" name="color_bound_1" offset="0xc4"/>
+  <colorARGB info="used to scale the particle color; only used if controlled by attachment" name="scale_color_0" offset="0xd4"/>
+  <colorARGB info="used to scale the particle color; only used if controlled by attachment" name="scale_color_1" offset="0xe4"/>
+  <float32 info="for glow effects that dynamically control particle color; sets rate of change" name="color_rate_of_change" offset="0xf4"/>
+  <float32 info="percentage of the glow that is fading at any given time" name="fading_percentage_of_glow" offset="0xf8"/>
+  <float32 info="Herz; frequency in Hz that trailing particles are generated" name="particle_generation_frequency" offset="0xfc"/>
+  <float32 info="seconds; how long a trailing particle remains in existence" name="lifetime_of_trailing_particles" offset="0x100"/>
+  <float32 info="world units per second" name="velocity_of_trailing_particles" offset="0x104"/>
+  <float32 info="world units" name="trailing_particle_minimum_translation" offset="0x108"/>
+  <float32 info="world units" name="trailing_particle_maximum_translation" offset="0x10c"/>
+  <reference name="texture" offset="0x144"/>
+</struct>

@@ -1,0 +1,404 @@
+<?xml version="1.0" ?>
+<struct name="dela" size="1004">
+  <enum16 name="widget_type" offset="0x0">
+    <option name="container" value="0"/>
+    <option name="text_box" value="1"/>
+    <option name="spinner_list" value="2"/>
+    <option name="column_list" value="3"/>
+    <option name="game_model_not_implemented" value="4"/>
+    <option name="movie_not_implemented" value="5"/>
+    <option name="custom_not_implemented" value="6"/>
+  </enum16>
+  <enum16 name="controller_index" offset="0x2">
+    <option name="player_1" value="0"/>
+    <option name="player_2" value="1"/>
+    <option name="player_3" value="2"/>
+    <option name="player_4" value="3"/>
+    <option name="any_player" value="4"/>
+  </enum16>
+  <asciiz maxlength="32" name="name" offset="0x4"/>
+  <int16 name="bounds_top" offset="0x24"/>
+  <int16 name="bounds_left" offset="0x26"/>
+  <int16 name="bounds_bottom" offset="0x28"/>
+  <int16 name="bounds_right" offset="0x2a"/>
+  <flag bit="7" name="pass_unhandled_events_to_focused_child" offset="0x2c"/>
+  <flag bit="6" name="pause_game_time" offset="0x2c"/>
+  <flag bit="5" name="flash_background_bitmap" offset="0x2c"/>
+  <flag bit="4" name="d_pad_updown_tabs_through_children" offset="0x2c"/>
+  <flag bit="3" name="d_pad_leftright_tabs_through_children" offset="0x2c"/>
+  <flag bit="2" name="d_pad_updown_tabs_through_list_items" offset="0x2c"/>
+  <flag bit="1" name="d_pad_leftright_tabs_through_list_items" offset="0x2c"/>
+  <flag bit="0" name="dont_focus_a_specific_child_widget" offset="0x2c"/>
+  <flag bit="7" name="pass_unhandled_events_to_all_children" offset="0x2d"/>
+  <flag bit="6" name="render_regardless_of_controller_index" offset="0x2d"/>
+  <flag bit="5" name="pass_handled_events_to_all_children" offset="0x2d"/>
+  <flag bit="4" name="return_to_main_menu_if_no_history" offset="0x2d"/>
+  <flag bit="3" name="always_use_tag_controller_index" offset="0x2d"/>
+  <flag bit="2" name="always_use_nifty_render_effects" offset="0x2d"/>
+  <flag bit="1" name="dont_push_history" offset="0x2d"/>
+  <flag bit="0" name="force_handle_mouse" offset="0x2d"/>
+  <int32 info="0 or less = never autoclose" name="milliseconds_to_auto_close" offset="0x30"/>
+  <int32 info="0 or less = immediate close" name="milliseconds_auto_close_fade_time" offset="0x34"/>
+  <reference name="background_bitmap" offset="0x38"/>
+  <struct_array name="game_data_input_functions_game_data_inputs" offset="0x48" size="36">
+    <enum16 name="function" offset="0x0">
+      <option name="null" value="0"/>
+      <option name="player_settings_menu_update_description" value="1"/>
+      <option name="unused" value="2"/>
+      <option name="playlist_settings_menu_update_description" value="3"/>
+      <option name="gametype_select_menu_update_description" value="4"/>
+      <option name="multiplayer_type_menu_update_description" value="5"/>
+      <option name="solo_level_select_update" value="6"/>
+      <option name="difficulty_menu_update_description" value="7"/>
+      <option name="build_number_text_box_only" value="8"/>
+      <option name="server_list_update" value="9"/>
+      <option name="network_pre_game_status_update" value="10"/>
+      <option name="split_screen_pre_game_status_update" value="11"/>
+      <option name="network_split_screen_pre_join_players" value="12"/>
+      <option name="multiplayer_profile_list_update" value="13"/>
+      <option name="wide_3_player_profile_list_update" value="14"/>
+      <option name="player_profile_edit_select_menu_update" value="15"/>
+      <option name="player_profile_small_menu_update" value="16"/>
+      <option name="game_settings_lists_text_update" value="17"/>
+      <option name="solo_game_objective_text" value="18"/>
+      <option name="color_picker_update" value="19"/>
+      <option name="game_settings_lists_picture_update" value="20"/>
+      <option name="main_menu_fake_animate" value="21"/>
+      <option name="multiplayer_level_select_update" value="22"/>
+      <option name="get_active_player_profile_name" value="23"/>
+      <option name="get_edit_player_profile_name" value="24"/>
+      <option name="get_edit_game_settings_name" value="25"/>
+      <option name="get_active_player_profile_color" value="26"/>
+      <option name="multiplayer_set_textbox_map_name" value="27"/>
+      <option name="multiplayer_set_textbox_game_ruleset" value="28"/>
+      <option name="multiplayer_set_textbox_teams_no_teams" value="29"/>
+      <option name="multiplayer_set_textbox_score_limit" value="30"/>
+      <option name="multiplayer_set_textbox_score_limit_type" value="31"/>
+      <option name="multiplayer_set_bitmap_for_map" value="32"/>
+      <option name="multiplayer_set_bitmap_for_ruleset" value="33"/>
+      <option name="multiplayer_set_textbox_number_of_players" value="34"/>
+      <option name="multiplayer_edit_profile_set_rule_text" value="35"/>
+      <option name="system_link_status_check" value="36"/>
+      <option name="multiplayer_game_directions" value="37"/>
+      <option name="teams_no_teams_bitmap_update" value="38"/>
+      <option name="warn_if_different_will_nuke_saved_game" value="39"/>
+      <option name="dim_if_no_network_cable" value="40"/>
+      <option name="pause_game_set_textbox_inverted" value="41"/>
+      <option name="dim_unless_two_controllers" value="42"/>
+      <option name="controls_update_menu" value="43"/>
+      <option name="video_menu_update" value="44"/>
+      <option name="gamespy_screen_update" value="45"/>
+      <option name="common_button_bar_update" value="46"/>
+      <option name="gamepad_update_menu" value="47"/>
+      <option name="server_settings_update" value="48"/>
+      <option name="audio_menu_update" value="49"/>
+      <option name="multiplayer_profile_vehicles_update" value="50"/>
+      <option name="solo_map_list_update" value="51"/>
+      <option name="multiplayer_map_list_update" value="52"/>
+      <option name="gametype_select_list_update" value="53"/>
+      <option name="gametype_edit_list_update" value="54"/>
+      <option name="load_game_list_update" value="55"/>
+      <option name="checking_for_updates" value="56"/>
+      <option name="direct_ip_connect_update" value="57"/>
+      <option name="network_settings_update" value="58"/>
+    </enum16>
+  </struct_array>
+  <struct_array name="event_handlers" offset="0x54" size="72">
+    <flag bit="7" name="close_current_widget" offset="0x0"/>
+    <flag bit="6" name="close_other_widget" offset="0x0"/>
+    <flag bit="5" name="close_all_widgets" offset="0x0"/>
+    <flag bit="4" name="open_widget" offset="0x0"/>
+    <flag bit="3" name="reload_self" offset="0x0"/>
+    <flag bit="2" name="reload_other_widget" offset="0x0"/>
+    <flag bit="1" name="give_focus_to_widget" offset="0x0"/>
+    <flag bit="0" name="run_function" offset="0x0"/>
+    <flag bit="7" name="replace_self_with_widget" offset="0x1"/>
+    <flag bit="6" name="go_back_to_previous_widget" offset="0x1"/>
+    <flag bit="5" name="unknown" offset="0x1"/>
+    <flag bit="4" name="try_to_branch_on_failure" offset="0x1"/>
+    <enum16 name="event_type" offset="0x4">
+      <option name="a_button" value="0"/>
+      <option name="b_button" value="1"/>
+      <option name="x_button" value="2"/>
+      <option name="y_button" value="3"/>
+      <option name="black_button" value="4"/>
+      <option name="white_button" value="5"/>
+      <option name="left_trigger" value="6"/>
+      <option name="right_trigger" value="7"/>
+      <option name="d_pad_up" value="8"/>
+      <option name="d_pad_down" value="9"/>
+      <option name="d_pad_left" value="10"/>
+      <option name="d_pad_right" value="11"/>
+      <option name="start_button" value="12"/>
+      <option name="back_button" value="13"/>
+      <option name="left_thumb" value="14"/>
+      <option name="right_thumb" value="15"/>
+      <option name="left_analog_stick_up" value="16"/>
+      <option name="left_analog_stick_down" value="17"/>
+      <option name="left_analog_stick_left" value="18"/>
+      <option name="left_analog_stick_right" value="19"/>
+      <option name="right_analog_stick_up" value="20"/>
+      <option name="right_analog_stick_down" value="21"/>
+      <option name="right_analog_stick_left" value="22"/>
+      <option name="right_analog_stick_right" value="23"/>
+      <option name="created" value="24"/>
+      <option name="deleted" value="25"/>
+      <option name="get_focus" value="26"/>
+      <option name="lose_focus" value="27"/>
+      <option name="left_mouse" value="28"/>
+      <option name="middle_mouse" value="29"/>
+      <option name="right_mouse" value="30"/>
+      <option name="double_click" value="31"/>
+      <option name="custom_activation" value="32"/>
+      <option name="post_render" value="33"/>
+    </enum16>
+    <enum16 name="function" offset="0x6">
+      <option name="null" value="0"/>
+      <option name="list_goto_next_item" value="1"/>
+      <option name="list_goto_previous_item" value="2"/>
+      <option name="unused" value="3"/>
+      <option name="unused" value="4"/>
+      <option name="initialize_single_player_level_list_solo" value="5"/>
+      <option name="initialize_single_player_level_list_cooperative" value="6"/>
+      <option name="dispose_single_player_level_list" value="7"/>
+      <option name="solo_level_set_map" value="8"/>
+      <option name="set_difficulty" value="9"/>
+      <option name="start_new_game" value="10"/>
+      <option name="pause_game_restart_at_checkpoint" value="11"/>
+      <option name="pause_game_restart_level" value="12"/>
+      <option name="pause_game_return_to_main_menu" value="13"/>
+      <option name="clear_multiplayer_player_joins" value="14"/>
+      <option name="join_controller_to_multiplayer_game" value="15"/>
+      <option name="initialize_network_game_server_list" value="16"/>
+      <option name="start_network_game_server" value="17"/>
+      <option name="dispose_network_game_server_list" value="18"/>
+      <option name="shutdown_network_game" value="19"/>
+      <option name="network_game_join_from_server_list" value="20"/>
+      <option name="split_game_screen_initialize" value="21"/>
+      <option name="cooperative_game_initialize" value="22"/>
+      <option name="main_menu_initialize" value="23"/>
+      <option name="multiplayer_type_menu_initialize" value="24"/>
+      <option name="pick_play_stage_for_quick_start" value="25"/>
+      <option name="multiplayer_level_list_initialize" value="26"/>
+      <option name="multiplayer_level_list_dispose" value="27"/>
+      <option name="multiplayer_level_select" value="28"/>
+      <option name="multiplayer_profiles_list_initialize" value="29"/>
+      <option name="multiplayer_profiles_list_dispose" value="30"/>
+      <option name="multiplayer_profile_set_for_game" value="31"/>
+      <option name="swap_player_team" value="32"/>
+      <option name="network_game_join_player" value="33"/>
+      <option name="player_profile_list_initialize" value="34"/>
+      <option name="player_profile_list_dispose" value="35"/>
+      <option name="wide_3_player_profile_set_for_game" value="36"/>
+      <option name="wide_1_player_profile_set_for_game" value="37"/>
+      <option name="multiplayer_profile_begin_editing" value="38"/>
+      <option name="multiplayer_profile_end_editing" value="39"/>
+      <option name="multiplayer_profile_set_game_engine" value="40"/>
+      <option name="multiplayer_profile_change_name" value="41"/>
+      <option name="multiplayer_profile_set_capture_the_flag_rules" value="42"/>
+      <option name="multiplayer_profile_set_king_of_the_hill_rules" value="43"/>
+      <option name="multiplayer_profile_set_slayer_rules" value="44"/>
+      <option name="multiplayer_profile_set_oddball_rules" value="45"/>
+      <option name="multiplayer_profile_set_racing_rules" value="46"/>
+      <option name="multiplayer_profile_set_player_options" value="47"/>
+      <option name="multiplayer_profile_set_item_options" value="48"/>
+      <option name="multiplayer_profile_set_indicator_options" value="49"/>
+      <option name="multiplayer_profile_initialize_game_engine" value="50"/>
+      <option name="multiplayer_profile_initialize_name" value="51"/>
+      <option name="multiplayer_profile_initialize_capture_the_flag_rules" value="52"/>
+      <option name="multiplayer_profile_initialize_king_of_the_hill_rules" value="53"/>
+      <option name="multiplayer_profile_initialize_slayer_rules" value="54"/>
+      <option name="multiplayer_profile_initialize_oddball_rules" value="55"/>
+      <option name="multiplayer_profile_initialize_racing_rules" value="56"/>
+      <option name="multiplayer_profile_initialize_player_options" value="57"/>
+      <option name="multiplayer_profile_initialize_item_options" value="58"/>
+      <option name="multiplayer_profile_initialize_indicator_options" value="59"/>
+      <option name="multiplayer_profile_save_changes" value="60"/>
+      <option name="color_picker_menu_initialize" value="61"/>
+      <option name="color_picker_menu_dispose" value="62"/>
+      <option name="color_picker_select_color" value="63"/>
+      <option name="player_profile_begin_editing" value="64"/>
+      <option name="player_profile_end_editing" value="65"/>
+      <option name="player_profile_change_name" value="66"/>
+      <option name="player_profile_save_changes" value="67"/>
+      <option name="player_profile_initialize_control_settings" value="68"/>
+      <option name="player_profile_initialize_advanced_control_settings" value="69"/>
+      <option name="player_profile_save_control_settings" value="70"/>
+      <option name="player_profile_save_advanced_control_settings" value="71"/>
+      <option name="multiplayer_game_player_quit" value="72"/>
+      <option name="main_menu_switch_to_solo_game" value="73"/>
+      <option name="request_delete_player_profile" value="74"/>
+      <option name="request_delete_playlist_profile" value="75"/>
+      <option name="final_delete_player_profile" value="76"/>
+      <option name="final_delete_playlist_profile" value="77"/>
+      <option name="cancel_profile_delete" value="78"/>
+      <option name="create_and_edit_playlist_profile" value="79"/>
+      <option name="create_and_edit_player_profile" value="80"/>
+      <option name="network_game_speed_start" value="81"/>
+      <option name="network_game_delay_start" value="82"/>
+      <option name="network_server_accept_connection" value="83"/>
+      <option name="network_server_defer_start" value="84"/>
+      <option name="network_server_allow_start" value="85"/>
+      <option name="disable_if_no_xdemos" value="86"/>
+      <option name="run_xdemos" value="87"/>
+      <option name="single_player_reset_controller_choices" value="88"/>
+      <option name="single_player_set_player_1_controller_choice" value="89"/>
+      <option name="single_player_set_player_2_controller_choice" value="90"/>
+      <option name="error_if_no_network_connection" value="91"/>
+      <option name="start_server_if_none_advertised" value="92"/>
+      <option name="network_game_un_join_player" value="93"/>
+      <option name="close_if_not_editing_profile" value="94"/>
+      <option name="exit_to_xbox_dashboard" value="95"/>
+      <option name="new_campaign_chosen" value="96"/>
+      <option name="new_campaign_decision" value="97"/>
+      <option name="pop_history_stack_once" value="98"/>
+      <option name="difficulty_menu_initialize" value="99"/>
+      <option name="begin_music_fade_out" value="100"/>
+      <option name="new_game_if_no_player_profiles" value="101"/>
+      <option name="exit_gracefully_to_xbox_dashboard" value="102"/>
+      <option name="pause_game_invert_pitch" value="103"/>
+      <option name="start_new_cooperative_game" value="104"/>
+      <option name="pause_game_invert_spinner_get" value="105"/>
+      <option name="pause_game_invert_spinner_set" value="106"/>
+      <option name="main_menu_quit_game" value="107"/>
+      <option name="mouse_emit_accept_event" value="108"/>
+      <option name="mouse_emit_back_event" value="109"/>
+      <option name="mouse_emit_d_pad_left_event" value="110"/>
+      <option name="mouse_emit_d_pad_right_event" value="111"/>
+      <option name="mouse_spinner_3wide_click" value="112"/>
+      <option name="controls_screen_initialize" value="113"/>
+      <option name="video_screen_initialize" value="114"/>
+      <option name="controls_begin_binding" value="115"/>
+      <option name="gamespy_screen_initialize" value="116"/>
+      <option name="gamespy_screen_dispose" value="117"/>
+      <option name="gamespy_select_header" value="118"/>
+      <option name="gamespy_select_iem" value="119"/>
+      <option name="gamespy_select_button" value="120"/>
+      <option name="player_profile_initialize_mouse_settings" value="121"/>
+      <option name="player_profile_change_mouse_settings" value="122"/>
+      <option name="player_profile_initialize_audio_settings" value="123"/>
+      <option name="player_profile_change_audio_settings" value="124"/>
+      <option name="player_profile_change_video_settings" value="125"/>
+      <option name="controls_screen_dispose" value="126"/>
+      <option name="controls_screen_change_settings" value="127"/>
+      <option name="mouse_emit_x_event" value="128"/>
+      <option name="gamepad_screen_initialize" value="129"/>
+      <option name="gamepad_screen_dispose" value="130"/>
+      <option name="gamepad_screen_change_gamepads" value="131"/>
+      <option name="gamepad_screen_select_item" value="132"/>
+      <option name="mouse_screen_defaults" value="133"/>
+      <option name="audio_screen_defaults" value="134"/>
+      <option name="video_screen_defaults" value="135"/>
+      <option name="controls_screen_defaults" value="136"/>
+      <option name="profile_set_edit_begin" value="137"/>
+      <option name="profile_manager_delete" value="138"/>
+      <option name="profile_manager_select" value="139"/>
+      <option name="gamespy_dismiss_error" value="140"/>
+      <option name="server_settings_initialize" value="141"/>
+      <option name="server_settings_edit_server_name" value="142"/>
+      <option name="server_settings_edit_server_password" value="143"/>
+      <option name="server_settings_start_game" value="144"/>
+      <option name="video_test_dialog_initialize" value="145"/>
+      <option name="video_test_dialog_dispose" value="146"/>
+      <option name="video_test_dialog_accept" value="147"/>
+      <option name="gamespy_dismiss_filters" value="148"/>
+      <option name="gamespy_update_filter_settings" value="149"/>
+      <option name="gamespy_back_handler" value="150"/>
+      <option name="mouse_spinner_1wide_click" value="151"/>
+      <option name="controls_back_handler" value="152"/>
+      <option name="controls_advanced_launch" value="153"/>
+      <option name="controls_advanced_ok" value="154"/>
+      <option name="multiplayer_pause_menu_open" value="155"/>
+      <option name="multiplayer_game_options_open" value="156"/>
+      <option name="multiplayer_choose_team" value="157"/>
+      <option name="multiplayer_profile_initialize_vehicle_options" value="158"/>
+      <option name="multiplayer_profile_save_vehicle_options" value="159"/>
+      <option name="single_previous_cl_clicked_closed_cleared_class_item_activated" value="160"/>
+      <option name="multiplayer_profile_initialize_teamplay_options" value="161"/>
+      <option name="multiplayer_profile_save_teamplay_options" value="162"/>
+      <option name="multiplayer_game_options_choose" value="163"/>
+      <option name="emit_custom_activation_event" value="164"/>
+      <option name="player_profile_cancel_audio_set" value="165"/>
+      <option name="player_profile_initialize_network_options" value="166"/>
+      <option name="player_profile_save_network_options" value="167"/>
+      <option name="credits_post_render" value="168"/>
+      <option name="difficulty_item_select" value="169"/>
+      <option name="credits_initialize" value="170"/>
+      <option name="credits_dispose" value="171"/>
+      <option name="gamespy_get_patch" value="172"/>
+      <option name="video_screen_dispose" value="173"/>
+      <option name="campaign_menu_initialize" value="174"/>
+      <option name="campaign_menu_continue" value="175"/>
+      <option name="load_game_menu_initialize" value="176"/>
+      <option name="load_game_menu_dispose" value="177"/>
+      <option name="load_game_menu_activated" value="178"/>
+      <option name="solo_menu_save_checkpoint" value="179"/>
+      <option name="multiplayer_type_set_mode" value="180"/>
+      <option name="checking_for_updates_ok" value="181"/>
+      <option name="checking_for_updates_dismiss" value="182"/>
+      <option name="direct_ip_connection_initialize" value="183"/>
+      <option name="direct_ip_connection_go" value="184"/>
+      <option name="direct_ip_edit_field" value="185"/>
+      <option name="network_settings_edit_a_port" value="186"/>
+      <option name="network_settings_defaults" value="187"/>
+      <option name="load_game_menu_delete_request" value="188"/>
+      <option name="load_game_menu_delete_finish" value="189"/>
+    </enum16>
+    <reference name="widget_tag" offset="0x8"/>
+    <reference name="sound_effect" offset="0x18"/>
+    <asciiz maxlength="32" name="script" offset="0x28"/>
+  </struct_array>
+  <struct_array name="search_and_replace_functions" offset="0x60" size="34">
+    <asciiz maxlength="32" name="search_string" offset="0x0"/>
+    <enum16 name="replace_function" offset="0x20">
+      <option name="null" value="0"/>
+      <option name="widgets_controller" value="1"/>
+      <option name="build_number" value="2"/>
+      <option name="process_id_pid" value="3"/>
+    </enum16>
+  </struct_array>
+  <reference name="text_box_text_label_unicode_strings_list" offset="0xec"/>
+  <reference name="text_box_text_font" offset="0xfc"/>
+  <colorARGB name="text_box_text_color" offset="0x10c"/>
+  <enum16 name="text_box_justification" offset="0x11c">
+    <option name="left_justify" value="0"/>
+    <option name="right_justify" value="1"/>
+    <option name="center_justify" value="2"/>
+  </enum16>
+  <flag bit="7" name="editable" offset="0x11e"/>
+  <flag bit="6" name="password" offset="0x11e"/>
+  <flag bit="5" name="flashing" offset="0x11e"/>
+  <flag bit="4" name="dont_do_that_weird_focus_test" offset="0x11e"/>
+  <int16 info="0 = default" name="more_text_box_parameters_string_list_index" offset="0x12e"/>
+  <int16 info="offsets text position in its bounding area" name="more_text_box_parameters_horizontal_offset" offset="0x130"/>
+  <int16 info="offsets text position in its bounding area" name="more_text_box_parameters_vertical_offset" offset="0x132"/>
+  <flag bit="7" name="list_items_generated_in_code" offset="0x150"/>
+  <flag bit="6" name="list_items_from_string_list_tag" offset="0x150"/>
+  <flag bit="5" name="list_items_only_one_tooltip" offset="0x150"/>
+  <flag bit="4" name="list_single_preview_no_scroll" offset="0x150"/>
+  <reference name="spinner_list_list_header_bitmap" offset="0x154"/>
+  <reference name="spinner_list_list_footer_bitmap" offset="0x164"/>
+  <int16 name="spinner_list_header_bounds_top" offset="0x174"/>
+  <int16 name="spinner_list_header_bounds_left" offset="0x176"/>
+  <int16 name="spinner_list_header_bounds_bottom" offset="0x178"/>
+  <int16 name="spinner_list_header_bounds_right" offset="0x17a"/>
+  <int16 name="spinner_list_footer_bounds_top" offset="0x17c"/>
+  <int16 name="spinner_list_footer_bounds_left" offset="0x17e"/>
+  <int16 name="spinner_list_footer_bounds_bottom" offset="0x180"/>
+  <int16 name="spinner_list_footer_bounds_right" offset="0x182"/>
+  <reference name="column_list_extended_description_widget" offset="0x1a4"/>
+  <struct_array name="conditional_widgets" offset="0x2d4" size="80">
+    <reference name="widget_tag" offset="0x0"/>
+    <asciiz info="unused" maxlength="32" name="name" offset="0x10"/>
+    <flag bit="7" name="load_if_event_handler_function_fails" offset="0x30"/>
+    <int16 info="unused" name="custom_controller_index" offset="0x34"/>
+  </struct_array>
+  <struct_array name="child_widgets" offset="0x3e0" size="80">
+    <reference name="widget_tag" offset="0x0"/>
+    <asciiz info="unused" maxlength="32" name="name" offset="0x10"/>
+    <flag bit="7" name="use_custom_controller_index" offset="0x30"/>
+    <int16 name="custom_controller_index" offset="0x34"/>
+    <int16 name="vertical_offset" offset="0x36"/>
+    <int16 name="horizontal_offset" offset="0x38"/>
+  </struct_array>
+</struct>

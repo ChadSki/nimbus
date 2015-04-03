@@ -1,0 +1,113 @@
+<?xml version="1.0" ?>
+<struct name="bitm" size="108">
+  <enum16 name="type" offset="0x0">
+    <option name="texture_2d" value="0"/>
+    <option name="texture_3d" value="1"/>
+    <option name="cube_map" value="2"/>
+    <option name="sprite" value="3"/>
+    <option name="interface_bitmap" value="4"/>
+  </enum16>
+  <enum16 name="format" offset="0x2">
+    <option name="compressed_with_color_key_transparency" value="0"/>
+    <option name="compressed_with_explicit_alpha" value="1"/>
+    <option name="compressed_with_interpolated_alpha" value="2"/>
+    <option name="color_16_bit" value="3"/>
+    <option name="color_32_bit" value="4"/>
+    <option name="monochrome" value="5"/>
+  </enum16>
+  <enum16 name="usage" offset="0x4">
+    <option name="alpha_blend" value="0"/>
+    <option name="default" value="1"/>
+    <option name="height_map" value="2"/>
+    <option name="detail_map" value="3"/>
+    <option name="light_map" value="4"/>
+    <option name="vector_map" value="5"/>
+  </enum16>
+  <flag bit="7" name="enable_diffusion_dithering" offset="0x6"/>
+  <flag bit="6" name="disable_height_map_compression" offset="0x6"/>
+  <flag bit="5" name="uniform_sprite_sequences" offset="0x6"/>
+  <flag bit="4" name="filthy_sprite_bug_fix" offset="0x6"/>
+  <float32 info="0 - 1 only; 0 = fade to gray by last mipmap; 1 = fade to gray by first mipmap" name="post_processing_detail_fade_factor" offset="0x8"/>
+  <float32 info="0 - 1 only; sharpens mipmap after downsampling" name="post_processing_sharpen_amount" offset="0xc"/>
+  <float32 info="texture repeats; the apparent height of the bump map above the triangle it is textured onto (ie, 1.0 = as high as the texture is wide)" name="post_processing_bump_height" offset="0x10"/>
+  <enum16 name="sprite_processing_sprite_budget_size" offset="0x14">
+    <option name="square_32px" value="0"/>
+    <option name="square_64px" value="1"/>
+    <option name="square_128px" value="2"/>
+    <option name="square_256px" value="3"/>
+    <option name="square_512px" value="4"/>
+  </enum16>
+  <int16 name="sprite_processing_sprite_budget_count" offset="0x16"/>
+  <int16 info="pixels" name="color_plate_color_plate_width" offset="0x18"/>
+  <int16 info="pixels" name="color_plate_color_plate_height" offset="0x1a"/>
+  <int32 info="bytes; this is only a pointer if the actual value is 0" name="color_plate_compressed_color_plate_data" offset="0x1c"/>
+  <int32 info="bytes; this is only a pointer, don't change this" name="processed_pixel_data" offset="0x38"/>
+  <float32 info="pixels; 0 - 10 only; blurs the bitmap before generating mipmaps" name="miscellaneous_blur_filter_size" offset="0x44"/>
+  <float32 info="-1 to 1 only; affects alpha mipmap generation" name="miscellaneous_alpha_bias" offset="0x48"/>
+  <int16 info="levels; 0 defaults to all levels" name="miscellaneous_mipmap_count" offset="0x4c"/>
+  <enum16 name="more_sprite_processing_sprite_usage" offset="0x4e">
+    <option name="blendaddsubtractmax" value="0"/>
+    <option name="multiplymin" value="1"/>
+    <option name="double_multiply" value="2"/>
+  </enum16>
+  <int16 name="more_sprite_processing_sprite_spacing" offset="0x50"/>
+  <struct_array name="sequences" offset="0x54" size="64">
+    <asciiz maxlength="32" name="name" offset="0x0"/>
+    <struct_array name="sequences" offset="0x34" size="32">
+      <int16 name="bitmap_index" offset="0x0"/>
+      <float32 name="left" offset="0x8"/>
+      <float32 name="right" offset="0xc"/>
+      <float32 name="top" offset="0x10"/>
+      <float32 name="bottom" offset="0x14"/>
+      <float32 name="registration_point_x" offset="0x18"/>
+      <float32 name="registration_point_y" offset="0x1c"/>
+    </struct_array>
+  </struct_array>
+  <struct_array name="bitmaps" offset="0x60" size="48">
+    <ascii length="4" name="signature" offset="0x0" reverse="True"/>
+    <int16 name="width" offset="0x4"/>
+    <int16 name="height" offset="0x6"/>
+    <int8 name="depth" offset="0x8"/>
+    <enum16 name="type" offset="0xa">
+      <option name="texture_2d" value="0"/>
+      <option name="texture_3d" value="1"/>
+      <option name="cube_map" value="2"/>
+      <option name="white" value="3"/>
+    </enum16>
+    <enum16 name="format" offset="0xc">
+      <option name="a8" value="0"/>
+      <option name="y8" value="1"/>
+      <option name="ay8" value="2"/>
+      <option name="a8y8" value="3"/>
+      <option name="unused1" value="4"/>
+      <option name="unused2" value="5"/>
+      <option name="r5g6b5" value="6"/>
+      <option name="unused3" value="7"/>
+      <option name="a1r5g5b5" value="8"/>
+      <option name="a4r4g4b4" value="9"/>
+      <option name="x8r8g8b8" value="10"/>
+      <option name="a8r8g8b8" value="11"/>
+      <option name="unused4" value="12"/>
+      <option name="unused5" value="13"/>
+      <option name="dxt1" value="14"/>
+      <option name="dxt3" value="15"/>
+      <option name="dxt5" value="16"/>
+      <option name="p8_bump" value="17"/>
+      <option name="r2d2" value="18"/>
+      <option name="c3p0" value="19"/>
+      <option name="ob1" value="20"/>
+    </enum16>
+    <flag bit="7" name="power_of_two_dimensions" offset="0xe"/>
+    <flag bit="6" name="compressed" offset="0xe"/>
+    <flag bit="5" name="palettized" offset="0xe"/>
+    <flag bit="4" name="swizzled" offset="0xe"/>
+    <flag bit="3" name="linear" offset="0xe"/>
+    <flag bit="2" name="v16u16" offset="0xe"/>
+    <int16 name="registration_point_x" offset="0x10"/>
+    <int16 name="registration_point_y" offset="0x12"/>
+    <int16 name="mipmap_count" offset="0x14"/>
+    <int32 info="pixels; In CE tags, this offset starts at 0, because the image is referenced within that particular tag. In compiled map files, it seems the offsets are cumulative, and perhaps become offsets within the bitmaps.map file." name="pixels_offset" offset="0x18"/>
+    <int32 info="pixels; number of pixels used in this bitmap sub-image" name="pixel_count" offset="0x1c"/>
+    <reference loneID="True" name="bitmap" offset="0x20"/>
+  </struct_array>
+</struct>

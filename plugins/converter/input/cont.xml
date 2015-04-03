@@ -1,0 +1,198 @@
+<plugin class="cont" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00">
+	<option name="First Point Unfaded" value="31"/>
+	<option name="Last Point Unfaded" value="30"/>
+	<option name="Points Start Pinned to Media" value="29"/>
+	<option name="Points Start Pinned to Ground" value="28"/>
+	<option name="Points Always Pinned to Media" value="27"/>
+	<option name="Points Always Pinned to Ground" value="26"/>
+	<option name="Edge Effect Fades Slowly" value="25"/>
+</bitmask32>
+<bitmask32 name="Shader Flags" offset="0x02" helptag="HelpText 1">
+	<option name="Point Generation Rate" value="31"/>
+	<option name="Point Velocity" value="30"/>
+	<option name="Point Velocity Delta" value="29"/>
+	<option name="Point Velocity Cone Angle" value="28"/>
+	<option name="Inherited Velocity Fraction" value="27"/>
+	<option name="Sequence Animation Rate" value="26"/>
+	<option name="Texture Scale U" value="25"/>
+	<option name="Texture Scale V" value="24"/>
+	<option name="Texture Animation U" value="23"/>
+	<option name="Texture Animation V" value="22"/>
+</bitmask32>
+
+<float name="Point Creation.Point Generation Rate" note="points generated per second" offset="0x04"/>
+<float name="Point Creation.Point Velocity - from" note="world units per second" info="velocity added to each point's initial velocity" offset="0x08"/>
+<float name="Point Creation.Point Velocity - to" note="world units per second" info="velocity added to each point's initial velocity" offset="0x0C"/>
+<float name="Point Creation.Point Velocity Cone Angle" note="radians" info="initial velocity is inside the cone defined by the marker's forward vector and this angle" offset="0x10"/>
+<float name="Point Creation.Inherited Velocity Fraction" note="0 - 1 only" info="fraction of parent object's velocity that is inherited by contrail points" offset="0x14"/>
+
+<enum16 name="Rendering.Render Type" info="this specifies how the contrail is oriented in space" offset="0x18">
+	<option name="Vertical Orientation" value="00"/>
+	<option name="Horizontal Orientation" value="01"/>
+	<option name="Media Mapped" value="02"/>
+	<option name="Ground Mapped" value="03"/>
+	<option name="Viewer Facing" value="04"/>
+	<option name="Double-Marker Linked" value="05"/>
+</enum16>
+
+<float name="Rendering.Texture Repeats U" info="texture repeats per contrail segment" offset="0x1C"/>
+<float name="Rendering.Texture Repeats V" info="texture repeats across contrail width" offset="0x20"/>
+<float name="Rendering.Texture Animation U" note="repeats per second" info="the texture along the contrail is animated by this value" offset="0x24"/>
+<float name="Rendering.Texture Animation V" note="repeats per second" info="the texture across the contrail is animated by this value" offset="0x28"/>
+<float name="Rendering.Animation Rate" note="frames per second" offset="0x2C"/>
+
+<dependency name="Rendering.Bitmap" offset="0x30"/>
+
+<short name="Rendering.First Sequence Index" offset="0x40"/>
+<short name="Rendering.Sequence Count" offset="0x42"/>
+
+<bitmask32 name="Rendering.Shader Flags" offset="0xAC">
+	<option name="Sort Bias" value="31"/>
+	<option name="Nonlinear Tint" value="30"/>
+	<option name="Don't Overdraw FP Weapon" value="29"/>
+</bitmask32>
+
+<enum16 name="Rendering.Framebuffer Blend Function" offset="0xAE">
+	<option name="Alpha Blend" value="00"/>
+	<option name="Multiply" value="01"/>
+	<option name="Double Multiply" value="02"/>
+	<option name="Add" value="03"/>
+	<option name="Subtract" value="04"/>
+	<option name="Component Min" value="05"/>
+	<option name="Component Max" value="06"/>
+	<option name="Alpha-Multiply Add" value="07"/>
+</enum16>
+
+<enum16 name="Rendering.Framebuffer Fade Mode" offset="0xB0">
+	<option name="None" value="00"/>
+	<option name="Fade When Perpendicular" value="01"/>
+	<option name="Fade When Parallel" value="02"/>
+</enum16>
+
+<bitmask32 name="Rendering.Map Flags" offset="0xB2">
+	<option name="Unfiltered" value="31"/>
+</bitmask32>
+
+<dependency name="Secondary Map.Bitmap" info_img="cont Secondary Map.png" offset="0xD0"/>
+
+<enum16 name="Secondary Map.Anchor" info_img="cont Secondary Map.png" offset="0xE0">
+	<option name="With Primary" value="00"/>
+	<option name="With Screen Space" value="01"/>
+	<option name="Z Sprite" value="02"/>
+</enum16>
+
+<bitmask32 name="Secondary Map.Flags" info_img="cont Secondary Map.png" offset="0xE2">
+	<option name="Unfiltered" value="31"/>
+</bitmask32>
+
+<enum16 name="Secondary Map.U-Animation Source" info_img="cont Secondary Map.png" offset="0xE4">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.U-Animation Function" info_img="cont Secondary Map.png" offset="0xE6">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.U-Animation Period" note="seconds; 0 defaults to 1" info_img="cont Secondary Map.png" offset="0xE8"/>
+<float name="Secondary Map.U-Animation Phase" info_img="cont Secondary Map.png" offset="0xEC"/>
+<float name="Secondary Map.U-Animation Scale" note="repeats; 0 defaults to 1" info_img="cont Secondary Map.png" offset="0xF0"/>
+
+<enum16 name="Secondary Map.V-Animation Source" info_img="cont Secondary Map.png" offset="0xF4">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.V-Animation Function" info_img="cont Secondary Map.png" offset="0xF6">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.V-Animation Period" note="seconds; 0 defaults to 1" info_img="cont Secondary Map.png" offset="0xF8"/>
+<float name="Secondary Map.V-Animation Phase" info_img="cont Secondary Map.png" offset="0xFC"/>
+<float name="Secondary Map.V-Animation Scale" note="repeats; 0 defaults to 1" info_img="cont Secondary Map.png" offset="0x100"/>
+
+<enum16 name="Secondary Map.Rotation-Animation Source" info_img="cont Secondary Map.png" offset="0x104">
+	<option name="None" value="00"/>
+	<option name="A out" value="01"/>
+	<option name="B out" value="02"/>
+	<option name="C out" value="03"/>
+	<option name="D out" value="04"/>
+</enum16>
+
+<enum16 name="Secondary Map.Rotation-Animation Function" info_img="cont Secondary Map.png" offset="0x106">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+
+<float name="Secondary Map.Rotation-Animation Period" note="seconds; 0 defaults to 1" info_img="cont Secondary Map.png" offset="0x108"/>
+<float name="Secondary Map.Rotation-Animation Phase" info_img="cont Secondary Map.png" offset="0x10C"/>
+<float name="Secondary Map.Rotation-Animation Scale" note="degrees; 0 defaults to 360" info_img="cont Secondary Map.png" offset="0x110"/>
+<float name="Secondary Map.Rotation-Animation Center: x" info_img="cont Secondary Map.png" offset="0x114"/>
+<float name="Secondary Map.Rotation-Animation Center: y" info_img="cont Secondary Map.png" offset="0x118"/>
+
+<float name="Secondary Map.Zsprite Radius Scale" info_img="cont Secondary Map.png" offset="0x120"/>
+
+<struct name="Point States" offset="0x138" size="104">
+	<float name="State Timing.Duration: from" note="seconds" info="the time a point spends in this state (use transition durations instead, for smoother effects)" offset="0x00"/>
+	<float name="State Timing.Duration: to" note="seconds" info="the time a point spends in this state (use transition durations instead, for smoother effects)" offset="0x04"/>
+	<float name="State Timing.Transition Duration: from" note="seconds" info="the time a point takes to transition to the next state" offset="0x08"/>
+	<float name="State Timing.Transition Duration: to" note="seconds" info="the time a point takes to transition to the next state" offset="0x0C"/>
+	
+	<dependency name="Point Variables.Physics" offset="0x10"/>
+	
+	<float name="Point Variables.Width" note="world units" info="contrail width at this point" offset="0x40"/>
+	
+	<colorARGB name="Point Variables.Color Lower Bound" info="contrail color at this point" offset="0x44"/>
+	<colorARGB name="Point Variables.Color Upper Bound" info="contrail color at this point" offset="0x54"/>
+	
+	<bitmask32 name="Point Variables.Scale Flags" offset="0x64">
+		<option name="Duration" value="31"/>
+		<option name="Duration Delta" value="30"/>
+		<option name="Transition Duration" value="29"/>
+		<option name="Transition Duration Delta" value="28"/>
+		<option name="Width" value="27"/>
+		<option name="Color" value="26"/>
+	</bitmask32>
+</struct>
+
+</plugin>

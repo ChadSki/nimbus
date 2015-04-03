@@ -1,0 +1,159 @@
+<plugin class="actv" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00">
+	<option name="Can Shoot While Flying" value="31"/>
+	<option name="Interpolate Color in HSV" value="30"/>
+	<option name="Has Unlimited Grenades" value="29"/>
+	<option name="Moveswitch Stay w/ Friends" value="28"/>
+	<option name="Active Camouflage" value="27"/>
+	<option name="Super Active Camouflage" value="26"/>
+	<option name="Cannot Use Ranged Weapons" value="25"/>
+	<option name="Prefer Passenger Seat" value="24"/>
+</bitmask32>
+
+<dependency name="Actor Definition" offset="0x04"/>
+<dependency name="Unit" note="biped, unit or vehicle" offset="0x14"/>
+<dependency name="Major Variant" offset="0x24"/>
+
+<enum16 name="Movement Switching.Movement Type" info_img="actv Movement Switching.png" offset="0x4C">
+	<option name="Always Run" value="00"/>
+	<option name="Always Crouch" value="01"/>
+	<option name="Switch Types" value="02"/>
+</enum16>
+
+<float name="Movement Switching.Initial Crouch Chance" note="0 - 1 only" info="actors try to maintain this fraction of crouched actors" info_img="actv Movement Switching.png" offset="0x50"/>
+<float name="Movement Switching.Crouch Time: from" note="seconds" info="how long to stay crouched before running" info_img="actv Movement Switching.png" offset="0x54"/>
+<float name="Movement Switching.Crouch Time: to" note="seconds" info="how long to stay crouched before running" info_img="actv Movement Switching.png" offset="0x58"/>
+<float name="Movement Switching.Run Time: from" note="seconds" info="how long to run before moving to a crouch" info_img="actv Movement Switching.png" offset="0x5C"/>
+<float name="Movement Switching.Run Time: to" note="seconds" info="how long to run before moving to a crouch" info_img="actv Movement Switching.png" offset="0x60"/>
+
+<dependency name="Ranged Combat.Weapon" offset="0x64"/>
+
+<float name="Ranged Combat.Maximum Firing Distance" note="world units" info="only fire at targets within this distance" offset="0x74"/>
+<float name="Ranged Combat.Rate of Fire" offset="0x78"/>
+<float name="Ranged Combat.Projectile Error" note="radians" offset="0x7C"/>
+<float name="Ranged Combat.Fire Burst Delay Time: from" note="seconds" offset="0x80"/>
+<float name="Ranged Combat.Fire Burst Delay Time: to" note="seconds" offset="0x84"/>
+<float name="Ranged Combat.New-Target Firing Pattern Time" note="seconds" offset="0x88"/>
+<float name="Ranged Combat.Surprise Delay Time" note="seconds" offset="0x8C"/>
+<float name="Ranged Combat.Surprise Fire-Wildly Time" note="seconds" offset="0x90"/>
+<float name="Ranged Combat.Death Fire-Wildly Chance" note="0 - 1 only" offset="0x94"/>
+<float name="Ranged Combat.Death Fire-Wildly Time" note="seconds" offset="0x98"/>
+<float name="Ranged Combat.Desired Combat Range: from" note="world units" offset="0x9C"/>
+<float name="Ranged Combat.Desired Combat Range: to" note="world units" offset="0xA0"/>
+<float name="Ranged Combat.Custom Stand Gun Offset: i" info="overrides the default in the base actor" offset="0xA4"/>
+<float name="Ranged Combat.Custom Stand Gun Offset: i" info="overrides the default in the base actor" offset="0xA8"/>
+<float name="Ranged Combat.Custom Stand Gun Offset: k" info="overrides the default in the base actor" offset="0xAC"/>
+<float name="Ranged Combat.Custom Crouch Gun Offset: i" info="overrides the default in the base actor" offset="0xB0"/>
+<float name="Ranged Combat.Custom Crouch Gun Offset: i" info="overrides the default in the base actor" offset="0xB4"/>
+<float name="Ranged Combat.Custom Crouch Gun Offset: k" info="overrides the default in the base actor" offset="0xB8"/>
+<float name="Ranged Combat.Target Tracking" note="0 - 1 only" info="how much to follow the target while shooting" offset="0xBC"/>
+<float name="Ranged Combat.Target Leading" note="0 - 1 only" info="lead prediction accuracy" offset="0xC0"/>
+<float name="Ranged Combat.Weapon Damage Modifier" note="0 = default" info="fraction of normal damage to inflict" offset="0xC4"/>
+<float name="Ranged Combat.Damage Per Second" note="used if WDM = 0" info="how much damage to inflict on target per second while firing a burst at them" offset="0xC8"/>
+
+<float name="Burst Geometry.Burst Origin Radius" note="world units" info_img="actv Burst Geometry.png" offset="0xCC"/>
+<float name="Burst Geometry.Burst Origin Angle" note="radians" info_img="actv Burst Geometry.png" offset="0xD0"/>
+<float name="Burst Geometry.Burst Return Length: from" note="world units" info_img="actv Burst Geometry.png" offset="0xD4"/>
+<float name="Burst Geometry.Burst Return Length: to" note="world units" info_img="actv Burst Geometry.png" offset="0xD8"/>
+<float name="Burst Geometry.Burst Return Angle" note="radians" info_img="actv Burst Geometry.png" offset="0xDC"/>
+<float name="Burst Geometry.Burst Duration: from" note="seconds" info_img="actv Burst Geometry.png" offset="0xE0"/>
+<float name="Burst Geometry.Burst Duration: to" note="seconds" info_img="actv Burst Geometry.png" offset="0xE4"/>
+<float name="Burst Geometry.Burst Separation: from" note="seconds" info_img="actv Burst Geometry.png" offset="0xE8"/>
+<float name="Burst Geometry.Burst Separation: to" note="seconds" info_img="actv Burst Geometry.png" offset="0xEC"/>
+<float name="Burst Geometry.Burst Angular Velocity" note="radians per second" info_img="actv Burst Geometry.png" offset="0xF0"/>
+<float name="Burst Geometry.Special Damage Modifier" note="0 - 1 only" info_img="actv Burst Geometry.png" offset="0xF8"/>
+<float name="Burst Geometry.Special Projectile Error" note="radians" info_img="actv Burst Geometry.png" offset="0xFC"/>
+
+<float name="Firing Patterns.New-Target Burst Duration" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x100"/>
+<float name="Firing Patterns.New-Target Burst Separation" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x104"/>
+<float name="Firing Patterns.New-Target Rate of Fire" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x108"/>
+<float name="Firing Patterns.New-Target Projectile Error" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x10C"/>
+<float name="Firing Patterns.Moving Burst Duration" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x118"/>
+<float name="Firing Patterns.Moving Burst Separation" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x11C"/>
+<float name="Firing Patterns.Moving Rate of Fire" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x120"/>
+<float name="Firing Patterns.Moving Projectile Error" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x124"/>
+<float name="Firing Patterns.Berserk Burst Duration" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x130"/>
+<float name="Firing Patterns.Berserk Burst Separation" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x134"/>
+<float name="Firing Patterns.Berserk Rate of Fire" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x138"/>
+<float name="Firing Patterns.Berserk Projectile Error" note="multiplier; 0 = unchanged" info_img="actv Firing Patterns.png" offset="0x13C"/>
+
+<float name="Special-Case Firing Properties.Super-Ballistic Range" info="aim shots super-ballistically if target is outside this range" offset="0x148"/>
+<float name="Special-Case Firing Properties.Bombardment Range" info="offset burst targets randomly by this range when firing at non-visible enemies" offset="0x14C"/>
+<float name="Special-Case Firing Properties.Modified Vision Range" info="any custom vision range this actv has" offset="0x150"/>
+
+<enum16 name="Special-Case Firing Properties.Special-Fire Mode" info="type of special weapon fire possible" offset="0x154">
+	<option name="None" value="00"/>
+	<option name="Overcharge" value="01"/>
+	<option name="Secondary Trigger" value="02"/>
+</enum16>
+
+<enum16 name="Special-Case Firing Properties.Special-Fire Situation" info="when to use special weapon mode" offset="0x156">
+	<option name="Never" value="00"/>
+	<option name="Enemy Visible" value="01"/>
+	<option name="Enemy Out of Sight" value="02"/>
+	<option name="Strafing" value="03"/>
+</enum16>
+
+<float name="Special-Case Firing Properties.Special-Fire Chance" note="0 - 1 only" info="how likely to use this" offset="0x158"/>
+<float name="Special-Case Firing Properties.Special-Fire Delay" note="seconds" info="waiting period between mode uses" offset="0x15C"/>
+
+<float name="Berserking and Melee.Melee Range" note="world units" offset="0x160"/>
+<float name="Berserking and Melee.Melee Abort Range" note="world units" offset="0x164"/>
+<float name="Berserking and Melee.Berserk Firing Range: from" note="world units" offset="0x168"/>
+<float name="Berserking and Melee.Berserk Firing Range: to" note="world units" offset="0x16C"/>
+<float name="Berserking and Melee.Berserk Melee Range" note="world units" offset="0x170"/>
+<float name="Berserking and Melee.Berserk Melee Abort Range" note="world units" offset="0x174"/>
+
+<enum16 name="Grenades.Grenade Type" info="type of grenades thrown" offset="0x180">
+	<option name="Human Fragmentation" value="00"/>
+	<option name="Covenant Plasma" value="01"/>
+</enum16>
+
+<enum16 name="Grenades.Trajectory Type" info="how grenades are thrown" offset="0x182">
+	<option name="Toss" value="00"/>
+	<option name="Lob" value="01"/>
+	<option name="Bounce" value="02"/>
+</enum16>
+
+<enum16 name="Grenade.Grenade Stimulus" info="what causes us to consider throwing a grenade" offset="0x184">
+	<option name="Never" value="00"/>
+	<option name="Visible Target" value="01"/>
+	<option name="Seek Cover" value="02"/>
+</enum16>
+
+<short name="Grenades.Minimum Enemy Count" info="how many enemies must be within the radius of the grenade before we consider throwing it there" offset="0x186"/>
+
+<float name="Grenades.Enemy Radius" note="world units" info="consider enemies within this radius of throw location" offset="0x188"/>
+<float name="Grenades.Grenade Velocity" note="world units per second" info="how fast to throw the grenades" offset="0x190"/>
+<float name="Grenades.Grenade Ranges: from" note="world units" info="ranges within which to consider throwing grenade" offset="0x194"/>
+<float name="Grenades.Grenade Ranges: to" note="world units" info="ranges within which to consider throwing grenade" offset="0x198"/>
+<float name="Grenades.Collateral Damage Radius" note="world units" info="don't throw if friendlies are within this range of target" offset="0x19C"/>
+<float name="Grenades.Grenade Chance" note="0 - 1 only" info="how likely to throw a grenade" offset="0x1A0"/>
+<float name="Grenades.Grenade Check Time" note="seconds" info="how often to consider throwing a grenade while stimulated" offset="0x1A4"/>
+<float name="Grenades.Encounter Grenade Timeout" note="seconds" info="don't throw grenade if another actor within my encounter threw one this recently" offset="0x1A8"/>
+
+<dependency name="Items.Equipment" info="drops upon death" offset="0x1C0"/>
+
+<short name="Items.Grenade Count: from" info="number of grenades that we start with" offset="0x1D0"/>
+<short name="Items.Grenade Count: to" info="number of grenades that we start with" offset="0x1D2"/>
+
+<float name="Items.Don't Drop Grenades Chance" note="0 - 1 only" info="how likely to NOT drop grenades, even if we still have some" offset="0x1D4"/>
+<float name="Items.Drop Weapon Loaded: from" note="fractions of a clip, eg. 0.3 to 0.5" offset="0x1D8"/>
+<float name="Items.Drop Weapon Loaded: to () ()" note="fractions of a clip, eg. 0.3 to 0.5" info="amount of ammo loaded into the weapon that drops" offset="0x1DC"/>
+
+<short name="Items.Drop Weapon Ammo: from ()" info="total ammo in the dropped weapon" offset="0x1E0"/>
+<short name="Items.Drop Weapon Ammo: to ()" info="total ammo in the dropped weapon" offset="0x1E2"/>
+
+<float name="Unit.Body Vitality ()" info="maximum body vitality of the unit" offset="0x200"/>
+<float name="Unit.Shield Vitality ()" info="maximum shield vitality of the unit" offset="0x204"/>
+<float name="Unit.Shield Sapping Radius () ()" note="world units" info="how far away we can drain the player's shields" offset="0x208"/>
+
+<short name="Unit.Force Shader Permutation ()" info="if nonzero, overrides the unit's shader permutation" offset="0x20C"/>
+
+<struct name="Change Colors" offset="0x22C" size="32">
+	<colorRGB name="Color Lower Bound" offset="0x00"/>
+	<colorRGB name="Color Upper Bound" offset="0x0C"/>
+</struct>
+
+</plugin>

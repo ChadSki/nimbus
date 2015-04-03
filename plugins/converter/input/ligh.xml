@@ -1,0 +1,108 @@
+<plugin class="ligh" author="sparky" version="4.0" headersize="Main">
+
+<bitmask32 name="Flags" offset="0x00">
+	<option name="Dynamic" info="dynamically illuminate interiors" value="31"/>
+	<option name="No Specular" info="for dynamic lights, cast only diffuse light" value="30"/>
+	<option name="Don't Light Own Object" info="for dynamic lights, don't light the object to which it is attached" value="29"/>
+	<option name="Supersize in First Person" info="for dynamic lights, light every environment surface if this light is on the gun in the current window" value="28"/>
+	<option name="First Person Flashlight" value="27"/>
+	<option name="Don't Fade Active Camouflage" value="26"/>
+</bitmask32>
+
+<float name="Shape.Radius" note="0 = lens flare only" info="the radius where illumination is zero" info_img="ligh Shape.png" offset="0x04"/>
+<float name="Shape.Radius Modifier: from" info="how the radius changes with external scale" info_img="ligh Shape.png" offset="0x08"/>
+<float name="Shape.Radius Modifier: to" info="how the radius changes with external scale" info_img="ligh Shape.png" offset="0x0C"/>
+<float name="Shape.Falloff Angle" note="radians" info="the angle at which the light begins to fade" info_img="ligh Shape.png" offset="0x10"/>
+<float name="Shape.Cutoff Angle" note="radians" info="the angle at which illumination is zero" info_img="ligh Shape.png" offset="0x14"/>
+<float name="Shape.Lens Flare Only Radius" info_img="ligh Shape.png" offset="0x18"/>
+
+<bitmask8 name="Color.Interpolation Flags" offset="0x34">
+	<option name="Blend in HSV" info="blends colors in HSV rather than RGB space" value="07"/>
+	<option name="...More Colors" info="blends colors through more hues, going the long way around the color wheel" value="06"/>
+</bitmask8>
+
+<colorARGB name="Color.Color Lower Bound" offset="0x38"/>
+<colorARGB name="Color.Color Upper Bound" offset="0x48"/>
+
+<dependency name="Gel.Primary Cube Map" info="diffuse and specular light" info_img="ligh Gel.png" offset="0x64"/>
+<enum16 name="Gel.Texture Animation Function" info_img="ligh Gel.png" offset="0x76">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+<float name="Gel.Texture Animation Period" note="seconds" info="time between repeats" info_img="ligh Gel.png" offset="0x78"/>
+
+<dependency name="Gel.Secondary Cube Map" info="specular light" info_img="ligh Gel.png" offset="0x7C"/>
+<enum16 name="Gel.Yaw Function" info="controls rotation of gel in yaw" info_img="ligh Gel.png" offset="0x8E">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+<float name="Gel.Yaw Period" note="seconds" info="time between repeats" info_img="ligh Gel.png" offset="0x90"/>
+
+<enum16 name="Gel.Roll Function" info="controls rotation of gel in roll" info_img="ligh Gel.png" offset="0x96">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+<float name="Gel.Roll Period" note="seconds" info="time between repeats" info_img="ligh Gel.png" offset="0x98"/>
+
+<enum16 name="Gel.Pitch Function" info="controls rotation of gel in pitch" info_img="ligh Gel.png" offset="0x9E">
+	<option name="One" value="00"/>
+	<option name="Zero" value="01"/>
+	<option name="Cosine" value="02"/>
+	<option name="Cosine (variable period)" value="03"/>
+	<option name="Diagonal Wave" value="04"/>
+	<option name="Diagonal Wave (variable period)" value="05"/>
+	<option name="Slide" value="06"/>
+	<option name="Slide (variable period)" value="07"/>
+	<option name="Noise" value="08"/>
+	<option name="Jitter" value="09"/>
+	<option name="Wander" value="10"/>
+	<option name="Spark" value="11"/>
+</enum16>
+<float name="Gel.Pitch Period" note="seconds" info="time between repeats" info_img="ligh Gel.png" offset="0xA0"/>
+
+<dependency name="Lens Flare" info_img="ligh Lens Flare.png" offset="0xAC"/>
+
+<float name="Radiosity.Intensity" info_img="ligh Radiosity.png" offset="0xD4"/>
+<colorRGB name="Radiosity.Color" info_img="ligh Radiosity.png" offset="0xD8"/>
+
+<float name="Effect Parameters.Duration" note="ticks; 30 = 1 second" info="if created by an effect, light will last this long" info_img="ligh Effect Parameters.png" offset="0xF4"/>
+<enum16 name="Effect Parameters.Falloff Function" info="scale of light will diminish over time according to this function" info_img="ligh Effect Parameters.png" offset="0xFA">
+	<option name="Linear" value="00"/>
+	<option name="Early" value="01"/>
+	<option name="Very Early" value="02"/>
+	<option name="Late" value="03"/>
+	<option name="Very Late" value="04"/>
+	<option name="Cosine" value="05"/>
+</enum16>
+
+</plugin>

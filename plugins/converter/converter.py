@@ -186,7 +186,7 @@ def convert_struct(old_root, new_root):
             convert_struct(old_child, new_child)
 
         elif 'index' in old_child.tag:  # TODO
-            continue
+            # continue
             new_child = SubElement(new_root, 'index')
             new_child.set('name', to_snake_case(old_child.attrib['name']))
             new_child.set('offset', hex(old_offset))

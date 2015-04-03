@@ -1,0 +1,10 @@
+<plugin class="itmc" author="sparky" version="4.0" headersize="Main">
+
+<struct name="Item Permutations" offset="0x00" size="84">
+	<float name="Weight" info="relatively how likely this item will be chosen" offset="0x20"/>
+	<dependency name="Item" info="eqip, garb, item or weap" offset="0x24"/>
+</struct>
+
+<short name="Spawn Time" note="seconds; 0 = default" offset="0x0C"/>
+
+</plugin>
