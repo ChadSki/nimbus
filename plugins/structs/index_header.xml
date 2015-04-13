@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<plugin name="index_header" struct_size="40">
+<plugin name="index_header" struct_size="40" use_magic="false">
     <uint32 name="primary_magic" offset="0" />
     <uint32 name="base_tag_ident" offset="4" />
     <uint32 name="map_id" offset="8" />

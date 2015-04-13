@@ -5,149 +5,157 @@
 # license as detailed in the LICENSE file.
 
 import re
-from byteaccess import FileContext, MemContext
-from halotag import HaloTag
-from plugins import struct_type
+from .byteaccess import FileContext, MemContext
+from .plugins import struct_type
+from .halotag import HaloTag
 
 
 class HaloMap(object):
 
-    """TODO."""
+    """Halo map object.
 
-    def __init__(self):
-        self.context = None
-        """TODO"""
+    Attributes
+    ----------
+    tags_by_ident : Dict[int, HaloTag]
+        All tags in this map, accessible by unique id.
 
-        self.magic = None
-        """TODO"""
-
-        self.tags_by_ident = None
-        """TODO"""
-
-    def tag(self, *args, **kwargs):
-        return next(self.tags(*args, **kwargs))
-
-    def tags(self, first_class='', *name_fragments):
-        """Search for tags by class and name fragments.
-
-        Arguments:
-        first_class -- All or part of the primary class name ('weap', 'bipd', ...)
-                       Use the empty string to include all classes in your search.
-                       Regular expressions are supported.
-
-        *name_fragments -- All remaining arguments are independently searched for in tag
-                           names, e.g. 'assault', 'rifle'. Only tags which contain all
-                           fragments will be returned. Regular expressions are supported.
-        """
-        return filter(
-            lambda tag: (first_class == '' or re.search(first_class,
-                                                        tag.tag_header.first_class)
-                         and all(regex == '' or re.search(regex, tag.name)
-                                 for regex in name_fragments)),
-            self.tags_by_ident.values())
-
-
-def load_map(map_path=None):
-    """Load a map from disk, or from Halo's memory if no filepath is specified.
-
-    Arguments:
-    map_path -- Location of the map on disk.
+    context
+        Data context from which the map was loaded.
     """
-    halomap = HaloMap()  # end result, assembled piece-by-piece
 
-    if map_path is not None:
-        location = 'file'
-        halomap.context = FileContext(map_path)
+    @staticmethod
+    def from_memory(mirror_path=None):
+        """Load a map from Halo's memory. Changes immediately take effect in-game,
+        but will be lost unless saved to disk.
 
-    else:
-        location = 'mem'
-        halomap.context = MemContext('halo.exe')
+        Parameters
+        ----------
+        mirror_path : string, optional
+            Location of the map on disk to open for mirroring changes. If None,
+            changes made in memory are not saved and will be lost.
+        """
+        if mirror_path is not None:
+            raise NotImplementedError()
 
-    # aliasing to save keystrokes =)
-    ByteAccess = halomap.context.ByteAccess
+        return HaloMap(MemContext('halo.exe'))
 
-    if location == 'mem':
-        # Force Halo to render video even when window is deselected
-        exe_offset = 0x400000
-        wmkillHandler_offset = exe_offset + 0x142538
-        ByteAccess(wmkillHandler_offset, 4).WriteBytes(0, b'\xe9\x91\x00\x00')
+    @staticmethod
+    def from_file(map_path):
+        """Load a map from a local mapfile. Changes immediately take effect;
+        keep backups of your map files!
 
-    # fetch the necessary struct layouts
-    MapHeader = struct_type('map_header')
-    IndexHeader = struct_type('index_header')
-    TagHeader = struct_type('tag_header')
+        Parameters
+        ----------
+        map_path : string
+            Location of the map on disk to open for editing.
+        """
+        return HaloMap(FileContext(map_path))
 
-    # load the map header
-    map_header =\
-        MapHeader(
-            ByteAccess(offset={'file': 0, 'mem': 0x6A8154}[location],
-                       size=MapHeader.struct_size),
-            halomap)
+# if location == 'mem':
+#     # Force Halo to render video even when window is deselected
+#     # exe_offset = 0x400000
+#     wmkillHandler_offset = 0x542018  # exe_offset + 0x142538
+#     self.context.RawByteAccess(wmkillHandler_offset, 4)\
+#         .write_bytes(0, b'\xe9\x91\x00\x00')
 
-    # load the index header
-    index_header =\
-        IndexHeader(
-            ByteAccess(
-                offset={'file': map_header.index_offset, 'mem': 0x40440000}[location],
-                size=IndexHeader.struct_size),
-            halomap)
+    def __init__(self, context):
+        """Load a map from the given context (either a file or Halo's memory).
 
-    if location == 'file':
-        # Usually the tag index directly follows the index header. However, some forms
-        # of map protection move the tag index to other locations.
-        index_offset = map_header.index_offset + index_header.primary_magic - 0x40440000
+        Parameters
+        ----------
+        context
+            Data context from which to read map data.
+        """
+        self.context = context
+
+        MapHeader = struct_type('map_header')
+        self.map_header = MapHeader(offsets={'file': 0, 'mem': 0x6A8154},
+                                    halomap=self)
+
+        IndexHeader = struct_type('index_header')
+        self.index_header = IndexHeader(offsets={'file': self.map_header.index_offset,
+                                                 'mem': 0x40440000},
+                                        halomap=self)
+
+        # Almost always 0x40440028, unless the map has been protected in
+        # a specific way.
+        mem_index_offset = self.index_header.primary_magic
+
+        # Usually the tag index directly follows the index header. However,
+        # some forms of map protection move the tag index to other locations.
+        file_index_offset = (self.index_header.primary_magic - 0x40440000
+                             + self.map_header.index_offset)
 
         # On disk, we need to use a magic value to convert raw pointers into file
-        # offsets. This magic value is based on the tag index's location within the
-        # file, since the tag index always appears at the same place in memory.
-        halomap.magic = index_header.primary_magic - index_offset
+        # offsets. If this is a disk or mirror context, it will automatically make
+        # use of this magic number. Memory contexts will ignore it, since offsets
+        # in memory are already pointers.
+        self.context.magic = self.index_header.primary_magic - file_index_offset
 
-    elif location == 'mem':
-        # Almost always 0x40440028, unless the map has been protected in a specific way.
-        index_offset = index_header.primary_magic
+        TagHeader = struct_type('tag_header')
+        tag_headers = [
+            TagHeader(
+                offsets={'file': TagHeader.struct_size * i + file_index_offset,
+                         'mem': TagHeader.struct_size * i + mem_index_offset},
+                halomap=self)
+            for i in range(self.index_header.tag_count)]
 
-        # In memory, offsets are just raw pointers and require no adjustment.
-        halomap.magic = 0
+        # build associative tag collection (ID => HaloTag)
+        self.tags_by_ident = {
+            tag_header.ident: HaloTag(header=tag_header,
+                                      halomap=self)
+            for tag_header in tag_headers}
 
-    # load all tag headers from the index
-    tag_headers = [TagHeader(ByteAccess(offset=TagHeader.struct_size * i + index_offset,
-                                        size=TagHeader.struct_size),
-                             halomap) for i in range(index_header.tag_count)]
+    def tag(self, tag_class='', *name_fragments):
+        """Find a tag by name and class. Returns the first tag to match all
+        criteria, or None.
 
-    # metadata can have pointers to unknown places, but at least we know where to start
-    meta_offsets = sorted(tag_header.meta_offset_raw for tag_header in tag_headers)
+        Parameters
+        ----------
+        tag_class : string
+            Filter your search by a full or partial tag class name. Use the
+            empty string to include all classes in your search. Regular
+            expressions are enabled.
 
-    if location == 'file':  # the BSP's meta has an offset of 0, skip it
-        bsp_offset = meta_offsets.pop(0)
+            Examples: '', 'bipd', 'obje', 'proj|weap|vehi', 's(cex|chi|gla)'
 
-    elif location == 'mem':  # the BSP's meta has a very large, distant offset, skip it
-        bsp_offset = meta_offsets.pop()
+        name_fragments : tuple of string, optional
+            Each fragment is independently searched for in tag names. Only tags
+            which contain all fragments will be returned. Regular expressions
+            are enabled.
 
-    # to calculate sizes, we need the offset to the end of the metadata region (does
-    # not point to a tag)
-    meta_offsets.append(meta_offsets[0] + map_header.metadata_size)
+            Example fragments: '', 'cyborg', 'rifle|pistol'
+        """
+        return next(self.tags(tag_class, name_fragments), None)
 
-    # [0, 10, 40, 60] from location offsets...
-    #  [10, 30, 20]   we can calculate sizes...
-    meta_sizes = {  # but instead of an ordered list, key based on the start offset
-        start: (end - start) for start, end in zip(meta_offsets[:-1], meta_offsets[1:])
-    }
+    def tags(self, tag_class='', *name_fragments):
+        """Filter tags by name and class.
 
-    # just give the BSP's meta a guesstimate size for now
-    meta_sizes.update({bsp_offset: 1024})
+        Parameters
+        ----------
+        tag_class : string
+            Filter your search by a full or partial tag class name. Use the
+            empty string to include all classes in your search. Regular
+            expressions are enabled.
 
-    # not sure what the actual limit is; just picking some value
-    name_maxlen = 256
+            Examples: '', 'bipd', 'obje', 'proj|weap|vehi', 's(cex|chi|gla)'
 
-    # build associative tag collection (ID => HaloTag)
-    halomap.tags_by_ident = {
-        tag_header.ident:
-            HaloTag(tag_header,
-                    ByteAccess(offset=tag_header.name_offset_raw - halomap.magic,
-                               size=name_maxlen),
-                    ByteAccess(offset=tag_header.meta_offset_raw - halomap.magic,
-                               size=meta_sizes[tag_header.meta_offset_raw]),
-                    halomap) for tag_header in tag_headers
-    }
+        name_fragments : tuple of string, optional
+            Each fragment is independently searched for in tag names. Only tags
+            which contain all fragments will be returned. Regular expressions
+            are enabled.
 
-    return halomap
+            Example fragments: '', 'cyborg', 'rifle|pistol'
+        """
+        def match(tag):
+            return (any(re.search(tag_class, tag.tag_header.first_class),
+                        re.search(tag_class, tag.tag_header.second_class),
+                        re.search(tag_class, tag.tag_header.second_class))
+
+                    and all(regex == '' or re.search(regex, tag.name)
+                            for regex in name_fragments))
+
+        return filter(match, self.tags_by_ident.values())
+
+    def save_as(filepath):
+        raise NotImplementedError()

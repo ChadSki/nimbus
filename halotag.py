@@ -4,7 +4,7 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from plugins import struct_type
+from .plugins import struct_type
 
 
 class HaloTag(object):
@@ -36,7 +36,7 @@ class HaloTag(object):
 
     @meta.setter
     def meta(self, value):
-        raise Exception('Replacing entire meta at once not yet implemented.')
+        raise NotImplementedError('Replacing the entire meta at once is not supported.')
 
     def __str__(self):
         """Returns a 1-line string representation of this tag."""
@@ -47,4 +47,4 @@ class HaloTag(object):
 
     def __repr__(self):
         """Returns a full string representation of this tag and its metadata."""
-        return '{}{}'.format(str(self), str(self.meta))
+        return '{}: {}'.format(str(self), str(self.meta))
