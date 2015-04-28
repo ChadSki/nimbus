@@ -49,6 +49,11 @@ def asciiz(*, name, offset, maxlength, info=''):
         name=name, doc=info)
 
 
+def asciizptr(*, name, offset, info=''):
+    """Pointer to a null-terminated ascii string."""
+    pass
+
+
 def rawdata(*, name, offset, length, info=''):
     """Just bytes. Useful for debugging."""
     return NotifyProperty(
