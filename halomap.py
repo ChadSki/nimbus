@@ -12,15 +12,22 @@ from .halotag import HaloTag
 
 class HaloMap(object):
 
-    """Halo map object.
+    """Represents a single Halo mapfile and everything in it.
 
     Attributes
     ----------
+    map_header : ObservableStruct
+        todo
+
+    index_header : ObservableStruct
+        todo
+
     tags_by_ident : Dict[int, HaloTag]
-        All tags in this map, accessible by unique id.
+        Each tag in the map, addressable by unique id.
 
     context
-        Data context from which the map was loaded.
+        Data context from which the map was loaded. As a HaloMap object is edited,
+        changes are written back via this context.
     """
 
     @staticmethod
@@ -35,7 +42,7 @@ class HaloMap(object):
             changes made in memory are not saved and will be lost.
         """
         if mirror_path is not None:
-            raise NotImplementedError()
+            raise NotImplementedError('Cannot mirror to disk yet.')
 
         return HaloMap(MemContext('halo.exe'))
 
@@ -50,13 +57,6 @@ class HaloMap(object):
             Location of the map on disk to open for editing.
         """
         return HaloMap(FileContext(map_path))
-
-# if location == 'mem':
-#     # Force Halo to render video even when window is deselected
-#     # exe_offset = 0x400000
-#     wmkillHandler_offset = 0x542018  # exe_offset + 0x142538
-#     self.context.RawByteAccess(wmkillHandler_offset, 4)\
-#         .write_bytes(0, b'\xe9\x91\x00\x00')
 
     def __init__(self, context):
         """Load a map from the given context (either a file or Halo's memory).

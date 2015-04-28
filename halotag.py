@@ -9,15 +9,30 @@ from .plugins import struct_type
 
 class HaloTag(object):
 
-    """Encapsulates an index entry, tag name, and metadata."""
+    """Represents one Halo tag and all of its data.
 
-    def __init__(self, tag_header, name_access, meta_access, halomap):
-        # these attributes are all protected from erroneous assignment
-        self.tag_header = tag_header
-        self.name_access = name_access
-        self.meta_access = meta_access
+    Attributes
+    ----------
+    tag_header : ObservableStruct
+        todo
+
+    tag_data : ObservableStruct
+        todo
+
+    name : string
+        property ? todo ???
+    """
+
+    def __init__(self, header, halomap):
         self.halomap = halomap
-        self._meta = None
+        self.header = header
+        self.data = struct_type(self.tag_header.first_class)(
+            offset=self.tag_header.meta_offset_raw,
+            halomap=self.halomap)
+
+        self.name_access = self.halomap.context.ByteAccess(
+            offset=self.header.name_offset_raw,
+            size=256)
 
     @property
     def name(self):
@@ -27,24 +42,13 @@ class HaloTag(object):
     def name(self, value):
         raise NotImplementedError('Changing tag names not yet implemented.')
 
-    @property
-    def meta(self):
-        if self._meta is None:
-            tag_type = struct_type(self.tag_header.first_class)
-            self._meta = tag_type(self.meta_access, self.halomap)
-        return self._meta
-
-    @meta.setter
-    def meta(self, value):
-        raise NotImplementedError('Replacing the entire meta at once is not supported.')
-
     def __str__(self):
         """Returns a 1-line string representation of this tag."""
-        answer = '[{}]{}({})'.format(self.tag_header.first_class,
+        answer = '[{}]{}({})'.format(self.header.first_class,
                                      self.name,
                                      self.tag_header.ident)
         return repr(answer).replace("'", '"')
 
     def __repr__(self):
         """Returns a full string representation of this tag and its metadata."""
-        return '{}: {}'.format(str(self), str(self.meta))
+        return '{}: {}'.format(str(self), str(self.tag_data))
