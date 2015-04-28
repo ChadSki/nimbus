@@ -64,7 +64,7 @@ class HaloMap(object):
         Parameters
         ----------
         context
-            Data context from which to read map data.
+            Where to read map data and write changes.
         """
         self.context = context
 
@@ -148,9 +148,9 @@ class HaloMap(object):
             Example fragments: '', 'cyborg', 'rifle|pistol'
         """
         def match(tag):
-            return (any(re.search(tag_class, tag.tag_header.first_class),
-                        re.search(tag_class, tag.tag_header.second_class),
-                        re.search(tag_class, tag.tag_header.second_class))
+            return (any(re.search(tag_class, tag.header.first_class),
+                        re.search(tag_class, tag.header.second_class),
+                        re.search(tag_class, tag.header.third_class))
 
                     and all(regex == '' or re.search(regex, tag.name)
                             for regex in name_fragments))
