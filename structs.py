@@ -4,68 +4,13 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
+from collections import MutableMapping
 import functools
-import os
-import traceback
-import xml.etree.ElementTree as ElementTree
+from os import path
+import re
+from xml.etree import ElementTree
 from .fields import field_type
 from .event import Event
-
-
-class ObservableStruct(object):
-
-    """TODO
-
-    Does __init__ get documented here?
-    """
-
-    def __init__(self, byteaccess, halomap):
-            self.byteaccess = byteaccess
-            self.halomap = halomap
-            self.collection_changed = Event()
-
-    def __dir__(self):
-            """A sorted list of methods and properties available to this class."""
-            return sorted(self.field_names)
-            # + ['byteaccess', 'field_names', 'halomap', 'property_changed'])
-
-    def __repr__(self):
-        return self.json()
-
-    def json(self):
-        """Generate a string representation of this struct in JSON format."""
-        r = '{'                                      # open JSON object
-        for name in self.__dir__():                  # for each field:
-            r += '\n    "{0}": '.format(name)        # single-indented field name
-            try:
-                value = getattr(self, name)
-
-                lines = str(value).split('\n')
-                if len(lines) > 1:
-                    r += lines.pop(0)  # attach the first part directly
-                    for line in lines:
-                        r += '\n    ' + line  # indent the remaining lines
-                else:
-                    if isinstance(value, bool):
-                        r += str(value).lower()
-                    elif isinstance(value, str):
-                        r += repr(str(value)).replace(
-                            '"', '@').replace(
-                            "'", '"').replace(
-                            '@', "'")
-                    elif value is None:
-                        r += 'null'
-                    else:
-                        r += str(value)
-                r += ','  # comma to close this field
-
-            except (AttributeError, RuntimeError):
-                print('parse: error getting "{}" from "{}"'
-                      .format(name, self.class_name))
-                print(traceback.format_exc())
-
-        r += '\n}'  # close JSON object
-        return r
 
 
 def pascal_case(s):
@@ -73,15 +18,62 @@ def pascal_case(s):
     return ''.join(x.title() for x in s.split('_'))
 
 
+def eschaton_int(s):
+    """Parse integers the same way Eschaton does.
+
+    By default, Python disagrees with Eschaton about leading zeroes. This logic
+    fixes that; either this starts with 0x (and is hexadecimal), or it's a
+    base-10 integer.
+    """
+    s = s.strip().lower()
+    return int(s, 16) if s.startswith('0x') else int(s, 10)
+
+
 def try_parse_int(s):
     """Parse xml attributes according to the Entity plugin spec. If it looks
     like an integer, it's probably intended as an integer. Otherwise, a string.
     """
     try:
-        s = s.strip().lower()
-        return int(s, 16) if s.startswith('0x') else int(s, 10)
+        eschaton_int(s)
     except ValueError:
         return s
+
+
+def load_fields(struct_node):
+    fields = {}  # type: Dict[str, NotifyProperty]
+    for field_node in struct_node:
+
+        print('{} attrs:'.format(field_node.tag))
+        for name, value in field_node.attrib.items():
+            print("    {} = {}".format(name, value))
+        try:
+            kwargs = {name: try_parse_int(value)
+                      for name, value in field_node.attrib.items()}
+
+            # if a field involves another struct, load that type first
+            if field_node.tag == 'struct_array':
+                kwargs['struct_class'] = _struct_type(field_node)
+
+            # load enum options if present
+            options = {option.attrib['name']: try_parse_int(option.attrib['value'])
+                       for option in field_node.iter('option')}
+
+            if len(options) > 0:
+                kwargs['options'] = options
+
+            fields[field_node.attrib['name']] = \
+                field_type(typename=field_node.tag)(**kwargs)
+
+        except:
+            print('error loading struct <{}> at field "{}"'
+                  .format(struct_node.attrib['name'],
+                          field_node.attrib['name']))
+            print('field_node.attrib:')
+            for key in field_node.attrib:
+                print('    {} => {}'.format(key, field_node.attrib[key]))
+            raise
+
+    return fields
 
 
 def _struct_type(struct_node):
@@ -94,53 +86,94 @@ def _struct_type(struct_node):
     struct_node : ElementTree.Element
         A single struct from a plugin (possibly one of many).
     """
-    try:
-        # typename, e.g. "MagazineStruct" or "BipdStruct". Doesn't need to be unique.
-        class_name = pascal_case(struct_node.attrib['name']) + 'Struct'
+    class DynamicStruct(MutableMapping):
 
-        fields = {}  # type: Dict[str, NotifyProperty]
-        for field_node in struct_node:
-            try:
-                fields[field_node.attrib['name']] = field_type(typename=field_node.tag)(
+        """Dynamically implemented struct type, with reflection and mutability.
 
-                    # if a field involves another struct, load that too (recurse)
-                    struct_class=(_struct_type(field_node)
-                                  if field_node.tag == 'struct_array' else
-                                  None),
+        This class knows about its own fields, and provides access to them by name.
+        For example `foo.bar` in addition to the dictionary-style access `foo[bar]`
+        both access the "bar" field as defined in XML plugins.
 
-                    # if present, load enum options from child field_nodes
-                    options={
-                        option.attrib['name']: try_parse_int(option.attrib['value'])
-                        for option in field_node.iter('option')
-                    },
+        TODO:
+            - I want to implement 'observable' idiom in the future
+        """
+        store = load_fields(struct_node)  # type: Dict[str, ObservableField]
+        struct_size = int(struct_node.attrib['struct_size'], 0)
 
-                    # everything else (via xml attributes)
-                    **{name: try_parse_int(value)
-                       for name, value in field_node.attrib.items()})
+#        @property
+#        def store(self):
+#            return DynamicStruct.store
+#
+#        @property
+#        def struct_size(self):
+#            return DynamicStruct.struct_size
 
-            except TypeError:
-                print('parse: error while parsing struct <{}> field "{}"'
-                      .format(field_node.tag, field_node.attrib['name']))
-                for key in field_node.attrib:
-                    print('    {} => {}'.format(key, field_node.attrib[key]))
-                raise
+        def fields(self, field_type, *name_fragments):
+            """Filter fields by type and by name. Iterates through all fields which
+            match the given criteria.
 
-        # build and return the struct type
-        return type(
-            class_name, (ObservableStruct,),
-            dict(
-                class_name=class_name,
-                struct_size=int(struct_node.attrib['size'], 0),
-                field_names=sorted(name for name in fields),
-                **fields))
+            Parameters
+            ----------
+            field_type : string
+                Filter your search by type, or use the empty string to include all
+                classes in your search. Regular expressions are enabled.
 
-    except:
-        print('parse: error loading <{}> node "{}"'.format(struct_node.tag,
-                                                           struct_node.attrib['name']))
-        raise
+                Examples: '', 'int', '^int', 'asciiz?|rawdata'
+
+            name_fragments : tuple of string, optional
+                Each fragment is independently searched for in tag names. Only tags
+                which contain all fragments will be returned. Regular expressions
+                are enabled.
+
+                Example fragments: '', 'cyborg', 'rifle|pistol'
+            """
+            def match(field):
+                return (re.search(field_type, field.field_type)
+                        and all(re.search(regex, field.name)
+                                for regex in name_fragments))
+
+            return filter(match, type(self).store.values())
+
+        def __init__(self, halomap, offsets):
+            self.byteaccess = halomap.context.ByteAccess(
+                offsets[halomap.context.where],
+                type(self).struct_size)
+            self.halomap = halomap
+            self.collection_changed = Event()
+
+        def __getitem__(self, key):
+            return self.store[self.__keytransform__(key)]
+
+        def __setitem__(self, key, value):
+            self.store[self.__keytransform__(key)] = value
+
+        def __delitem__(self, key):
+            del self.store[self.__keytransform__(key)]
+
+        def __iter__(self):
+            return iter(self.store)
+
+        def __len__(self):
+            return len(self.store)
+
+        def __keytransform__(self, key):
+            return key
+
+        def __getattr__(self, name):
+            """Using magic, merges the attributes of self.store.
+
+            Resolves in the following order:
+                1. First self's attributes are checked
+                2. If nothing was found, Python will run __getattr__ and check
+                   self.store's attributes
+                4. If both fail, just let the AttributeError propagate upwards.
+            """
+            return self.store[name].value.fget(self)
 
 
-plugins_dir = os.path.dirname(os.path.realpath(__file__))
+    # typename, e.g. "MagazineStruct" or "BipdStruct". Doesn't need to be unique.
+    DynamicStruct.__name__ = pascal_case(struct_node.attrib['name']) + 'Struct'
+    return DynamicStruct
 
 
 @functools.lru_cache()
@@ -152,10 +185,12 @@ def struct_type(name):
     Parameters
     ----------
     name : string
-        todo
+        Name of the struct type to load (snake_case)
     """
     # Find and open the plugin
-    filepath = os.path.join(plugins_dir, name + '.xml')
+    this_dir = path.dirname(path.realpath(__file__))
+    plugins_dir = path.join(this_dir, "structs")
+    filepath = path.join(plugins_dir, name + '.xml')
     root_node = ElementTree.parse(filepath).getroot()
 
     # Enforce matching names
@@ -165,4 +200,8 @@ def struct_type(name):
             .format(filepath, root_node.attrib['name']))
 
     # Define a new class based on the XML definition
-    return _struct_type(root_node)
+    try:
+        return _struct_type(root_node)
+    except:
+        print('\nerror in plugin "{}"\n'.format(filepath))
+        raise

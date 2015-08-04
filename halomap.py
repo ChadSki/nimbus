@@ -5,8 +5,8 @@
 # license as detailed in the LICENSE file.
 
 import re
-from .byteaccess import FileContext, MemContext
-from .plugins import struct_type
+from .byteaccess import FileContext, MemoryContext
+from .structs import struct_type
 from .halotag import HaloTag
 
 
@@ -16,10 +16,10 @@ class HaloMap(object):
 
     Attributes
     ----------
-    map_header : ObservableStruct
+    map_header : HaloStruct
         todo
 
-    index_header : ObservableStruct
+    index_header : HaloStruct
         todo
 
     tags_by_ident : Dict[int, HaloTag]
@@ -44,7 +44,7 @@ class HaloMap(object):
         if mirror_path is not None:
             raise NotImplementedError('Cannot mirror to disk yet.')
 
-        return HaloMap(MemContext('halo.exe'))
+        return HaloMap(MemoryContext('halo.exe'))
 
     @staticmethod
     def from_file(map_path):
@@ -68,17 +68,21 @@ class HaloMap(object):
         """
         self.context = context
 
-        MapHeader = struct_type('map_header')
-        self.map_header = MapHeader(offsets={'file': 0, 'mem': 0x6A8154},
-                                    halomap=self)
+        self.map_header = struct_type('map_header')(
+            offsets={'file': 0, 'mem': 0x6A8154},
+            halomap=self)
 
-        IndexHeader = struct_type('index_header')
-        self.index_header = IndexHeader(offsets={'file': self.map_header.index_offset,
-                                                 'mem': 0x40440000},
-                                        halomap=self)
+        try:
+            self.index_header = struct_type('index_header')(
+                offsets={'file': self.map_header.index_offset, 'mem': 0x40440000},
+                halomap=self)
+        except AttributeError:
+            print('**********************************************************************')
+            print(self.map_header.store)
+            print('**********************************************************************2')
+            raise
 
-        # Almost always 0x40440028, unless the map has been protected in
-        # a specific way.
+        # Almost always 0x40440028 (map protection may change this)
         mem_index_offset = self.index_header.primary_magic
 
         # Usually the tag index directly follows the index header. However,
@@ -87,24 +91,18 @@ class HaloMap(object):
                              + self.map_header.index_offset)
 
         # On disk, we need to use a magic value to convert raw pointers into file
-        # offsets. If this is a disk or mirror context, it will automatically make
-        # use of this magic number. Memory contexts will ignore it, since offsets
-        # in memory are already pointers.
+        # offsets. If this is a disk context, it will use this magic number
+        # automatically. Memory contexts will ignore it, since offsets in memory
+        # are already valid pointers.
         self.context.magic = self.index_header.primary_magic - file_index_offset
-
-        TagHeader = struct_type('tag_header')
-        tag_headers = [
-            TagHeader(
-                offsets={'file': TagHeader.struct_size * i + file_index_offset,
-                         'mem': TagHeader.struct_size * i + mem_index_offset},
-                halomap=self)
-            for i in range(self.index_header.tag_count)]
 
         # build associative tag collection (ID => HaloTag)
         self.tags_by_ident = {
-            tag_header.ident: HaloTag(header=tag_header,
-                                      halomap=self)
-            for tag_header in tag_headers}
+            tag_header.ident: HaloTag(
+                offsets={'file': TagHeader.struct_size * i + file_index_offset,
+                         'mem': TagHeader.struct_size * i + mem_index_offset},
+                halomap=self)
+            for i in range(self.index_header.tag_count)}
 
     def tag(self, tag_class='', *name_fragments):
         """Find a tag by name and class. Returns the first tag to match all
@@ -120,39 +118,24 @@ class HaloMap(object):
             Examples: '', 'bipd', 'obje', 'proj|weap|vehi', 's(cex|chi|gla)'
 
         name_fragments : tuple of string, optional
-            Each fragment is independently searched for in tag names. Only tags
-            which contain all fragments will be returned. Regular expressions
+            Each fragment is independently searched for in tag names. Only a tag
+            which contains all fragments will be returned. Regular expressions
             are enabled.
 
-            Example fragments: '', 'cyborg', 'rifle|pistol'
+            Example fragments: '', 'cyborg', 'plasma.*(rifle|pistol)'
         """
         return next(self.tags(tag_class, name_fragments), None)
 
     def tags(self, tag_class='', *name_fragments):
-        """Filter tags by name and class.
-
-        Parameters
-        ----------
-        tag_class : string
-            Filter your search by a full or partial tag class name. Use the
-            empty string to include all classes in your search. Regular
-            expressions are enabled.
-
-            Examples: '', 'bipd', 'obje', 'proj|weap|vehi', 's(cex|chi|gla)'
-
-        name_fragments : tuple of string, optional
-            Each fragment is independently searched for in tag names. Only tags
-            which contain all fragments will be returned. Regular expressions
-            are enabled.
-
-            Example fragments: '', 'cyborg', 'rifle|pistol'
+        """Filter tags by name and class. Same as self.tag(), but iterates
+        through all tags which match the search criteria.
         """
         def match(tag):
             return (any(re.search(tag_class, tag.first_class),
                         re.search(tag_class, tag.second_class),
                         re.search(tag_class, tag.third_class))
 
-                    and all(regex == '' or re.search(regex, tag.name)
+                    and all(re.search(regex, tag.name)
                             for regex in name_fragments))
 
         return filter(match, self.tags_by_ident.values())

@@ -5,17 +5,18 @@
     <reference name="collision" offset="0x70" />
     <reference name="physics" offset="0x80" />
     <struct_array name="magazines" struct_size='112' offset="0x4F0">
-        <uint16 name="rounds_recharged" offset="0x4" />
-        <uint16 name="rounds_total_initial" offset="0x6" />
-        <uint16 name="rounds_total_maximum" offset="0x8" />
-        <uint16 name="rounds_loaded_maximum" offset="0xA" />
+        <int16 name="rounds_recharged" offset="0x4" />
+        <int16 name="rounds_total_initial" offset="0x6" />
+        <int16 name="rounds_total_maximum" offset="0x8" />
+        <int16 name="rounds_loaded_maximum" offset="0xA" />
     </struct_array>
     <struct_array name="triggers" struct_size="276" offset="0x4FC">
         <float32 name="initial_rounds_per_second" offset="0x4" />
         <float32 name="final_rounds_per_second" offset="0x8" />
         <float32 name="rounds_per_second_acceleration" offset="0x8" />
         <float32 name="rounds_per_second_deceleration" offset="0x8" />
-        <uint16 name="projectiles_per_shot" offset="0x6E" />
+        <int16 name="rounds_per_shot" offset="0x22" />
+        <int16 name="projectiles_per_shot" offset="0x6E" />
         <reference name="projectile" offset="0x94"/>
         <struct_array name="firing_effects" struct_size="132" offset="0x108">
             <reference name="fire_effect" offset="0x24" />
