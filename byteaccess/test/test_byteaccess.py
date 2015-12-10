@@ -4,12 +4,7 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-import os
-import sys
-sys.path.insert(0, os.path.abspath('..\..'))
-
 import byteaccess
-
 
 def string_tests(foo, bar, offset):
     assert foo.read_bytes(0, 4) == b'asdf'
@@ -38,7 +33,9 @@ def number_tests(foo, offset):
 
 
 def test_filebyteaccess():
-    context = byteaccess.FileContext('./testfile.bin')
+    import os
+    this_folder = os.path.dirname(os.path.realpath(__file__))
+    context = byteaccess.FileContext(os.path.join(this_folder, 'testfile.bin'))
 
     foo = context.ByteAccess(0, 21)
     bar = context.ByteAccess(0, 4)

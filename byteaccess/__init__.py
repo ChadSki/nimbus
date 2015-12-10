@@ -1,4 +1,4 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2015, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
@@ -28,7 +28,7 @@ Example usage:
     foo.read_bytes(2, 6)  #=> b'medata'  # read any length of data from any offset
 """
 
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 __all__ = ['FileContext', 'MemContext']
 
 

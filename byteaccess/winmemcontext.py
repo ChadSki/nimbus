@@ -1,4 +1,4 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2015, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
@@ -6,8 +6,9 @@
 
 from .basebyteaccess import BaseByteAccess
 from .windowsinterop import find_process
-from ctypes import (byref, c_ulong, c_char_p, create_string_buffer, windll)
-k32 = windll.kernel32
+import ctypes
+from ctypes import (c_ulong, c_char_p)
+k32 = ctypes.windll.kernel32
 
 
 class WinMemContext(object):
@@ -16,7 +17,8 @@ class WinMemContext(object):
 
     Usage:
         context = WinMemContext('notepad')
-        context.ByteAccess(offset, size)
+        foo = context.ByteAccess(offset, size)
+        bar = context.ByteAccess(other_offset, other_size)
     """
 
     def __init__(self, process_name):
@@ -32,16 +34,17 @@ class WinMemContext(object):
         self.process = k32.OpenProcess(PROCESS_ALL_ACCESS, False,
                                        process_entry.th32ProcessID)
 
+        # Define a ByteAccess specific to this process
         class WinMemByteAccess(BaseByteAccess):
 
             """Read/write bytes to a specific process's memory."""
 
             def _read_bytes(slf, offset, size):
                 address = slf.offset + offset
-                buf = create_string_buffer(size)
+                buf = ctypes.create_string_buffer(size)
                 bytesRead = c_ulong(0)
-                if k32.ReadProcessMemory(self.process, address,
-                                         buf, size, byref(bytesRead)):
+                if k32.ReadProcessMemory(self.process, address, buf, size,
+                                         ctypes.byref(bytesRead)):
                     return bytes(buf)
                 else:
                     raise OSError("Failed to read memory. " +
@@ -53,14 +56,15 @@ class WinMemContext(object):
                 buf = c_char_p(to_write)
                 size = len(to_write)
                 bytesWritten = c_ulong(0)
-                if k32.WriteProcessMemory(self.process, address,
-                                          buf, size, byref(bytesWritten)):
+                if k32.WriteProcessMemory(self.process, address, buf, size,
+                                          ctypes.byref(bytesWritten)):
                     return  # Success!
                 else:
                     raise OSError("Failed to write memory. " +
                                   "offset:{0} size:{1}"
                                   .format(offset, size))
 
+        # store under a common name, so we can find without knowing the specific implementation
         self.ByteAccess = WinMemByteAccess
 
     def close(self):

@@ -1,16 +1,17 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2015, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 """Convenience functions for developing on Windows."""
 
-from ctypes import (byref, c_ulong, c_ulonglong, c_char, windll, sizeof, Structure)
+import ctypes
+from ctypes import (c_ulong, c_ulonglong, c_char)
 import platform
-k32 = windll.kernel32
+k32 = ctypes.windll.kernel32
 
 
-class ProcessEntry32(Structure):
+class ProcessEntry32(ctypes.Structure):
 
     """Holds process-related info.
 
@@ -38,21 +39,21 @@ def find_process(name):
     no process was found which matches the given name.
     """
     # get a snapshot of running processes
-    TH32CS_SNAPPROCESS = 0x00000002
+    TH32CS_SNAPPROCESS = 2
     hTH32Snapshot = k32.CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
     try:
         # iterate over processes
         process_entry = ProcessEntry32()
-        process_entry.dwSize = sizeof(ProcessEntry32)
+        process_entry.dwSize = ctypes.sizeof(ProcessEntry32)
 
-        if 0 == k32.Process32First(hTH32Snapshot, byref(process_entry)):
+        if 0 == k32.Process32First(hTH32Snapshot, ctypes.byref(process_entry)):
             raise RuntimeError("Failed iterating processes while looking for '{0}'"
                                .format(name))
         while True:
             if process_entry.szExeFile == name:
                 return process_entry
 
-            if 0 == k32.Process32Next(hTH32Snapshot, byref(process_entry)):
+            if 0 == k32.Process32Next(hTH32Snapshot, ctypes.byref(process_entry)):
                 break
 
         raise RuntimeError("{0} is not running".format(name.decode('ascii')))

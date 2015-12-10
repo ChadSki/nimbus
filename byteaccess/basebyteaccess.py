@@ -1,4 +1,4 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2015, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
@@ -10,7 +10,7 @@ from struct import pack, unpack
 
 class BaseByteAccess(metaclass=abc.ABCMeta):
 
-    """Abstract base class implements common ByteAccess functionality."""
+    """Abstract base class implements functionality common to all ByteAccesses."""
 
     def __init__(self, offset, size):
         """Provide access to a region of bytes.
