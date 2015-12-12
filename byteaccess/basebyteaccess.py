@@ -143,62 +143,23 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
 
     # read/write numerics
 
-    def read_float32(self, offset):
-        return unpack('<f', self.read_bytes(offset, 4))[0]
-
-    def read_float64(self, offset):
-        return unpack('<d', self.read_bytes(offset, 8))[0]
-
-    def read_int8(self, offset):
-        return unpack('<b', self.read_bytes(offset, 1))[0]
-
-    def read_int16(self, offset):
-        return unpack('<h', self.read_bytes(offset, 2))[0]
-
-    def read_int32(self, offset):
-        return unpack('<i', self.read_bytes(offset, 4))[0]
-
-    def read_int64(self, offset):
-        return unpack('<q', self.read_bytes(offset, 8))[0]
-
-    def read_uint8(self, offset):
-        return unpack('<B', self.read_bytes(offset, 1))[0]
-
-    def read_uint16(self, offset):
-        return unpack('<H', self.read_bytes(offset, 2))[0]
-
-    def read_uint32(self, offset):
-        return unpack('<I', self.read_bytes(offset, 4))[0]
-
-    def read_uint64(self, offset):
-        return unpack('<Q', self.read_bytes(offset, 8))[0]
-
-    def write_float32(self, offset, data):
-        self.write_bytes(offset, pack('<f', data))
-
-    def write_float64(self, offset, data):
-        self.write_bytes(offset, pack('<d', data))
-
-    def write_int8(self, offset, data):
-        self.write_bytes(offset, pack('<b', data))
-
-    def write_int16(self, offset, data):
-        self.write_bytes(offset, pack('<h', data))
-
-    def write_int32(self, offset, data):
-        self.write_bytes(offset, pack('<i', data))
-
-    def write_int64(self, offset, data):
-        self.write_bytes(offset, pack('<q', data))
-
-    def write_uint8(self, offset, data):
-        self.write_bytes(offset, pack('<B', data))
-
-    def write_uint16(self, offset, data):
-        self.write_bytes(offset, pack('<H', data))
-
-    def write_uint32(self, offset, data):
-        self.write_bytes(offset, pack('<I', data))
-
-    def write_uint64(self, offset, data):
-        self.write_bytes(offset, pack('<Q', data))
+    def read_float32(self, offset): return unpack('<f', self.read_bytes(offset, 4))[0]
+    def read_float64(self, offset): return unpack('<d', self.read_bytes(offset, 8))[0]
+    def read_int8(self, offset):    return unpack('<b', self.read_bytes(offset, 1))[0]
+    def read_int16(self, offset):   return unpack('<h', self.read_bytes(offset, 2))[0]
+    def read_int32(self, offset):   return unpack('<i', self.read_bytes(offset, 4))[0]
+    def read_int64(self, offset):   return unpack('<q', self.read_bytes(offset, 8))[0]
+    def read_uint8(self, offset):   return unpack('<B', self.read_bytes(offset, 1))[0]
+    def read_uint16(self, offset):  return unpack('<H', self.read_bytes(offset, 2))[0]
+    def read_uint32(self, offset):  return unpack('<I', self.read_bytes(offset, 4))[0]
+    def read_uint64(self, offset):  return unpack('<Q', self.read_bytes(offset, 8))[0]
+    def write_float32(self, offset, data): self.write_bytes(offset, pack('<f', data))
+    def write_float64(self, offset, data): self.write_bytes(offset, pack('<d', data))
+    def write_int8(self, offset, data):    self.write_bytes(offset, pack('<b', data))
+    def write_int16(self, offset, data):   self.write_bytes(offset, pack('<h', data))
+    def write_int32(self, offset, data):   self.write_bytes(offset, pack('<i', data))
+    def write_int64(self, offset, data):   self.write_bytes(offset, pack('<q', data))
+    def write_uint8(self, offset, data):   self.write_bytes(offset, pack('<B', data))
+    def write_uint16(self, offset, data):  self.write_bytes(offset, pack('<H', data))
+    def write_uint32(self, offset, data):  self.write_bytes(offset, pack('<I', data))
+    def write_uint64(self, offset, data):  self.write_bytes(offset, pack('<Q', data))
