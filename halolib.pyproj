@@ -26,19 +26,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="byteaccess\basebyteaccess.py" />
-    <Compile Include="byteaccess\filecontext.py" />
+    <Compile Include="byteaccess\file.py" />
     <Compile Include="byteaccess\test\test_byteaccess.py" />
     <Compile Include="byteaccess\windowsinterop.py" />
-    <Compile Include="byteaccess\winmemcontext.py" />
+    <Compile Include="byteaccess\process.py" />
     <Compile Include="byteaccess\__init__.py" />
     <Compile Include="event.py" />
-    <Compile Include="fields\field.py" />
-    <Compile Include="fields\halo_fields.py" />
-    <Compile Include="fields\observabledict.py" />
-    <Compile Include="fields\struct.py" />
-    <Compile Include="fields\test\test_fields.py" />
-    <Compile Include="fields\__init__.py" />
+    <Compile Include="basicstruct\basicfields.py" />
+    <Compile Include="halostruct\halofields.py" />
+    <Compile Include="basicstruct\observabledict.py" />
+    <Compile Include="basicstruct\basicstruct.py" />
+    <Compile Include="basicstruct\test\test_basicstruct.py" />
+    <Compile Include="basicstruct\__init__.py" />
     <Compile Include="halomap.py" />
+    <Compile Include="halostruct\halostruct.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="halostruct\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="halotag.py" />
     <Compile Include="plugin-converter\converter.py" />
     <Compile Include="structs.py" />
@@ -47,8 +53,9 @@
   <ItemGroup>
     <Folder Include="byteaccess" />
     <Folder Include="byteaccess\test" />
-    <Folder Include="fields" />
-    <Folder Include="fields\test" />
+    <Folder Include="basicstruct\" />
+    <Folder Include="basicstruct\test\" />
+    <Folder Include="halostruct\" />
     <Folder Include="plugin-converter" />
   </ItemGroup>
   <ItemGroup>

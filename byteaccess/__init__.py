@@ -17,33 +17,27 @@ Example usage:
     import byteaccess
 
     if location == 'file':
-        data_context = byteaccess.FileContext('filename.txt')
+        MyThingAccess = byteaccess.byteaccess_for_file('filename.txt')
     elif location == 'mem'
-        data_context = byteaccess.MemContext('processname')
+        MyThingAccess = byteaccess.byteaccess_for_process('processname')
 
-    foo = data_context.ByteAccess(offset, size)
-
+    foo = MyThingAccess(offset, size)
     foo.write_bytes(0, b'somedata')    # write data to offsets within the ByteAccess
-
-    foo.read_bytes(2, 6)  #=> b'medata'  # read any length of data from any offset
+    foo.read_bytes(0, 6)  #=> b'someda'  # read any length of data from any offset
 """
 
 __version__ = '0.4.0'
 __all__ = ['FileContext', 'MemContext']
 
 
-from .filecontext import FileContext  # FileContext is the same on all platforms
+from .file import open_file
 
 import platform
-p = platform.system()  # MemContext is platform dependent
-if p == 'Windows':
-    from .winmemcontext import WinMemContext
-    MemContext = WinMemContext
+if platform.system() == 'Windows':
+    from .process import open_process
 
-elif p == 'Darwin':
+elif platform.system() == 'Darwin':
     raise NotImplementedError("Mac support not yet available")
-    #from .macmemcontext import MacMemContext
-    #MemContext = MacMemContext
 
 else:
     raise NotImplementedError("Unsupported platform.")

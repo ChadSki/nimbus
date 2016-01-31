@@ -4,5 +4,3 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from basic_fields import *
-from halo_fields import *

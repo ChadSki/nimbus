@@ -1,10 +1,46 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2016, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from field import Field
+import abc
+
+
+class Field(metaclass=abc.ABCMeta):
+
+    """Encapsulates read/write access to a single field within a struct.
+
+    Fields are parented by a struct, which can be accessed via `self.parent`.
+
+    The getf/setf functions translate between Python values and raw data from
+    `self.byteaccess`."""
+
+    def __init__(self, *, offset, docstring, **kwargs):
+        self.offset = offset
+        self.docstring = docstring
+        self.parent = None  # to be set by parent struct
+
+    @property
+    def byteaccess(self):
+        """All reading and writing is brokered through the parent struct. It
+        maintains ownership of the ByteAccess."""
+        try:
+            return self.parent.byteaccess
+        except AttributeError as exc:
+            if parent is None:
+                raise RuntimeError("This field has not been assigned a parent struct"
+                                   "to read/write from.") from exc
+            else:
+                raise exc
+
+    @abc.abstractmethod
+    def getf(self):
+        pass
+
+    @abc.abstractmethod
+    def setf(self, value):
+        pass
 
 
 ################################################################
@@ -14,7 +50,7 @@ class Ascii(Field):
 
     """Fixed-length ascii string."""
 
-    def __init__(self, *, length, reverse, **kwargs):
+    def __init__(self, *, length, reverse=False, **kwargs):
         super().__init__(**kwargs)
         self.length = length
         self.reverse = reverse

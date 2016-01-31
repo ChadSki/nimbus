@@ -10,7 +10,10 @@ from struct import pack, unpack
 
 class BaseByteAccess(metaclass=abc.ABCMeta):
 
-    """Abstract base class implements functionality common to all ByteAccesses."""
+    """Abstract base class implements functionality common to all ByteAccesses.
+    
+    Provides generic methods for reading and writing different values. Subclasses
+    need onlt implement _read_bytes and _write_bytes, and optionally a custom __init__."""
 
     def __init__(self, offset, size):
         """Provide access to a region of bytes.
@@ -25,9 +28,6 @@ class BaseByteAccess(metaclass=abc.ABCMeta):
             raise ValueError("Cannot create a ByteAccess with no size")
         self.offset = offset
         self.size = size
-
-    # This abstract class is defined such that subclasses only need to
-    # implement the following two methods:
 
     @abc.abstractmethod
     def _read_bytes(self, offset, size):

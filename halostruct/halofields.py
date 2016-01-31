@@ -1,4 +1,4 @@
-# Copyright (c) 2013, Chad Zawistowski
+# Copyright (c) 2015, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
@@ -7,7 +7,17 @@
 from field import Field
 
 
-class TagReference(Field):
+class HaloField(Field):
+
+    """Fields that require a halomap to make sense, and can count on their
+    parent struct to retain a reference to one."""
+
+    @property
+    def halomap(self):
+        return self.parent.halomap
+
+
+class TagReference(HaloField):
 
     """Semantic link to a HaloTag."""
 
@@ -21,8 +31,8 @@ class TagReference(Field):
 
         # LoneIDs (idents just by themselves) need no adjustment.
         if loneid != 'True':
-            # This is a full reference, and we only care to read the ident
-            self.offset += 12  # (which is located 12 bytes inside)
+            # This is a full reference, but we only care to read the ident
+            self.offset += 12  # which is located 12 bytes inside
 
     def getf(self):
         ident = self.byteaccess.read_uint32(self.offset)
@@ -31,8 +41,7 @@ class TagReference(Field):
         try:
             return self.halomap.tags_by_ident[ident]  # the referenced tag
         except KeyError:
-            # we wanted a tag that wasn't there =(
-            return None
+            return None  # we wanted a tag that wasn't there =(
 
     def setf(self, value):
         # when value is None, write Halo's version of null (-1)
@@ -42,7 +51,7 @@ class TagReference(Field):
                                      else value.ident)
 
 
-class StructArray(Field):
+class StructArray(HaloField):
 
     """A pointer to an array of structs."""
 
@@ -68,4 +77,4 @@ class StructArray(Field):
 
     def setf(self, value):
         raise NotImplementedError(
-            'Assigning entire struct arrays is not yet supported.')
+            'Reassigning entire struct arrays is not yet supported.')

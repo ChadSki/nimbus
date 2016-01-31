@@ -1,5 +1,4 @@
-bin/
-halolib/build/
+.vs
 
 ############
 ## Halo
