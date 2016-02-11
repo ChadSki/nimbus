@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{000e61a3-c50c-4673-8b33-3f2b35b07ca8}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>byteaccess\test\test_byteaccess.py</StartupFile>
+    <StartupFile>basicstruct\test\test_observablestruct.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,40 +22,48 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="plugin-converter\entity_quickbeam_conversion.txt" />
-    <Content Include="subtree merge.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="basicstruct\field.py" />
+    <Compile Include="basicstruct\struct.py" />
+    <Compile Include="basicstruct\test\test_observablestruct.py" />
+    <Compile Include="basicstruct\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="byteaccess\basebyteaccess.py" />
     <Compile Include="byteaccess\file.py" />
     <Compile Include="byteaccess\test\test_byteaccess.py" />
     <Compile Include="byteaccess\windowsinterop.py" />
     <Compile Include="byteaccess\process.py" />
     <Compile Include="byteaccess\__init__.py" />
-    <Compile Include="event.py" />
-    <Compile Include="basicstruct\basicfields.py" />
-    <Compile Include="halostruct\halofields.py" />
-    <Compile Include="basicstruct\observabledict.py" />
-    <Compile Include="basicstruct\basicstruct.py" />
-    <Compile Include="basicstruct\test\test_basicstruct.py" />
-    <Compile Include="basicstruct\__init__.py" />
+    <Compile Include="halomap\field.py" />
     <Compile Include="halomap.py" />
-    <Compile Include="halostruct\halostruct.py">
+    <Compile Include="halomap\struct.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="halostruct\__init__.py">
+    <Compile Include="halomap\structs\index_header.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="halotag.py" />
+    <Compile Include="halomap\structs\map_header.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="halomap\structs\weap.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="halomap\test\test_halostruct.py" />
+    <Compile Include="halomap\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="plugin-converter\converter.py" />
-    <Compile Include="structs.py" />
-    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="byteaccess" />
-    <Folder Include="byteaccess\test" />
     <Folder Include="basicstruct\" />
     <Folder Include="basicstruct\test\" />
-    <Folder Include="halostruct\" />
+    <Folder Include="byteaccess" />
+    <Folder Include="byteaccess\test" />
+    <Folder Include="halomap\" />
+    <Folder Include="halomap\structs\" />
+    <Folder Include="halomap\test\" />
     <Folder Include="plugin-converter" />
   </ItemGroup>
   <ItemGroup>

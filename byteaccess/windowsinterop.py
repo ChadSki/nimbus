@@ -1,4 +1,4 @@
-# Copyright (c) 2015, Chad Zawistowski
+# Copyright (c) 2016, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD

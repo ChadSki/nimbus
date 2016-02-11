@@ -1,3 +1,0 @@
-git remote add byteaccess-origin https://github.com/ChadSki/byteaccess.git
-git fetch byteaccess-origin
-git read-tree --prefix=byteaccess -u byteaccess-origin/master:byteaccess

@@ -9,7 +9,8 @@ import abc
 
 class Field(metaclass=abc.ABCMeta):
 
-    """Encapsulates read/write access to a single field within a struct.
+    """Represents a single field within a struct, and brokers read/write access
+    to the underlying bits wherever they may reside.
 
     Fields are parented by a struct, which can be accessed via `self.parent`.
 
@@ -23,23 +24,31 @@ class Field(metaclass=abc.ABCMeta):
 
     @property
     def byteaccess(self):
-        """All reading and writing is brokered through the parent struct. It
-        maintains ownership of the ByteAccess."""
+        """All reading and writing is brokered through the parent struct.
+        This property enables convenient access, but the parent struct is
+        the canonical owner of the ByteAccess."""
         try:
             return self.parent.byteaccess
+
         except AttributeError as exc:
             if parent is None:
-                raise RuntimeError("This field has not been assigned a parent struct"
-                                   "to read/write from.") from exc
+                raise RuntimeError(
+                    "This field is either not attached to a parent struct,"
+                    "or for some other reason cannot read/write to its"
+                    "byteaccess.") from exc
             else:
                 raise exc
 
     @abc.abstractmethod
     def getf(self):
+        """To define a new type of field, subclass Field and override
+        this getter function."""
         pass
 
     @abc.abstractmethod
     def setf(self, value):
+        """To define a new type of field, subclass Field and override
+        this setter function."""
         pass
 
 

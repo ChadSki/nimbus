@@ -1,13 +1,14 @@
-# Copyright (c) 2015, Chad Zawistowski
+# Copyright (c) 2016, Chad Zawistowski
 # All rights reserved.
 #
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from field import Field
+import basicstruct
+from basicstruct.field import Field
 
 
-class HaloField(Field):
+class HaloMapField(Field):
 
     """Fields that require a halomap to make sense, and can count on their
     parent struct to retain a reference to one."""
@@ -17,7 +18,7 @@ class HaloField(Field):
         return self.parent.halomap
 
 
-class TagReference(HaloField):
+class TagReference(HaloMapField):
 
     """Semantic link to a HaloTag."""
 
@@ -51,7 +52,7 @@ class TagReference(HaloField):
                                      else value.ident)
 
 
-class StructArray(HaloField):
+class StructArray(HaloMapField):
 
     """A pointer to an array of structs."""
 
