@@ -36,9 +36,9 @@
     <Compile Include="byteaccess\windowsinterop.py" />
     <Compile Include="byteaccess\process.py" />
     <Compile Include="byteaccess\__init__.py" />
-    <Compile Include="halomap\field.py" />
+    <Compile Include="halomap\halomapfield.py" />
     <Compile Include="halomap.py" />
-    <Compile Include="halomap\struct.py">
+    <Compile Include="halomap\halomapstruct.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="halomap\structs\index_header.py">
@@ -47,7 +47,7 @@
     <Compile Include="halomap\structs\map_header.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="halomap\structs\weap.py">
+    <Compile Include="halomap\structs\tags.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="halomap\test\test_halostruct.py" />

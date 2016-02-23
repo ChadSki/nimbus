@@ -14,7 +14,7 @@ class BloodGulchTest(unittest.TestCase):
 
     def test_importing(self):
         import halomap
-        from halomap.field import StructArray, TagReference
+        from halomap.halomapfield import StructArray, TagReference
         assert True
 
 

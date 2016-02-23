@@ -8,7 +8,8 @@ from .basebyteaccess import BaseByteAccess
 from mmap import mmap
 
 def open_file(filepath):
-    """Define a ByteAccess for reading and writing to a specific file.
+    """Return a class for reading and writing to a specific file.
+    Instantiate ByteAccess objects to encapsulate specific regions.
 
     filepath -- Full path to the file which will be opened.
 
