@@ -17,7 +17,7 @@ class Field(metaclass=abc.ABCMeta):
     The getf/setf functions translate between Python values and raw data from
     `byteaccess`."""
 
-    def __init__(self, *, offset, docs, **kwargs):
+    def __init__(self, *, offset, docs="", **kwargs):
         self.offset = offset
         self.docs = docs
         self.parent = None  # to be set by parent struct
@@ -65,10 +65,10 @@ class Asciiz(Field):
         self.maxlength = maxlength
 
     def getf(self, byteaccess):
-        return byteaccess.read_asciiz(self.offset, self.maxlength),
+        return byteaccess.read_asciiz(self.offset, self.maxlength)
 
     def setf(self, byteaccess, newvalue):
-        byteaccess.write_asciiz(self.offset, self.maxlength, newvalue),
+        byteaccess.write_asciiz(self.offset, self.maxlength, newvalue)
 
 
 class AsciizPtr(Field):
@@ -161,7 +161,7 @@ class Float32(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_float32(self.offset),
+        return byteaccess.read_float32(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_float32(self.offset, newvalue),
@@ -175,7 +175,7 @@ class Float64(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_float64(self.offset),
+        return byteaccess.read_float64(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_float64(self.offset, newvalue),
@@ -189,7 +189,7 @@ class Int8(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_int8(self.offset),
+        return byteaccess.read_int8(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_int8(self.offset, newvalue)
@@ -203,7 +203,7 @@ class Int16(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_int16(self.offset),
+        return byteaccess.read_int16(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_int16(self.offset, newvalue)
@@ -217,7 +217,7 @@ class Int32(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_int32(self.offset),
+        return byteaccess.read_int32(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_int32(self.offset, newvalue)
@@ -231,7 +231,7 @@ class Int64(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_int64(self.offset),
+        return byteaccess.read_int64(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_int64(self.offset, newvalue)
@@ -245,7 +245,7 @@ class UInt8(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_uint8(self.offset),
+        return byteaccess.read_uint8(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_uint8(self.offset, self.value)
@@ -259,7 +259,7 @@ class UInt16(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_uint16(self.offset),
+        return byteaccess.read_uint16(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_uint16(self.offset, self.value)
@@ -273,7 +273,7 @@ class UInt32(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_uint32(self.offset),
+        return byteaccess.read_uint32(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_uint32(self.offset, self.value)
@@ -287,7 +287,7 @@ class UInt64(Field):
         super().__init__(**kwargs)
 
     def getf(self, byteaccess):
-        return byteaccess.read_uint64(self.offset),
+        return byteaccess.read_uint64(self.offset)
 
     def setf(self, byteaccess, newvalue):
         byteaccess.write_uint64(self.offset, self.value)

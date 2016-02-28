@@ -7,7 +7,7 @@
 from basicstruct.struct import BasicStruct
 from basicstruct import field
 
-struct_type = \
+IndexHeader = \
     BasicStruct("IndexHeader",
         primary_magic=field.UInt32(offset=0),
         base_tag_ident=field.UInt32(offset=4),
