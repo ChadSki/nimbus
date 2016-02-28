@@ -7,9 +7,7 @@
 import os
 import unittest
 import byteaccess
-import basicstruct
-from basicstruct.struct import Event, basic_struct_factory
-from basicstruct.field import Field
+from basicstruct import Event, define_basic_struct
 from basicstruct.field import (
     Ascii, Asciiz, AsciizPtr, RawData,
     Enum16, Flag, Float32, Float64,
@@ -25,7 +23,7 @@ class BasicStructTest(unittest.TestCase):
 
     def setUp(self):
         TextFileAccess = byteaccess.open_file(os.path.join(this_folder, 'testfile.bin'))
-        TextStruct = basic_struct_factory(
+        TextStruct = define_basic_struct(
             char_array=Ascii(offset=0, length=4, reverse=True),
             char_array2=Ascii(offset=0, length=4, reverse=False),
             char_array3=Ascii(offset=4, length=1),
@@ -58,12 +56,12 @@ class BitmapStructTest(unittest.TestCase):
     def setUp(self):
         BmpFileAccess = byteaccess.open_file(os.path.join(this_folder, 'test.bmp'))
 
-        BmpHeader = basic_struct_factory(
+        BmpHeader = define_basic_struct(
             id=Ascii(offset=0x0, length=2, docs="should be `BM`", reverse=False),
             filesize=UInt32(offset=0x2),
             pixels_offset=UInt32(offset=0xA))
 
-        DibHeader = basic_struct_factory(
+        DibHeader = define_basic_struct(
             header_size=UInt32(offset=0),
             width=UInt32(offset=4),
             height=UInt32(offset=8),
@@ -76,7 +74,7 @@ class BitmapStructTest(unittest.TestCase):
             num_palette_colors=UInt32(offset=32),
             num_important_colors=UInt32(offset=36))
 
-        PixelArray = basic_struct_factory(
+        PixelArray = define_basic_struct(
             red_pixel=RawData(offset=0, length=3),
             white_pixel=RawData(offset=3, length=3),
             blue_pixel=RawData(offset=8, length=3),

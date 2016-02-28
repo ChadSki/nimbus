@@ -6,6 +6,7 @@
 
 import unittest
 import halomap
+from halomap.structs import MapHeader, IndexHeader, tag_types
 
 class BloodGulchTest(unittest.TestCase):
 
@@ -13,8 +14,6 @@ class BloodGulchTest(unittest.TestCase):
         pass
 
     def test_importing(self):
-        import halomap
-        from halomap.halomapfield import StructArray, TagReference
         assert True
 
 

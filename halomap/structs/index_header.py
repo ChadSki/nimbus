@@ -4,11 +4,11 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from basicstruct.struct import BasicStruct
+from basicstruct.struct import define_basic_struct
 from basicstruct import field
 
 IndexHeader = \
-    BasicStruct("IndexHeader",
+    define_basic_struct(
         primary_magic=field.UInt32(offset=0),
         base_tag_ident=field.UInt32(offset=4),
         map_id=field.UInt32(offset=8),

@@ -5,14 +5,13 @@
 # license as detailed in the LICENSE file.
 
 from basicstruct import field
-import halomap
-from halomap.halomapstruct import HaloMapStruct
-from halomap import halomapfield
+from .halostruct import define_halo_struct
+
 
 tag_types = {}
 # type: Dict[str, HaloMapStruct]
 
-tag_types['weap'] = HaloMapStruct(
+tag_types['weap'] = define_halo_struct(
     primary_magic=field.UInt32(offset=0),
     base_tag_ident=field.UInt32(offset=4),
     map_id=field.UInt32(offset=8),

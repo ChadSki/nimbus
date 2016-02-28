@@ -4,11 +4,11 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from basicstruct.struct import BasicStruct
+from basicstruct.struct import define_basic_struct
 from basicstruct import field
 
 MapHeader = \
-    BasicStruct("MapHeader",
+    define_basic_struct(
         integrity=field.Ascii(offset=0, length=4, reverse=True),
         game_version=field.UInt32(offset=4),
         map_size=field.UInt32(offset=4),

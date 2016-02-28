@@ -27,6 +27,7 @@ class BasicStruct(object):
         self.byteaccess = byteaccess
         self.property_changed = Event()
         self.fields = kwargs
+        # type: Dict[str, Field]
 
     def __getattr__(self, attr_name):
         """Invoke a field, reading from the underlying data.
@@ -55,7 +56,7 @@ class BasicStruct(object):
         This method is called when normal attribute lookup fails. It is here
         used to extend attribute lookup to the `fields` dictionary, so that
         those fields look like normal attributes."""
-        fields = []
+        fields = {}
         try:
             fields = self.fields
         except KeyError:
@@ -69,7 +70,7 @@ class BasicStruct(object):
         else:
             self.__dict__[attr_name] = newvalue
 
-def basic_struct_factory(**fields):
+def define_basic_struct(**fields):
     def finish_construction(byteaccess):
         return BasicStruct(byteaccess, **fields)
     return finish_construction

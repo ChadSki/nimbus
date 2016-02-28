@@ -24,6 +24,17 @@
     <Content Include="basicstruct\test\test.bmp" />
     <Content Include="basicstruct\test\testfile.bin" />
     <Content Include="byteaccess\test\testfile.bin" />
+    <Content Include="halomap\structs\clean_xml\bipd.xml" />
+    <Content Include="halomap\structs\clean_xml\effe.xml" />
+    <Content Include="halomap\structs\clean_xml\index_header.xml" />
+    <Content Include="halomap\structs\clean_xml\map_header.xml" />
+    <Content Include="halomap\structs\clean_xml\object_table.xml" />
+    <Content Include="halomap\structs\clean_xml\player_table.xml" />
+    <Content Include="halomap\structs\clean_xml\proj.xml" />
+    <Content Include="halomap\structs\clean_xml\tag_header.xml" />
+    <Content Include="halomap\structs\clean_xml\unknown.xml" />
+    <Content Include="halomap\structs\clean_xml\vehi.xml" />
+    <Content Include="halomap\structs\clean_xml\weap.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="basicstruct\field.py" />
@@ -38,8 +49,8 @@
     <Compile Include="byteaccess\windowsinterop.py" />
     <Compile Include="byteaccess\process.py" />
     <Compile Include="byteaccess\__init__.py" />
-    <Compile Include="halomap\halomapfield.py" />
-    <Compile Include="halomap\halomapstruct.py">
+    <Compile Include="halomap\structs\halofield.py" />
+    <Compile Include="halomap\structs\halostruct.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="halomap\structs\index_header.py">
@@ -51,19 +62,22 @@
     <Compile Include="halomap\structs\tags.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="halomap\test\test_halostruct.py" />
-    <Compile Include="halomap\__init__.py">
+    <Compile Include="halomap\structs\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="halomap\halomap.py" />
+    <Compile Include="halomap\test\test_halomap.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="basicstruct\" />
     <Folder Include="basicstruct\test\" />
     <Folder Include="byteaccess" />
     <Folder Include="byteaccess\test" />
-    <Folder Include="halomap\" />
     <Folder Include="halomap\structs\" />
+    <Folder Include="halomap\" />
+    <Folder Include="halomap\structs\clean_xml\" />
     <Folder Include="halomap\test\" />
   </ItemGroup>
   <ItemGroup>
