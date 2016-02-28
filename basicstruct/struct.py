@@ -19,44 +19,57 @@ class Event(set):
         for handler in self:
             handler(*args, **kwargs)
 
-def basic_struct_factory(**fields):
+class BasicStruct(object):
 
-    class BasicStruct(object):
+    """TODO"""
 
-        """TODO"""
+    def __init__(self, byteaccess, **kwargs):
+        self.byteaccess = byteaccess
+        self.property_changed = Event()
+        self.fields = kwargs
 
-        def __init__(self, byteaccess):
-            self.byteaccess = byteaccess
-            self.property_changed = Event()
-
-        def __getattr__(self, attr_name):
-            """Invoke a field, reading from the underlying data.
+    def __getattr__(self, attr_name):
+        """Invoke a field, reading from the underlying data.
         
-            This method is called when normal attribute lookup fails. It is here
-            used to extend attribute lookup to the `fields` dictionary, so that
-            those fields look like normal attributes."""
+        This method is called when normal attribute lookup fails. It is here
+        used to extend attribute lookup to the `fields` dictionary, so that
+        those fields look like normal attributes."""
+        if attr_name == 'fields':
+            return self.__dict__['fields']
+        elif attr_name in self.fields:
             try:
-                return fields[attr_name].getf(self.byteaccess)
+                return self.fields[attr_name].getf(self.byteaccess)
             except KeyError as err:
                 raise AttributeError(
                     ("Attribute name `{}` does not appear to be a member"
                         "of this struct").format(attr_name)) from err
+        else:
+            return self.__dict__[attr_name]
 
-        def __setattr__(self, attr_name, newvalue):
-            """Invoke a field, writing to the underlying data.
+    def __setattr__(self, attr_name, newvalue):
+        """Invoke a field, writing to the underlying data.
 
-            If the field has changed, invokes the `property_changed` event handler
-            and triggers any registered events.
+        If the field has changed, invokes the `property_changed` event handler
+        and triggers any registered events.
         
-            This method is called when normal attribute lookup fails. It is here
-            used to extend attribute lookup to the `fields` dictionary, so that
-            those fields look like normal attributes."""
-            if attr_name in fields:
-                oldvalue = fields[attr_name].getf(self.byteaccess)
-                if oldvalue != newvalue:
-                    fields[attr_name].setf(self.byteaccess, newvalue)
-                    self.property_changed(attr_name)
-            else:
-                self.__dict__[attr_name] = newvalue
+        This method is called when normal attribute lookup fails. It is here
+        used to extend attribute lookup to the `fields` dictionary, so that
+        those fields look like normal attributes."""
+        fields = []
+        try:
+            fields = self.fields
+        except KeyError:
+            pass
 
-    return BasicStruct
+        if attr_name in fields:
+            oldvalue = fields[attr_name].getf(self.byteaccess)
+            if oldvalue != newvalue:
+                fields[attr_name].setf(self.byteaccess, newvalue)
+                self.property_changed(attr_name)
+        else:
+            self.__dict__[attr_name] = newvalue
+
+def basic_struct_factory(**fields):
+    def finish_construction(byteaccess):
+        return BasicStruct(byteaccess, **fields)
+    return finish_construction

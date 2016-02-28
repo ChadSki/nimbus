@@ -9,8 +9,8 @@ import halomap
 from halomap.halomapstruct import HaloMapStruct
 from halomap import halomapfield
 
-# Dict<char[4], HaloMapStruct 
 tag_types = {}
+# type: Dict[str, HaloMapStruct]
 
 tag_types['weap'] = HaloMapStruct(
     primary_magic=field.UInt32(offset=0),

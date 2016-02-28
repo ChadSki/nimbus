@@ -18,7 +18,10 @@ from basicstruct.field import (
 
 this_folder = os.path.dirname(os.path.realpath(__file__))
 
+
 class BasicStructTest(unittest.TestCase):
+
+    """Tests each of the basic field types."""
 
     def setUp(self):
         TextFileAccess = byteaccess.open_file(os.path.join(this_folder, 'testfile.bin'))
@@ -49,6 +52,8 @@ class BasicStructTest(unittest.TestCase):
         assert self.struct.bytes == b'\xDE\xAD\xC0\xDE\xFE\xED\xC0\xBB'
 
 class BitmapStructTest(unittest.TestCase):
+
+    """Tests reading a tiny bitmap file."""
 
     def setUp(self):
         BmpFileAccess = byteaccess.open_file(os.path.join(this_folder, 'test.bmp'))
@@ -94,7 +99,6 @@ class BitmapStructTest(unittest.TestCase):
         assert self.dib_header.bits_per_pixel == 24
         assert self.dib_header.bmp_size == 16
         assert self.dib_header.dpi_horizontal == 2835
-        print(self.dib_header.dpi_vertical)
         assert self.dib_header.dpi_vertical == 2835
         assert self.dib_header.num_palette_colors == 0
 

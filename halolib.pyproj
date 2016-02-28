@@ -55,6 +55,7 @@
     <Compile Include="halomap\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="halomap\halomap.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="basicstruct\" />

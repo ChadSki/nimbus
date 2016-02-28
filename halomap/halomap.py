@@ -77,9 +77,9 @@ class HaloMap(object):
                 offsets={'file': self.map_header.index_offset, 'mem': 0x40440000},
                 halomap=self)
         except AttributeError:
-            print('**********************************************************************')
+            print('************************************************************')
             print(self.map_header.store)
-            print('**********************************************************************2')
+            print('***********************************************************2')
             raise
 
         # Almost always 0x40440028 (map protection may change this)

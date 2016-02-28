@@ -64,7 +64,7 @@ class WinMemByteAccessTest(unittest.TestCase, BaseByteAccessTest):
         self.offset = 0x6A8154  # suitable scratch area I guess?
 
     def test_membyteaccess(self):
-        """ Ensure we can read Halo's map header from memory"""
+        """Ensure we can read Halo's map header from memory"""
         foo = self.ByteAccess(self.index_header, 4)
         print(foo.read_all_bytes())
         assert foo.read_all_bytes() == b'sgat'
