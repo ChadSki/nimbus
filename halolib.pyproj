@@ -24,17 +24,17 @@
     <Content Include="basicstruct\test\test.bmp" />
     <Content Include="basicstruct\test\testfile.bin" />
     <Content Include="byteaccess\test\testfile.bin" />
-    <Content Include="halomap\structs\clean_xml\bipd.xml" />
-    <Content Include="halomap\structs\clean_xml\effe.xml" />
-    <Content Include="halomap\structs\clean_xml\index_header.xml" />
-    <Content Include="halomap\structs\clean_xml\map_header.xml" />
-    <Content Include="halomap\structs\clean_xml\object_table.xml" />
-    <Content Include="halomap\structs\clean_xml\player_table.xml" />
-    <Content Include="halomap\structs\clean_xml\proj.xml" />
-    <Content Include="halomap\structs\clean_xml\tag_header.xml" />
-    <Content Include="halomap\structs\clean_xml\unknown.xml" />
-    <Content Include="halomap\structs\clean_xml\vehi.xml" />
-    <Content Include="halomap\structs\clean_xml\weap.xml" />
+    <Content Include="halolib\structs\clean_xml\bipd.xml" />
+    <Content Include="halolib\structs\clean_xml\effe.xml" />
+    <Content Include="halolib\structs\clean_xml\index_header.xml" />
+    <Content Include="halolib\structs\clean_xml\map_header.xml" />
+    <Content Include="halolib\structs\clean_xml\object_table.xml" />
+    <Content Include="halolib\structs\clean_xml\player_table.xml" />
+    <Content Include="halolib\structs\clean_xml\proj.xml" />
+    <Content Include="halolib\structs\clean_xml\tag_header.xml" />
+    <Content Include="halolib\structs\clean_xml\unknown.xml" />
+    <Content Include="halolib\structs\clean_xml\vehi.xml" />
+    <Content Include="halolib\structs\clean_xml\weap.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="basicstruct\field.py" />
@@ -49,36 +49,26 @@
     <Compile Include="byteaccess\windowsinterop.py" />
     <Compile Include="byteaccess\process.py" />
     <Compile Include="byteaccess\__init__.py" />
-    <Compile Include="halomap\structs\halofield.py" />
-    <Compile Include="halomap\structs\halostruct.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="halomap\structs\index_header.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="halomap\structs\map_header.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="halomap\structs\tags.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="halomap\structs\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="halomap\halomap.py" />
-    <Compile Include="halomap\test\test_halomap.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="halolib\halomap.py" />
+    <Compile Include="halolib\structs\halofield.py" />
+    <Compile Include="halolib\structs\halostruct.py" />
+    <Compile Include="halolib\structs\indexheader.py" />
+    <Compile Include="halolib\structs\mapheader.py" />
+    <Compile Include="halolib\structs\tags.py" />
+    <Compile Include="halolib\structs\__init__.py" />
+    <Compile Include="halolib\halotag.py" />
+    <Compile Include="halolib\test\test_halolib.py" />
+    <Compile Include="halolib\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="basicstruct\" />
     <Folder Include="basicstruct\test\" />
     <Folder Include="byteaccess" />
     <Folder Include="byteaccess\test" />
-    <Folder Include="halomap\structs\" />
-    <Folder Include="halomap\" />
-    <Folder Include="halomap\structs\clean_xml\" />
-    <Folder Include="halomap\test\" />
+    <Folder Include="halolib\" />
+    <Folder Include="halolib\structs\" />
+    <Folder Include="halolib\structs\clean_xml\" />
+    <Folder Include="halolib\test\" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\3.5" />

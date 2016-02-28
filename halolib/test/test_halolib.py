@@ -5,8 +5,7 @@
 # license as detailed in the LICENSE file.
 
 import unittest
-import halomap
-from halomap.structs import MapHeader, IndexHeader, tag_types
+from halolib import HaloMap
 
 class BloodGulchTest(unittest.TestCase):
 
