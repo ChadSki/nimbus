@@ -24,7 +24,10 @@ class BloodGulchTest(unittest.TestCase):
         self.map = HaloMap.from_file(bloodgulch_path)
 
     def test_importing(self):
-        assert True
+        print(self.map)
+        print(self.map.index_header.tag_count)
+        x = self.map.tag('weap')
+        print('x:{}'.format(x))
 
 
 if __name__ == '__main__':

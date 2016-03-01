@@ -28,8 +28,7 @@ class BasicStructTest(unittest.TestCase):
             char_array2=Ascii(offset=0, length=4, reverse=False),
             char_array3=Ascii(offset=4, length=1),
             c_string=Asciiz(offset=5, maxlength=19),
-            bytes=RawData(offset=0x20, length=8),
-            )
+            bytes=RawData(offset=0x20, length=8))
         self.struct = TextStruct(TextFileAccess, 0)
 
     def test_ascii(self):

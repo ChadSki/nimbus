@@ -33,4 +33,5 @@ def define_halo_struct(struct_size, **fields):
         # build the struct interface around it
         return HaloStruct(byteaccess, halomap, **fields)
 
+    finish_construction.struct_size = struct_size
     return finish_construction

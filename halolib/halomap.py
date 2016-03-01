@@ -6,7 +6,7 @@
 
 import re
 from byteaccess import open_file, open_process
-from .structs import IndexHeader, MapHeader, tag_types
+from .structs import IndexHeader, MapHeader, TagHeader
 from .halotag import HaloTag
 
 class HaloMap(object):
@@ -65,6 +65,8 @@ class HaloMap(object):
         context
             Where to read map data and write changes.
         """
+        self.map_access = map_access
+
         map_header = MapHeader(map_access, {'file': 0, 'mem': 0x6A8154})
 
         index_header = IndexHeader(map_access,
@@ -84,17 +86,19 @@ class HaloMap(object):
         # are already valid pointers.
         magic_offset = index_header.primary_magic - file_index_offset
 
-        # build associative tag collection (ID => HaloTag)
-        tags_by_ident = {
-            tag_header.ident: HaloTag(
-                offsets={'file': TagHeader.struct_size * i + file_index_offset,
-                         'mem': TagHeader.struct_size * i + mem_index_offset},
-                halomap=self)
-            for i in range(index_header.tag_count)}
+        tag_headers = [
+            TagHeader(map_access,
+                {'file': TagHeader.struct_size * i + file_index_offset,
+                 'mem': TagHeader.struct_size * i + mem_index_offset})
+            for i in range(index_header.tag_count)]
+
+        # build associative tag collection
+        tags_by_ident = {tag_header.ident: HaloTag(tag_header, self)
+                         for tag_header in tag_headers}
+        # type: Dict[int, HaloTag]
 
         # save references to stuff
         self.magic_offset = magic_offset
-        self.map_access = map_access
         self.map_header = map_header
         self.index_header = index_header
         self.tags_by_ident = tags_by_ident
@@ -119,19 +123,18 @@ class HaloMap(object):
 
             Example fragments: '', 'cyborg', 'plasma.*(rifle|pistol)'
         """
-        return next(self.tags(tag_class, name_fragments), None)
+        return next(self.tags(tag_class, *name_fragments), None)
 
     def tags(self, tag_class='', *name_fragments):
         """Filter tags by name and class. Same as self.tag(), but iterates
         through all tags which match the search criteria.
         """
         def match(tag):
-            return (any(re.search(tag_class, tag.first_class),
-                        re.search(tag_class, tag.second_class),
-                        re.search(tag_class, tag.third_class))
-
+            return (any((re.search(tag_class, tag.first_class),
+                         re.search(tag_class, tag.second_class),
+                         re.search(tag_class, tag.third_class)))
                     and all(re.search(regex, tag.name)
-                            for regex in name_fragments))
+                           for regex in name_fragments))
 
         return filter(match, self.tags_by_ident.values())
 

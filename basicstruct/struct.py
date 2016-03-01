@@ -29,7 +29,6 @@ class BasicStruct(object):
         The underlying data which a BasicStruct mediates access to.
 
     fields : Dict[str, BasicField]
-        
     """
 
     def __init__(self, byteaccess, **fields):
@@ -39,7 +38,7 @@ class BasicStruct(object):
 
     def __getattr__(self, attr_name):
         """Invoke a field, reading from the underlying data.
-        
+
         This method is called when normal attribute lookup fails. It is here
         used to extend attribute lookup to the `fields` dictionary, so that
         those fields look like normal attributes."""
@@ -96,4 +95,6 @@ def define_basic_struct(struct_size, **fields):
         byteaccess = thing_access(offset, struct_size)
         # build the struct interface around it
         return BasicStruct(byteaccess, **fields)
+
+    finish_construction.struct_size = struct_size
     return finish_construction

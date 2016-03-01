@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{000e61a3-c50c-4673-8b33-3f2b35b07ca8}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>basicstruct\test\test_observablestruct.py</StartupFile>
+    <StartupFile>basicstruct\struct.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

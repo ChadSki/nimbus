@@ -4,6 +4,8 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
+from .structs import tag_types
+
 class HaloTag(object):
 
     """Represents one Halo tag and all of its data.
@@ -17,12 +19,16 @@ class HaloTag(object):
         todo
     """
 
-    def __init__(self, offsets, halomap):
+    def __init__(self, header, halomap):
         self.halomap = halomap
-        self.header = struct_type('tag_header')(offsets, halomap)
-        self.data = struct_type(header.first_class)(
-            offset=header.meta_offset_raw,
-            halomap=halomap)
+        self.header = header
+        try:
+            self.data = tag_types[header.first_class](
+                halomap.map_access,
+                offset=header.meta_offset_raw,
+                halomap=halomap)
+        except KeyError:
+            self.data = None
 
     def __str__(self):
         """Returns a 1-line string representation of this tag.
@@ -42,4 +48,7 @@ class HaloTag(object):
             1. self
             2. self.data
         """
-        return getattr(self.data, name)
+        try:
+            return getattr(self.header, name)
+        except:
+            return getattr(self.data, name)

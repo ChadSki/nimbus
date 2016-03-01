@@ -77,11 +77,12 @@ class AsciizPtr(BasicField):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+    def getf(self, byteaccess):
+        return "NotImplemented"
+
+    def setf(self, byteaccess):
         raise NotImplementedError()
-
-    def getf(self, byteaccess): pass
-
-    def setf(self, byteaccess): pass
 
 
 class RawData(BasicField):

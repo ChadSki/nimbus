@@ -8,7 +8,6 @@
 from basicstruct import field
 from .halostruct import define_halo_struct
 
-
 tag_types = {}
 # type: Dict[str, HaloMapStruct]
 
