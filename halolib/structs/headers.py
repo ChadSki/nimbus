@@ -6,6 +6,8 @@
 
 from basicstruct.struct import define_basic_struct
 from basicstruct import field
+from halolib.structs.halostruct import define_halo_struct
+from halolib.structs import halofield
 
 MapHeader = \
     define_basic_struct(struct_size=132,
@@ -32,12 +34,12 @@ IndexHeader = \
         integrity=field.Ascii(offset=36, length=4, reverse=True))
 
 TagHeader = \
-    define_basic_struct(struct_size=32,
+    define_halo_struct(struct_size=32,
         first_class=field.Ascii(offset=0, length=4, reverse=True),
         second_class=field.Ascii(offset=4, length=4, reverse=True),
         third_class=field.Ascii(offset=8, length=4, reverse=True),
         ident=field.UInt32(offset=12),
-        name=field.AsciizPtr(offset=16),
+        name=halofield.AsciizPtr(offset=16),
         meta_offset_raw=field.UInt32(offset=16),
         indexed=field.UInt32(offset=24))
 

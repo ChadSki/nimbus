@@ -33,6 +33,8 @@ class BasicStruct(object):
 
     def __init__(self, byteaccess, **fields):
         self.byteaccess = byteaccess
+        for field in fields.values():
+            field.parent = self
         self.fields = fields
         self.property_changed = Event()
 
@@ -44,7 +46,8 @@ class BasicStruct(object):
         those fields look like normal attributes."""
         if attr_name == 'fields':
             return self.__dict__['fields']
-        elif attr_name in self.fields:
+
+        if attr_name in self.fields:
             try:
                 return self.fields[attr_name].getf(self.byteaccess)
             except KeyError as err:

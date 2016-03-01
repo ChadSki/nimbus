@@ -71,20 +71,6 @@ class Asciiz(BasicField):
         byteaccess.write_asciiz(self.offset, self.maxlength, newvalue)
 
 
-class AsciizPtr(BasicField):
-
-    """Pointer to a null-terminated ascii string."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    def getf(self, byteaccess):
-        return "NotImplemented"
-
-    def setf(self, byteaccess):
-        raise NotImplementedError()
-
-
 class RawData(BasicField):
 
     """Just bytes. Useful for debugging."""

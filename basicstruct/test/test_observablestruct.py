@@ -9,7 +9,7 @@ import unittest
 import byteaccess
 from basicstruct import Event, define_basic_struct
 from basicstruct.field import (
-    Ascii, Asciiz, AsciizPtr, RawData,
+    Ascii, Asciiz, RawData,
     Enum16, Flag, Float32, Float64,
     Int8, Int16, Int32, Int64,
     UInt8, UInt16, UInt32, UInt64)

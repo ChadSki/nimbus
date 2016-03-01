@@ -8,7 +8,7 @@ import basicstruct
 from basicstruct.field import BasicField
 
 
-class HaloMapField(BasicField):
+class HaloField(BasicField):
 
     """Fields that require a halomap to make sense, and can count on their
     parent struct to retain a reference to one."""
@@ -18,7 +18,28 @@ class HaloMapField(BasicField):
         return self.parent.halomap
 
 
-class TagReference(HaloMapField):
+class AsciizPtr(HaloField):
+
+    """Pointer to a null-terminated string somewhere else in the mapfile."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.string_access = None
+
+    def getf(self, byteaccess):
+        if self.string_access is None:
+            name_offset = byteaccess.read_uint32(self.offset)
+            self.string_access = \
+                self.halomap.map_access(
+                    name_offset - self.halomap.magic_offset,
+                    128)  # fuck if I know
+        return self.string_access.read_asciiz(0, 128)
+
+    def setf(self, byteaccess):
+        raise NotImplementedError()
+
+
+class TagReference(HaloField):
 
     """Semantic link to a HaloTag."""
 
@@ -52,7 +73,7 @@ class TagReference(HaloMapField):
                                      else value.ident)
 
 
-class StructArray(HaloMapField):
+class StructArray(HaloField):
 
     """A pointer to an array of structs."""
 

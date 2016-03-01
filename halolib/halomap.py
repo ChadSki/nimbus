@@ -89,7 +89,8 @@ class HaloMap(object):
         tag_headers = [
             TagHeader(map_access,
                 {'file': TagHeader.struct_size * i + file_index_offset,
-                 'mem': TagHeader.struct_size * i + mem_index_offset})
+                 'mem': TagHeader.struct_size * i + mem_index_offset},
+                self)
             for i in range(index_header.tag_count)]
 
         # build associative tag collection
