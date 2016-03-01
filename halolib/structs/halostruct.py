@@ -10,11 +10,27 @@ class HaloStruct(BasicStruct):
 
     """TODO"""
 
-    def __init__(self, byteaccess, *, halomap, **kwargs):
+    def __init__(self, byteaccess, halomap, **fields):
         self.halomap = halomap
-        super().__init__(byteaccess, **kwargs)
+        super().__init__(byteaccess, **fields)
 
-def define_halo_struct(**fields):
-    def finish_construction(byteaccess):
-        return BasicStruct(byteaccess, **fields)
+def define_halo_struct(struct_size, **fields):
+    """Returns a constructor function for a newly defined Halo struct.
+
+    Parameters
+    ----------
+    struct_size : int
+        size of the struct in bytes
+
+    **fields : Dict[str, Union[BasicField, HaloField]]
+        the remaining arguments are grouped into a dictionary, with the
+        argument name as the key and the argument itself (expected to be a
+        field of some sort) as the value.
+    """
+    def finish_construction(map_access, offset, halomap):
+        # enclose the bytes we need
+        byteaccess = map_access(offset, struct_size)
+        # build the struct interface around it
+        return HaloStruct(byteaccess, halomap, **fields)
+
     return finish_construction

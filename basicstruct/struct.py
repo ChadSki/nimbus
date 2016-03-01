@@ -21,13 +21,21 @@ class Event(set):
 
 class BasicStruct(object):
 
-    """TODO"""
+    """Wrap a ByteAccess and implement a struct interface.
 
-    def __init__(self, byteaccess, **kwargs):
+    Attributes
+    ----------
+    byteaccess : ByteAccess
+        The underlying data which a BasicStruct mediates access to.
+
+    fields : Dict[str, BasicField]
+        
+    """
+
+    def __init__(self, byteaccess, **fields):
         self.byteaccess = byteaccess
+        self.fields = fields
         self.property_changed = Event()
-        self.fields = kwargs
-        # type: Dict[str, Field]
 
     def __getattr__(self, attr_name):
         """Invoke a field, reading from the underlying data.
@@ -43,7 +51,7 @@ class BasicStruct(object):
             except KeyError as err:
                 raise AttributeError(
                     ("Attribute name `{}` does not appear to be a member"
-                        "of this struct").format(attr_name)) from err
+                     "of this struct").format(attr_name)) from err
         else:
             return self.__dict__[attr_name]
 
@@ -70,7 +78,22 @@ class BasicStruct(object):
         else:
             self.__dict__[attr_name] = newvalue
 
-def define_basic_struct(**fields):
-    def finish_construction(byteaccess):
+def define_basic_struct(struct_size, **fields):
+    """Returns a constructor function for a newly defined struct.
+
+    Parameters
+    ----------
+    struct_size : int
+        size of the struct in bytes
+
+    **fields : Dict[str, BasicField]
+        the remaining arguments are grouped into a dictionary, with the
+        argument name as the key and the argument itself (which should be a
+        BasicField) as the value.
+    """
+    def finish_construction(thing_access, offset):
+        # enclose the bytes we need
+        byteaccess = thing_access(offset, struct_size)
+        # build the struct interface around it
         return BasicStruct(byteaccess, **fields)
     return finish_construction

@@ -12,7 +12,7 @@ from .halostruct import define_halo_struct
 tag_types = {}
 # type: Dict[str, HaloMapStruct]
 
-tag_types['weap'] = define_halo_struct(
+tag_types['weap'] = define_halo_struct(struct_size=0x504,
     primary_magic=field.UInt32(offset=0),
     base_tag_ident=field.UInt32(offset=4),
     map_id=field.UInt32(offset=8),

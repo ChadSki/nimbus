@@ -7,8 +7,19 @@
 from basicstruct.struct import define_basic_struct
 from basicstruct import field
 
+MapHeader = \
+    define_basic_struct(struct_size=132,
+        integrity=field.Ascii(offset=0, length=4, reverse=True),
+        game_version=field.UInt32(offset=4),
+        map_size=field.UInt32(offset=4),
+        index_offset=field.UInt32(offset=16),
+        metadata_size=field.UInt32(offset=20),
+        map_name=field.Asciiz(offset=32, maxlength=32),
+        map_build=field.Asciiz(offset=64, maxlength=64),
+        map_type=field.UInt32(offset=128))
+
 IndexHeader = \
-    define_basic_struct(
+    define_basic_struct(struct_size=40,
         primary_magic=field.UInt32(offset=0),
         base_tag_ident=field.UInt32(offset=4),
         map_id=field.UInt32(offset=8),
@@ -19,3 +30,5 @@ IndexHeader = \
         indicie_offset=field.UInt32(offset=28),
         model_data_length=field.UInt32(offset=32),
         integrity=field.Ascii(offset=36, length=4, reverse=True))
+
+

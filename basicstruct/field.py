@@ -7,7 +7,7 @@
 import abc
 
 
-class Field(metaclass=abc.ABCMeta):
+class BasicField(metaclass=abc.ABCMeta):
 
     """Represents a single field within a struct, and brokers read/write access
     to the underlying bits wherever they may reside.
@@ -38,7 +38,7 @@ class Field(metaclass=abc.ABCMeta):
 ################################################################
 # Text fields
 
-class Ascii(Field):
+class Ascii(BasicField):
 
     """Fixed-length ascii string."""
 
@@ -56,7 +56,7 @@ class Ascii(Field):
                          newvalue[::-1] if self.reverse else newvalue)
 
 
-class Asciiz(Field):
+class Asciiz(BasicField):
 
     """Null-terminated ascii string."""
 
@@ -71,7 +71,7 @@ class Asciiz(Field):
         byteaccess.write_asciiz(self.offset, self.maxlength, newvalue)
 
 
-class AsciizPtr(Field):
+class AsciizPtr(BasicField):
 
     """Pointer to a null-terminated ascii string."""
 
@@ -84,7 +84,7 @@ class AsciizPtr(Field):
     def setf(self, byteaccess): pass
 
 
-class RawData(Field):
+class RawData(BasicField):
 
     """Just bytes. Useful for debugging."""
 
@@ -102,7 +102,7 @@ class RawData(Field):
 ################################################################
 # Fields with options
 
-class Enum16(Field):
+class Enum16(BasicField):
 
     """16-bit enumeration of options."""
 
@@ -134,7 +134,7 @@ class Enum16(Field):
         byteaccess.write_uint16(self.offset, self.options[newvalue])
 
 
-class Flag(Field):
+class Flag(BasicField):
 
     """A boolean flag."""
 
@@ -153,7 +153,7 @@ class Flag(Field):
 # Number fields
 
 
-class Float32(Field):
+class Float32(BasicField):
 
     """Floating point single-precision number."""
 
@@ -167,7 +167,7 @@ class Float32(Field):
         byteaccess.write_float32(self.offset, newvalue),
 
 
-class Float64(Field):
+class Float64(BasicField):
 
     """Floating point double-precision number."""
 
@@ -181,7 +181,7 @@ class Float64(Field):
         byteaccess.write_float64(self.offset, newvalue),
 
 
-class Int8(Field):
+class Int8(BasicField):
 
     """8-bit (1-byte) signed integer."""
 
@@ -195,7 +195,7 @@ class Int8(Field):
         byteaccess.write_int8(self.offset, newvalue)
 
 
-class Int16(Field):
+class Int16(BasicField):
 
     """16-bit (2-byte) signed integer."""
 
@@ -209,7 +209,7 @@ class Int16(Field):
         byteaccess.write_int16(self.offset, newvalue)
 
 
-class Int32(Field):
+class Int32(BasicField):
 
     """32-bit (4-byte) signed integer."""
 
@@ -223,7 +223,7 @@ class Int32(Field):
         byteaccess.write_int32(self.offset, newvalue)
 
 
-class Int64(Field):
+class Int64(BasicField):
 
     """64-bit (8-byte) signed integer."""
 
@@ -237,7 +237,7 @@ class Int64(Field):
         byteaccess.write_int64(self.offset, newvalue)
 
 
-class UInt8(Field):
+class UInt8(BasicField):
 
     """8-bit (1-byte) unsigned integer."""
 
@@ -251,7 +251,7 @@ class UInt8(Field):
         byteaccess.write_uint8(self.offset, self.value)
 
 
-class UInt16(Field):
+class UInt16(BasicField):
 
     """16-bit (2-byte) unsigned integer."""
 
@@ -265,7 +265,7 @@ class UInt16(Field):
         byteaccess.write_uint16(self.offset, self.value)
 
 
-class UInt32(Field):
+class UInt32(BasicField):
 
     """32-bit (4-byte) unsigned integer."""
 
@@ -279,7 +279,7 @@ class UInt32(Field):
         byteaccess.write_uint32(self.offset, self.value)
 
 
-class UInt64(Field):
+class UInt64(BasicField):
 
     """64-bit (8-byte) unsigned integer."""
 

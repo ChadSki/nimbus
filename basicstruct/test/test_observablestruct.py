@@ -23,15 +23,14 @@ class BasicStructTest(unittest.TestCase):
 
     def setUp(self):
         TextFileAccess = byteaccess.open_file(os.path.join(this_folder, 'testfile.bin'))
-        TextStruct = define_basic_struct(
+        TextStruct = define_basic_struct(struct_size=0x30,
             char_array=Ascii(offset=0, length=4, reverse=True),
             char_array2=Ascii(offset=0, length=4, reverse=False),
             char_array3=Ascii(offset=4, length=1),
             c_string=Asciiz(offset=5, maxlength=19),
             bytes=RawData(offset=0x20, length=8),
             )
-        access = TextFileAccess(0, 0x30)
-        self.struct = TextStruct(access)
+        self.struct = TextStruct(TextFileAccess, 0)
 
     def test_ascii(self):
         print(self.struct.char_array)
@@ -56,12 +55,12 @@ class BitmapStructTest(unittest.TestCase):
     def setUp(self):
         BmpFileAccess = byteaccess.open_file(os.path.join(this_folder, 'test.bmp'))
 
-        BmpHeader = define_basic_struct(
+        BmpHeader = define_basic_struct(struct_size=14,
             id=Ascii(offset=0x0, length=2, docs="should be `BM`", reverse=False),
             filesize=UInt32(offset=0x2),
             pixels_offset=UInt32(offset=0xA))
 
-        DibHeader = define_basic_struct(
+        DibHeader = define_basic_struct(struct_size=40,
             header_size=UInt32(offset=0),
             width=UInt32(offset=4),
             height=UInt32(offset=8),
@@ -74,15 +73,15 @@ class BitmapStructTest(unittest.TestCase):
             num_palette_colors=UInt32(offset=32),
             num_important_colors=UInt32(offset=36))
 
-        PixelArray = define_basic_struct(
+        PixelArray = define_basic_struct(struct_size=14,
             red_pixel=RawData(offset=0, length=3),
             white_pixel=RawData(offset=3, length=3),
             blue_pixel=RawData(offset=8, length=3),
             green_pixel=RawData(offset=11, length=3))
 
-        self.bmp_header = BmpHeader(BmpFileAccess(0, 14))
-        self.dib_header = DibHeader(BmpFileAccess(14, 40))
-        self.pixel_array = PixelArray(BmpFileAccess(54, 14))
+        self.bmp_header = BmpHeader(BmpFileAccess, 0)
+        self.dib_header = DibHeader(BmpFileAccess, 14)
+        self.pixel_array = PixelArray(BmpFileAccess, 54)
 
     def test_bitmap_header(self):
         assert self.bmp_header.id == 'BM'

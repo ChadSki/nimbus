@@ -52,8 +52,9 @@
     <Compile Include="halolib\halomap.py" />
     <Compile Include="halolib\structs\halofield.py" />
     <Compile Include="halolib\structs\halostruct.py" />
-    <Compile Include="halolib\structs\indexheader.py" />
-    <Compile Include="halolib\structs\mapheader.py" />
+    <Compile Include="halolib\structs\headers.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="halolib\structs\tags.py" />
     <Compile Include="halolib\structs\__init__.py" />
     <Compile Include="halolib\halotag.py" />

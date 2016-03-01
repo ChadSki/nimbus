@@ -4,5 +4,5 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from .indexheader import IndexHeader
+from .headers import IndexHeader, MapHeader
 from .tags import tag_types

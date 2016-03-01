@@ -26,6 +26,11 @@ def open_file(filepath):
         file_handle = open(filepath, 'r+b')
         mmap_f = mmap(file_handle.fileno(), 0)
 
+        def __init__(self, offset, size):
+            if isinstance(offset, dict):
+                offset = offset['file']
+            super().__init__(offset, size)
+
         @classmethod
         def close(self):
             """Close the file and invalidate all child ByteAccesses."""

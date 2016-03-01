@@ -6,8 +6,8 @@
 
 import re
 from byteaccess import open_file, open_process
-from .structs import tag_types
-
+from .structs import IndexHeader, MapHeader, tag_types
+from .halotag import HaloTag
 
 class HaloMap(object):
 
@@ -43,7 +43,7 @@ class HaloMap(object):
         if mirror_path is not None:
             raise NotImplementedError('Cannot mirror to disk yet.')
 
-        return HaloMap(MemoryContext('halo.exe'))
+        return HaloMap(open_process('halo.exe'))
 
     @staticmethod
     def from_file(map_path):
@@ -55,9 +55,9 @@ class HaloMap(object):
         map_path : string
             Location of the map on disk to open for editing.
         """
-        return HaloMap(FileContext(map_path))
+        return HaloMap(open_file(map_path))
 
-    def __init__(self, context):
+    def __init__(self, map_access):
         """Load a map from the given context (either a file or Halo's memory).
 
         Parameters
@@ -65,43 +65,39 @@ class HaloMap(object):
         context
             Where to read map data and write changes.
         """
-        self.context = context
+        map_header = MapHeader(map_access, {'file': 0, 'mem': 0x6A8154})
 
-        self.map_header = struct_type('map_header')(
-            offsets={'file': 0, 'mem': 0x6A8154},
-            halomap=self)
-
-        try:
-            self.index_header = struct_type('index_header')(
-                offsets={'file': self.map_header.index_offset, 'mem': 0x40440000},
-                halomap=self)
-        except AttributeError:
-            print('************************************************************')
-            print(self.map_header.store)
-            print('***********************************************************2')
-            raise
+        index_header = IndexHeader(map_access,
+            {'file': map_header.index_offset, 'mem': 0x40440000})
 
         # Almost always 0x40440028 (map protection may change this)
-        mem_index_offset = self.index_header.primary_magic
+        mem_index_offset = index_header.primary_magic
 
         # Usually the tag index directly follows the index header. However,
         # some forms of map protection move the tag index to other locations.
-        file_index_offset = (self.index_header.primary_magic - 0x40440000
-                             + self.map_header.index_offset)
+        file_index_offset = (index_header.primary_magic - 0x40440000
+                             + map_header.index_offset)
 
         # On disk, we need to use a magic value to convert raw pointers into file
         # offsets. If this is a disk context, it will use this magic number
         # automatically. Memory contexts will ignore it, since offsets in memory
         # are already valid pointers.
-        self.context.magic = self.index_header.primary_magic - file_index_offset
+        magic_offset = index_header.primary_magic - file_index_offset
 
         # build associative tag collection (ID => HaloTag)
-        self.tags_by_ident = {
+        tags_by_ident = {
             tag_header.ident: HaloTag(
                 offsets={'file': TagHeader.struct_size * i + file_index_offset,
                          'mem': TagHeader.struct_size * i + mem_index_offset},
                 halomap=self)
-            for i in range(self.index_header.tag_count)}
+            for i in range(index_header.tag_count)}
+
+        # save references to stuff
+        self.magic_offset = magic_offset
+        self.map_access = map_access
+        self.map_header = map_header
+        self.index_header = index_header
+        self.tags_by_ident = tags_by_ident
 
     def tag(self, tag_class='', *name_fragments):
         """Find a tag by name and class. Returns the first tag to match all

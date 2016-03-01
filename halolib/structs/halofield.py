@@ -5,10 +5,10 @@
 # license as detailed in the LICENSE file.
 
 import basicstruct
-from basicstruct.field import Field
+from basicstruct.field import BasicField
 
 
-class HaloMapField(Field):
+class HaloMapField(BasicField):
 
     """Fields that require a halomap to make sense, and can count on their
     parent struct to retain a reference to one."""

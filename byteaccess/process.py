@@ -35,6 +35,11 @@ def open_process(process_name):
         process = k32.OpenProcess(PROCESS_ALL_ACCESS, False,
                                   process_entry.th32ProcessID)
 
+        def __init__(self, offset, size):
+            if isinstance(offset, dict):
+                offset = offset['mem']
+            super().__init__(offset, size)
+
         @classmethod
         def close(self):
             """Close the process and invalidate all child ByteAccesses."""
