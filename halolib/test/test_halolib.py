@@ -11,24 +11,33 @@ from halolib import HaloMap
 def find_maps_folder():
     for drive in ('C:\\', 'D:\\', 'E:\\'):  # probably enough drives
         for arch in ('Program Files (x86)', 'Program Files'):
-            maps_folder = os.path.join(drive, arch, 'Microsoft Games', 'Halo', 'MAPS')
+            maps_folder = os.path.join(
+                drive, arch, 'Microsoft Games', 'Halo', 'MAPS')
             if os.path.exists(maps_folder):
                 return maps_folder
     raise FileNotFoundError('Cannot find Halo MAPS folder.')
 
 
-class BloodGulchTest(unittest.TestCase):
+class SimpleMapTest(object):
 
-    def setUp(self):
-        bloodgulch_path = os.path.join(find_maps_folder(), 'bloodgulch.map')
-        self.map = HaloMap.from_file(bloodgulch_path)
-
-    def test_importing(self):
+    def test_iterate_all_tags(self):
         print(self.map)
         print(self.map.index_header.tag_count)
-        x = self.map.tag('weap')
-        print('x:{}'.format(x))
+        for tag in self.map.tags():
+            print('{}'.format(tag))
 
+
+class BloodgulchTest(SimpleMapTest, unittest.TestCase):
+
+    def setUp(self):
+        bloodgulch_path = os.path.join(
+            find_maps_folder(), 'bloodgulch.map')
+        self.map = HaloMap.from_file(bloodgulch_path)
+
+class MemoryMapTest(SimpleMapTest, unittest.TestCase):
+
+    def setUp(self):
+        self.map = HaloMap.from_memory()
 
 if __name__ == '__main__':
     unittest.main()

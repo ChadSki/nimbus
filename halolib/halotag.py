@@ -33,7 +33,6 @@ class HaloTag(object):
     def __str__(self):
         """Returns a 1-line string representation of this tag.
         """
-        print("printing name")
         answer = '[{}]{}({})'.format(self.first_class, self.name, self.ident)
         return repr(answer).replace("'", '"')
 

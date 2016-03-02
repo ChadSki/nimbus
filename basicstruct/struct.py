@@ -4,6 +4,8 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
+import copy
+
 class Event(set):
 
     """A very simple event handler.
@@ -29,13 +31,23 @@ class BasicStruct(object):
         The underlying data which a BasicStruct mediates access to.
 
     fields : Dict[str, BasicField]
+        A dictionary of all the fields in the struct, by name.
+
+    property_changed : Event
+        This event is triggered by fields when their values are being
+        changed via this API's set functions. Changes to the underlying
+        struct that didn't go through the set functions will not trigger
+        the event.
     """
 
-    def __init__(self, byteaccess, **fields):
+    def __init__(self, byteaccess, **kwargs):
         self.byteaccess = byteaccess
-        for field in fields.values():
-            field.parent = self
-        self.fields = fields
+        self.fields = {}
+        for name, field in kwargs.items():
+            self.fields[name] = copy.copy(field)
+            # fields need to access our byteaccess, and trigger our
+            # property_changed event
+            self.fields[name].parent = self
         self.property_changed = Event()
 
     def __getattr__(self, attr_name):

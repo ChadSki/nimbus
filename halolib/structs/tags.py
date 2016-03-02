@@ -6,19 +6,16 @@
 """TODO"""
 
 from basicstruct import field
-from .halostruct import define_halo_struct
+from halolib.structs.halostruct import define_halo_struct
+from halolib.structs import halofield
+
 
 tag_types = {}
 # type: Dict[str, HaloMapStruct]
 
 tag_types['weap'] = define_halo_struct(struct_size=0x504,
-    primary_magic=field.UInt32(offset=0),
-    base_tag_ident=field.UInt32(offset=4),
-    map_id=field.UInt32(offset=8),
-    tag_count=field.UInt32(offset=12),
-    verticie_count=field.UInt32(offset=16),
-    verticie_offset=field.UInt32(offset=20),
-    indicie_count=field.UInt32(offset=24),
-    indicie_offset=field.UInt32(offset=28),
-    model_data_length=field.UInt32(offset=32),
-    integrity=field.Ascii(offset=36, length=4, reverse=True))
+    model=halofield.TagReference(offset=0x28),
+    animation=halofield.TagReference(offset=0x38),
+    collision=halofield.TagReference(offset=0x70),
+    physics=halofield.TagReference(offset=0x80),
+    )

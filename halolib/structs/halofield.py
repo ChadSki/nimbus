@@ -22,6 +22,8 @@ class AsciizPtr(HaloField):
 
     """Pointer to a null-terminated string somewhere else in the mapfile."""
 
+    max_str_size = 260  # good ol' Windows MAX_PATH
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.string_access = None
@@ -29,11 +31,10 @@ class AsciizPtr(HaloField):
     def getf(self, byteaccess):
         if self.string_access is None:
             name_offset = byteaccess.read_uint32(self.offset)
-            self.string_access = \
-                self.halomap.map_access(
-                    name_offset - self.halomap.magic_offset,
-                    128)  # fuck if I know
-        return self.string_access.read_asciiz(0, 128)
+            self.string_access = self.halomap.map_access(
+                name_offset - self.halomap.magic_offset,
+                AsciizPtr.max_str_size)
+        return self.string_access.read_asciiz(0, AsciizPtr.max_str_size)
 
     def setf(self, byteaccess):
         raise NotImplementedError()
@@ -43,16 +44,11 @@ class TagReference(HaloField):
 
     """Semantic link to a HaloTag."""
 
-    def __init__(self, *, loneid='False', **kwargs):
+    def __init__(self, *, loneid=False, **kwargs):
         super().__init__(**kwargs)
 
-        if loneid not in ('True', 'False'):
-            raise ValueError(
-                'LoneID attribute set to "{}",' +
-                'must be "True" or "False".'.format(loneid))
-
         # LoneIDs (idents just by themselves) need no adjustment.
-        if loneid != 'True':
+        if not loneid:
             # This is a full reference, but we only care to read the ident
             self.offset += 12  # which is located 12 bytes inside
 
@@ -75,27 +71,30 @@ class TagReference(HaloField):
 
 class StructArray(HaloField):
 
-    """A pointer to an array of structs."""
+    """A pointer to an array of Halo structs somewhere else in the mapfile."""
 
     def __init__(self, *, struct_type, halomap, **kwargs):
         super().__init__(**kwargs)
         self.struct_type = struct_type
         self.halomap = halomap
+        self.children = None
 
     def getf(self):
-        count = self.byteaccess.read_uint32(self.offset)
-        raw_offset = self.byteaccess.read_uint32(self.offset + 4)
+        if self.children is None:
+            count = self.byteaccess.read_uint32(self.offset)
+            raw_offset = self.byteaccess.read_uint32(self.offset + 4)
 
-        start_offset = raw_offset - self.halomap.magic
-        size = self.struct_type.size
+            start_offset = raw_offset - self.halomap.magic
+            size = self.struct_type.size
 
-        if count > 1024:  # something's fucky
-            raise RuntimeError('{} structs in struct_array?!'.format(count))
+            if count > 1024:  # something's fucky
+                raise RuntimeError('{} structs in struct_array?!'.format(count))
 
-        return [self.struct_type(
-                    self.halomap.context.ByteAccess(
-                        start_offset + i * size, size))
+            self.children = [self.struct_type(
+                self.halomap.context.ByteAccess(
+                    start_offset + i * size, size))
                 for i in range(count)]
+        return self.children
 
     def setf(self, value):
         raise NotImplementedError(
