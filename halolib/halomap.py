@@ -81,10 +81,10 @@ class HaloMap(object):
                              + map_header.index_offset)
 
         # On disk, we need to use a magic value to convert raw pointers into file
-        # offsets. If this is a disk context, it will use this magic number
-        # automatically. Memory contexts will ignore it, since offsets in memory
-        # are already valid pointers.
-        magic_offset = index_header.primary_magic - file_index_offset
+        # offsets. Offsets in memory are already valid pointers.
+        magic_offset = {
+            'file': index_header.primary_magic - file_index_offset,
+            'mem': 0}
 
         tag_headers = [
             TagHeader(map_access,

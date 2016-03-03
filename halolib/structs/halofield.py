@@ -22,7 +22,8 @@ class AsciizPtr(HaloField):
 
     """Pointer to a null-terminated string somewhere else in the mapfile."""
 
-    max_str_size = 260  # good ol' Windows MAX_PATH
+    # really should use some low constant with a doubling mechanism or something
+    max_str_size = 260
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -30,12 +31,14 @@ class AsciizPtr(HaloField):
 
     def getf(self, byteaccess):
         if self.string_access is None:
-            name_offset = byteaccess.read_uint32(self.offset)
+            name_offset_raw = byteaccess.read_uint32(self.offset)
+            name_offset = {
+                medium: name_offset_raw - magic
+                for medium, magic in self.halomap.magic_offset.items()}
             self.string_access = self.halomap.map_access(
-                name_offset - self.halomap.magic_offset,
-                AsciizPtr.max_str_size)
+                name_offset, AsciizPtr.max_str_size)
         return self.string_access.read_asciiz(0, AsciizPtr.max_str_size)
-
+        
     def setf(self, byteaccess):
         raise NotImplementedError()
 

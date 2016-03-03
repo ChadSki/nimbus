@@ -43,8 +43,8 @@ def open_file(filepath):
             buf = FileByteAccess.mmap_f[begin:end]
 
             if len(buf) != size:
-                raise RuntimeError(('requested {} bytes but got only buffer:{}\n' +
-                                    '    begin:{} end:{}' +
+                raise RuntimeError(('requested {} bytes but got only buffer:{}\n'
+                                    '    begin:{} end:{}\n'
                                     '    offset:{} self.offset:{}')
                                     .format(size, buf, begin, end,
                                             offset, self.offset))

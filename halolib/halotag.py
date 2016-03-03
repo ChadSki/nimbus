@@ -13,10 +13,10 @@ class HaloTag(object):
     Attributes
     ----------
     header : ObservableStruct
-        todo
+        Exposes fields from the TagHeader struct in the tag index.
 
     data : ObservableStruct
-        todo
+        Exposes fields from the tag's data structs.
     """
 
     def __init__(self, header, halomap):
@@ -31,22 +31,19 @@ class HaloTag(object):
             self.data = None
 
     def __str__(self):
-        """Returns a 1-line string representation of this tag.
-        """
+        """Returns a 1-line string representation of this tag."""
         answer = '[{}]{}({})'.format(self.first_class, self.name, self.ident)
         return repr(answer).replace("'", '"')
 
     def __repr__(self):
-        """Returns a full string representation of this tag and its metadata.
-        """
+        """Returns a full string representation of this tag."""
         return '{}: {}'.format(str(self), str(self.data))
 
     def __getattr__(self, name):
-        """Using dynamic magic, merge the attributes of self.data into this object.
-
-        Attributes resolve in the following order:
+        """Look for attributes in the following order:
             1. self
-            2. self.data
+            2. self.header
+            3. self.data
         """
         try:
             return getattr(self.header, name)
