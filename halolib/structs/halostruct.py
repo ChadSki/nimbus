@@ -27,9 +27,9 @@ def define_halo_struct(struct_size, **fields):
         argument name as the key and the argument itself (expected to be a
         field of some sort) as the value.
     """
-    def finish_construction(map_access, offset, halomap):
+    def finish_construction(halomap, offset):
         # enclose the bytes we need
-        byteaccess = map_access(offset, struct_size)
+        byteaccess = halomap.map_access(offset, struct_size)
         # build the struct interface around it
         return HaloStruct(byteaccess, halomap, **fields)
 

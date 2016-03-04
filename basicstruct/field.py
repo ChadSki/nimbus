@@ -17,7 +17,7 @@ class BasicField(metaclass=abc.ABCMeta):
     The getf/setf functions translate between Python values and raw data from
     `byteaccess`."""
 
-    def __init__(self, *, offset, docs="", **kwargs):
+    def __init__(self, offset: int, docs=""):
         self.offset = offset
         self.docs = docs
         self.parent = None  # to be set by parent struct
@@ -42,8 +42,8 @@ class Ascii(BasicField):
 
     """Fixed-length ascii string."""
 
-    def __init__(self, *, length, reverse=False, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, length, reverse=False, docs=""):
+        super().__init__(offset, docs)
         self.length = length
         self.reverse = reverse
 
@@ -60,8 +60,8 @@ class Asciiz(BasicField):
 
     """Null-terminated ascii string."""
 
-    def __init__(self, *, maxlength, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, maxlength, docs=""):
+        super().__init__(offset, docs)
         self.maxlength = maxlength
 
     def getf(self, byteaccess):
@@ -75,8 +75,8 @@ class RawData(BasicField):
 
     """Just bytes. Useful for debugging."""
 
-    def __init__(self, *, length, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, length, docs=""):
+        super().__init__(offset, docs)
         self.length = length
 
     def getf(self, byteaccess):
@@ -93,8 +93,8 @@ class Enum16(BasicField):
 
     """16-bit enumeration of options."""
 
-    def __init__(self, *, options, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, options, docs=""):
+        super().__init__(offset, docs)
 
         self.options = options
         # type: Dict[str, int]
@@ -125,8 +125,8 @@ class Flag(BasicField):
 
     """A boolean flag."""
 
-    def __init__(self, *, bit, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, bit, docs=""):
+        super().__init__(offset, docs)
         self.bit = bit
 
     def fget(self):
@@ -144,8 +144,8 @@ class Float32(BasicField):
 
     """Floating point single-precision number."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_float32(self.offset)
@@ -158,8 +158,8 @@ class Float64(BasicField):
 
     """Floating point double-precision number."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_float64(self.offset)
@@ -172,8 +172,8 @@ class Int8(BasicField):
 
     """8-bit (1-byte) signed integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_int8(self.offset)
@@ -186,8 +186,8 @@ class Int16(BasicField):
 
     """16-bit (2-byte) signed integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_int16(self.offset)
@@ -200,8 +200,8 @@ class Int32(BasicField):
 
     """32-bit (4-byte) signed integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_int32(self.offset)
@@ -214,8 +214,8 @@ class Int64(BasicField):
 
     """64-bit (8-byte) signed integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_int64(self.offset)
@@ -228,8 +228,8 @@ class UInt8(BasicField):
 
     """8-bit (1-byte) unsigned integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_uint8(self.offset)
@@ -242,8 +242,8 @@ class UInt16(BasicField):
 
     """16-bit (2-byte) unsigned integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_uint16(self.offset)
@@ -256,8 +256,8 @@ class UInt32(BasicField):
 
     """32-bit (4-byte) unsigned integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_uint32(self.offset)
@@ -270,8 +270,8 @@ class UInt64(BasicField):
 
     """64-bit (8-byte) unsigned integer."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, docs=""):
+        super().__init__(offset, docs)
 
     def getf(self, byteaccess):
         return byteaccess.read_uint64(self.offset)

@@ -6,7 +6,12 @@
 
 import basicstruct
 from basicstruct.field import BasicField
+from halolib.structs.halostruct import define_halo_struct
 
+def add_offsets(offset_dict, edit_fn):
+    """TODO"""
+    return {where: edit_fn(offset)
+            for where, offset in offset_dict.items()}
 
 class HaloField(BasicField):
 
@@ -25,16 +30,16 @@ class AsciizPtr(HaloField):
     # really should use some low constant with a doubling mechanism or something
     max_str_size = 260
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, offset, docs=""):
+        super().__init__(offset, docs)
         self.string_access = None
 
     def getf(self, byteaccess):
         if self.string_access is None:
             name_offset_raw = byteaccess.read_uint32(self.offset)
-            name_offset = {
-                medium: name_offset_raw - magic
-                for medium, magic in self.halomap.magic_offset.items()}
+            name_offset = add_offsets(
+                self.halomap.magic_offset,
+                lambda magic: name_offset_raw - magic)
             self.string_access = self.halomap.map_access(
                 name_offset, AsciizPtr.max_str_size)
         return self.string_access.read_asciiz(0, AsciizPtr.max_str_size)
@@ -47,8 +52,8 @@ class TagReference(HaloField):
 
     """Semantic link to a HaloTag."""
 
-    def __init__(self, *, loneid=False, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, *, offset, loneid=False, docs=""):
+        super().__init__(offset, docs)
 
         # LoneIDs (idents just by themselves) need no adjustment.
         if not loneid:
@@ -77,26 +82,29 @@ class StructArray(HaloField):
 
     """A pointer to an array of Halo structs somewhere else in the mapfile."""
 
-    def __init__(self, *, struct_type, halomap, **kwargs):
-        super().__init__(**kwargs)
-        self.struct_type = struct_type
-        self.halomap = halomap
+    def __init__(self, *, offset, docs="", **kwargs):
+        super().__init__(offset, docs)
+        self.struct_type = define_halo_struct(**kwargs)
         self.children = None
 
     def getf(self, byteaccess):
         if self.children is None:
             count = byteaccess.read_uint32(self.offset)
-            raw_offset = byteaccess.read_uint32(self.offset + 4)
+            array_offset_raw = byteaccess.read_uint32(self.offset + 4)
 
-            start_offset = raw_offset - self.halomap.magic_offset
-            size = self.struct_type.size
+            array_offset = add_offsets(
+                self.halomap.magic_offset,
+                lambda magic: array_offset_raw - magic)
+
+            size = self.struct_type.struct_size
 
             if count > 1024:  # something's fucky
                 raise RuntimeError('{} structs in struct_array?!'.format(count))
 
-            self.children = [self.struct_type(
-                self.halomap.map_access(
-                    start_offset + i * size, size))
+            # get accesses and build structs around them, then save for later
+            self.children = [
+                self.struct_type(self.halomap,
+                    add_offsets(array_offset, lambda offset: offset + i * size))
                 for i in range(count)]
         return self.children
 

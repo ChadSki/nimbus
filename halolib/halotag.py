@@ -4,7 +4,7 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from .structs import tag_types
+from .structs import tag_types, add_offsets
 
 class HaloTag(object):
 
@@ -23,14 +23,11 @@ class HaloTag(object):
         self.halomap = halomap
         self.header = header
         try:
-            meta_offset = {
-                medium: header.meta_offset_raw - magic
-                for medium, magic in self.halomap.magic_offset.items()}
+            meta_offset = add_offsets(self.halomap.magic_offset,
+                lambda magic: header.meta_offset_raw - magic)
 
             self.data = tag_types[header.first_class](
-                halomap.map_access,
-                offset=meta_offset,
-                halomap=halomap)
+                halomap, meta_offset)
         except KeyError:
             self.data = None
 

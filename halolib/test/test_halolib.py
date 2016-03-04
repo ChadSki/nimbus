@@ -7,6 +7,7 @@
 import os
 import unittest
 from halolib import HaloMap
+from halolib.structs import tag_types
 
 def find_maps_folder():
     for drive in ('C:\\', 'D:\\', 'E:\\'):  # probably enough drives
@@ -26,9 +27,10 @@ class SimpleMapTest(object):
         for tag in self.map.tags():
             print('{}'.format(tag))
 
-    def test_vehi_tag(self):
-        for tag in self.map.tags('vehi'):
-            print(repr(tag))
+    def test_print_known_tags(self):
+        for tag_class in tag_types:
+            for tag in self.map.tags(tag_class):
+                print(repr(tag))
 
 class BloodgulchTest(SimpleMapTest, unittest.TestCase):
 

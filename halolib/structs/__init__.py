@@ -7,3 +7,4 @@
 from .headers import IndexHeader, MapHeader, TagHeader
 from .tags import tag_types
 from .halostruct import define_halo_struct
+from .halofield import add_offsets
