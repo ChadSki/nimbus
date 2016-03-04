@@ -44,10 +44,11 @@ def open_file(filepath):
 
             if len(buf) != size:
                 raise RuntimeError(('requested {} bytes but got only buffer:{}\n'
-                                    '    begin:{} end:{}\n'
-                                    '    offset:{} self.offset:{}')
-                                    .format(size, buf, begin, end,
-                                            offset, self.offset))
+                                    '    self.offset:{} request_offset:{}\n'
+                                    '    request_begin:{} request_end:{}')
+                                    .format(size, buf,
+                                            self.offset, offset,
+                                            begin, end))
             return buf
 
         def _write_bytes(self, offset, to_write):

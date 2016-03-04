@@ -40,6 +40,6 @@ TagHeader = \
         third_class=field.Ascii(offset=8, length=4, reverse=True),
         ident=field.UInt32(offset=12),
         name=halofield.AsciizPtr(offset=16),
-        meta_offset_raw=field.UInt32(offset=16),
+        meta_offset_raw=field.UInt32(offset=20),
         indexed=field.UInt32(offset=24))
 

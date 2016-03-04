@@ -82,7 +82,7 @@ class HaloMap(object):
 
         # On disk, we need to use a magic value to convert raw pointers into file
         # offsets. Offsets in memory are already valid pointers.
-        magic_offset = {
+        self.magic_offset = {
             'file': index_header.primary_magic - file_index_offset,
             'mem': 0}
 
@@ -99,7 +99,6 @@ class HaloMap(object):
         # type: Dict[int, HaloTag]
 
         # save references to stuff
-        self.magic_offset = magic_offset
         self.map_header = map_header
         self.index_header = index_header
         self.tags_by_ident = tags_by_ident

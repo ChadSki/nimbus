@@ -55,21 +55,22 @@ class TagReference(HaloField):
             # This is a full reference, but we only care to read the ident
             self.offset += 12  # which is located 12 bytes inside
 
-    def getf(self):
-        ident = self.byteaccess.read_uint32(self.offset)
-        if ident == 0 or ident == 0xFFFFFFFF:
+    def getf(self, byteaccess):
+        ident = byteaccess.read_uint32(self.offset)
+        if ident == 0xFFFFFFFF:
             return None
         try:
             return self.halomap.tags_by_ident[ident]  # the referenced tag
         except KeyError:
+            print("keyerror")
             return None  # we wanted a tag that wasn't there =(
 
-    def setf(self, value):
+    def setf(self, byteaccess, value):
         # when value is None, write Halo's version of null (-1)
         # otherwise, write the tag's ident, not the tag itself
-        self.byteaccess.write_uint32(self.offset,
-                                     0xFFFFFFFF if value is None
-                                     else value.ident)
+        byteaccess.write_uint32(self.offset,
+                                0xFFFFFFFF if value is None
+                                else value.ident)
 
 
 class StructArray(HaloField):
@@ -82,23 +83,23 @@ class StructArray(HaloField):
         self.halomap = halomap
         self.children = None
 
-    def getf(self):
+    def getf(self, byteaccess):
         if self.children is None:
-            count = self.byteaccess.read_uint32(self.offset)
-            raw_offset = self.byteaccess.read_uint32(self.offset + 4)
+            count = byteaccess.read_uint32(self.offset)
+            raw_offset = byteaccess.read_uint32(self.offset + 4)
 
-            start_offset = raw_offset - self.halomap.magic
+            start_offset = raw_offset - self.halomap.magic_offset
             size = self.struct_type.size
 
             if count > 1024:  # something's fucky
                 raise RuntimeError('{} structs in struct_array?!'.format(count))
 
             self.children = [self.struct_type(
-                self.halomap.context.ByteAccess(
+                self.halomap.map_access(
                     start_offset + i * size, size))
                 for i in range(count)]
         return self.children
 
-    def setf(self, value):
+    def setf(self, byteaccess, value):
         raise NotImplementedError(
             'Reassigning entire struct arrays is not yet supported.')

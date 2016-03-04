@@ -23,9 +23,13 @@ class HaloTag(object):
         self.halomap = halomap
         self.header = header
         try:
+            meta_offset = {
+                medium: header.meta_offset_raw - magic
+                for medium, magic in self.halomap.magic_offset.items()}
+
             self.data = tag_types[header.first_class](
                 halomap.map_access,
-                offset=header.meta_offset_raw,
+                offset=meta_offset,
                 halomap=halomap)
         except KeyError:
             self.data = None

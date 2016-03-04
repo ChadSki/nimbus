@@ -26,6 +26,9 @@ class SimpleMapTest(object):
         for tag in self.map.tags():
             print('{}'.format(tag))
 
+    def test_vehi_tag(self):
+        for tag in self.map.tags('vehi'):
+            print(repr(tag))
 
 class BloodgulchTest(SimpleMapTest, unittest.TestCase):
 
