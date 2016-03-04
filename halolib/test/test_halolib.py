@@ -29,6 +29,7 @@ class SimpleMapTest(object):
 
     def test_print_known_tags(self):
         for tag_class in tag_types:
+            print(tag_class)
             for tag in self.map.tags(tag_class):
                 print(repr(tag))
 
