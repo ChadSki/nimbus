@@ -2,55 +2,37 @@
 
 Halolib is a library for Python 3 which provides scriptable editing of Halo mapfiles, either on disk or in Halo's memory. Halolib is compatible with Halo 1 PC on Windows.
 
-Because of the difficulty of maintaining a build chain for cross-platform Cython extensions, development is moving to an IronPython/Mono stack. Watch [Quickbeam](https://github.com/ChadSki/Quickbeam) for updates.
-
-## Installation
-
-Halolib requires an installation of Python 3. Either invoke the examples directly, or import from halolib.
-
-If you do not already have an installation of Python 3, you can download my stripped-down portable Python 3.2 installation from [here](http://www.mediafire.com/download/55o5dzct6hyw8bd/halolib-portable-python-2013-09-06.7z) (15 MB zipped, 60 MB unzipped) and place the bin/ folder in the root of this repo.
-
-If you are not executing halolib from a 32-bit installation of Python, you may need to recompile halolib/field.pyx usinhg Cyton. See Development below for compilation instructions.
-
 ## Usage
 
 As an example of modding at runtime, here we swap the projectile of the player's starting weapon with a more powerful projectile.
 
 ### mem_example.py
 ```python
-from halolib import *
-load_plugins('.\plugins')
-m = load_map_from_memory(fix_video_render=True)
+import halolib
+map = halolib.HaloMap.from_memory()
 
-# weaps
-rifle = m.get_tag('weap', 'assault rifle')
-banshee_gun = m.get_tag('weap', 'banshee')
+# weapons
+rifle = map.tag('weap', 'assault rifle')
+banshee_gun = map.tag('weap', 'banshee')
 
-# vehis
-warthog = m.get_tag('vehi', 'warthog')
+# vehicles
+warthog = map.tag('vehi', 'warthog')
 
-# projs
-rocket = m.get_tag('proj', 'rocket')
-plasma = m.get_tag('proj', 'plasma grenade')
+# projectiles
+rocket = map.tag('proj', 'rocket')
+plasma = map.tag('proj', 'plasma grenade')
 
-# do swaps
-rifle.triggers[0].projectile = rocket           # assault rifle shoots rockets
-banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger spawns warthogs
-banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger shoots plasma grenades
+# make edits
+rifle.triggers[0].projectile = rocket           # assault rifle now shoots rockets
+banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger now spawns warthogs
+banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger now shoots plasma grenades
 ```
 
 ![Effects of mem_example.py](http://i.imgur.com/tdnHwf0.png)
 
-## Development
-
-Halolib is developed on Windows with the 32-bit build of Python 3.2 and the accompanying Cython package.
-
-Building halolib/field.pyx requires Cython and a C compiler. I use a portable Python 3.2, Cython 0.19.1, and MinGW bundle that can be downloaded [here](http://www.mediafire.com/download/u1p4449zk4d2gy1/halolib-portable-devenv-2013-09-06.7z) (26 MB zipped, 82 MB unzipped). Place the bin/ folder in the root of this repository, and run halolib/build.bat to compile field.pyx.
-
 ### License
 
 The entirety of my work on this project is released under the 2-clause BSD license. While contributors retain copyright on their own work, I ask that pull requests also be released under the 2-clause BSD license.
-
 
 ## Community
 
@@ -65,8 +47,6 @@ The entirety of my work on this project is released under the 2-clause BSD licen
 - dirk: Provided source code to [SDMHaloMapLoader](https://github.com/samdmarshall/SDMHaloMapLoader)
 - Zero2: Explained reflexives, map magic, and map deprotection theory
 - Btcc22: Assistance with C++ and reverse-engineering of the Halo executable
-
-If you helped me at one point in time and I forgot to list you, let me know so I can bestow proper credit!
 
 ### Forums
 
