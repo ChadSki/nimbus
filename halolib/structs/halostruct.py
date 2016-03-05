@@ -11,7 +11,7 @@ class HaloStruct(BasicStruct):
     """TODO"""
 
     def __init__(self, byteaccess, halomap, **fields):
-        self.halomap = halomap
+        object.__setattr__(self, 'halomap', halomap)
         super().__init__(byteaccess, **fields)
 
 def define_halo_struct(struct_size, **fields):

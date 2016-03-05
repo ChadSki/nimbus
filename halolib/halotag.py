@@ -20,16 +20,16 @@ class HaloTag(object):
     """
 
     def __init__(self, header, halomap):
-        self.halomap = halomap
-        self.header = header
+        object.__setattr__(self, 'halomap', halomap)
+        object.__setattr__(self, 'header', header)
         try:
-            meta_offset = add_offsets(self.halomap.magic_offset,
-                lambda magic: header.meta_offset_raw - magic)
-
-            self.data = tag_types[header.first_class](
-                halomap, meta_offset)
+            data = tag_types[header.first_class](halomap,
+                add_offsets(
+                    self.halomap.magic_offset,
+                    lambda magic: header.meta_offset_raw - magic))
         except KeyError:
-            self.data = None
+            data = None
+        object.__setattr__(self, 'data', data)
 
     def __str__(self):
         """Returns a 1-line string representation of this tag."""
@@ -50,3 +50,9 @@ class HaloTag(object):
             return getattr(self.header, name)
         except:
             return getattr(self.data, name)
+
+    def __setattr__(self, attr_name, newvalue):
+        try:
+            return self.header.__setattr__(attr_name, newvalue)
+        except AttributeError:
+            return self.data.__setattr__(attr_name, newvalue)

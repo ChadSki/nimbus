@@ -41,14 +41,14 @@ class BasicStruct(object):
     """
 
     def __init__(self, byteaccess, **kwargs):
-        self.byteaccess = byteaccess
-        self.fields = {}
+        object.__setattr__(self, 'byteaccess', byteaccess)
+        object.__setattr__(self, 'fields', {})
         for name, field in kwargs.items():
             self.fields[name] = copy.copy(field)
             # fields need to access our byteaccess, and trigger our
             # property_changed event
             self.fields[name].parent = self
-        self.property_changed = Event()
+        object.__setattr__(self, 'property_changed', Event())
 
     def __str__(self):
         answer = "{"
@@ -105,13 +105,14 @@ class BasicStruct(object):
         except KeyError:
             pass
 
-        if attr_name in fields:
+        if attr_name in fields.keys():
             oldvalue = fields[attr_name].getf(self.byteaccess)
+            fields[attr_name].setf(self.byteaccess, newvalue)
             if oldvalue != newvalue:
-                fields[attr_name].setf(self.byteaccess, newvalue)
                 self.property_changed(attr_name)
         else:
-            self.__dict__[attr_name] = newvalue
+            raise AttributeError("Cannot assign to {} because it is not a "
+                "member of this struct.".format(attr_name))
 
 def define_basic_struct(struct_size, **fields):
     """Returns a constructor function for a newly defined struct.
