@@ -30,20 +30,18 @@ class HaloMap(object):
     """
 
     @staticmethod
-    def from_memory(mirror_path=None):
+    def from_hpc_memory():
         """Load a map from Halo's memory. Changes immediately take effect in-game,
         but will be lost unless saved to disk.
-
-        Parameters
-        ----------
-        mirror_path : string, optional
-            Location of the map on disk to open for mirroring changes. If None,
-            changes made in memory are not saved and will be lost.
         """
-        if mirror_path is not None:
-            raise NotImplementedError('Cannot mirror to disk yet.')
-
         return HaloMap(open_process('halo.exe'))
+
+    @staticmethod
+    def from_hded_memory():
+        """Load a map from Halo's memory. Changes immediately take effect in-game,
+        but will be lost unless saved to disk.
+        """
+        return HaloMap(open_process('haloded.exe'))
 
     @staticmethod
     def from_file(map_path):
