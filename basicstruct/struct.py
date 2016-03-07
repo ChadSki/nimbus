@@ -24,7 +24,28 @@ class Event(set):
             print('handler')
             handler(*args, **kwargs)
 
-class BasicStruct(object):
+class Observable(object):
+
+    def __init__(self):
+        object.__setattr__(self, 'property_changed', Event())
+
+    def register_callback(self, callback_ptr, opaque_ptr):
+        """Saves a callback function pointer and opaque pointer argument.
+        Takes arguments as uint32_t rather than void* in order to work around
+        Python's type system.
+        """
+        print('registering callback')
+        functype = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint64)
+        callback = functype(callback_ptr)
+        def stub(attr_name):
+            print('stub')
+            callback(opaque_ptr)
+        self.property_changed.add(stub)
+        for each in self.property_changed:
+            print(each)
+            each('foo')
+
+class BasicStruct(Observable):
 
     """Wrap a ByteAccess and implement a struct interface.
 
@@ -44,6 +65,7 @@ class BasicStruct(object):
     """
 
     def __init__(self, byteaccess, **kwargs):
+        super().__init__()
         object.__setattr__(self, 'byteaccess', byteaccess)
         object.__setattr__(self, 'fields', {})
         for name, field in kwargs.items():
@@ -51,7 +73,6 @@ class BasicStruct(object):
             # fields need to access our byteaccess, and trigger our
             # property_changed event
             self.fields[name].parent = self
-        object.__setattr__(self, 'property_changed', Event())
 
     def __str__(self):
         answer = "{"
@@ -117,22 +138,6 @@ class BasicStruct(object):
         else:
             raise AttributeError("Cannot assign to {} because it is not a "
                 "member of this struct.".format(attr_name))
-
-    def register_callback(self, callback_ptr, opaque_ptr):
-        """Saves a callback function pointer and opaque pointer argument.
-        Takes arguments as uint32_t rather than void* in order to work around
-        Python's type system.
-        """
-        print('registering callback')
-        functype = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint64)
-        callback = functype(callback_ptr)
-        def stub(attr_name):
-            print('stub')
-            callback(opaque_ptr)
-        self.property_changed.add(stub)
-        for each in self.property_changed:
-            print(each)
-            each('foo')
 
 
 def define_basic_struct(struct_size, **fields):

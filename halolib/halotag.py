@@ -4,9 +4,10 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
+from basicstruct.struct import Observable
 from .structs import tag_types, add_offsets
 
-class HaloTag(object):
+class HaloTag(Observable):
 
     """Represents one Halo tag and all of its data.
 
@@ -20,6 +21,7 @@ class HaloTag(object):
     """
 
     def __init__(self, header, halomap):
+        super().__init__()
         object.__setattr__(self, 'halomap', halomap)
         object.__setattr__(self, 'header', header)
         try:

@@ -6,10 +6,11 @@
 
 import re
 from byteaccess import open_file, open_process
+from basicstruct.struct import Observable
 from .structs import IndexHeader, MapHeader, TagHeader
 from .halotag import HaloTag
 
-class HaloMap(object):
+class HaloMap(Observable):
 
     """Represents a single Halo mapfile and everything in it.
 
@@ -63,6 +64,7 @@ class HaloMap(object):
         context
             Where to read map data and write changes.
         """
+        super().__init__()
         self.map_access = map_access
 
         map_header = MapHeader(map_access, {'file': 0, 'mem': 0x6A8154})
