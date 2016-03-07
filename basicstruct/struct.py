@@ -11,15 +11,17 @@ class Event(set):
 
     """A very simple event handler.
     
-    Add an event handler (a function) with += and -= syntax.
+    Add an event handler (a function) with `.add(handler)`.
     You may remove all handlers at once with `.clear()`.
-    Invoke the handler with function call syntax `()`.
+    Invoke the event with function call syntax `()`.
     
     Event handlers should be short and return quickly! Execution cannot
     continue until all event handlers have finished, so make it snappy."""
 
     def __call__(self, *args, **kwargs):
+        print('calling handlers')
         for handler in self:
+            print('handler')
             handler(*args, **kwargs)
 
 class BasicStruct(object):
@@ -100,7 +102,6 @@ class BasicStruct(object):
         This method is called when normal attribute lookup fails. It is here
         used to extend attribute lookup to the `fields` dictionary, so that
         those fields look like normal attributes."""
-        print('setting')
         fields = {}
         try:
             fields = self.fields
@@ -109,6 +110,7 @@ class BasicStruct(object):
 
         if attr_name in fields.keys():
             oldvalue = fields[attr_name].getf(self.byteaccess)
+            print('old:{}\nnew:{}'.format(oldvalue, newvalue))
             fields[attr_name].setf(self.byteaccess, newvalue)
             if oldvalue != newvalue:
                 self.property_changed(attr_name)
@@ -121,9 +123,16 @@ class BasicStruct(object):
         Takes arguments as uint32_t rather than void* in order to work around
         Python's type system.
         """
-        functype = ctypes.CFUNCTYPE(None, ctypes.c_uint64, ctypes.c_char_p)
+        print('registering callback')
+        functype = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_uint64)
         callback = functype(callback_ptr)
-        self.property_changed.add(lambda attr_name: callback(opaque_ptr, attr_name))
+        def stub(attr_name):
+            print('stub')
+            callback(opaque_ptr)
+        self.property_changed.add(stub)
+        for each in self.property_changed:
+            print(each)
+            each('foo')
 
 
 def define_basic_struct(struct_size, **fields):
