@@ -30,14 +30,14 @@ class HaloMap(object):
     """
 
     @staticmethod
-    def from_hpc_memory():
+    def from_hpc():
         """Load a map from Halo's memory. Changes immediately take effect in-game,
         but will be lost unless saved to disk.
         """
         return HaloMap(open_process('halo.exe'))
 
     @staticmethod
-    def from_hded_memory():
+    def from_hded():
         """Load a map from Halo's memory. Changes immediately take effect in-game,
         but will be lost unless saved to disk.
         """
@@ -135,5 +135,3 @@ class HaloMap(object):
 
         return filter(match, self.tags_by_ident.values())
 
-    def save_as(filepath):
-        raise NotImplementedError()

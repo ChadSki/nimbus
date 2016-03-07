@@ -5,6 +5,7 @@
 # license as detailed in the LICENSE file.
 
 import copy
+import ctypes
 
 class Event(set):
 
@@ -99,6 +100,7 @@ class BasicStruct(object):
         This method is called when normal attribute lookup fails. It is here
         used to extend attribute lookup to the `fields` dictionary, so that
         those fields look like normal attributes."""
+        print('setting')
         fields = {}
         try:
             fields = self.fields
@@ -113,6 +115,16 @@ class BasicStruct(object):
         else:
             raise AttributeError("Cannot assign to {} because it is not a "
                 "member of this struct.".format(attr_name))
+
+    def register_callback(self, callback_ptr, opaque_ptr):
+        """Saves a callback function pointer and opaque pointer argument.
+        Takes arguments as uint32_t rather than void* in order to work around
+        Python's type system.
+        """
+        functype = ctypes.CFUNCTYPE(None, ctypes.c_uint64, ctypes.c_char_p)
+        callback = functype(callback_ptr)
+        self.property_changed.add(lambda attr_name: callback(opaque_ptr, attr_name))
+
 
 def define_basic_struct(struct_size, **fields):
     """Returns a constructor function for a newly defined struct.
