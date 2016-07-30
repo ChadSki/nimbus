@@ -6,7 +6,7 @@
 
 import basicstruct
 from basicstruct.field import BasicField
-from halolib.structs.halostruct import define_halo_struct
+from .halostruct import define_halo_struct
 
 def add_offsets(offset_dict, edit_fn):
     """TODO"""

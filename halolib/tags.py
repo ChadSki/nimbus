@@ -6,8 +6,8 @@
 """TODO"""
 
 from basicstruct import field
-from halolib.structs.halostruct import define_halo_struct
-from halolib.structs import halofield
+from .halostruct import define_halo_struct
+from . import halofield
 
 
 tag_types = {}
