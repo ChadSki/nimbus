@@ -1,8 +1,8 @@
-# Welcome to halolib! If you just ran develop.cmd and are viewing this in the
+# Welcome to Nimbus! If you just ran develop.cmd and are viewing this in the
 # IDLE editor, press F5 to run this example. Halo must be running in the background.
 
-import halolib
-map = halolib.HaloMap.from_memory()
+import nimbus
+map = nimbus.HaloMap.from_memory()
 
 # weapons
 pistol = map.tag('weap', '\\pistol')

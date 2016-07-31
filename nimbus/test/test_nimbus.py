@@ -6,8 +6,8 @@
 
 import os
 import unittest
-from halolib import HaloMap
-from halolib.structs import tag_types
+from nimbus import HaloMap
+from nimbus.structs import tag_types
 
 def find_maps_folder():
     for drive in ('C:\\', 'D:\\', 'E:\\'):  # probably enough drives
