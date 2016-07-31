@@ -12,6 +12,7 @@ import halolib
 map = halolib.HaloMap.from_memory()
 
 # weapons
+pistol = map.tag('weap', '\\pistol')
 rifle = map.tag('weap', 'assault rifle')
 banshee_gun = map.tag('weap', 'banshee')
 
@@ -23,9 +24,10 @@ rocket = map.tag('proj', 'rocket')
 plasma = map.tag('proj', 'plasma grenade')
 
 # make edits
-rifle.triggers[0].projectile = rocket           # assault rifle now shoots rockets
-banshee_gun.triggers[0].projectile = warthog    # banshee primary trigger now spawns warthogs
-banshee_gun.triggers[1].projectile = plasma     # banshee secondary trigger now shoots plasma grenades
+pistol.triggers[0].projectile = rocket        # pistol now shoots rockets
+rifle.triggers[0].projectile = rocket         # assault rifle now shoots rockets
+banshee_gun.triggers[0].projectile = warthog  # banshee primary trigger now spawns warthogs
+banshee_gun.triggers[1].projectile = plasma   # banshee secondary trigger now shoots plasma grenades
 ```
 
 ![Effects of mem_example.py](http://i.imgur.com/tdnHwf0.png)

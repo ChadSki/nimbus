@@ -13,5 +13,5 @@ goto :eof
 
 :: The ~dp1 nonsense means "the folder component of argument 1".
 :launchidle
-start pythonw %~dp1lib\idlelib\idle.py -e main.py
+start pythonw %~dp1lib\idlelib\idle.py -e mem_example.py
 goto :eof
