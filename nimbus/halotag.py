@@ -4,7 +4,8 @@
 # This software is free and open source, released under the 2-clause BSD
 # license as detailed in the LICENSE file.
 
-from .structs import tag_types, add_offsets
+from .tags import tag_types
+from .halofield import add_offsets
 
 class HaloTag(object):
 

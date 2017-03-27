@@ -6,8 +6,8 @@
 
 from basicstruct.struct import define_basic_struct
 from basicstruct import field
-from halolib.structs.halostruct import define_halo_struct
-from halolib.structs import halofield
+from .halostruct import define_halo_struct
+from . import halofield
 
 MapHeader = \
     define_basic_struct(struct_size=132,

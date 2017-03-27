@@ -6,7 +6,7 @@
 
 import re
 from byteaccess import open_file, open_process
-from .structs import IndexHeader, MapHeader, TagHeader
+from .headers import IndexHeader, MapHeader, TagHeader
 from .halotag import HaloTag
 
 class HaloMap(object):
